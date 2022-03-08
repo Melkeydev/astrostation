@@ -3,14 +3,29 @@ import { IoMusicalNotesOutline } from "react-icons/io5";
 import { IoImagesOutline } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
 import { MdOutlineTimer } from "react-icons/md";
+import { useToggleMusic, useToggleTimer } from "../../store";
 
 export const SideNav = () => {
+  const { isMusicToggled, setIsMusicToggled } = useToggleMusic();
+  const { isTimerToggled, setIsTimerToggled } = useToggleTimer();
+
+  function toggleMusicPlayer() {
+    setIsMusicToggled(!isMusicToggled);
+  }
+
+  function toggleTimerPlayer() {
+    setIsTimerToggled(!isTimerToggled);
+  }
+
   return (
     <div className="flex absolute">
       <aside className="flex flex-col text-gray-700">
         <ul>
           <NavItem>
-            <IoMusicalNotesOutline className="h-6 w-6" />
+            <IoMusicalNotesOutline
+              className="h-6 w-6"
+              onClick={toggleMusicPlayer}
+            />
           </NavItem>
           <NavItem>
             <IoImagesOutline className="h-6 w-6" />
@@ -19,15 +34,11 @@ export const SideNav = () => {
             <CgNotes className="h-6 w-6" />
           </NavItem>
           <NavItem>
-            <MdOutlineTimer className="h-6 w-6" />
+            <MdOutlineTimer className="h-6 w-6" onClick={toggleTimerPlayer} />
           </NavItem>
         </ul>
 
-        <div
-          className="mt-auto h-16 flex items-ce￼ReturnToDust: no api limitations on it?
-￼
-nter w-full"
-        >
+        <div className="mt-auto h-16 flex items-center w-full">
           <button className="h-16 mx-auto flex justify-center items-center w-full focus:text-orange-500 hover:bg-red-200 focus:outline-none">
             <svg
               className="h-5 w-5 text-red-700"

@@ -1,10 +1,14 @@
 import { Button } from "../components/Common/Button";
-import { useSetBackground } from "../store";
+import { useSetBackground, useToggleMusic, useToggleTimer } from "../store";
 import { Player } from "../components/Player/Player";
-import { FaPlayCircle } from "react-icons/fa";
+import { Timer } from "../components/Timer/Timer";
+
+// Store Hooks
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isBackground, setIsBackground } = useSetBackground();
+  const { isMusicToggled } = useToggleMusic();
+  const { isTimerToggled } = useToggleTimer();
   return (
     <div className="h-full w-full">
       <div className="flex justify-end">
@@ -18,9 +22,16 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           Button
         </Button>
       </div>
-      <div className="flex justify-center">
-        <Player />
-      </div>
+      {isMusicToggled && (
+        <div className="flex justify-center">
+          <Player />
+        </div>
+      )}
+      {isTimerToggled && (
+        <div className="flex justify-center">
+          <Timer />
+        </div>
+      )}
     </div>
   );
 };

@@ -16,6 +16,7 @@ const classes: { [key: string]: any } = {
       "bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
     danger:
       "bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+    cold: "bg-blue-grey-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
   },
 };
 

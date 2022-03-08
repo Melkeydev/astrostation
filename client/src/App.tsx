@@ -1,4 +1,3 @@
-import { useState } from "react";
 import {
   BrowserRouter as Router,
   Routes,
@@ -6,11 +5,8 @@ import {
   //Link,
   //useParams,
 } from "react-router-dom";
-
 import { Backgrounds } from "./components/Backgrounds/utils";
-
 import { HomePage } from "./pages/Homepage";
-
 import { SideNav } from "./components/Nav/SideNav";
 
 enum backgrounds {
