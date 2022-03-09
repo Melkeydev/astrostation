@@ -16,11 +16,13 @@
     "react-router-dom": "^6.2.1",
     "react-youtube": "^7.14.0",
     "sass": "^1.49.8",
+    "uuid": "^8.3.2",
     "zustand": "^3.7.0"
   },
   "devDependencies": {
     "@types/react": "^17.0.33",
     "@types/react-dom": "^17.0.10",
+    "@types/uuid": "^8.3.4",
     "@vitejs/plugin-react": "^1.0.7",
     "autoprefixer": "^10.4.2",
     "postcss": "^8.4.6",

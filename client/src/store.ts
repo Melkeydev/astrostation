@@ -1,5 +1,50 @@
 import create from "zustand";
 
+interface Task {
+  id: number;
+  description: string;
+  completed: boolean;
+}
+
+interface TaskState {
+  tasks: Task[];
+  addTask: (description: string) => void;
+  removeTask: (id: number) => void;
+  toggleCompletedState: (id: number) => void;
+}
+
+export const useTask = create<TaskState>((set) => ({
+  // initial state
+  tasks: [],
+  // methods for manipulating state
+  addTask: (description: string) => {
+    set((state) => ({
+      tasks: [
+        ...state.tasks,
+        {
+          id: state.tasks.length + 1,
+          description,
+          completed: false,
+        } as Task,
+      ],
+    }));
+  },
+  removeTask: (id) => {
+    set((state) => ({
+      tasks: state.tasks.filter((task) => task.id !== id),
+    }));
+  },
+  toggleCompletedState: (id) => {
+    set((state) => ({
+      tasks: state.tasks.map((task) =>
+        task.id === id
+          ? ({ ...task, completed: !task.completed } as Task)
+          : task
+      ),
+    }));
+  },
+}));
+
 type IBackground = {
   isBackground: number;
   setIsBackground: (isBackground: number) => void;

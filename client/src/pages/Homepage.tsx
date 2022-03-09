@@ -3,6 +3,8 @@ import { useSetBackground, useToggleMusic, useToggleTimer } from "../store";
 import { Player } from "../components/Player/Player";
 import { Timer } from "../components/Timer/Timer";
 
+import { TaskTracker } from "../components/TaskTracker/TaskTracker";
+
 // Store Hooks
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
@@ -32,6 +34,9 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           <Timer />
         </div>
       )}
+      <div className="flex justify-center">
+        <TaskTracker />
+      </div>
     </div>
   );
 };
