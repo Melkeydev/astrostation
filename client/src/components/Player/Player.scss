@@ -1,0 +1,21 @@
+.rc-slider-track {
+  @apply bg-black;
+}
+
+.rc-slider-handle {
+  @apply bg-black text-white;
+}
+
+.rc-slider-rail {
+  @apply bg-gray-300;
+}
+
+@media (prefers-colors-scheme: dark) {
+  .rc-slider-track {
+    @apply bg-white;
+  }
+
+  .rc-slider-rail {
+    @apply bg-black;
+  }
+}
