@@ -6,7 +6,7 @@ export const AddTask = () => {
   const [reminder, setReminder] = useState(false);
   const { addTask } = useTask();
 
-  const onSubmit = (e) => {
+  const onSubmit = (e: any) => {
     e.preventDefault();
 
     if (!text) {

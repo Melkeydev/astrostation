@@ -9,27 +9,15 @@ export const TaskTracker = () => {
   const [taskText, setTaskText] = useState("");
   const { tasks, removeTask, toggleCompletedState } = useTask();
 
-  function onDelete() {
-    console.log("delete");
-  }
-
-  function onToggle() {
-    console.log("toggle");
-  }
-
   return (
-    <div className="">
+    <div className="w-1/5">
       <Header
         title="Task Tracker"
         onAdd={() => setShowAddTask(!showAddTask)}
         showAdd={showAddTask}
       />
       {showAddTask && <AddTask />}
-      {tasks.length > 0 ? (
-        <Tasks tasks={tasks} onDelete={onDelete} onToggle={onToggle} />
-      ) : (
-        "No Tasks to Show"
-      )}
+      {tasks.length > 0 ? <Tasks tasks={tasks} /> : "No Tasks to Show"}
     </div>
   );
 };

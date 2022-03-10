@@ -1,10 +1,10 @@
 import { Task } from "./Task";
 
-export const Tasks = ({ tasks, onDelete, onToggle }) => {
+export const Tasks = ({ tasks }: any) => {
   return (
     <>
       {tasks.map((task, index) => (
-        <Task key={index} task={task} onDelete={onDelete} onToggle={onToggle} />
+        <Task key={index} task={task} />
       ))}
     </>
   );

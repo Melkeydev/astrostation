@@ -3,6 +3,7 @@ import create from "zustand";
 interface Task {
   id: number;
   description: string;
+  inProgress: boolean;
   completed: boolean;
 }
 
@@ -10,7 +11,8 @@ interface TaskState {
   tasks: Task[];
   addTask: (description: string) => void;
   removeTask: (id: number) => void;
-  toggleCompletedState: (id: number) => void;
+  toggleInProgressState: (id: number) => void;
+  completeTask: (id: number) => void;
 }
 
 export const useTask = create<TaskState>((set) => ({
@@ -24,6 +26,7 @@ export const useTask = create<TaskState>((set) => ({
         {
           id: state.tasks.length + 1,
           description,
+          inProgress: false,
           completed: false,
         } as Task,
       ],
@@ -34,7 +37,16 @@ export const useTask = create<TaskState>((set) => ({
       tasks: state.tasks.filter((task) => task.id !== id),
     }));
   },
-  toggleCompletedState: (id) => {
+  toggleInProgressState: (id) => {
+    set((state) => ({
+      tasks: state.tasks.map((task) =>
+        task.id === id
+          ? ({ ...task, inProgress: !task.inProgress } as Task)
+          : task
+      ),
+    }));
+  },
+  completeTask: (id) => {
     set((state) => ({
       tasks: state.tasks.map((task) =>
         task.id === id
