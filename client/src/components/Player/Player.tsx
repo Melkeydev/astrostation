@@ -45,7 +45,7 @@ export const Player = () => {
   };
   return (
     <>
-      <div className="py-4 px-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 w-1/2">
+      <div className="py-4 px-3 mb-2 max-w-sm bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 w-1/2">
         <div className="flex items-center space-x-6 justify-between">
           <div>Name of Song</div>
           <div className="flex space-x-2">
@@ -73,6 +73,7 @@ export const Player = () => {
             }}
             trackStyle={[{ backgroundColor: "black" }]}
             handleStyle={[{ backgroundColor: "black", borderColor: "white" }]}
+            reverse
           />
         </div>
       </div>

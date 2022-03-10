@@ -1,9 +1,12 @@
-export const NavItem = ({ children }: { children: any }) => {
+export const NavItem = ({ children, onClick }: { children: any, onClick?: () => void }) => {
   return (
-    <li className="hover:bg-gray-100">
-      <div className="hover:bg-gray-100 h-16 px-6 flex justify-center items-center w-full focus:text-orange-500">
+    <li>
+      <button
+        className="h-16 px-6 flex justify-center items-center w-full text-gray-300 hover:bg-gray-200 hover:text-gray-800"
+        onClick={onClick}
+      >
         {children}
-      </div>
+      </button>
     </li>
   );
 };

@@ -124,7 +124,7 @@ export const Timer = () => {
   }
 
   return (
-    <div className="py-2 px-1 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 w-1/2">
+    <div className="py-2 px-1 mb-2 max-w-sm bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 w-1/2">
       <div className="text-center">
         <div className="text-center p-4 rounded">
           {/* Controls */}
@@ -149,7 +149,7 @@ export const Timer = () => {
                 </button>
               </div>
               {*/}
-              <Button variant="cold" onClick={selectShortBreak}>
+              <Button className="text-gray-800 hover:text-white dark:text-white" variant="cold" onClick={selectShortBreak}>
                 Short Break
               </Button>
             </div>
@@ -174,7 +174,7 @@ export const Timer = () => {
                 </button>
               </div>
               {*/}
-              <Button variant="cold" onClick={selectLongBreak}>
+              <Button className="text-gray-800 hover:text-white dark:text-white" variant="cold" onClick={selectLongBreak}>
                 Long Break
               </Button>
             </div>

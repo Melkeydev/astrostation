@@ -7,7 +7,7 @@ export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
   const { isBackground } = useSetBackground();
   console.log(isBackground);
   return (
-    <div className="fixed inset-0">
+    <div className="fixed inset-0 bg-black">
       {
         {
           [backgrounds.SPACE]: <Space />,

@@ -19,13 +19,10 @@ export const SideNav = () => {
 
   return (
     <div className="flex absolute">
-      <aside className="flex flex-col text-gray-700">
+      <aside className="flex flex-col">
         <ul>
-          <NavItem>
-            <IoMusicalNotesOutline
-              className="h-6 w-6"
-              onClick={toggleMusicPlayer}
-            />
+          <NavItem onClick={toggleMusicPlayer}>
+            <IoMusicalNotesOutline className="h-6 w-6" />
           </NavItem>
           <NavItem>
             <IoImagesOutline className="h-6 w-6" />
@@ -33,8 +30,8 @@ export const SideNav = () => {
           <NavItem>
             <CgNotes className="h-6 w-6" />
           </NavItem>
-          <NavItem>
-            <MdOutlineTimer className="h-6 w-6" onClick={toggleTimerPlayer} />
+          <NavItem onClick={toggleTimerPlayer}>
+            <MdOutlineTimer className="h-6 w-6" />
           </NavItem>
         </ul>
 
