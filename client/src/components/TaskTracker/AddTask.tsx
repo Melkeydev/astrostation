@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { useTask } from "../../store";
+import { Button } from "../Common/Button";
 
 export const AddTask = () => {
   const [text, setText] = useState("");
@@ -25,13 +26,14 @@ export const AddTask = () => {
       <div className="my-5">
         <label className="block">Task</label>
         <input
-          className="w-full h-10 m-1 py-2 px-3 text-lg"
+          className="w-full h-10 m-1 py-2 px-3 text-lg border border-gray-300"
           type="text"
           placeholder="Add Task"
           value={text}
           onChange={(e) => setText(e.target.value)}
         />
       </div>
+      {/*Set Reminder should trigger after every finished session*/}
       <div className="my-5 flex items-center justify-center">
         <label className="flex-1">Set Reminder</label>
         <input
@@ -44,7 +46,9 @@ export const AddTask = () => {
       </div>
 
       {/*Make this into a button*/}
-      <input type="submit" value="Save Task" className="btn btn-block" />
+      <Button type="submit" variant="secondary">
+        Save
+      </Button>
     </form>
   );
 };

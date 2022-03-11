@@ -16,11 +16,7 @@ export const Task = ({ task }: any) => {
     <div
       className={`w-full m-1 py-2 px-2 cursor-pointer border-l-4 bg-stone-300 ${
         task.inProgress && !task.completed && "border-yellow-500"
-      } ${
-        task.completed
-          ? "border-green-500 bg-green-300 line-through"
-          : "border-slate-500"
-      }`}
+      } ${task.completed && "border-green-500 bg-green-300 line-through"}`}
       onDoubleClick={() => preventFalseInProgress()}
     >
       <h3 className="flex items-center justify-between">

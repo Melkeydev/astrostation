@@ -3,11 +3,12 @@ import { IoMusicalNotesOutline } from "react-icons/io5";
 import { IoImagesOutline } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
 import { MdOutlineTimer } from "react-icons/md";
-import { useToggleMusic, useToggleTimer } from "../../store";
+import { useToggleMusic, useToggleTimer, useToggleTasks } from "../../store";
 
 export const SideNav = () => {
   const { isMusicToggled, setIsMusicToggled } = useToggleMusic();
   const { isTimerToggled, setIsTimerToggled } = useToggleTimer();
+  const { isTasksToggled, setIsTasksToggled } = useToggleTasks();
 
   function toggleMusicPlayer() {
     setIsMusicToggled(!isMusicToggled);
@@ -15,6 +16,10 @@ export const SideNav = () => {
 
   function toggleTimerPlayer() {
     setIsTimerToggled(!isTimerToggled);
+  }
+
+  function toggleTaskTracker() {
+    setIsTasksToggled(!isTasksToggled);
   }
 
   return (
@@ -28,7 +33,7 @@ export const SideNav = () => {
             <IoImagesOutline className="h-6 w-6" />
           </NavItem>
           <NavItem>
-            <CgNotes className="h-6 w-6" />
+            <CgNotes className="h-6 w-6" onClick={toggleTaskTracker} />
           </NavItem>
           <NavItem onClick={toggleTimerPlayer}>
             <MdOutlineTimer className="h-6 w-6" />

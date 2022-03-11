@@ -4,6 +4,7 @@ const classes: { [key: string]: any } = {
   base: "focus:outline-none transition ease-in-out duration-300",
   disabled: "opacity-50 cursor-not-allowed",
   pill: "rounded-full",
+  type: "submit",
   size: {
     small: "px-2 py-1 text-sm",
     normal: "px-4 py-2",
@@ -13,7 +14,7 @@ const classes: { [key: string]: any } = {
     primary:
       "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
     secondary:
-      "bg-gray-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+      "bg-stone-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
     danger:
       "bg-red-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
     cold: "bg-blue-grey-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
@@ -23,6 +24,7 @@ const classes: { [key: string]: any } = {
 export const Button = ({
   children,
   className,
+  type = "submit",
   variant = "primary",
   size = "normal",
   disabled = false,
@@ -30,6 +32,7 @@ export const Button = ({
 }: {
   children: any;
   className?: string;
+  type?: any;
   variant?: string;
   size?: string;
   onClick?: React.MouseEventHandler;
@@ -46,6 +49,7 @@ export const Button = ({
                 ${className}
             `)}
       onClick={onClick}
+      type={type}
     >
       {children}
     </button>
