@@ -1,5 +1,10 @@
 import { Button } from "../components/Common/Button";
-import { useSetBackground, useToggleMusic, useToggleTimer } from "../store";
+import {
+  useSetBackground,
+  useToggleMusic,
+  useToggleTimer,
+  useToggleTasks,
+} from "../store";
 import { Player } from "../components/Player/Player";
 import { Timer } from "../components/Timer/Timer";
 
@@ -11,8 +16,9 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isBackground, setIsBackground } = useSetBackground();
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
+  const { isTasksToggled } = useToggleTasks();
   return (
-    <div className="h-full w-full">
+    <div className="h-full w-full space-y-1">
       <div className="flex justify-end">
         <Button onClick={() => setIsBackground(backgrounds.SPACE)}>
           Button
@@ -34,9 +40,11 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           <Timer />
         </div>
       )}
-      <div className="flex justify-center">
-        <TaskTracker />
-      </div>
+      {isTasksToggled && (
+        <div className="flex justify-center">
+          <TaskTracker />
+        </div>
+      )}
     </div>
   );
 };

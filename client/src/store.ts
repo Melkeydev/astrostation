@@ -67,6 +67,16 @@ export const useSetBackground = create<IBackground>((set) => ({
   setIsBackground: (isBackground) => set({ isBackground }),
 }));
 
+type IToggleTasks = {
+  isTasksToggled: boolean;
+  setIsTasksToggled: (isTasksToggled: boolean) => void;
+};
+
+export const useToggleTasks = create<IToggleTasks>((set) => ({
+  isTasksToggled: true,
+  setIsTasksToggled: (isTasksToggled) => set({ isTasksToggled }),
+}));
+
 type IToggleMusic = {
   isMusicToggled: boolean;
   setIsMusicToggled: (isMusicToggled: boolean) => void;
