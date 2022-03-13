@@ -26,7 +26,7 @@ export const AddTask = () => {
       <div className="my-5">
         <label className="block">Task</label>
         <input
-          className="w-full h-10 m-1 py-2 px-3 text-lg"
+          className="w-full h-10 m-1 py-2 px-3 text-lg border border-gray-300"
           type="text"
           placeholder="Add Task"
           value={text}
