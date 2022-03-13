@@ -10,7 +10,7 @@ export const TaskTracker = () => {
   const { tasks, removeTask, toggleCompletedState } = useTask();
 
   return (
-    <div className="w-1/5 p-5 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:broder-gray-700">
+    <div className="w-1/5 p-5 mb-2 dark:text-gray-300 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">
       <Header
         title="Task Tracker"
         onAdd={() => setShowAddTask(!showAddTask)}

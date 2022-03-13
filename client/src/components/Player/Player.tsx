@@ -1,10 +1,11 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import YouTube from "react-youtube";
 import { FaPlayCircle, FaPauseCircle, FaYoutube } from "react-icons/fa";
 import { AiOutlineHeart } from "react-icons/ai";
 import { IconContext } from "react-icons";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
+import "./Player.scss"
 
 interface IPlayer {
   playVideo: () => void;
@@ -45,7 +46,7 @@ export const Player = () => {
   };
   return (
     <>
-      <div className="py-4 px-3 max-w-sm bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700 w-1/2">
+      <div className="py-4 px-3 mb-2 max-w-sm bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 w-1/2">
         <div className="flex items-center space-x-6 justify-between">
           <div>Name of Song</div>
           <div className="flex space-x-2">
@@ -71,8 +72,6 @@ export const Player = () => {
             onChange={(value) => {
               onVolumeChange(value);
             }}
-            trackStyle={[{ backgroundColor: "black" }]}
-            handleStyle={[{ backgroundColor: "black", borderColor: "white" }]}
           />
         </div>
       </div>
