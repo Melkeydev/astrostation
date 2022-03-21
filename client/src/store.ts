@@ -47,22 +47,16 @@ interface SongTask {
 interface SongState {
   song: SongTask;
   setSong: (songID: string) => void;
+  toggledSong: string;
+  setToggledSong: (toggledSong: string) => void;
 }
 
 export const useSong = create<SongState>((set) => ({
   song: songs[0],
   setSong: (songId) =>
     set({ song: songs.find((s) => s.id === songId) as SongTask }),
-}));
-
-type ISong = {
-  isSong: string;
-  setIsSong: (isSong: string) => void;
-};
-
-export const useSetSong = create<ISong>((set) => ({
-  isSong: "jWIqKujW0NY",
-  setIsSong: (isSong) => set({ isSong }),
+  toggledSong: "",
+  setToggledSong: (toggledSong) => set({ toggledSong }),
 }));
 
 export const useTask = create<TaskState>((set) => ({

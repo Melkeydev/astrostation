@@ -1,11 +1,16 @@
-import { useSetSong, useSong } from "../../store";
+import { useSong } from "../../store";
 
 export const StationSelector = () => {
-  const { setIsSong } = useSetSong();
-  const { setSong } = useSong();
+  const { setSong, setToggledSong } = useSong();
 
   function setSongId(e: any) {
-    setSong(e.target.id);
+    const id = e.target.id;
+    setSong(id);
+    songSelected(id);
+  }
+
+  function songSelected(id: string) {
+    setToggledSong(id);
   }
   return (
     <div>
