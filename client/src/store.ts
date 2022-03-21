@@ -1,5 +1,11 @@
 import create from "zustand";
+import { persist } from "zustand/middleware";
 
+/**
+ * Task Store
+ * ---
+ * Handle the tasks created in the tasks section
+ */
 interface Task {
   id: number;
   description: string;
@@ -99,42 +105,88 @@ export const useTask = create<TaskState>((set) => ({
   },
 }));
 
+/**
+ * Background Store
+ * ---
+ * Handles the background image state of app
+ */
 type IBackground = {
   isBackground: number;
   setIsBackground: (isBackground: number) => void;
 };
 
-export const useSetBackground = create<IBackground>((set) => ({
-  isBackground: 0,
-  setIsBackground: (isBackground) => set({ isBackground }),
-}));
+export const useSetBackground = create<IBackground>(
+  persist(
+    (set, _) => ({
+      isBackground: 0,
+      setIsBackground: (isBackground) => set({ isBackground }),
+    }),
+    {
+      name: "app_background",
+    }
+  )
+);
 
+/**
+ * Tasks Section Store
+ * ---
+ * Handle the visibility of the tasks section
+ */
 type IToggleTasks = {
   isTasksToggled: boolean;
   setIsTasksToggled: (isTasksToggled: boolean) => void;
 };
 
-export const useToggleTasks = create<IToggleTasks>((set) => ({
-  isTasksToggled: true,
-  setIsTasksToggled: (isTasksToggled) => set({ isTasksToggled }),
-}));
+export const useToggleTasks = create<IToggleTasks>(
+  persist(
+    (set, _) => ({
+      isTasksToggled: true,
+      setIsTasksToggled: (isTasksToggled) => set({ isTasksToggled }),
+    }),
+    {
+      name: "show_tasks_section",
+    }
+  )
+);
 
+/**
+ * Music Section Store
+ * ---
+ * Handle the visibility of the music section
+ */
 type IToggleMusic = {
   isMusicToggled: boolean;
   setIsMusicToggled: (isMusicToggled: boolean) => void;
 };
 
-export const useToggleMusic = create<IToggleMusic>((set) => ({
-  isMusicToggled: true,
-  setIsMusicToggled: (isMusicToggled) => set({ isMusicToggled }),
-}));
+export const useToggleMusic = create<IToggleMusic>(
+  persist(
+    (set, _) => ({
+      isMusicToggled: true,
+      setIsMusicToggled: (isMusicToggled) => set({ isMusicToggled }),
+    }),
+    {
+      name: "show_music_section",
+    }
+  )
+);
 
+/**
+ * Timer Section Store
+ * ---
+ * Handle the visibility of the timer section
+ */
 type IToggleTimer = {
   isTimerToggled: boolean;
   setIsTimerToggled: (isTimerToggled: boolean) => void;
 };
 
-export const useToggleTimer = create<IToggleTimer>((set) => ({
-  isTimerToggled: true,
-  setIsTimerToggled: (isTimerToggled) => set({ isTimerToggled }),
-}));
+export const useToggleTimer = create<IToggleTimer>(
+  persist(
+    (set, _) => ({
+      isTimerToggled: true,
+      setIsTimerToggled: (isTimerToggled) => set({ isTimerToggled }),
+    }),
+    { name: "show_timer_section" }
+  )
+);
