@@ -1,23 +1,28 @@
-import { useState, useEffect } from "react";
-import YouTube from "react-youtube";
-import { FaPlayCircle, FaPauseCircle, FaYoutube } from "react-icons/fa";
-import { AiOutlineHeart } from "react-icons/ai";
-import { IconContext } from "react-icons";
 import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
-import "./Player.scss"
+import { useEffect, useState } from "react";
+import { IconContext } from "react-icons";
+import { AiOutlineHeart } from "react-icons/ai";
+import { FaPauseCircle, FaPlayCircle, FaYoutube } from "react-icons/fa";
+import YouTube from "react-youtube";
+import { useSetSong, useSong } from "../../store";
+import "./Player.scss";
+import { StationSelector } from "./StationSelector";
 
 interface IPlayer {
   playVideo: () => void;
   pauseVideo: () => void;
+  changeVideo: () => void;
   setVolume: (volume: number | number[]) => void;
 }
 
 export const Player = () => {
+  const { song } = useSong();
+
   const [player, setPlayer] = useState<IPlayer>();
-  // TODO: change this to be a static list fetched
-  const [videoId, SetVideoId] = useState("0uw1Adx0psw");
   const [playAudio, setPlayAudio] = useState(true);
+
+  const [videoID, setVideoID] = useState("0uw1Adx0psw");
 
   const onReady = (e: any) => {
     setPlayer(e.target);
@@ -35,6 +40,12 @@ export const Player = () => {
     player?.setVolume(value);
   };
 
+  const onChangeVideo = () => {
+    console.log(videoID);
+    setVideoID("5qap5aO4i9A");
+    console.log(videoID);
+  };
+
   const triggerAudio = () => {
     if (playAudio) {
       onPlayVideo();
@@ -44,11 +55,16 @@ export const Player = () => {
 
     setPlayAudio(!playAudio);
   };
+  let opts = {
+    playerVars: {
+      autoplay: 1,
+    } as const,
+  };
   return (
     <>
       <div className="py-4 px-3 mb-2 max-w-sm bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 w-1/2">
         <div className="flex items-center space-x-6 justify-between">
-          <div>Name of Song</div>
+          <div>{song?.artist}</div>
           <div className="flex space-x-2">
             <IconContext.Provider value={{ size: "1.1rem" }}>
               <FaYoutube />
@@ -58,21 +74,30 @@ export const Player = () => {
             </IconContext.Provider>
           </div>
         </div>
-        <YouTube className="hidden" videoId={videoId} onReady={onReady} />
-        <div className="flex items-center space-x-3">
-          <IconContext.Provider value={{ size: "1.5rem" }}>
-            {playAudio ? (
-              <FaPlayCircle onClick={triggerAudio} />
-            ) : (
-              <FaPauseCircle onClick={triggerAudio} />
-            )}
-          </IconContext.Provider>
-          <Slider
-            defaultValue={75}
-            onChange={(value) => {
-              onVolumeChange(value);
-            }}
-          />
+        <YouTube
+          className="hidden"
+          videoId={videoID}
+          onReady={onReady}
+          opts={opts}
+        />
+        <div className="space-y-2">
+          <div className="flex items-center space-x-3">
+            <IconContext.Provider value={{ size: "1.5rem" }}>
+              {playAudio ? (
+                <FaPlayCircle onClick={triggerAudio} />
+              ) : (
+                <FaPauseCircle onClick={triggerAudio} />
+              )}
+            </IconContext.Provider>
+            <Slider
+              defaultValue={75}
+              onChange={(value) => {
+                onVolumeChange(value);
+              }}
+            />
+            <FaPauseCircle onClick={onChangeVideo} />
+          </div>
+          <StationSelector />
         </div>
       </div>
     </>
