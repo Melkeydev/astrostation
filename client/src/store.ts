@@ -172,6 +172,29 @@ export const useToggleMusic = create<IToggleMusic>(
 );
 
 /**
+ * Spotify Section Store
+ * ---
+ * Handle the visibility of the Spotify section
+ */
+
+type IToggleSpotify = {
+  isSpotifyToggled: boolean;
+  setIsSpotifyToggled: (isSpotifyToggled: boolean) => void;
+};
+
+export const useSpotifyMusic = create<IToggleSpotify>(
+  persist(
+    (set, _) => ({
+      isSpotifyToggled: true,
+      setIsSpotifyToggled: (isSpotifyToggled) => set({ isSpotifyToggled }),
+    }),
+    {
+      name: "show_spotify_section",
+    }
+  )
+);
+
+/**
  * Timer Section Store
  * ---
  * Handle the visibility of the timer section
