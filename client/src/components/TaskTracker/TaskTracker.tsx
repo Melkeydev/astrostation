@@ -6,8 +6,7 @@ import { useTask } from "../../store";
 
 export const TaskTracker = () => {
   const [showAddTask, setShowAddTask] = useState(false);
-  const [taskText, setTaskText] = useState("");
-  const { tasks, removeTask, toggleCompletedState } = useTask();
+  const { tasks } = useTask();
 
   return (
     <div className="w-1/5 p-5 mb-2 dark:text-gray-300 bg-white rounded-lg border border-gray-200 shadow-md dark:bg-gray-800 dark:border-gray-700">

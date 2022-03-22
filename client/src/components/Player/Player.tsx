@@ -5,7 +5,7 @@ import { IconContext } from "react-icons";
 import { AiOutlineHeart } from "react-icons/ai";
 import { FaPauseCircle, FaPlayCircle, FaYoutube } from "react-icons/fa";
 import YouTube from "react-youtube";
-import { useSong } from "../../store";
+import { useSong, useToggleMusic } from "../../store";
 import "./Player.scss";
 import { StationSelector } from "./StationSelector";
 
@@ -26,6 +26,7 @@ type PlayerVarsType = {
 
 export const Player = () => {
   const { song, toggledSong } = useSong();
+  const { isMusicToggled } = useToggleMusic();
 
   const [player, setPlayer] = useState<IPlayer>();
   const [playAudio, setPlayAudio] = useState(true);
@@ -39,6 +40,12 @@ export const Player = () => {
       setAutoPlay(1);
     }
   }, [toggledSong]);
+
+  useEffect(() => {
+    if (!isMusicToggled) {
+      onPauseVideo();
+    }
+  }, [isMusicToggled]);
 
   const onReady = (e: any) => {
     setPlayer(e.target);

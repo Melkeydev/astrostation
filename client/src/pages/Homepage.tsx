@@ -1,23 +1,22 @@
-import { Button } from "../components/Common/Button";
 import {
   useSetBackground,
   useToggleMusic,
   useToggleTimer,
   useToggleTasks,
+  useSpotifyMusic,
 } from "../store";
+import { Button } from "../components/Common/Button";
 import { Player } from "../components/Player/Player";
 import { Timer } from "../components/Timer/Timer";
-
 import { TaskTracker } from "../components/TaskTracker/TaskTracker";
-import { StationSelector } from "../components/Player/StationSelector";
-
-// Store Hooks
+import { Spotify } from "../components/Player/Spotify/Player";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
-  const { isBackground, setIsBackground } = useSetBackground();
+  const { setIsBackground } = useSetBackground();
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
   const { isTasksToggled } = useToggleTasks();
+  const { isSpotifyToggled } = useSpotifyMusic();
   return (
     <div className="h-full w-full space-y-1">
       <div className="flex justify-end">
@@ -36,6 +35,13 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           <Player />
         </div>
       )}
+      <div
+        className={`flex justify-center ${
+          isSpotifyToggled ? "block" : "hidden"
+        }`}
+      >
+        <Spotify />
+      </div>
       {isTimerToggled && (
         <div className="flex justify-center">
           <Timer />
