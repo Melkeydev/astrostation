@@ -3,12 +3,19 @@ import { IoMusicalNotesOutline } from "react-icons/io5";
 import { IoImagesOutline } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
 import { MdOutlineTimer } from "react-icons/md";
-import { useToggleMusic, useToggleTimer, useToggleTasks } from "../../store";
+import { FaSpotify } from "react-icons/fa";
+import {
+  useToggleMusic,
+  useToggleTimer,
+  useToggleTasks,
+  useSpotifyMusic,
+} from "../../store";
 
 export const SideNav = () => {
   const { isMusicToggled, setIsMusicToggled } = useToggleMusic();
   const { isTimerToggled, setIsTimerToggled } = useToggleTimer();
   const { isTasksToggled, setIsTasksToggled } = useToggleTasks();
+  const { isSpotifyToggled, setIsSpotifyToggled } = useSpotifyMusic();
 
   function toggleMusicPlayer() {
     setIsMusicToggled(!isMusicToggled);
@@ -22,12 +29,19 @@ export const SideNav = () => {
     setIsTasksToggled(!isTasksToggled);
   }
 
+  function toggleSpotify() {
+    setIsSpotifyToggled(!isSpotifyToggled);
+  }
+
   return (
     <div className="flex absolute">
       <aside className="flex flex-col">
         <ul>
           <NavItem onClick={toggleMusicPlayer}>
             <IoMusicalNotesOutline className="h-6 w-6" />
+          </NavItem>
+          <NavItem onClick={toggleSpotify}>
+            <FaSpotify className="h-6 w-6" />
           </NavItem>
           <NavItem>
             <IoImagesOutline className="h-6 w-6" />

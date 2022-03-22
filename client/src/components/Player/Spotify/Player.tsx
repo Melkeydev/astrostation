@@ -4,7 +4,6 @@ export const Spotify = () => {
       <div className="bg-white rounded-t-lg p-1">Spotify</div>
       <div className="justify-center">
         <iframe
-          className="rounded-lg"
           src="https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn?utm_source=generator&theme=0"
           height="380"
           width="100%"
