@@ -7,14 +7,13 @@ import {
 } from "../store";
 import { Player } from "../components/Player/Player";
 import { Timer } from "../components/Timer/Timer";
-
 import { TaskTracker } from "../components/TaskTracker/TaskTracker";
-import { StationSelector } from "../components/Player/StationSelector";
+import { Spotify } from "../components/Player/Spotify/Player";
 
 // Store Hooks
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
-  const { isBackground, setIsBackground } = useSetBackground();
+  const { setIsBackground } = useSetBackground();
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
   const { isTasksToggled } = useToggleTasks();
@@ -36,6 +35,9 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           <Player />
         </div>
       )}
+      <div className="flex justify-center">
+        <Spotify />
+      </div>
       {isTimerToggled && (
         <div className="flex justify-center">
           <Timer />
