@@ -21,6 +21,51 @@ interface TaskState {
   completeTask: (id: number) => void;
 }
 
+export const useTask = create<TaskState>(
+  persist(
+    (set, _) => ({
+      tasks: [],
+      addTask: (description: string) => {
+        set((state) => ({
+          tasks: [
+            ...state.tasks,
+            {
+              id: state.tasks.length + 1,
+              description,
+              inProgress: false,
+              completed: false,
+            } as Task,
+          ],
+        }));
+      },
+      removeTask: (id) => {
+        set((state) => ({
+          tasks: state.tasks.filter((task) => task.id !== id),
+        }));
+      },
+      toggleInProgressState: (id) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({ ...task, inProgress: !task.inProgress } as Task)
+              : task
+          ),
+        }));
+      },
+      completeTask: (id) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({ ...task, completed: !task.completed } as Task)
+              : task
+          ),
+        }));
+      },
+    }),
+    { name: "user_tasks" }
+  )
+);
+
 const songs = [
   {
     id: "0uw1Adx0psw",
@@ -63,46 +108,6 @@ export const useSong = create<SongState>((set) => ({
     set({ song: songs.find((s) => s.id === songId) as SongTask }),
   toggledSong: "",
   setToggledSong: (toggledSong) => set({ toggledSong }),
-}));
-
-export const useTask = create<TaskState>((set) => ({
-  tasks: [],
-  addTask: (description: string) => {
-    set((state) => ({
-      tasks: [
-        ...state.tasks,
-        {
-          id: state.tasks.length + 1,
-          description,
-          inProgress: false,
-          completed: false,
-        } as Task,
-      ],
-    }));
-  },
-  removeTask: (id) => {
-    set((state) => ({
-      tasks: state.tasks.filter((task) => task.id !== id),
-    }));
-  },
-  toggleInProgressState: (id) => {
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
-        task.id === id
-          ? ({ ...task, inProgress: !task.inProgress } as Task)
-          : task
-      ),
-    }));
-  },
-  completeTask: (id) => {
-    set((state) => ({
-      tasks: state.tasks.map((task) =>
-        task.id === id
-          ? ({ ...task, completed: !task.completed } as Task)
-          : task
-      ),
-    }));
-  },
 }));
 
 /**
