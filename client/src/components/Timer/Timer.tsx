@@ -137,7 +137,7 @@ export const Timer = () => {
             />
           </div>
           {/* Controls */}
-          <div className="flex p-4">
+          <div className="flex">
             {/* Control 1 */}
             <div className="flex-1 flex-col flex justify-center items-center">
               {/*}
