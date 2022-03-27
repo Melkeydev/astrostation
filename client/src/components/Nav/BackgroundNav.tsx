@@ -21,9 +21,9 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
   }, [menuRef]);
 
   return (
-    <div className="absolute top-0 right-0 m-2 flex justify-end">
+    <div className="absolute top-0 right-0 m-2 flex justify-end" ref={menuRef}>
       <div className="inline-block text-left">
-        <div ref={menuRef} id="id_test">
+        <div>
           <button
             type="button"
             className="inline-flex justify-center w-full rounded shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 focus:outline-none"
