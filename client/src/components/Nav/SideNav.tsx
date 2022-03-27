@@ -46,8 +46,8 @@ export const SideNav = () => {
           <NavItem>
             <IoImagesOutline className="h-6 w-6" />
           </NavItem>
-          <NavItem>
-            <CgNotes className="h-6 w-6" onClick={toggleTaskTracker} />
+          <NavItem onClick={toggleTaskTracker}>
+            <CgNotes className="h-6 w-6" />
           </NavItem>
           <NavItem onClick={toggleTimerPlayer}>
             <MdOutlineTimer className="h-6 w-6" />
