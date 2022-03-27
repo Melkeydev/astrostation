@@ -129,7 +129,7 @@ export const Timer = () => {
   return (
     <div className="py-2 px-1 mb-2 max-w-sm bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 w-1/2">
       <div className="text-center">
-        <div className="text-center p-4 rounded">
+        <div className="text-center p-2 rounded">
           <div className="flex justify-end">
             <IoCloseSharp
               className="text-red-500 cursor-pointer hover:bg-red-200"
@@ -207,12 +207,20 @@ export const Timer = () => {
           </div>
 
           <div className="timer-control">
-            <button id="start_stop" onClick={(e) => toggleCountDown()}>
+            <button id="start_stop" onClick={(e) => toggleCountDown()}></button>
+            <Button
+              className="text-gray-800 font-normal hover:text-white dark:text-white"
+              variant="cold"
+            >
               {hasStarted ? "Stop" : "Start"}
-            </button>
-            <button className="ml-4" id="pl-4" onClick={handleResetTimer}>
+            </Button>
+            <Button
+              className="text-gray-800 font-normal hover:text-white dark:text-white ml-4"
+              variant="cold"
+              onClick={handleResetTimer}
+            >
               Reset
-            </button>
+            </Button>
           </div>
         </div>
       </div>
