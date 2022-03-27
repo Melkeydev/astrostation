@@ -1,5 +1,7 @@
-import React, { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
+import { IoCloseSharp } from "react-icons/io5";
 import { Button } from "../Common/Button";
+import { useToggleTimer } from "../../store";
 
 export const Timer = () => {
   const [sessionLength, setSessionLength] = useState(1500);
@@ -11,6 +13,7 @@ export const Timer = () => {
   const [timerIntervalId, setTimerIntervalId] = useState(null);
   const [isSession, setIsSession] = useState(false);
   const [sessionType, setSessionType] = useState("Session");
+  const { setIsTimerToggled } = useToggleTimer();
 
   const audioRef = useRef();
   let hasStarted = timerIntervalId !== null; // check timer state
@@ -127,6 +130,12 @@ export const Timer = () => {
     <div className="py-2 px-1 mb-2 max-w-sm bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 w-1/2">
       <div className="text-center">
         <div className="text-center p-4 rounded">
+          <div className="flex justify-end">
+            <IoCloseSharp
+              className="text-red-500 cursor-pointer hover:bg-red-200"
+              onClick={() => setIsTimerToggled(false)}
+            />
+          </div>
           {/* Controls */}
           <div className="flex p-4">
             {/* Control 1 */}
@@ -149,7 +158,11 @@ export const Timer = () => {
                 </button>
               </div>
               {*/}
-              <Button className="text-gray-800 hover:text-white dark:text-white" variant="cold" onClick={selectShortBreak}>
+              <Button
+                className="text-gray-800 hover:text-white dark:text-white"
+                variant="cold"
+                onClick={selectShortBreak}
+              >
                 Short Break
               </Button>
             </div>
@@ -174,7 +187,11 @@ export const Timer = () => {
                 </button>
               </div>
               {*/}
-              <Button className="text-gray-800 hover:text-white dark:text-white" variant="cold" onClick={selectLongBreak}>
+              <Button
+                className="text-gray-800 hover:text-white dark:text-white"
+                variant="cold"
+                onClick={selectLongBreak}
+              >
                 Long Break
               </Button>
             </div>
