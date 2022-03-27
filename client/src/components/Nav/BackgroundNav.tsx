@@ -3,12 +3,12 @@ import { useSetBackground } from "../../store";
 export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
   const [showMenu, setShowMenu] = useState(false);
   const { setIsBackground } = useSetBackground();
-  const menuRef = useRef(null);
+  const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     //https://stackoverflow.com/questions/32553158/detect-click-outside-react-component
     function handleClickOutside(event: any) {
-      if (menuRef.current && !menuRef.current.contains(event.target)) {
+      if (!menuRef.current?.contains(event.target)) {
         setShowMenu(false);
       }
     }
@@ -21,12 +21,12 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
   }, [menuRef]);
 
   return (
-    <div className="flex justify-end">
-      <div className="relative inline-block text-left">
+    <div className="absolute top-0 right-0 m-2 flex justify-end">
+      <div className="inline-block text-left">
         <div ref={menuRef} id="id_test">
           <button
             type="button"
-            className="inline-flex justify-center w-full rounded-l-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none"
+            className="inline-flex justify-center w-full rounded shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 focus:outline-none"
             onClick={() => setShowMenu(!showMenu)}
           >
             Choose Background
@@ -48,30 +48,66 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
 
         {showMenu && (
           <div
-            className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+            className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
             role="menu"
             ref={menuRef}
           >
             <div
-              className="py-1 cursor-pointer hover:bg-gray-100 hover:rounded-md"
+              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
               onClick={() => setIsBackground(backgrounds.SPACE)}
             >
-              <div className="text-gray-700 block px-4 py-2 text-sm">Space</div>
+              <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
+                Space
+              </div>
             </div>
             <div
-              className="py-1 cursor-pointer hover:bg-gray-100 hover:rounded-md"
+              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
               onClick={() => setIsBackground(backgrounds.STARS)}
             >
-              <div className="text-gray-700 block px-4 py-2 text-sm">Stars</div>
+              <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
+                Stars
+              </div>
             </div>
             <div
-              className="py-1 cursor-pointer hover:bg-gray-100 hover:rounded-md"
+              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
               onClick={() => setIsBackground(backgrounds.CITY)}
             >
-              <div className="text-gray-700 block px-4 py-2 text-sm">City</div>
+              <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
+                City
+              </div>
             </div>
           </div>
         )}
+
+        {/*
+        {showMenu && (
+          <div
+            ref={menuRef}
+            className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+          >
+            <ul
+              role="menu"
+              className="flex flex-col divide-y divide-gray-100 dark:divide-gray-900"
+            >
+              <li>
+                <button onClick={() => setIsBackground(backgrounds.SPACE)} className="w-full text-left rounded-t-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900 px-4 py-2 text-sm">
+                  Space
+                </button>
+              </li>
+              <li>
+                <button onClick={() => setIsBackground(backgrounds.STARS)} className="w-full text-left text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900 px-4 py-2 text-sm">
+                  Stars
+                </button>
+              </li>
+              <li>
+                <button onClick={() => setIsBackground(backgrounds.CITY)} className="w-full text-left rounded-b-md text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-900 px-4 py-2 text-sm">
+                  City
+                </button>
+              </li>
+            </ul>
+          </div>
+        )}
+        */}
       </div>
     </div>
   );
