@@ -2,8 +2,8 @@ import Slider from "rc-slider";
 import "rc-slider/assets/index.css";
 import { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
-import { AiOutlineHeart } from "react-icons/ai";
 import { FaPauseCircle, FaPlayCircle, FaYoutube } from "react-icons/fa";
+import { IoCloseSharp } from "react-icons/io5";
 import YouTube from "react-youtube";
 import { useSong, useToggleMusic } from "../../store";
 import "./Player.scss";
@@ -26,7 +26,7 @@ type PlayerVarsType = {
 
 export const Player = () => {
   const { song, toggledSong } = useSong();
-  const { isMusicToggled } = useToggleMusic();
+  const { isMusicToggled, setIsMusicToggled } = useToggleMusic();
 
   const [player, setPlayer] = useState<IPlayer>();
   const [playAudio, setPlayAudio] = useState(true);
@@ -87,7 +87,10 @@ export const Player = () => {
               <FaYoutube />
             </IconContext.Provider>
             <IconContext.Provider value={{ size: "1.1rem" }}>
-              <AiOutlineHeart />
+              <IoCloseSharp
+                className="text-red-500 cursor-pointer hover:bg-red-200"
+                onClick={() => setIsMusicToggled(false)}
+              />
             </IconContext.Provider>
           </div>
         </div>
