@@ -43,9 +43,6 @@ export const SideNav = () => {
           <NavItem onClick={toggleSpotify}>
             <FaSpotify className="h-6 w-6" />
           </NavItem>
-          <NavItem>
-            <IoImagesOutline className="h-6 w-6" />
-          </NavItem>
           <NavItem onClick={toggleTaskTracker}>
             <CgNotes className="h-6 w-6" />
           </NavItem>
