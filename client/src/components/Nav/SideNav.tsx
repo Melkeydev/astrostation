@@ -2,16 +2,19 @@ import { NavItem } from "./NavItems";
 import { IoMusicalNotesOutline } from "react-icons/io5";
 import { IoImagesOutline } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
-import { MdOutlineTimer } from "react-icons/md";
+import { MdOutlineTimer, MdWbSunny, MdDarkMode } from "react-icons/md";
 import { FaSpotify } from "react-icons/fa";
 import {
   useToggleMusic,
   useToggleTimer,
   useToggleTasks,
   useSpotifyMusic,
+  useDarkToggleStore,
 } from "../../store";
 
 export const SideNav = () => {
+  const { isDark, toggleDarkMode } = useDarkToggleStore();
+
   const { isMusicToggled, setIsMusicToggled } = useToggleMusic();
   const { isTimerToggled, setIsTimerToggled } = useToggleTimer();
   const { isTasksToggled, setIsTasksToggled } = useToggleTasks();
@@ -51,6 +54,13 @@ export const SideNav = () => {
           </NavItem>
           <NavItem onClick={toggleTimerPlayer}>
             <MdOutlineTimer className="h-6 w-6" />
+          </NavItem>
+          <NavItem onClick={toggleDarkMode}>
+            {isDark ? (
+              <MdWbSunny className="h-6 w-6" />
+            ) : (
+              <MdDarkMode className="h-6 w-6" />
+            )}
           </NavItem>
         </ul>
 
