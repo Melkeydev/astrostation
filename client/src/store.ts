@@ -2,9 +2,36 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 
 /**
+ * Max Pomodoro Store
+ * ---
+ * Handle for the amount of pomodoro's per task
+ */
+
+interface MaxPomo {
+  maxPomodoro: number;
+  increaseMaxPomodoro: () => void;
+  decreaseMaxPomodoro: () => void;
+  defaultMaxPomodoro: () => void;
+}
+
+export const useMaxPomodoro = create<MaxPomo>(
+  persist(
+    (set, _) => ({
+      maxPomodoro: 3,
+      decreaseMaxPomodoro: () =>
+        set((state) => ({ maxPomodoro: state.maxPomodoro - 1 })),
+      increaseMaxPomodoro: () =>
+        set((state) => ({ maxPomodoro: state.maxPomodoro + 1 })),
+      defaultMaxPomodoro: () => set(() => ({ maxPomodoro: 3 })),
+    }),
+    { name: "max_pomodoro_per_task" }
+  )
+);
+
+/**
  * Has Started Store
  * ---
- * Handler has started in timer
+ * Handler has started in timer sessions
  */
 interface HasStarted {
   hasStarted: boolean;
