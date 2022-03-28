@@ -2,6 +2,99 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 
 /**
+ * Has Started Store
+ * ---
+ * Handler has started in timer
+ */
+interface HasStarted {
+  hasStarted: boolean;
+  setHasStarted: (hasStarted: boolean) => void;
+}
+
+export const useHasStarted = create<HasStarted>((set) => ({
+  hasStarted: false,
+  setHasStarted: (hasStarted) => set({ hasStarted }),
+}));
+
+/**
+ * Short Break Time Store
+ * ---
+ * Handle short break times
+ */
+interface ShortBreakTime {
+  shortBreakLength: number;
+  decreaseShortBreakLength: () => void;
+  increaseShortBreakLength: () => void;
+  defaultShortBreakLength: () => void;
+}
+
+export const useShortBreakTimer = create<ShortBreakTime>(
+  persist(
+    (set, _) => ({
+      shortBreakLength: 300,
+      decreaseShortBreakLength: () =>
+        set((state) => ({ shortBreakLength: state.shortBreakLength - 60 })),
+      increaseShortBreakLength: () =>
+        set((state) => ({ shortBreakLength: state.shortBreakLength + 60 })),
+      defaultShortBreakLength: () => set(() => ({ shortBreakLength: 300 })),
+    }),
+    { name: "short_break_timer_length" }
+  )
+);
+
+/**
+ * Long Break Time Store
+ * ---
+ * Handle long break times
+ */
+interface LongBreakTime {
+  longBreakLength: number;
+  decreaseLongBreakLength: () => void;
+  increaseLongBreakLength: () => void;
+  defaultLongBreakLength: () => void;
+}
+
+export const useLongBreakTimer = create<LongBreakTime>(
+  persist(
+    (set, _) => ({
+      longBreakLength: 1500,
+      decreaseLongBreakLength: () =>
+        set((state) => ({ longBreakLength: state.longBreakLength - 60 })),
+      increaseLongBreakLength: () =>
+        set((state) => ({ longBreakLength: state.longBreakLength + 60 })),
+      defaultLongBreakLength: () => set(() => ({ longBreakLength: 900 })),
+    }),
+    { name: "long_break_timer_length" }
+  )
+);
+
+/**
+ * Pomodoro Time Store
+ * ---
+ * Handle pomodoro times
+ */
+interface PomodoroTime {
+  pomodoroLength: number;
+  decreasePomodoroLength: () => void;
+  increasePomodoroLength: () => void;
+  defaultPomodoroLength: () => void;
+}
+
+export const usePomodoroTimer = create<PomodoroTime>(
+  persist(
+    (set, _) => ({
+      pomodoroLength: 1500,
+      decreasePomodoroLength: () =>
+        set((state) => ({ pomodoroLength: state.pomodoroLength - 60 })),
+      increasePomodoroLength: () =>
+        set((state) => ({ pomodoroLength: state.pomodoroLength + 60 })),
+      defaultPomodoroLength: () => set(() => ({ pomodoroLength: 1500 })),
+    }),
+    { name: "pomodoro_timer_length" }
+  )
+);
+
+/**
  * Task Store
  * ---
  * Handle the tasks created in the tasks section

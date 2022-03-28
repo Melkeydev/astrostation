@@ -10,6 +10,8 @@ import { TaskTracker } from "../components/TaskTracker/TaskTracker";
 import { Spotify } from "../components/Player/Spotify/Player";
 import { BackgroundNav } from "../components/Nav/BackgroundNav";
 
+import { TimerSettings } from "../components/Timer/Settings";
+
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
@@ -33,6 +35,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
       </div>
       {isTimerToggled && (
         <div className="flex justify-center">
+          <TimerSettings />
           <Timer />
         </div>
       )}
