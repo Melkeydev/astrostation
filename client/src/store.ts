@@ -218,3 +218,23 @@ export const useToggleTimer = create<IToggleTimer>(
     { name: "show_timer_section" }
   )
 );
+
+/**
+ * Dark Mode Store
+ * ---
+ * Handle different styling between app dark and light mode
+ */
+type DarkModeState = {
+  isDark: boolean;
+  toggleDarkMode: () => void;
+};
+
+export const useDarkToggleStore = create<DarkModeState>(
+  persist(
+    (set, _) => ({
+      isDark: true,
+      toggleDarkMode: () => set((oldState) => ({ isDark: !oldState.isDark })),
+    }),
+    { name: "darkmode" }
+  )
+);
