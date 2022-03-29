@@ -7,6 +7,7 @@ import {
   useLongBreakTimer,
   usePomodoroTimer,
   useHasStarted,
+  useSetPomodoroCounter,
 } from "../../store";
 
 export const Timer = () => {
@@ -22,6 +23,7 @@ export const Timer = () => {
   const [isSession, setIsSession] = useState(false);
   const [sessionType, setSessionType] = useState("Session");
   const { setIsTimerToggled } = useToggleTimer();
+  const { setPomodoroCounter } = useSetPomodoroCounter();
 
   const audioRef = useRef();
 
@@ -31,6 +33,7 @@ export const Timer = () => {
 
   useEffect(() => {
     if (timer === 0) {
+      setPomodoroCounter();
       audioRef.current.play();
       if (sessionType === "Session") {
         setSessionType("Break");
@@ -112,7 +115,6 @@ export const Timer = () => {
     setTimer(1500);
   }
 
-  // TODO: add that it cannot be changed while in break mode
   function selectShortBreak() {
     if (hasStarted) return; // guard against change when running
     if (sessionType == "Break") {

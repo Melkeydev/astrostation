@@ -2,6 +2,22 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 
 /**
+ * Pomo Counter Store
+ * ---
+ * Handler for Pomo Counts
+ */
+interface PomodoroCounter {
+  pomodoroCounts: number;
+  setPomodoroCounter: () => void;
+}
+
+export const useSetPomodoroCounter = create<PomodoroCounter>((set) => ({
+  pomodoroCounts: 0,
+  setPomodoroCounter: () =>
+    set((state) => ({ pomodoroCounts: state.pomodoroCounts + 1 })),
+}));
+
+/**
  * Toggle Settings Store
  * ---
  * Handler for Settings
@@ -146,11 +162,12 @@ interface Task {
   description: string;
   inProgress: boolean;
   completed: boolean;
+  pomodoro: number;
 }
 
 interface TaskState {
   tasks: Task[];
-  addTask: (description: string) => void;
+  addTask: (description: string, count: number) => void;
   removeTask: (id: number) => void;
   toggleInProgressState: (id: number) => void;
   completeTask: (id: number) => void;
@@ -160,7 +177,7 @@ export const useTask = create<TaskState>(
   persist(
     (set, _) => ({
       tasks: [],
-      addTask: (description: string) => {
+      addTask: (description: string, count: number) => {
         set((state) => ({
           tasks: [
             ...state.tasks,
@@ -169,6 +186,7 @@ export const useTask = create<TaskState>(
               description,
               inProgress: false,
               completed: false,
+              pomodoro: count,
             } as Task,
           ],
         }));
