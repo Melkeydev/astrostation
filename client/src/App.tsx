@@ -5,9 +5,11 @@ import {
   //Link,
   //useParams,
 } from "react-router-dom";
+import { useEffect } from "react";
 import { Backgrounds } from "./components/Backgrounds/utils";
 import { HomePage } from "./pages/Homepage";
 import { SideNav } from "./components/Nav/SideNav";
+import { useDarkToggleStore } from "./store";
 
 enum backgrounds {
   CITY,
@@ -17,6 +19,16 @@ enum backgrounds {
 
 // This needs to handle my sidebar, and my background changes
 function App() {
+  const isDark = useDarkToggleStore((state) => state.isDark);
+
+  useEffect(() => {
+    if (isDark) {
+      document.documentElement.classList.add("dark");
+    } else {
+      document.documentElement.classList.remove("dark");
+    }
+  }, [isDark]);
+
   return (
     <Router>
       <Backgrounds backgrounds={backgrounds} />
