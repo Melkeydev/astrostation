@@ -4,20 +4,45 @@ import {
   usePomodoroTimer,
   useHasStarted,
   useMaxPomodoro,
+  useToggleSettings,
 } from "../../store";
+import { IoCloseSharp } from "react-icons/io5";
+import { Button } from "../Common/Button";
 export const TimerSettings = () => {
+  const { setIsSettingsToggled } = useToggleSettings();
   const {
     shortBreakLength,
     decreaseShortBreakLength,
     increaseShortBreakLength,
+    defaultShortBreakLength,
   } = useShortBreakTimer();
-  const { longBreakLength, decreaseLongBreakLength, increaseLongBreakLength } =
-    useLongBreakTimer();
-  const { pomodoroLength, decreasePomodoroLength, increasePomodoroLength } =
-    usePomodoroTimer();
-  const { hasStarted, setHasStarted } = useHasStarted();
-  const { maxPomodoro, decreaseMaxPomodoro, increaseMaxPomodoro } =
-    useMaxPomodoro();
+  const {
+    longBreakLength,
+    decreaseLongBreakLength,
+    increaseLongBreakLength,
+    defaultLongBreakLength,
+  } = useLongBreakTimer();
+  const {
+    pomodoroLength,
+    decreasePomodoroLength,
+    increasePomodoroLength,
+    defaultPomodoroLength,
+  } = usePomodoroTimer();
+  const { hasStarted } = useHasStarted();
+  const {
+    maxPomodoro,
+    decreaseMaxPomodoro,
+    increaseMaxPomodoro,
+    defaultMaxPomodoro,
+  } = useMaxPomodoro();
+
+  function handleDefaults() {
+    if (hasStarted) return;
+    defaultShortBreakLength();
+    defaultLongBreakLength();
+    defaultPomodoroLength();
+    defaultMaxPomodoro();
+  }
 
   function handleSessionLengthChange(e) {
     if (hasStarted) return; // guard against change when running
@@ -68,6 +93,12 @@ export const TimerSettings = () => {
   return (
     <div className="space-y-2 p-4 mb-2 max-w-sm bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 w-1/2">
       <div className="border-b-2 border-gray-100 pb-2">
+        <div className="flex justify-end">
+          <IoCloseSharp
+            className="text-red-500 cursor-pointer hover:bg-red-200"
+            onClick={() => setIsSettingsToggled(false)}
+          />
+        </div>
         <div className="text-center p-2 rounded">Time (minutes)</div>
         <div className="flex justify-between items-center">
           <div>
@@ -134,15 +165,15 @@ export const TimerSettings = () => {
       </div>
       <div className="flex justify-between border-b-2 border-gray-100 pb-2 items-center">
         <div>Max Pomodoro's</div>
-        <div className="bg-gray-200 text-center items-center">
-          <div className="flex justify-between p-2">
+        <div className="bg-gray-200">
+          <div className="flex p-2 space-x-5">
             <button
               id="pomodoro-decrement"
               onClick={(e) => handlePomodoroLengthChange(e)}
             >
               &lt;
             </button>
-            {Math.floor(maxPomodoro)}
+            <div>{Math.floor(maxPomodoro)}</div>
             <button
               id="pomodoro-increment"
               onClick={(e) => handlePomodoroLengthChange(e)}
@@ -151,6 +182,22 @@ export const TimerSettings = () => {
             </button>
           </div>
         </div>
+      </div>
+      <div className="flex justify-between">
+        <Button
+          className="text-gray-800 font-normal hover:text-white dark:text-white"
+          variant="cold"
+          onClick={handleDefaults}
+        >
+          Default
+        </Button>
+        <Button
+          className="text-gray-800 font-normal hover:text-white dark:text-white"
+          variant="cold"
+          onClick={() => setIsSettingsToggled(false)}
+        >
+          Okay
+        </Button>
       </div>
     </div>
   );

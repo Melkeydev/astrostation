@@ -2,6 +2,21 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 
 /**
+ * Toggle Settings Store
+ * ---
+ * Handler for Settings
+ */
+interface IToggleSettings {
+  isSettingsToggled: boolean;
+  setIsSettingsToggled: (isSettingsToggled: boolean) => void;
+}
+
+export const useToggleSettings = create<IToggleSettings>((set) => ({
+  isSettingsToggled: false,
+  setIsSettingsToggled: (isSettingsToggled) => set({ isSettingsToggled }),
+}));
+
+/**
  * Max Pomodoro Store
  * ---
  * Handle for the amount of pomodoro's per task
