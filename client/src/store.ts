@@ -2,6 +2,21 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 
 /**
+ * Timer Store
+ * ---
+ * Handler for Timer
+ */
+interface Timer {
+  timerQueue: number;
+  setTimerQueue: (newTime: number) => void;
+}
+
+export const useTimer = create<Timer>((set) => ({
+  timerQueue: 1500,
+  setTimerQueue: (newTime) => set({ timerQueue: newTime }),
+}));
+
+/**
  * Pomo Counter Store
  * ---
  * Handler for Pomo Counts
@@ -163,6 +178,7 @@ interface Task {
   inProgress: boolean;
   completed: boolean;
   pomodoro: number;
+  pomodoroCounter: number;
 }
 
 interface TaskState {
@@ -171,6 +187,7 @@ interface TaskState {
   removeTask: (id: number) => void;
   toggleInProgressState: (id: number) => void;
   completeTask: (id: number) => void;
+  setPomodoroCounter: (id: number) => void;
 }
 
 export const useTask = create<TaskState>(
@@ -187,6 +204,7 @@ export const useTask = create<TaskState>(
               inProgress: false,
               completed: false,
               pomodoro: count,
+              pomodoroCounter: 0,
             } as Task,
           ],
         }));
@@ -210,6 +228,18 @@ export const useTask = create<TaskState>(
           tasks: state.tasks.map((task) =>
             task.id === id
               ? ({ ...task, completed: !task.completed } as Task)
+              : task
+          ),
+        }));
+      },
+      setPomodoroCounter: (id) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({
+                  ...task,
+                  pomodoroCounter: task.pomodoroCounter + 1,
+                } as Task)
               : task
           ),
         }));

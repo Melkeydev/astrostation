@@ -33,11 +33,11 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         </button>
         <BackgroundNav backgrounds={backgrounds} />
       </div>
-      {isMusicToggled && (
-        <div className="flex justify-center">
-          <Player />
-        </div>
-      )}
+      <div
+        className={`flex justify-center ${isMusicToggled ? "block" : "hidden"}`}
+      >
+        <Player />
+      </div>
       <div
         className={`flex justify-center ${
           isSpotifyToggled ? "block" : "hidden"
@@ -45,21 +45,23 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
       >
         <Spotify />
       </div>
-      {isSettingsToggled && (
-        <div className="flex justify-center">
-          <TimerSettings />
-        </div>
-      )}
-      {isTimerToggled && (
-        <div className="flex justify-center">
-          <Timer />
-        </div>
-      )}
-      {isTasksToggled && (
-        <div className="flex justify-center">
-          <TaskTracker />
-        </div>
-      )}
+      <div
+        className={`flex justify-center ${
+          isSettingsToggled ? "block" : "hidden"
+        }`}
+      >
+        <TimerSettings />
+      </div>
+      <div
+        className={`flex justify-center ${isTimerToggled ? "block" : "hidden"}`}
+      >
+        <Timer />
+      </div>
+      <div
+        className={`flex justify-center ${isTasksToggled ? "block" : "hidden"}`}
+      >
+        <TaskTracker />
+      </div>
     </div>
   );
 };

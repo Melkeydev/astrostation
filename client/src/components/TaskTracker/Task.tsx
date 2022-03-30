@@ -1,11 +1,17 @@
 import { useEffect } from "react";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import { RiArrowGoBackFill } from "react-icons/ri";
-import { useTask, useSetPomodoroCounter } from "../../store";
+import { useTask, useTimer } from "../../store";
 
 export const Task = ({ task }: any) => {
-  const { removeTask, completeTask, toggleInProgressState } = useTask();
-  const { pomodoroCounts } = useSetPomodoroCounter();
+  const {
+    removeTask,
+    completeTask,
+    toggleInProgressState,
+    setPomodoroCounter,
+  } = useTask();
+
+  const { timerQueue } = useTimer();
 
   function preventFalseInProgress() {
     if (task.completed) {
@@ -15,14 +21,22 @@ export const Task = ({ task }: any) => {
   }
 
   function getRemainingPomodoro() {
-    // Each Task needs their own counter
-    let number = task.pomodoro - pomodoroCounts;
+    console.log(task.id, task.pomodoro, task.pomodoroCounter);
+    let number = task.pomodoro - task.pomodoroCounter;
+    if (number < 0) {
+      return 0;
+    }
     return number;
   }
 
-  // This wont work if the Task component is closed
   useEffect(() => {
-    if (task.pomodoro == 0) {
+    if (timerQueue === 0) {
+      setPomodoroCounter(task.id);
+    }
+  }, [timerQueue]);
+
+  useEffect(() => {
+    if (task.pomodoro < 0) {
       alert(`${task.description} should be completed`);
     }
   }, [task.pomodoro]);

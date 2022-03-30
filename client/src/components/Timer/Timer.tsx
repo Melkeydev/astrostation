@@ -8,6 +8,7 @@ import {
   usePomodoroTimer,
   useHasStarted,
   useSetPomodoroCounter,
+  useTimer,
 } from "../../store";
 
 export const Timer = () => {
@@ -17,10 +18,10 @@ export const Timer = () => {
   const { hasStarted, setHasStarted } = useHasStarted();
   const [breakLength, setBreakLength] = useState(shortBreakLength);
   const [timer, setTimer] = useState(1500);
+  const { setTimerQueue } = useTimer();
   const [timerMinutes, setTimerMinutes] = useState("00");
   const [timerSeconds, setTimerSeconds] = useState("00");
   const [timerIntervalId, setTimerIntervalId] = useState(null);
-  const [isSession, setIsSession] = useState(false);
   const [sessionType, setSessionType] = useState("Session");
   const { setIsTimerToggled } = useToggleTimer();
   const { setPomodoroCounter } = useSetPomodoroCounter();
@@ -34,6 +35,7 @@ export const Timer = () => {
   useEffect(() => {
     if (timer === 0) {
       setPomodoroCounter();
+      setTimerQueue(0);
       audioRef.current.play();
       if (sessionType === "Session") {
         setSessionType("Break");
@@ -92,16 +94,7 @@ export const Timer = () => {
     }
   }
 
-  function handleBreakLengthChange(e: any) {
-    if (hasStarted) return; // guard against change when running
-
-    if (e.target.id === "break-decrement" && breakLength > 60) {
-      setBreakLength((prevVal) => prevVal - 60);
-    } else if (e.target.id === "break-increment" && breakLength < 3600) {
-      setBreakLength((prevVal) => prevVal + 60);
-    }
-  }
-
+  // TODO: fix default handling
   function handleResetTimer() {
     audioRef?.current?.load();
     if (timerIntervalId) {
@@ -113,6 +106,7 @@ export const Timer = () => {
     defaultLongBreakLength();
     setSessionType("Session");
     setTimer(1500);
+    setTimerQueue(1500);
   }
 
   function selectShortBreak() {
