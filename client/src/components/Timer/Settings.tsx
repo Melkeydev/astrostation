@@ -8,6 +8,7 @@ import {
 } from "../../store";
 import { IoCloseSharp } from "react-icons/io5";
 import { Button } from "../Common/Button";
+import { ToggleOption } from "./ToggleOption";
 export const TimerSettings = () => {
   const { setIsSettingsToggled } = useToggleSettings();
   const {
@@ -44,49 +45,22 @@ export const TimerSettings = () => {
     defaultMaxPomodoro();
   }
 
-  function handleSessionLengthChange(e) {
+  function handleLengthChange(
+    e: any,
+    decrement: string,
+    increment: string,
+    minLength: number,
+    maxLength: number,
+    propertyLength: number,
+    decrementFunction: any,
+    incrementFunction: any
+  ) {
     if (hasStarted) return; // guard against change when running
 
-    if (e.target.id === "session-decrement" && pomodoroLength > 60) {
-      decreasePomodoroLength();
-    } else if (e.target.id === "session-increment" && pomodoroLength < 3600) {
-      increasePomodoroLength();
-    }
-  }
-
-  function handlePomodoroLengthChange(e) {
-    if (hasStarted) return; // guard against change when running
-
-    if (e.target.id === "pomodoro-decrement" && maxPomodoro > 1) {
-      decreaseMaxPomodoro();
-    } else if (e.target.id === "pomodoro-increment" && maxPomodoro < 10) {
-      increaseMaxPomodoro();
-    }
-  }
-
-  function handleShortBreakLengthChange(e: any) {
-    if (hasStarted) return; // guard against change when running
-
-    if (e.target.id === "short-break-decrement" && shortBreakLength > 60) {
-      decreaseShortBreakLength();
-    } else if (
-      e.target.id === "short-break-increment" &&
-      shortBreakLength < 3600
-    ) {
-      increaseShortBreakLength();
-    }
-  }
-
-  function handleLongBreakLengthChange(e: any) {
-    if (hasStarted) return; // guard against change when running
-
-    if (e.target.id === "long-break-decrement" && longBreakLength > 60) {
-      decreaseLongBreakLength();
-    } else if (
-      e.target.id === "long-break-increment" &&
-      longBreakLength < 3600
-    ) {
-      increaseLongBreakLength();
+    if (e.target.id === decrement && propertyLength > minLength) {
+      decrementFunction();
+    } else if (e.target.id === increment && propertyLength < maxLength) {
+      incrementFunction();
     }
   }
 
@@ -101,66 +75,60 @@ export const TimerSettings = () => {
         </div>
         <div className="text-center p-2 rounded">Time (minutes)</div>
         <div className="flex justify-between items-center">
-          <div>
-            Pomodoro
-            <div className="bg-gray-200 text-center items-center">
-              <div className="flex justify-between p-2">
-                <button
-                  id="session-decrement"
-                  onClick={(e) => handleSessionLengthChange(e)}
-                >
-                  &lt;
-                </button>
-                {Math.floor(pomodoroLength / 60)}
-                <button
-                  id="session-increment"
-                  onClick={(e) => handleSessionLengthChange(e)}
-                >
-                  &gt;
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            Short Break
-            <div className="bg-gray-200 text-center items-center">
-              <div className="flex justify-between p-2">
-                <button
-                  id="short-break-decrement"
-                  onClick={(e) => handleShortBreakLengthChange(e)}
-                >
-                  &lt;
-                </button>
-                {Math.floor(shortBreakLength / 60)}
-                <button
-                  id="short-break-increment"
-                  onClick={(e) => handleShortBreakLengthChange(e)}
-                >
-                  &gt;
-                </button>
-              </div>
-            </div>
-          </div>
-          <div>
-            Long Break
-            <div className="bg-gray-200 text-center items-center">
-              <div className="flex justify-between p-2">
-                <button
-                  id="long-break-decrement"
-                  onClick={(e) => handleLongBreakLengthChange(e)}
-                >
-                  &lt;
-                </button>
-                {Math.floor(longBreakLength / 60)}
-                <button
-                  id="long-break-increment"
-                  onClick={(e) => handleLongBreakLengthChange(e)}
-                >
-                  &gt;
-                </button>
-              </div>
-            </div>
-          </div>
+          <ToggleOption
+            title="Pomodoro"
+            decrement="session-decrement"
+            increment="session-increment"
+            onClick={(e) =>
+              handleLengthChange(
+                e,
+                "session-decrement",
+                "session-increment",
+                60,
+                3600,
+                pomodoroLength,
+                decreasePomodoroLength,
+                increasePomodoroLength
+              )
+            }
+            propertyLength={Math.floor(pomodoroLength / 60)}
+          />
+          <ToggleOption
+            title="Short Break"
+            decrement="short-break-decrement"
+            increment="short-break-increment"
+            onClick={(e) =>
+              handleLengthChange(
+                e,
+                "short-break-decrement",
+                "short-break-increment",
+                60,
+                3600,
+                shortBreakLength,
+                decreaseShortBreakLength,
+                increaseShortBreakLength
+              )
+            }
+            propertyLength={Math.floor(shortBreakLength / 60)}
+          />
+          <ToggleOption
+            title="Long Break"
+            decrement="long-break-decrement"
+            increment="long-break-increment"
+            onClick={(e) =>
+              handleLengthChange(
+                e,
+                "long-break-decrement",
+                "long-break-increment",
+                60,
+                3600,
+                longBreakLength,
+                decreaseLongBreakLength,
+                increaseLongBreakLength
+              )
+            }
+            propertyLength={Math.floor(longBreakLength / 60)}
+          />
         </div>
       </div>
       <div className="flex justify-between border-b-2 border-gray-100 pb-2 items-center">
@@ -169,14 +137,36 @@ export const TimerSettings = () => {
           <div className="flex p-2 space-x-5">
             <button
               id="pomodoro-decrement"
-              onClick={(e) => handlePomodoroLengthChange(e)}
+              onClick={(e) =>
+                handleLengthChange(
+                  e,
+                  "pomodoro-decrement",
+                  "pomodoro-increment",
+                  1,
+                  10,
+                  maxPomodoro,
+                  decreaseMaxPomodoro,
+                  increaseMaxPomodoro
+                )
+              }
             >
               &lt;
             </button>
             <div>{Math.floor(maxPomodoro)}</div>
             <button
               id="pomodoro-increment"
-              onClick={(e) => handlePomodoroLengthChange(e)}
+              onClick={(e) =>
+                handleLengthChange(
+                  e,
+                  "pomodoro-decrement",
+                  "pomodoro-increment",
+                  1,
+                  10,
+                  maxPomodoro,
+                  decreaseMaxPomodoro,
+                  increaseMaxPomodoro
+                )
+              }
             >
               &gt;
             </button>

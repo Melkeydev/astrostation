@@ -104,12 +104,12 @@ interface ShortBreakTime {
 export const useShortBreakTimer = create<ShortBreakTime>(
   persist(
     (set, _) => ({
-      shortBreakLength: 300,
+      shortBreakLength: 60,
       decreaseShortBreakLength: () =>
         set((state) => ({ shortBreakLength: state.shortBreakLength - 60 })),
       increaseShortBreakLength: () =>
         set((state) => ({ shortBreakLength: state.shortBreakLength + 60 })),
-      defaultShortBreakLength: () => set(() => ({ shortBreakLength: 300 })),
+      defaultShortBreakLength: () => set(() => ({ shortBreakLength: 60 })),
     }),
     { name: "short_break_timer_length" }
   )
@@ -156,7 +156,7 @@ interface PomodoroTime {
 export const usePomodoroTimer = create<PomodoroTime>(
   persist(
     (set, _) => ({
-      pomodoroLength: 1500,
+      pomodoroLength: 60,
       decreasePomodoroLength: () =>
         set((state) => ({ pomodoroLength: state.pomodoroLength - 60 })),
       increasePomodoroLength: () =>
@@ -187,6 +187,7 @@ interface TaskState {
   removeTask: (id: number) => void;
   toggleInProgressState: (id: number) => void;
   completeTask: (id: number) => void;
+  reducePomodoro: (id: number) => void;
   setPomodoroCounter: (id: number) => void;
 }
 
@@ -199,7 +200,7 @@ export const useTask = create<TaskState>(
           tasks: [
             ...state.tasks,
             {
-              id: state.tasks.length + 1,
+              id: Date.now() + state.tasks.length,
               description,
               inProgress: false,
               completed: false,
@@ -228,6 +229,18 @@ export const useTask = create<TaskState>(
           tasks: state.tasks.map((task) =>
             task.id === id
               ? ({ ...task, completed: !task.completed } as Task)
+              : task
+          ),
+        }));
+      },
+      reducePomodoro: (id) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({
+                  ...task,
+                  pomodoro: task.pomodoro > 0 ? task.pomodoro - 1 : 0,
+                } as Task)
               : task
           ),
         }));

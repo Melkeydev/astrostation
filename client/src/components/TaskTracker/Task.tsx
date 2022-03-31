@@ -9,6 +9,7 @@ export const Task = ({ task }: any) => {
     completeTask,
     toggleInProgressState,
     setPomodoroCounter,
+    reducePomodoro,
   } = useTask();
 
   const { timerQueue } = useTimer();
@@ -21,22 +22,28 @@ export const Task = ({ task }: any) => {
   }
 
   function getRemainingPomodoro() {
-    console.log(task.id, task.pomodoro, task.pomodoroCounter);
-    let number = task.pomodoro - task.pomodoroCounter;
-    if (number < 0) {
+    //let number = task.pomodoro - task.pomodoroCounter;
+    console.log("from func", task.pomodoro, "");
+    if (task.pomodoro < 0) {
       return 0;
     }
-    return number;
+    return task.pomodoro;
   }
 
+  // This needs to be fixed because adding a task during break causes this to trigger
+  // if number is 0 then setPomodoro to 0
+  // if pomodoro === 0, then we mark it as red
   useEffect(() => {
     if (timerQueue === 0) {
-      setPomodoroCounter(task.id);
+      //setPomodoroCounter(task.id);
+      console.log(task.pomodoro);
+      reducePomodoro(task.id);
+      console.log(task.pomodoro);
     }
   }, [timerQueue]);
 
   useEffect(() => {
-    if (task.pomodoro < 0) {
+    if (task.pomodoro == 0) {
       alert(`${task.description} should be completed`);
     }
   }, [task.pomodoro]);

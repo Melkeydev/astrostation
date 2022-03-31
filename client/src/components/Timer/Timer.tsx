@@ -16,8 +16,9 @@ export const Timer = () => {
   const { longBreakLength, defaultLongBreakLength } = useLongBreakTimer();
   const { pomodoroLength, defaultPomodoroLength } = usePomodoroTimer();
   const { hasStarted, setHasStarted } = useHasStarted();
+  // breakLength is not hooked up to the hook
   const [breakLength, setBreakLength] = useState(shortBreakLength);
-  const [timer, setTimer] = useState(1500);
+  const [timer, setTimer] = useState(60);
   const { setTimerQueue } = useTimer();
   const [timerMinutes, setTimerMinutes] = useState("00");
   const [timerSeconds, setTimerSeconds] = useState("00");
@@ -105,7 +106,7 @@ export const Timer = () => {
     defaultShortBreakLength();
     defaultLongBreakLength();
     setSessionType("Session");
-    setTimer(1500);
+    setTimer(60);
     setTimerQueue(1500);
   }
 
