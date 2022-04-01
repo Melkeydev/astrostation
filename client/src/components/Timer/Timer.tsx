@@ -12,11 +12,10 @@ import {
 } from "../../store";
 
 export const Timer = () => {
-  const { shortBreakLength, defaultShortBreakLength } = useShortBreakTimer();
-  const { longBreakLength, defaultLongBreakLength } = useLongBreakTimer();
-  const { pomodoroLength, defaultPomodoroLength } = usePomodoroTimer();
+  const { shortBreakLength, setShortBreak } = useShortBreakTimer();
+  const { longBreakLength, setLongBreak } = useLongBreakTimer();
+  const { pomodoroLength, setPomodoroLength } = usePomodoroTimer();
   const { hasStarted, setHasStarted } = useHasStarted();
-  // breakLength is not hooked up to the hook
   const [breakLength, setBreakLength] = useState(shortBreakLength);
   const [timer, setTimer] = useState(60);
   const { setTimerQueue } = useTimer();
@@ -44,6 +43,7 @@ export const Timer = () => {
       } else {
         setSessionType("Session");
         setTimer(pomodoroLength);
+        setTimerQueue(pomodoroLength);
       }
     }
   }, [timer, sessionType]);
@@ -102,12 +102,12 @@ export const Timer = () => {
       clearInterval(timerIntervalId);
     }
     setTimerIntervalId(null);
-    defaultPomodoroLength();
-    defaultShortBreakLength();
-    defaultLongBreakLength();
+    setPomodoroLength(pomodoroLength);
+    setShortBreak(shortBreakLength);
+    setLongBreak(longBreakLength);
     setSessionType("Session");
-    setTimer(60);
-    setTimerQueue(1500);
+    setTimer(pomodoroLength);
+    setTimerQueue(pomodoroLength);
   }
 
   function selectShortBreak() {

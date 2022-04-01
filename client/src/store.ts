@@ -12,7 +12,7 @@ interface Timer {
 }
 
 export const useTimer = create<Timer>((set) => ({
-  timerQueue: 1500,
+  timerQueue: 60,
   setTimerQueue: (newTime) => set({ timerQueue: newTime }),
 }));
 
@@ -58,6 +58,7 @@ interface MaxPomo {
   increaseMaxPomodoro: () => void;
   decreaseMaxPomodoro: () => void;
   defaultMaxPomodoro: () => void;
+  setMaxPomodoro: (value: number) => void;
 }
 
 export const useMaxPomodoro = create<MaxPomo>(
@@ -69,6 +70,7 @@ export const useMaxPomodoro = create<MaxPomo>(
       increaseMaxPomodoro: () =>
         set((state) => ({ maxPomodoro: state.maxPomodoro + 1 })),
       defaultMaxPomodoro: () => set(() => ({ maxPomodoro: 3 })),
+      setMaxPomodoro: (value) => set({ maxPomodoro: value }),
     }),
     { name: "max_pomodoro_per_task" }
   )
@@ -99,6 +101,7 @@ interface ShortBreakTime {
   decreaseShortBreakLength: () => void;
   increaseShortBreakLength: () => void;
   defaultShortBreakLength: () => void;
+  setShortBreak: (value: number) => void;
 }
 
 export const useShortBreakTimer = create<ShortBreakTime>(
@@ -110,6 +113,7 @@ export const useShortBreakTimer = create<ShortBreakTime>(
       increaseShortBreakLength: () =>
         set((state) => ({ shortBreakLength: state.shortBreakLength + 60 })),
       defaultShortBreakLength: () => set(() => ({ shortBreakLength: 60 })),
+      setShortBreak: (value) => set({ shortBreakLength: value }),
     }),
     { name: "short_break_timer_length" }
   )
@@ -125,17 +129,19 @@ interface LongBreakTime {
   decreaseLongBreakLength: () => void;
   increaseLongBreakLength: () => void;
   defaultLongBreakLength: () => void;
+  setLongBreak: (value: number) => void;
 }
 
 export const useLongBreakTimer = create<LongBreakTime>(
   persist(
     (set, _) => ({
-      longBreakLength: 1500,
+      longBreakLength: 60,
       decreaseLongBreakLength: () =>
         set((state) => ({ longBreakLength: state.longBreakLength - 60 })),
       increaseLongBreakLength: () =>
         set((state) => ({ longBreakLength: state.longBreakLength + 60 })),
-      defaultLongBreakLength: () => set(() => ({ longBreakLength: 900 })),
+      defaultLongBreakLength: () => set(() => ({ longBreakLength: 60 })),
+      setLongBreak: (value) => set({ longBreakLength: value }),
     }),
     { name: "long_break_timer_length" }
   )
@@ -151,6 +157,7 @@ interface PomodoroTime {
   decreasePomodoroLength: () => void;
   increasePomodoroLength: () => void;
   defaultPomodoroLength: () => void;
+  setPomodoroLength: (value: number) => void;
 }
 
 export const usePomodoroTimer = create<PomodoroTime>(
@@ -161,7 +168,8 @@ export const usePomodoroTimer = create<PomodoroTime>(
         set((state) => ({ pomodoroLength: state.pomodoroLength - 60 })),
       increasePomodoroLength: () =>
         set((state) => ({ pomodoroLength: state.pomodoroLength + 60 })),
-      defaultPomodoroLength: () => set(() => ({ pomodoroLength: 1500 })),
+      defaultPomodoroLength: () => set(() => ({ pomodoroLength: 60 })),
+      setPomodoroLength: (value) => set({ pomodoroLength: value }),
     }),
     { name: "pomodoro_timer_length" }
   )
@@ -179,6 +187,7 @@ interface Task {
   completed: boolean;
   pomodoro: number;
   pomodoroCounter: number;
+  alerted: boolean;
 }
 
 interface TaskState {
@@ -189,6 +198,7 @@ interface TaskState {
   completeTask: (id: number) => void;
   reducePomodoro: (id: number) => void;
   setPomodoroCounter: (id: number) => void;
+  alertTask: (id: number) => void;
 }
 
 export const useTask = create<TaskState>(
@@ -206,6 +216,7 @@ export const useTask = create<TaskState>(
               completed: false,
               pomodoro: count,
               pomodoroCounter: 0,
+              alerted: false,
             } as Task,
           ],
         }));
@@ -252,6 +263,18 @@ export const useTask = create<TaskState>(
               ? ({
                   ...task,
                   pomodoroCounter: task.pomodoroCounter + 1,
+                } as Task)
+              : task
+          ),
+        }));
+      },
+      alertTask: (id) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({
+                  ...task,
+                  alerted: true,
                 } as Task)
               : task
           ),
