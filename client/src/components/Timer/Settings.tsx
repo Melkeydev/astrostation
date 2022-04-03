@@ -131,7 +131,7 @@ export const TimerSettings = () => {
           />
         </div>
       </div>
-      <div className="flex justify-between border-b-2 border-gray-100 pb-2 items-center">
+      <div className="flex justify-between border-b-2 border-gray-100 px-2 pb-2 items-center">
         <div>Max Pomodoro's</div>
         <div className="bg-gray-200">
           <div className="flex p-2 space-x-5">
