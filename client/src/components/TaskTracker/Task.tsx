@@ -1,9 +1,18 @@
+import { useEffect } from "react";
 import { FaTimes, FaCheck } from "react-icons/fa";
 import { RiArrowGoBackFill } from "react-icons/ri";
-import { useTask } from "../../store";
+import { useTask, useTimer } from "../../store";
 
 export const Task = ({ task }: any) => {
-  const { removeTask, completeTask, toggleInProgressState } = useTask();
+  const {
+    removeTask,
+    completeTask,
+    toggleInProgressState,
+    reducePomodoro,
+    alertTask,
+  } = useTask();
+
+  const { timerQueue } = useTimer();
 
   function preventFalseInProgress() {
     if (task.completed) {
@@ -11,6 +20,27 @@ export const Task = ({ task }: any) => {
     }
     toggleInProgressState(task.id);
   }
+
+  function getRemainingPomodoro() {
+    //let number = task.pomodoro - task.pomodoroCounter;
+    if (task.pomodoro < 0) {
+      return 0;
+    }
+    return task.pomodoro;
+  }
+
+  useEffect(() => {
+    if (timerQueue === 0 && !task.alerted) {
+      reducePomodoro(task.id);
+    }
+  }, [timerQueue]);
+
+  useEffect(() => {
+    if (task.pomodoro == 0 && !task.alerted) {
+      alertTask(task.id);
+      alert(`${task.description} should be completed`);
+    }
+  }, [task.pomodoro]);
 
   return (
     <div
@@ -42,6 +72,10 @@ export const Task = ({ task }: any) => {
             onClick={() => removeTask(task.id)}
           />
         </div>
+      </h3>
+      <h3 className="flex items-center justify-between">
+        Pomodoro's Left
+        <div className="flex justify-end">{getRemainingPomodoro()}</div>
       </h3>
     </div>
   );

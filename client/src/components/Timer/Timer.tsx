@@ -1,40 +1,56 @@
 import { useState, useEffect, useRef } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { Button } from "../Common/Button";
-import { useToggleTimer } from "../../store";
+import {
+  useToggleTimer,
+  useShortBreakTimer,
+  useLongBreakTimer,
+  usePomodoroTimer,
+  useHasStarted,
+  useSetPomodoroCounter,
+  useTimer,
+} from "../../store";
 
 export const Timer = () => {
-  const [sessionLength, setSessionLength] = useState(1500);
-  const [breakLength, setBreakLength] = useState(300);
-
-  const [timer, setTimer] = useState(1500);
+  const { shortBreakLength, setShortBreak } = useShortBreakTimer();
+  const { longBreakLength, setLongBreak } = useLongBreakTimer();
+  const { pomodoroLength, setPomodoroLength } = usePomodoroTimer();
+  const { hasStarted, setHasStarted } = useHasStarted();
+  const [breakLength, setBreakLength] = useState(shortBreakLength);
+  const [timer, setTimer] = useState(60);
+  const { setTimerQueue } = useTimer();
   const [timerMinutes, setTimerMinutes] = useState("00");
   const [timerSeconds, setTimerSeconds] = useState("00");
   const [timerIntervalId, setTimerIntervalId] = useState(null);
-  const [isSession, setIsSession] = useState(false);
   const [sessionType, setSessionType] = useState("Session");
   const { setIsTimerToggled } = useToggleTimer();
+  const { setPomodoroCounter } = useSetPomodoroCounter();
 
   const audioRef = useRef();
-  let hasStarted = timerIntervalId !== null; // check timer state
 
-  // // update timer display
+  useEffect(() => {
+    setHasStarted(timerIntervalId !== null);
+  }, [timerIntervalId]);
+
   useEffect(() => {
     if (timer === 0) {
+      setPomodoroCounter();
+      setTimerQueue(0);
       audioRef.current.play();
       if (sessionType === "Session") {
         setSessionType("Break");
         setTimer(breakLength);
       } else {
         setSessionType("Session");
-        setTimer(sessionLength);
+        setTimer(pomodoroLength);
+        setTimerQueue(pomodoroLength);
       }
     }
   }, [timer, sessionType]);
 
   useEffect(() => {
-    setTimer(sessionLength);
-  }, [sessionLength]);
+    setTimer(pomodoroLength);
+  }, [pomodoroLength]);
 
   useEffect(() => {
     let time = secondsToTime(timer);
@@ -79,51 +95,35 @@ export const Timer = () => {
     }
   }
 
-  function handleBreakLengthChange(e: any) {
-    if (hasStarted) return; // guard against change when running
-
-    if (e.target.id === "break-decrement" && breakLength > 60) {
-      setBreakLength((prevVal) => prevVal - 60);
-    } else if (e.target.id === "break-increment" && breakLength < 3600) {
-      setBreakLength((prevVal) => prevVal + 60);
-    }
-  }
-
-  function handleSessionLengthChange(e) {
-    if (hasStarted) return; // guard against change when running
-
-    if (e.target.id === "session-decrement" && sessionLength > 60) {
-      setSessionLength((prevVal) => prevVal - 60);
-    } else if (e.target.id === "session-increment" && sessionLength < 3600) {
-      setSessionLength((prevVal) => prevVal + 60);
-    }
-  }
-
+  // TODO: fix default handling
   function handleResetTimer() {
     audioRef?.current?.load();
     if (timerIntervalId) {
       clearInterval(timerIntervalId);
     }
     setTimerIntervalId(null);
-    setSessionLength(1500);
-    setBreakLength(300);
+    setPomodoroLength(pomodoroLength);
+    setShortBreak(shortBreakLength);
+    setLongBreak(longBreakLength);
     setSessionType("Session");
-    setTimer(1500);
+    setTimer(pomodoroLength);
+    setTimerQueue(pomodoroLength);
   }
 
-  // TODO: add that it cannot be changed while in break mode
   function selectShortBreak() {
+    if (hasStarted) return; // guard against change when running
     if (sessionType == "Break") {
       return;
     }
-    setBreakLength(300);
+    setBreakLength(shortBreakLength);
   }
 
   function selectLongBreak() {
+    if (hasStarted) return; // guard against change when running
     if (sessionType == "Break") {
       return;
     }
-    setBreakLength(900);
+    setBreakLength(longBreakLength);
   }
 
   return (
@@ -138,26 +138,7 @@ export const Timer = () => {
           </div>
           {/* Controls */}
           <div className="flex">
-            {/* Control 1 */}
             <div className="flex-1 flex-col flex justify-center items-center">
-              {/*}
-              <p id="break-label">Break Length</p>
-              <div className="flex">
-                <button
-                  id="break-decrement"
-                  onClick={(e) => handleBreakLengthChange(e)}
-                >
-                  &lt;
-                </button>
-                <div id="p-4">{Math.floor(breakLength / 60)}</div>
-                <button
-                  id="break-increment"
-                  onClick={(e) => handleBreakLengthChange(e)}
-                >
-                  &gt;
-                </button>
-              </div>
-              {*/}
               <Button
                 className="text-gray-800 hover:text-white dark:text-white"
                 variant="cold"
@@ -167,26 +148,7 @@ export const Timer = () => {
               </Button>
             </div>
 
-            {/* Control 2 */}
             <div className="flex-1 flex flex-col justify-center items-center">
-              {/*}
-              <p id="session-label">Session Length</p>
-              <div className="flex">
-                <button
-                  id="session-decrement"
-                  onClick={(e) => handleSessionLengthChange(e)}
-                >
-                  &lt;
-                </button>
-                <div id="p-4">{sessionLength / 60}</div>
-                <button
-                  id="session-increment"
-                  onClick={(e) => handleSessionLengthChange(e)}
-                >
-                  &gt;
-                </button>
-              </div>
-              {*/}
               <Button
                 className="text-gray-800 hover:text-white dark:text-white"
                 variant="cold"
@@ -207,9 +169,9 @@ export const Timer = () => {
           </div>
 
           <div className="timer-control">
-            <button id="start_stop" onClick={(e) => toggleCountDown()}></button>
             <Button
               className="text-gray-800 font-normal hover:text-white dark:text-white"
+              onClick={() => toggleCountDown()}
               variant="cold"
             >
               {hasStarted ? "Stop" : "Start"}
