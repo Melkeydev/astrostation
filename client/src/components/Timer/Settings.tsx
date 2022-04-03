@@ -65,8 +65,8 @@ export const TimerSettings = () => {
   }
 
   return (
-    <div className="space-y-2 p-4 mb-2 max-w-sm bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 w-1/2">
-      <div className="border-b-2 border-gray-100 pb-2">
+    <div className="space-y-2 py-2 px-1 mb-2 max-w-sm bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 w-1/2">
+      <div className="border-b-2 border-gray-100 p-2">
         <div className="flex justify-end">
           <IoCloseSharp
             className="text-red-500 cursor-pointer hover:bg-red-200"
