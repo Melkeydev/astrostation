@@ -2,6 +2,180 @@ import create from "zustand";
 import { persist } from "zustand/middleware";
 
 /**
+ * Timer Store
+ * ---
+ * Handler for Timer
+ */
+interface Timer {
+  timerQueue: number;
+  setTimerQueue: (newTime: number) => void;
+}
+
+export const useTimer = create<Timer>((set) => ({
+  timerQueue: 60,
+  setTimerQueue: (newTime) => set({ timerQueue: newTime }),
+}));
+
+/**
+ * Pomo Counter Store
+ * ---
+ * Handler for Pomo Counts
+ */
+interface PomodoroCounter {
+  pomodoroCounts: number;
+  setPomodoroCounter: () => void;
+}
+
+export const useSetPomodoroCounter = create<PomodoroCounter>((set) => ({
+  pomodoroCounts: 0,
+  setPomodoroCounter: () =>
+    set((state) => ({ pomodoroCounts: state.pomodoroCounts + 1 })),
+}));
+
+/**
+ * Toggle Settings Store
+ * ---
+ * Handler for Settings
+ */
+interface IToggleSettings {
+  isSettingsToggled: boolean;
+  setIsSettingsToggled: (isSettingsToggled: boolean) => void;
+}
+
+export const useToggleSettings = create<IToggleSettings>((set) => ({
+  isSettingsToggled: false,
+  setIsSettingsToggled: (isSettingsToggled) => set({ isSettingsToggled }),
+}));
+
+/**
+ * Max Pomodoro Store
+ * ---
+ * Handle for the amount of pomodoro's per task
+ */
+
+interface MaxPomo {
+  maxPomodoro: number;
+  increaseMaxPomodoro: () => void;
+  decreaseMaxPomodoro: () => void;
+  defaultMaxPomodoro: () => void;
+  setMaxPomodoro: (value: number) => void;
+}
+
+export const useMaxPomodoro = create<MaxPomo>(
+  persist(
+    (set, _) => ({
+      maxPomodoro: 3,
+      decreaseMaxPomodoro: () =>
+        set((state) => ({ maxPomodoro: state.maxPomodoro - 1 })),
+      increaseMaxPomodoro: () =>
+        set((state) => ({ maxPomodoro: state.maxPomodoro + 1 })),
+      defaultMaxPomodoro: () => set(() => ({ maxPomodoro: 3 })),
+      setMaxPomodoro: (value) => set({ maxPomodoro: value }),
+    }),
+    { name: "max_pomodoro_per_task" }
+  )
+);
+
+/**
+ * Has Started Store
+ * ---
+ * Handler has started in timer sessions
+ */
+interface HasStarted {
+  hasStarted: boolean;
+  setHasStarted: (hasStarted: boolean) => void;
+}
+
+export const useHasStarted = create<HasStarted>((set) => ({
+  hasStarted: false,
+  setHasStarted: (hasStarted) => set({ hasStarted }),
+}));
+
+/**
+ * Short Break Time Store
+ * ---
+ * Handle short break times
+ */
+interface ShortBreakTime {
+  shortBreakLength: number;
+  decreaseShortBreakLength: () => void;
+  increaseShortBreakLength: () => void;
+  defaultShortBreakLength: () => void;
+  setShortBreak: (value: number) => void;
+}
+
+export const useShortBreakTimer = create<ShortBreakTime>(
+  persist(
+    (set, _) => ({
+      shortBreakLength: 60,
+      decreaseShortBreakLength: () =>
+        set((state) => ({ shortBreakLength: state.shortBreakLength - 60 })),
+      increaseShortBreakLength: () =>
+        set((state) => ({ shortBreakLength: state.shortBreakLength + 60 })),
+      defaultShortBreakLength: () => set(() => ({ shortBreakLength: 60 })),
+      setShortBreak: (value) => set({ shortBreakLength: value }),
+    }),
+    { name: "short_break_timer_length" }
+  )
+);
+
+/**
+ * Long Break Time Store
+ * ---
+ * Handle long break times
+ */
+interface LongBreakTime {
+  longBreakLength: number;
+  decreaseLongBreakLength: () => void;
+  increaseLongBreakLength: () => void;
+  defaultLongBreakLength: () => void;
+  setLongBreak: (value: number) => void;
+}
+
+export const useLongBreakTimer = create<LongBreakTime>(
+  persist(
+    (set, _) => ({
+      longBreakLength: 60,
+      decreaseLongBreakLength: () =>
+        set((state) => ({ longBreakLength: state.longBreakLength - 60 })),
+      increaseLongBreakLength: () =>
+        set((state) => ({ longBreakLength: state.longBreakLength + 60 })),
+      defaultLongBreakLength: () => set(() => ({ longBreakLength: 60 })),
+      setLongBreak: (value) => set({ longBreakLength: value }),
+    }),
+    { name: "long_break_timer_length" }
+  )
+);
+
+/**
+ * Pomodoro Time Store
+ * ---
+ * Handle pomodoro times
+ */
+interface PomodoroTime {
+  pomodoroLength: number;
+  decreasePomodoroLength: () => void;
+  increasePomodoroLength: () => void;
+  defaultPomodoroLength: () => void;
+  setPomodoroLength: (value: number) => void;
+}
+
+export const usePomodoroTimer = create<PomodoroTime>(
+  persist(
+    (set, _) => ({
+      pomodoroLength: 60,
+      decreasePomodoroLength: () =>
+        set((state) => ({ pomodoroLength: state.pomodoroLength - 60 })),
+      increasePomodoroLength: () =>
+        set((state) => ({ pomodoroLength: state.pomodoroLength + 60 })),
+      defaultPomodoroLength: () => set(() => ({ pomodoroLength: 60 })),
+      setPomodoroLength: (value) => set({ pomodoroLength: value }),
+    }),
+    { name: "pomodoro_timer_length" }
+  )
+);
+
+/**
  * Task Store
  * ---
  * Handle the tasks created in the tasks section
@@ -11,29 +185,38 @@ interface Task {
   description: string;
   inProgress: boolean;
   completed: boolean;
+  pomodoro: number;
+  pomodoroCounter: number;
+  alerted: boolean;
 }
 
 interface TaskState {
   tasks: Task[];
-  addTask: (description: string) => void;
+  addTask: (description: string, count: number) => void;
   removeTask: (id: number) => void;
   toggleInProgressState: (id: number) => void;
   completeTask: (id: number) => void;
+  reducePomodoro: (id: number) => void;
+  setPomodoroCounter: (id: number) => void;
+  alertTask: (id: number) => void;
 }
 
 export const useTask = create<TaskState>(
   persist(
     (set, _) => ({
       tasks: [],
-      addTask: (description: string) => {
+      addTask: (description: string, count: number) => {
         set((state) => ({
           tasks: [
             ...state.tasks,
             {
-              id: state.tasks.length + 1,
+              id: Date.now() + state.tasks.length,
               description,
               inProgress: false,
               completed: false,
+              pomodoro: count,
+              pomodoroCounter: 0,
+              alerted: false,
             } as Task,
           ],
         }));
@@ -57,6 +240,42 @@ export const useTask = create<TaskState>(
           tasks: state.tasks.map((task) =>
             task.id === id
               ? ({ ...task, completed: !task.completed } as Task)
+              : task
+          ),
+        }));
+      },
+      reducePomodoro: (id) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({
+                  ...task,
+                  pomodoro: task.pomodoro > 0 ? task.pomodoro - 1 : 0,
+                } as Task)
+              : task
+          ),
+        }));
+      },
+      setPomodoroCounter: (id) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({
+                  ...task,
+                  pomodoroCounter: task.pomodoroCounter + 1,
+                } as Task)
+              : task
+          ),
+        }));
+      },
+      alertTask: (id) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({
+                  ...task,
+                  alerted: true,
+                } as Task)
               : task
           ),
         }));

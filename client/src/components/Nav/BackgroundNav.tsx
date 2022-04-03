@@ -21,8 +21,8 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
   }, [menuRef]);
 
   return (
-    <div className="absolute top-0 right-0 m-2 flex justify-end" ref={menuRef}>
-      <div className="inline-block text-left">
+    <div className="flex justify-end" ref={menuRef}>
+      <div className="relative inline-block text-left">
         <div>
           <button
             type="button"

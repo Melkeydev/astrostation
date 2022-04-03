@@ -4,8 +4,8 @@ import { Button } from "../Common/Button";
 
 export const AddTask = () => {
   const [text, setText] = useState("");
-  const [reminder, setReminder] = useState(false);
   const { addTask } = useTask();
+  const [pomoCounter, setPomoCounter] = useState(1);
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -15,11 +15,19 @@ export const AddTask = () => {
       return;
     }
 
-    addTask(text);
+    addTask(text, pomoCounter);
 
     setText("");
-    setReminder(false);
+    setPomoCounter(1);
   };
+
+  function handlePomodoroChange(e) {
+    if (e.target.id === "pomodoro-decrement" && pomoCounter > 1) {
+      setPomoCounter(pomoCounter - 1);
+    } else if (e.target.id === "pomodoro-increment" && pomoCounter < 10) {
+      setPomoCounter(pomoCounter + 1);
+    }
+  }
 
   return (
     <form className="mb-8" onSubmit={onSubmit}>
@@ -35,17 +43,28 @@ export const AddTask = () => {
       </div>
       {/*Set Reminder should trigger after every finished session*/}
       <div className="my-5 flex items-center justify-center">
-        <label className="flex-1">Set Reminder</label>
-        <input
-          className="flex h-5"
-          type="checkbox"
-          checked={reminder}
-          value={reminder}
-          onChange={(e) => setReminder(e.currentTarget.checked)}
-        />
+        <label className="flex-1">Set Pomodoro Counts</label>
+        <div className="bg-gray-200">
+          <div className="flex p-2 space-x-5">
+            <button
+              type="button"
+              id="pomodoro-decrement"
+              onClick={(e) => handlePomodoroChange(e)}
+            >
+              &lt;
+            </button>
+            <div>{pomoCounter}</div>
+            <button
+              type="button"
+              id="pomodoro-increment"
+              onClick={(e) => handlePomodoroChange(e)}
+            >
+              &gt;
+            </button>
+          </div>
+        </div>
       </div>
 
-      {/*Make this into a button*/}
       <Button type="submit" variant="secondary">
         Save
       </Button>
