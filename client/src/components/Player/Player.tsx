@@ -82,6 +82,7 @@ export const Player = () => {
       <div className="py-4 px-3 mb-2 mt-2 max-w-sm bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 w-1/2">
         <div className="flex items-center space-x-6 justify-between">
           <div>{song?.artist}</div>
+          <div>This is to confirm build works</div>
           <div className="flex space-x-2">
             <IconContext.Provider value={{ size: "1.1rem" }}>
               <FaYoutube />
