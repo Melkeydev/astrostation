@@ -13,6 +13,8 @@ import { BackgroundNav } from "../components/Nav/BackgroundNav";
 import { TimerSettings } from "../components/Timer/Settings";
 import { GoGear } from "react-icons/go";
 
+console.log("test");
+
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
