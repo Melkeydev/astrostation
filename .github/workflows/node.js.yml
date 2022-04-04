@@ -6,13 +6,12 @@ name: Node.js CI
 on:
   push:
     branches: [ main ]
-
+    
+defaults:
+  run:
+    working-directory: client
 jobs:
   build:
-    defaults:
-      run:
-        working-directory: client
-
     runs-on: self-hosted
 
     strategy:
