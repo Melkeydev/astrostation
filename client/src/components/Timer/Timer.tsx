@@ -36,6 +36,7 @@ export const Timer = () => {
     if (timer === 0) {
       setPomodoroCounter();
       setTimerQueue(0);
+      // @ts-ignore
       audioRef.current.play();
       if (sessionType === "Session") {
         setSessionType("Break");
@@ -54,7 +55,9 @@ export const Timer = () => {
 
   useEffect(() => {
     let time = secondsToTime(timer);
+    // @ts-ignore
     setTimerMinutes(time[0]);
+    // @ts-ignore
     setTimerSeconds(time[1]);
   }, [timer]);
 
@@ -72,7 +75,9 @@ export const Timer = () => {
         setTimer((prevTime) => {
           let newTime = prevTime - 1;
           let time = secondsToTime(newTime);
+          // @ts-ignore
           setTimerMinutes(time[0]);
+          // @ts-ignore
           setTimerSeconds(time[1]);
           return newTime;
         });
@@ -95,8 +100,8 @@ export const Timer = () => {
     }
   }
 
-  // TODO: fix default handling
   function handleResetTimer() {
+    // @ts-ignore
     audioRef?.current?.load();
     if (timerIntervalId) {
       clearInterval(timerIntervalId);
@@ -163,7 +168,8 @@ export const Timer = () => {
           <div className="rounded p-4 inline-block">
             <p id="timer-label">{sessionType}</p>
             <div className="text-9xl font-bold">
-              {formatDisplayTime(timerMinutes)}:
+              {/*// @ts-ignore */}
+              {formatDisplayTime(timerMinutes)}:{/*// @ts-ignore */}
               {formatDisplayTime(timerSeconds)}
             </div>
           </div>
