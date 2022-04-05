@@ -29,6 +29,12 @@ function App() {
     }
   }, [isDark]);
 
+  useEffect(() => {
+    document.addEventListener("contextmenu", (event) => {
+      event.preventDefault();
+    });
+  }, []);
+
   return (
     <Router>
       <Backgrounds backgrounds={backgrounds} />
