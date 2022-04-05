@@ -197,6 +197,7 @@ interface TaskState {
   removeTask: (id: number) => void;
   toggleInProgressState: (id: number) => void;
   completeTask: (id: number) => void;
+  increasePomodoro: (id: number, maxPomo: number) => void;
   reducePomodoro: (id: number) => void;
   setPomodoroCounter: (id: number) => void;
   alertTask: (id: number) => void;
@@ -264,6 +265,19 @@ export const useTask = create<TaskState>(
               ? ({
                   ...task,
                   pomodoro: task.pomodoro > 0 ? task.pomodoro - 1 : 0,
+                } as Task)
+              : task
+          ),
+        }));
+      },
+      increasePomodoro: (id, maxPomo) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({
+                  ...task,
+                  pomodoro:
+                    task.pomodoro < maxPomo ? task.pomodoro + 1 : maxPomo,
                 } as Task)
               : task
           ),

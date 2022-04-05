@@ -79,8 +79,6 @@ export const Task = ({ task }: any) => {
               <BsThreeDotsVertical
                 className="cursor-pointer ml-2"
                 onClick={() => setOpenSettings(!openSettings)}
-                //className="text-red-500 cursor-pointer ml-2"
-                //onClick={() => removeTask(task.id)}
               />
             </div>
           </div>
