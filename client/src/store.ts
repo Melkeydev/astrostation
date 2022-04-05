@@ -193,6 +193,7 @@ interface Task {
 interface TaskState {
   tasks: Task[];
   addTask: (description: string, count: number) => void;
+  renameTask: (id: number, newName: string) => void;
   removeTask: (id: number) => void;
   toggleInProgressState: (id: number) => void;
   completeTask: (id: number) => void;
@@ -219,6 +220,18 @@ export const useTask = create<TaskState>(
               alerted: false,
             } as Task,
           ],
+        }));
+      },
+      renameTask: (id, newName) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({
+                  ...task,
+                  description: newName,
+                } as Task)
+              : task
+          ),
         }));
       },
       removeTask: (id) => {
