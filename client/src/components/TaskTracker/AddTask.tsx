@@ -44,7 +44,7 @@ export const AddTask = () => {
       {/*Set Reminder should trigger after every finished session*/}
       <div className="my-5 flex items-center justify-center">
         <label className="flex-1">Set Pomodoro Counts</label>
-        <div className="bg-gray-200">
+        <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-200">
           <div className="flex p-2 space-x-5">
             <button
               type="button"
