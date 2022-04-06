@@ -13,7 +13,11 @@ export const Task = ({ task }: any) => {
     toggleInProgressState,
     reducePomodoro,
     alertTask,
+    setPomodoroCounter,
   } = useTask();
+
+  console.log(task.pomodoro);
+  console.log(task.pomodoroCounter);
 
   const { timerQueue } = useTimer();
 
@@ -34,16 +38,18 @@ export const Task = ({ task }: any) => {
 
   useEffect(() => {
     if (timerQueue === 0 && !task.alerted) {
-      reducePomodoro(task.id);
+      //reducePomodoro(task.id);
+      console.log("does this hit");
+      setPomodoroCounter(task.id);
     }
   }, [timerQueue]);
 
   useEffect(() => {
-    if (task.pomodoro == 0 && !task.alerted) {
+    if (task.pomodoroCounter == task.pomodoro && !task.alerted) {
       alertTask(task.id);
       alert(`${task.description} should be completed`);
     }
-  }, [task.pomodoro]);
+  }, [task.pomodoroCounter]);
 
   return (
     <>
@@ -75,16 +81,15 @@ export const Task = ({ task }: any) => {
               </div>
               <div>{task.description}</div>
             </div>
-            <div>
+            <div className="flex items-center">
+              <div className="flex justify-end">
+                {task.pomodoroCounter}/{task.pomodoro}
+              </div>
               <BsThreeDotsVertical
                 className="cursor-pointer ml-2"
                 onClick={() => setOpenSettings(!openSettings)}
               />
             </div>
-          </div>
-          <div className="flex items-center justify-between">
-            Pomodoro's Left
-            <div className="flex justify-end">{getRemainingPomodoro()}</div>
           </div>
         </div>
       ) : (

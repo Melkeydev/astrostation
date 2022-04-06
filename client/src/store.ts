@@ -283,13 +283,17 @@ export const useTask = create<TaskState>(
           ),
         }));
       },
+      // TODO: this should be renamed
       setPomodoroCounter: (id) => {
         set((state) => ({
           tasks: state.tasks.map((task) =>
             task.id === id
               ? ({
                   ...task,
-                  pomodoroCounter: task.pomodoroCounter + 1,
+                  pomodoroCounter:
+                    task.pomodoroCounter < task.pomodoro
+                      ? task.pomodoroCounter + 1
+                      : task.pomodoro,
                 } as Task)
               : task
           ),
