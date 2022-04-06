@@ -1,5 +1,7 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
+import { DropResult } from "react-beautiful-dnd";
+import { Plugin } from "./types/Plugins";
 
 /**
  * Timer Store
@@ -455,5 +457,55 @@ export const useDarkToggleStore = create<DarkModeState>(
       toggleDarkMode: () => set((oldState) => ({ isDark: !oldState.isDark })),
     }),
     { name: "darkmode" }
+  )
+);
+
+type PluginsState = {
+  plugins: Plugin[];
+  addPlugin: (plugin: Plugin) => void;
+  deletePlugin: (plugin: Plugin) => void;
+  reorderPlugins: (result: DropResult) => void;
+};
+
+export const usePluginsStore = create<PluginsState>(
+  persist<PluginsState>(
+    (set, _) => ({
+      plugins: ["LofiPlayer", "SpotifyPlayer", "Timer", "TaskTracker"],
+
+      addPlugin(plugin) {
+        set((oldState) => ({ plugins: [...oldState.plugins, plugin] }));
+      },
+
+      deletePlugin(plugin) {
+        set((oldState) => ({
+          plugins: oldState.plugins.filter((item) => item !== plugin),
+        }));
+      },
+
+      reorderPlugins(result: DropResult) {
+        set((oldState) => {
+          function reorder(
+            list: Plugin[],
+            startIndex: number,
+            endIndex: number
+          ) {
+            const result = Array.from(list);
+            const [removed] = result.splice(startIndex, 1);
+            result.splice(endIndex, 0, removed);
+
+            return result;
+          }
+
+          return {
+            plugins: reorder(
+              oldState.plugins,
+              result.source.index,
+              result.destination.index
+            ),
+          };
+        });
+      },
+    }),
+    { name: "plugins" }
   )
 );
