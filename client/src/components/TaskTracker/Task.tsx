@@ -3,12 +3,14 @@ import { FaCheck } from "react-icons/fa";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Settings } from "./Settings";
-import { useTask, useTimer } from "../../store";
+import { useTask, useTimer, useBreakStarted } from "../../store";
 
 export const Task = ({ task }: any) => {
   const [openSettings, setOpenSettings] = useState(false);
   const { completeTask, toggleInProgressState, alertTask, setPomodoroCounter } =
     useTask();
+  const { breakStarted } = useBreakStarted();
+  const [pomoCount, setPomoCount] = useState(false);
 
   const { timerQueue } = useTimer();
 
@@ -21,15 +23,21 @@ export const Task = ({ task }: any) => {
 
   useEffect(() => {
     if (timerQueue === 0 && !task.alerted) {
-      console.log("did this hit");
+      console.log("test");
       setPomodoroCounter(task.id);
     }
-  }, [timerQueue]);
+  }, [timerQueue, breakStarted]);
+
+  useEffect(() => {
+    if (task.pomodoroCounter != task.pomodoro) {
+      setPomoCount(false);
+    }
+  }, [task.pomodoro]);
 
   useEffect(() => {
     if (task.pomodoroCounter == task.pomodoro && !task.alerted) {
       alertTask(task.id, true);
-      alert(`${task.description} should be completed`);
+      setPomoCount(true);
     }
   }, [task.pomodoroCounter]);
 
@@ -39,7 +47,14 @@ export const Task = ({ task }: any) => {
         <div
           className={`w-full py-2 px-2 cursor-pointer border-l-4 bg-stone-300 dark:bg-gray-700 ${
             task.inProgress && !task.completed && "border-yellow-500"
-          } ${task.completed && "border-green-500 bg-green-300 line-through"}`}
+          } ${
+            task.completed &&
+            "border-green-500 bg-green-300 dark:bg-green-300 line-through dark:text-stone-600"
+          } ${
+            !task.completed &&
+            pomoCount &&
+            "border-red-500 bg-red-300 dark:bg-red-300 dark:text-stone-600"
+          }`}
           onDoubleClick={() => preventFalseInProgress()}
         >
           <div className="flex items-center justify-between">
@@ -47,7 +62,7 @@ export const Task = ({ task }: any) => {
               <div>
                 {!task.completed ? (
                   <FaCheck
-                    className={`cursor-pointer ml-2 ${
+                    className={`cursor-pointer ml-2 dark:text-stone-600 ${
                       task.completed ? "text-green-500" : "text-slate-500"
                     }`}
                     onClick={() => completeTask(task.id)}

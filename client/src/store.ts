@@ -92,6 +92,21 @@ export const useHasStarted = create<HasStarted>((set) => ({
 }));
 
 /**
+ * Break Started Store
+ * ---
+ * Handler break started in timer sessions
+ */
+interface BreakStarted {
+  breakStarted: boolean;
+  setBreakStarted: (breakStarted: boolean) => void;
+}
+
+export const useBreakStarted = create<BreakStarted>((set) => ({
+  breakStarted: false,
+  setBreakStarted: (breakStarted) => set({ breakStarted }),
+}));
+
+/**
  * Short Break Time Store
  * ---
  * Handle short break times
@@ -192,7 +207,7 @@ interface Task {
 
 interface TaskState {
   tasks: Task[];
-  addTask: (description: string, count: number) => void;
+  addTask: (description: string, count: number, isBreak: boolean) => void;
   renameTask: (id: number, newName: string) => void;
   removeTask: (id: number) => void;
   toggleInProgressState: (id: number) => void;
@@ -208,7 +223,7 @@ export const useTask = create<TaskState>(
   persist(
     (set, _) => ({
       tasks: [],
-      addTask: (description: string, count: number) => {
+      addTask: (description: string, count: number, isBreak: boolean) => {
         set((state) => ({
           tasks: [
             ...state.tasks,
@@ -218,7 +233,7 @@ export const useTask = create<TaskState>(
               inProgress: false,
               completed: false,
               pomodoro: count,
-              pomodoroCounter: 0,
+              pomodoroCounter: isBreak ? -1 : 0,
               alerted: false,
             } as Task,
           ],

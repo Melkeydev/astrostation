@@ -1,5 +1,5 @@
 import { useCallback, useState } from "react";
-import { useTask } from "../../store";
+import { useTask, useBreakStarted } from "../../store";
 import { Button } from "../Common/Button";
 
 export const AddTask = () => {
@@ -9,6 +9,7 @@ export const AddTask = () => {
   const { addTask } = useTask();
   const [pomoCounter, setPomoCounter] = useState(1);
   const [charCount, setCharCount] = useState(text.slice(0, limit));
+  const { breakStarted } = useBreakStarted();
 
   const setFormattedContent = useCallback(
     (text) => {
@@ -16,6 +17,8 @@ export const AddTask = () => {
     },
     [limit, setCharCount]
   );
+
+  console.log(breakStarted);
 
   const onSubmit = (e: any) => {
     e.preventDefault();
@@ -25,7 +28,8 @@ export const AddTask = () => {
       return;
     }
 
-    addTask(text, pomoCounter);
+    // Might need to modify addTask to be aware of break time
+    addTask(text, pomoCounter, breakStarted);
 
     setText("");
     setCharCount("");

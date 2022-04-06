@@ -27,7 +27,7 @@ export const Settings = ({ setOpenSettings, Task }) => {
   };
 
   function handlePomoChange(e: any) {
-    if (e.target.id === "decrement" && changePomo > 0) {
+    if (e.target.id === "decrement" && changePomo > Task.pomodoroCounter) {
       setChangePomo(changePomo - 1);
     } else if (e.target.id === "increment" && changePomo < maxPomodoro) {
       setChangePomo(changePomo + 1);
