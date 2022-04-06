@@ -11,6 +11,7 @@
     "dotenv": "^16.0.0",
     "rc-slider": "^10.0.0-alpha.4",
     "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^17.0.2",
     "react-icons": "^4.3.1",
     "react-router-dom": "^6.2.1",
@@ -21,6 +22,7 @@
   },
   "devDependencies": {
     "@types/react": "^17.0.33",
+    "@types/react-beautiful-dnd": "^13.1.2",
     "@types/react-dom": "^17.0.10",
     "@types/uuid": "^8.3.4",
     "@vitejs/plugin-react": "^1.0.7",
