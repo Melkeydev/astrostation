@@ -200,7 +200,8 @@ interface TaskState {
   increasePomodoro: (id: number, maxPomo: number) => void;
   reducePomodoro: (id: number) => void;
   setPomodoroCounter: (id: number) => void;
-  alertTask: (id: number) => void;
+  alertTask: (id: number, flag: boolean) => void;
+  setPomodoro: (id: number, newVal: number) => void;
 }
 
 export const useTask = create<TaskState>(
@@ -283,7 +284,6 @@ export const useTask = create<TaskState>(
           ),
         }));
       },
-      // TODO: this should be renamed
       setPomodoroCounter: (id) => {
         set((state) => ({
           tasks: state.tasks.map((task) =>
@@ -299,13 +299,25 @@ export const useTask = create<TaskState>(
           ),
         }));
       },
-      alertTask: (id) => {
+      setPomodoro: (id, newVal) => {
         set((state) => ({
           tasks: state.tasks.map((task) =>
             task.id === id
               ? ({
                   ...task,
-                  alerted: true,
+                  pomodoro: newVal,
+                } as Task)
+              : task
+          ),
+        }));
+      },
+      alertTask: (id, flag) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({
+                  ...task,
+                  alerted: flag,
                 } as Task)
               : task
           ),

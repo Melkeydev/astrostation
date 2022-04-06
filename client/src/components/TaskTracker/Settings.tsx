@@ -1,13 +1,22 @@
 import { useState } from "react";
 import { Button } from "../Common/Button";
 import { AiFillDelete } from "react-icons/ai";
-import { useTask, useTimer } from "../../store";
+import { useTask, useMaxPomodoro } from "../../store";
 export const Settings = ({ setOpenSettings, Task }) => {
   const [text, setText] = useState(Task.description);
-  const { removeTask, increasePomodoro, reducePomodoro } = useTask();
+  const { removeTask, setPomodoro, alertTask } = useTask();
+  const { maxPomodoro } = useMaxPomodoro();
+
+  const [changePomo, setChangePomo] = useState(Task.pomodoro);
 
   const onSubmit = (e: any) => {
     e.preventDefault();
+
+    if (Task.pomodoroCounter == Task.pomodoro) {
+      alertTask(Task.id, false);
+    }
+    setPomodoro(Task.id, changePomo);
+    setOpenSettings(false);
   };
 
   const handleDelete = () => {
@@ -17,9 +26,13 @@ export const Settings = ({ setOpenSettings, Task }) => {
     setOpenSettings(false);
   };
 
-  // NOTE: Currently the settings flow is broken. Due to our Zustand hooks
-  // they will change regardless if you click yes or no.
-  // Need to add a middle handler to adjusting only when clicking Submit
+  function handlePomoChange(e: any) {
+    if (e.target.id === "decrement" && changePomo > 0) {
+      setChangePomo(changePomo - 1);
+    } else if (e.target.id === "increment" && changePomo < maxPomodoro) {
+      setChangePomo(changePomo + 1);
+    }
+  }
 
   return (
     <div className="space-y-2 py-2 px-1 mb-2 w-full bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 ">
@@ -38,9 +51,13 @@ export const Settings = ({ setOpenSettings, Task }) => {
         <div>Change Pomodoro's</div>
         <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-200">
           <div className="flex p-2 space-x-5">
-            <button id="pomodoro-decrement">&lt;</button>
-            <div>{Task.pomodoro}</div>
-            <button id="pomodoro-increment">&gt;</button>
+            <button id="decrement" onClick={(e) => handlePomoChange(e)}>
+              &lt;
+            </button>
+            <div>{changePomo}</div>
+            <button id="increment" onClick={(e) => handlePomoChange(e)}>
+              &gt;
+            </button>
           </div>
         </div>
       </div>
@@ -61,6 +78,7 @@ export const Settings = ({ setOpenSettings, Task }) => {
         <Button
           className="text-gray-800 font-normal hover:text-white dark:text-white"
           variant="cold"
+          onClick={(e) => onSubmit(e)}
         >
           Okay
         </Button>

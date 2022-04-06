@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { FaTimes, FaCheck } from "react-icons/fa";
+import { FaCheck } from "react-icons/fa";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Settings } from "./Settings";
@@ -7,17 +7,8 @@ import { useTask, useTimer } from "../../store";
 
 export const Task = ({ task }: any) => {
   const [openSettings, setOpenSettings] = useState(false);
-  const {
-    removeTask,
-    completeTask,
-    toggleInProgressState,
-    reducePomodoro,
-    alertTask,
-    setPomodoroCounter,
-  } = useTask();
-
-  console.log(task.pomodoro);
-  console.log(task.pomodoroCounter);
+  const { completeTask, toggleInProgressState, alertTask, setPomodoroCounter } =
+    useTask();
 
   const { timerQueue } = useTimer();
 
@@ -28,25 +19,16 @@ export const Task = ({ task }: any) => {
     toggleInProgressState(task.id);
   }
 
-  function getRemainingPomodoro() {
-    //let number = task.pomodoro - task.pomodoroCounter;
-    if (task.pomodoro < 0) {
-      return 0;
-    }
-    return task.pomodoro;
-  }
-
   useEffect(() => {
     if (timerQueue === 0 && !task.alerted) {
-      //reducePomodoro(task.id);
-      console.log("does this hit");
+      console.log("did this hit");
       setPomodoroCounter(task.id);
     }
   }, [timerQueue]);
 
   useEffect(() => {
     if (task.pomodoroCounter == task.pomodoro && !task.alerted) {
-      alertTask(task.id);
+      alertTask(task.id, true);
       alert(`${task.description} should be completed`);
     }
   }, [task.pomodoroCounter]);
