@@ -27,7 +27,7 @@ export const AddTask = () => {
     }
 
     // Might need to modify addTask to be aware of break time
-    addTask(text, pomoCounter, breakStarted);
+    addTask(charCount, pomoCounter, breakStarted);
 
     setText("");
     setCharCount("");
@@ -50,7 +50,7 @@ export const AddTask = () => {
           className="w-full h-10 m-1 py-2 px-3 text-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-500"
           type="text"
           placeholder="Add Task"
-          value={text}
+          value={charCount}
           onChange={(e) => {
             setText(e.target.value);
             setFormattedContent(e.target.value);
