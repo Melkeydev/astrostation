@@ -1,3 +1,4 @@
+import { useState } from "react";
 import {
   useShortBreakTimer,
   useLongBreakTimer,
@@ -11,34 +12,32 @@ import { Button } from "../Common/Button";
 import { ToggleOption } from "./ToggleOption";
 export const TimerSettings = () => {
   const { setIsSettingsToggled } = useToggleSettings();
-  const {
-    shortBreakLength,
-    decreaseShortBreakLength,
-    increaseShortBreakLength,
-    defaultShortBreakLength,
-  } = useShortBreakTimer();
-  const {
-    longBreakLength,
-    decreaseLongBreakLength,
-    increaseLongBreakLength,
-    defaultLongBreakLength,
-  } = useLongBreakTimer();
-  const {
-    pomodoroLength,
-    decreasePomodoroLength,
-    increasePomodoroLength,
-    defaultPomodoroLength,
-  } = usePomodoroTimer();
+  const { shortBreakLength, defaultShortBreakLength, setShortBreak } =
+    useShortBreakTimer();
+  const { longBreakLength, defaultLongBreakLength, setLongBreak } =
+    useLongBreakTimer();
+  const { pomodoroLength, defaultPomodoroLength, setPomodoroLength } =
+    usePomodoroTimer();
+  const { maxPomodoro, defaultMaxPomodoro, setMaxPomodoro } = useMaxPomodoro();
   const { hasStarted } = useHasStarted();
-  const {
-    maxPomodoro,
-    decreaseMaxPomodoro,
-    increaseMaxPomodoro,
-    defaultMaxPomodoro,
-  } = useMaxPomodoro();
+
+  const [pomoCount, setPomoCount] = useState(pomodoroLength);
+  const [shortBreak, setShortBreakState] = useState(shortBreakLength);
+  const [longBreak, setLongBreakState] = useState(longBreakLength);
+  const [maxPomo, setMaxPomo] = useState(maxPomodoro);
+
+  function onSubmit() {
+    setShortBreak(shortBreak);
+    setLongBreak(longBreak);
+    setPomodoroLength(pomoCount);
+    setMaxPomodoro(maxPomo);
+    setIsSettingsToggled(false);
+  }
 
   function handleDefaults() {
     if (hasStarted) return;
+
+    alert("Are you sure you want to reset to defaults?");
     defaultShortBreakLength();
     defaultLongBreakLength();
     defaultPomodoroLength();
@@ -52,15 +51,15 @@ export const TimerSettings = () => {
     minLength: number,
     maxLength: number,
     propertyLength: number,
-    decrementFunction: any,
-    incrementFunction: any
+    setStateFunc: any,
+    step: number
   ) {
     if (hasStarted) return; // guard against change when running
 
     if (e.target.id === decrement && propertyLength > minLength) {
-      decrementFunction();
+      setStateFunc(propertyLength - step);
     } else if (e.target.id === increment && propertyLength < maxLength) {
-      incrementFunction();
+      setStateFunc(propertyLength + step);
     }
   }
 
@@ -86,12 +85,12 @@ export const TimerSettings = () => {
                 "session-increment",
                 60,
                 3600,
-                pomodoroLength,
-                decreasePomodoroLength,
-                increasePomodoroLength
+                pomoCount,
+                setPomoCount,
+                60
               )
             }
-            propertyLength={Math.floor(pomodoroLength / 60)}
+            propertyLength={Math.floor(pomoCount / 60)}
           />
           <ToggleOption
             title="Short Break"
@@ -104,12 +103,12 @@ export const TimerSettings = () => {
                 "short-break-increment",
                 60,
                 3600,
-                shortBreakLength,
-                decreaseShortBreakLength,
-                increaseShortBreakLength
+                shortBreak,
+                setShortBreakState,
+                60
               )
             }
-            propertyLength={Math.floor(shortBreakLength / 60)}
+            propertyLength={Math.floor(shortBreak / 60)}
           />
           <ToggleOption
             title="Long Break"
@@ -122,12 +121,12 @@ export const TimerSettings = () => {
                 "long-break-increment",
                 60,
                 3600,
-                longBreakLength,
-                decreaseLongBreakLength,
-                increaseLongBreakLength
+                longBreak,
+                setLongBreakState,
+                60
               )
             }
-            propertyLength={Math.floor(longBreakLength / 60)}
+            propertyLength={Math.floor(longBreak / 60)}
           />
         </div>
       </div>
@@ -144,15 +143,15 @@ export const TimerSettings = () => {
                   "pomodoro-increment",
                   1,
                   10,
-                  maxPomodoro,
-                  decreaseMaxPomodoro,
-                  increaseMaxPomodoro
+                  maxPomo,
+                  setMaxPomo,
+                  1
                 )
               }
             >
               &lt;
             </button>
-            <div>{Math.floor(maxPomodoro)}</div>
+            <div>{Math.floor(maxPomo)}</div>
             <button
               id="pomodoro-increment"
               onClick={(e) =>
@@ -162,9 +161,9 @@ export const TimerSettings = () => {
                   "pomodoro-increment",
                   1,
                   10,
-                  maxPomodoro,
-                  decreaseMaxPomodoro,
-                  increaseMaxPomodoro
+                  maxPomo,
+                  setMaxPomo,
+                  1
                 )
               }
             >
@@ -184,7 +183,7 @@ export const TimerSettings = () => {
         <Button
           className="text-gray-800 font-normal hover:text-white dark:text-white"
           variant="cold"
-          onClick={() => setIsSettingsToggled(false)}
+          onClick={() => onSubmit()}
         >
           Okay
         </Button>
