@@ -10,7 +10,6 @@ export const Task = ({ task }: any) => {
   const { completeTask, toggleInProgressState, alertTask, setPomodoroCounter } =
     useTask();
   const { breakStarted } = useBreakStarted();
-  const [pomoCount, setPomoCount] = useState(false);
 
   const { timerQueue } = useTimer();
 
@@ -23,21 +22,13 @@ export const Task = ({ task }: any) => {
 
   useEffect(() => {
     if (timerQueue === 0 && !task.alerted) {
-      console.log("test");
       setPomodoroCounter(task.id);
     }
   }, [timerQueue, breakStarted]);
 
   useEffect(() => {
-    if (task.pomodoroCounter != task.pomodoro) {
-      setPomoCount(false);
-    }
-  }, [task.pomodoro]);
-
-  useEffect(() => {
     if (task.pomodoroCounter == task.pomodoro && !task.alerted) {
       alertTask(task.id, true);
-      setPomoCount(true);
     }
   }, [task.pomodoroCounter]);
 
@@ -52,7 +43,7 @@ export const Task = ({ task }: any) => {
             "border-green-500 bg-green-300 dark:bg-green-300 line-through dark:text-stone-600"
           } ${
             !task.completed &&
-            pomoCount &&
+            task.alerted &&
             "border-red-500 bg-red-300 dark:bg-red-300 dark:text-stone-600"
           }`}
           onDoubleClick={() => preventFalseInProgress()}
