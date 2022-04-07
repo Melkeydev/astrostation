@@ -136,7 +136,7 @@ export const Timer = () => {
   }
 
   return (
-    <div className="py-2 px-1 mb-2 max-w-sm bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 w-1/2">
+    <div className="py-2 px-1 mb-2 max-w-sm w-72 sm:w-96 bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700">
       <div className="text-center">
         <div className="text-center p-2 rounded">
           <div className="flex justify-end">
@@ -171,7 +171,7 @@ export const Timer = () => {
           {/* Timer */}
           <div className="rounded p-4 inline-block">
             <p id="timer-label">{sessionType}</p>
-            <div className="text-9xl font-bold">
+            <div className="text-7xl sm:text-9xl font-bold">
               {/*// @ts-ignore */}
               {formatDisplayTime(timerMinutes)}:{/*// @ts-ignore */}
               {formatDisplayTime(timerSeconds)}
