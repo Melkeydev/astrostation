@@ -1,16 +1,15 @@
-import { useEffect } from "react";
-import { FaTimes, FaCheck } from "react-icons/fa";
+import { useEffect, useState } from "react";
+import { FaCheck } from "react-icons/fa";
 import { RiArrowGoBackFill } from "react-icons/ri";
-import { useTask, useTimer } from "../../store";
+import { BsThreeDotsVertical } from "react-icons/bs";
+import { Settings } from "./Settings";
+import { useTask, useTimer, useBreakStarted } from "../../store";
 
 export const Task = ({ task }: any) => {
-  const {
-    removeTask,
-    completeTask,
-    toggleInProgressState,
-    reducePomodoro,
-    alertTask,
-  } = useTask();
+  const [openSettings, setOpenSettings] = useState(false);
+  const { completeTask, toggleInProgressState, alertTask, setPomodoroCounter } =
+    useTask();
+  const { breakStarted } = useBreakStarted();
 
   const { timerQueue } = useTimer();
 
@@ -21,62 +20,69 @@ export const Task = ({ task }: any) => {
     toggleInProgressState(task.id);
   }
 
-  function getRemainingPomodoro() {
-    //let number = task.pomodoro - task.pomodoroCounter;
-    if (task.pomodoro < 0) {
-      return 0;
-    }
-    return task.pomodoro;
-  }
-
   useEffect(() => {
     if (timerQueue === 0 && !task.alerted) {
-      reducePomodoro(task.id);
+      setPomodoroCounter(task.id);
     }
-  }, [timerQueue]);
+  }, [timerQueue, breakStarted]);
 
   useEffect(() => {
-    if (task.pomodoro == 0 && !task.alerted) {
-      alertTask(task.id);
-      alert(`${task.description} should be completed`);
+    if (task.pomodoroCounter == task.pomodoro && !task.alerted) {
+      alertTask(task.id, true);
     }
-  }, [task.pomodoro]);
+  }, [task.pomodoroCounter]);
 
   return (
-    <div
-      className={`w-full m-1 py-2 px-2 cursor-pointer border-l-4 bg-stone-300 ${
-        task.inProgress && !task.completed && "border-yellow-500"
-      } ${task.completed && "border-green-500 bg-green-300 line-through"}`}
-      onDoubleClick={() => preventFalseInProgress()}
-    >
-      <h3 className="flex items-center justify-between">
-        {task.description}
-        <div className="flex justify-end">
-          {!task.completed ? (
-            <FaCheck
-              className={`cursor-pointer ml-2 ${
-                task.completed ? "text-green-500" : "text-slate-500"
-              }`}
-              onClick={() => completeTask(task.id)}
-            />
-          ) : (
-            <RiArrowGoBackFill
-              className={`cursor-pointer ml-2 ${
-                task.completed ? "text-green-500" : "text-slate-500"
-              }`}
-              onClick={() => completeTask(task.id)}
-            />
-          )}
-          <FaTimes
-            className="text-red-500 cursor-pointer ml-2"
-            onClick={() => removeTask(task.id)}
-          />
+    <>
+      {!openSettings ? (
+        <div
+          className={`w-full py-2 px-2 cursor-pointer border-l-4 bg-stone-300 dark:bg-gray-700 ${
+            task.inProgress && !task.completed && "border-yellow-500"
+          } ${
+            task.completed &&
+            "border-green-500 bg-green-300 dark:bg-green-300 line-through dark:text-stone-600"
+          } ${
+            !task.completed &&
+            task.alerted &&
+            "border-red-500 bg-red-300 dark:bg-red-300 dark:text-stone-600"
+          }`}
+          onDoubleClick={() => preventFalseInProgress()}
+        >
+          <div className="flex items-center justify-between">
+            <div className="flex items-center space-x-2">
+              <div>
+                {!task.completed ? (
+                  <FaCheck
+                    className={`cursor-pointer ml-2 dark:text-stone-600 ${
+                      task.completed ? "text-green-500" : "text-slate-500"
+                    }`}
+                    onClick={() => completeTask(task.id)}
+                  />
+                ) : (
+                  <RiArrowGoBackFill
+                    className={`cursor-pointer ml-2 ${
+                      task.completed ? "text-green-500" : "text-slate-500"
+                    }`}
+                    onClick={() => completeTask(task.id)}
+                  />
+                )}
+              </div>
+              <div>{task.description}</div>
+            </div>
+            <div className="flex items-center">
+              <div className="flex justify-end">
+                {task.pomodoroCounter}/{task.pomodoro}
+              </div>
+              <BsThreeDotsVertical
+                className="cursor-pointer ml-2"
+                onClick={() => setOpenSettings(!openSettings)}
+              />
+            </div>
+          </div>
         </div>
-      </h3>
-      <h3 className="flex items-center justify-between">
-        Pomodoro's Left
-        <div className="flex justify-end">{getRemainingPomodoro()}</div>
-      </h3>
-    </div>
+      ) : (
+        <Settings setOpenSettings={setOpenSettings} Task={task} />
+      )}
+    </>
   );
 };

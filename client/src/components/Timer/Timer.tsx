@@ -9,6 +9,7 @@ import {
   useHasStarted,
   useSetPomodoroCounter,
   useTimer,
+  useBreakStarted,
 } from "../../store";
 
 export const Timer = () => {
@@ -16,6 +17,7 @@ export const Timer = () => {
   const { longBreakLength, setLongBreak } = useLongBreakTimer();
   const { pomodoroLength, setPomodoroLength } = usePomodoroTimer();
   const { hasStarted, setHasStarted } = useHasStarted();
+  const { setBreakStarted } = useBreakStarted();
   const [breakLength, setBreakLength] = useState(shortBreakLength);
   const [timer, setTimer] = useState(60);
   const { setTimerQueue } = useTimer();
@@ -41,9 +43,11 @@ export const Timer = () => {
       if (sessionType === "Session") {
         setSessionType("Break");
         setTimer(breakLength);
+        setBreakStarted(true);
       } else {
         setSessionType("Session");
         setTimer(pomodoroLength);
+        setBreakStarted(false);
         setTimerQueue(pomodoroLength);
       }
     }
