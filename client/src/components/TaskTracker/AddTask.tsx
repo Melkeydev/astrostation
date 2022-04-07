@@ -18,8 +18,6 @@ export const AddTask = () => {
     [limit, setCharCount]
   );
 
-  console.log(breakStarted);
-
   const onSubmit = (e: any) => {
     e.preventDefault();
 
