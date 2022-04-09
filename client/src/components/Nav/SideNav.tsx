@@ -1,6 +1,7 @@
 import { NavItem } from "./NavItems";
 import { IoMusicalNotesOutline } from "react-icons/io5";
-import { IoImagesOutline } from "react-icons/io5";
+import { IoPawOutline } from "react-icons/io5";
+import { IoMenu } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
 import { MdOutlineTimer, MdWbSunny, MdDarkMode } from "react-icons/md";
 import { FaSpotify } from "react-icons/fa";
@@ -11,10 +12,11 @@ import {
   useSpotifyMusic,
   useDarkToggleStore,
 } from "../../store";
+import { useState } from "react";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
-
+  const [toggle, setToggle] = useState(false);
   const { isMusicToggled, setIsMusicToggled } = useToggleMusic();
   const { isTimerToggled, setIsTimerToggled } = useToggleTimer();
   const { isTasksToggled, setIsTasksToggled } = useToggleTasks();
@@ -35,30 +37,43 @@ export const SideNav = () => {
   function toggleSpotify() {
     setIsSpotifyToggled(!isSpotifyToggled);
   }
-
+  function toggleNavBar() {
+    setToggle(!toggle);
+  }
   return (
     <div className="flex absolute">
       <aside className="flex flex-col">
         <ul>
-          <NavItem onClick={toggleMusicPlayer}>
-            <IoMusicalNotesOutline className="h-6 w-6" />
-          </NavItem>
-          <NavItem onClick={toggleSpotify}>
-            <FaSpotify className="h-6 w-6" />
-          </NavItem>
-          <NavItem onClick={toggleTaskTracker}>
-            <CgNotes className="h-6 w-6" />
-          </NavItem>
-          <NavItem onClick={toggleTimerPlayer}>
-            <MdOutlineTimer className="h-6 w-6" />
-          </NavItem>
-          <NavItem onClick={toggleDarkMode}>
-            {isDark ? (
-              <MdWbSunny className="h-6 w-6" />
-            ) : (
-              <MdDarkMode className="h-6 w-6" />
-            )}
-          </NavItem>
+          {toggle ? (
+            <NavItem onClick={toggleNavBar}>
+              <IoMenu className="h-6 w-6" />
+            </NavItem>
+          ) : (
+            <>
+              <NavItem onClick={toggleNavBar}>
+                <IoPawOutline className="h-6 w-6" />
+              </NavItem>
+              <NavItem onClick={toggleMusicPlayer}>
+                <IoMusicalNotesOutline className="h-6 w-6" />
+              </NavItem>
+              <NavItem onClick={toggleSpotify}>
+                <FaSpotify className="h-6 w-6" />
+              </NavItem>
+              <NavItem onClick={toggleTaskTracker}>
+                <CgNotes className="h-6 w-6" />
+              </NavItem>
+              <NavItem onClick={toggleTimerPlayer}>
+                <MdOutlineTimer className="h-6 w-6" />
+              </NavItem>
+              <NavItem onClick={toggleDarkMode}>
+                {isDark ? (
+                  <MdWbSunny className="h-6 w-6" />
+                ) : (
+                  <MdDarkMode className="h-6 w-6" />
+                )}
+              </NavItem>
+            </>
+          )}
         </ul>
 
         <div className="mt-auto h-16 flex items-center w-full">

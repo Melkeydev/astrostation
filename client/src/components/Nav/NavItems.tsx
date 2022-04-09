@@ -1,4 +1,9 @@
-export const NavItem = ({ children, onClick }: { children: any, onClick?: () => void }) => {
+import { FC } from "react";
+
+export const NavItem: FC<{ onClick?: () => void }> = ({
+  children,
+  onClick,
+}) => {
   return (
     <li>
       <button
