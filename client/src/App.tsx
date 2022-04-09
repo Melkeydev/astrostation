@@ -15,6 +15,7 @@ enum backgrounds {
   CITY,
   STARS,
   SPACE,
+  DOTS,
 }
 
 // This needs to handle my sidebar, and my background changes

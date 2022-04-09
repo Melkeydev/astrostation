@@ -1,6 +1,7 @@
 import { Space } from "./Space/Space";
 import { ShootingStars } from "./ShootingStars/ShootingStars";
 import { City } from "./City/City";
+import { Dots } from "./Dots/Dots";
 import { useSetBackground } from "../../store";
 
 export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
@@ -12,6 +13,7 @@ export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
           [backgrounds.SPACE]: <Space />,
           [backgrounds.STARS]: <ShootingStars />,
           [backgrounds.CITY]: <City />,
+          [backgrounds.DOTS]: <Dots />,
         }[isBackground]
       }
     </div>
