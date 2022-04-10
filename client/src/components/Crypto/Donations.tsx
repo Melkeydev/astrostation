@@ -7,7 +7,7 @@ export const Donations = () => {
     <>
       <button
         type="button"
-        className="flex items-center rounded-md shadow-sm px-4 py-2 bg-violet-700 text-white font-medium focus:outline-none dark:bg-gray-800 dark:text-gray-200"
+        className="flex items-center rounded-md shadow-sm px-4 py-2 bg-violet-700 text-white font-medium focus:outline-none dark:bg-violet-700 dark:text-violet-200"
         onClick={() => setModal(true)}
       >
         Donate

@@ -104,10 +104,13 @@ export const Modal = ({ isVisible = false, onClose }) => {
   });
 
   return !isVisible ? null : (
-    <div className="modal" onClick={onClose}>
-      <div className="modal-dialog" onClick={(e) => e.stopPropagation()}>
+    <div className="modal " onClick={onClose}>
+      <div
+        className="modal-dialog dark:bg-gray-800 dark:text-gray-300"
+        onClick={(e) => e.stopPropagation()}
+      >
         <div className="flex justify-end">
-          <div className="modal-header">
+          <div className="modal-header dark:bg-gray-800 dark:text-gray-300">
             <IoCloseSharp
               className="text-red-500 cursor-pointer hover:bg-red-200"
               onClick={onClose}
@@ -115,16 +118,16 @@ export const Modal = ({ isVisible = false, onClose }) => {
           </div>
         </div>
         <div className="">
-          <div className="w-full">
+          <div className="w-full ">
             <form className="" onSubmit={handleSubmit}>
-              <div className="w-full sm:w-auto shadow-lg mx-auto rounded-xl bg-white">
+              <div className="w-full sm:w-auto shadow-lg mx-auto rounded-xl bg-white dark:bg-gray-800 dark:text-gray-300">
                 <main className="pl-4 pr-4 pb-4">
-                  <h1 className="text-xl font-semibold text-gray-700 text-center">
+                  <h1 className="text-xl font-semibold text-gray-700 text-center dark:text-gray-300">
                     Connect MetaMask Wallet and Donate
                   </h1>
                   <div>
                     <div className="flex items-center h-10">
-                      <div className="flex items-center px-4 py-2 bg-violet-700 text-white font-medium focus:outline-none dark:bg-gray-800 dark:text-gray-200">
+                      <div className="flex items-center px-4 py-2 bg-violet-700 text-white font-medium focus:outline-none dark:bg-violet-800 dark:text-gray-200">
                         <FaEthereum className="h-6 w-6" />
                         ETH
                       </div>
