@@ -54,14 +54,6 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
           >
             <div
               className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
-              onClick={() => setIsBackground(backgrounds.SPACE)}
-            >
-              <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
-                Space
-              </div>
-            </div>
-            <div
-              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
               onClick={() => setIsBackground(backgrounds.STARS)}
             >
               <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
@@ -82,6 +74,30 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
             >
               <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
                 Dots
+              </div>
+            </div>
+            <div
+              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
+              onClick={() => setIsBackground(backgrounds.SNOW)}
+            >
+              <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
+                Snow
+              </div>
+            </div>
+            <div
+              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
+              onClick={() => setIsBackground(backgrounds.FADE)}
+            >
+              <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
+                Fade
+              </div>
+            </div>
+            <div
+              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
+              onClick={() => setIsBackground(backgrounds.GRADIENT)}
+            >
+              <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
+                Gradient
               </div>
             </div>
           </div>

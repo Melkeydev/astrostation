@@ -1,5 +1,4 @@
 import "./City.scss";
-import { Circle } from "./Circle";
 import { CircleContainer } from "./CircleContainer";
 
 export const City = () => {

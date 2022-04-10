@@ -14,8 +14,10 @@ import { useDarkToggleStore } from "./store";
 enum backgrounds {
   CITY,
   STARS,
-  SPACE,
   DOTS,
+  SNOW,
+  FADE,
+  GRADIENT,
 }
 
 // This needs to handle my sidebar, and my background changes
