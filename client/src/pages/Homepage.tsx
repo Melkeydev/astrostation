@@ -13,6 +13,8 @@ import { BackgroundNav } from "../components/Nav/BackgroundNav";
 import { TimerSettings } from "../components/Timer/Settings";
 import { GoGear } from "react-icons/go";
 
+import { Donations } from "../components/Crypto/Donations";
+
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
@@ -32,6 +34,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           <GoGear className="-mr-1 ml-2" />
         </button>
         <BackgroundNav backgrounds={backgrounds} />
+        <Donations />
       </div>
       <div
         className={`flex justify-center ${isMusicToggled ? "block" : "hidden"}`}
