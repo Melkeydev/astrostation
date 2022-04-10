@@ -75,9 +75,9 @@ export const Modal = ({ isVisible = false, onClose }) => {
               <div className="credit-card w-full sm:w-auto shadow-lg mx-auto rounded-xl bg-white">
                 <main className="p-4">
                   <h1 className="text-xl font-semibold text-gray-700 text-center">
-                    Send ETH donation
+                    Connect MetaMask Wallet and Donate
                   </h1>
-                  <div className="">
+                  <div>
                     <div className="my-3">
                       <input
                         name="ether"

@@ -34,7 +34,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           <GoGear className="-mr-1 ml-2" />
         </button>
         <BackgroundNav backgrounds={backgrounds} />
-        <Donations />
       </div>
       <div
         className={`flex justify-center ${isMusicToggled ? "block" : "hidden"}`}
@@ -64,6 +63,9 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         className={`flex justify-center ${isTasksToggled ? "block" : "hidden"}`}
       >
         <TaskTracker />
+      </div>
+      <div className="fixed bottom-0">
+        <Donations />
       </div>
     </div>
   );
