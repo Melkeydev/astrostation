@@ -5,7 +5,12 @@ import { IconContext } from "react-icons";
 import { FaPauseCircle, FaPlayCircle, FaYoutube } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import YouTube from "react-youtube";
-import { useSong, useToggleMusic } from "../../store";
+import {
+  StationPlugin,
+  useSong,
+  useStationPluginsStore,
+  useToggleMusic,
+} from "../../store";
 import "./Player.scss";
 import { StationSelector } from "./StationSelector";
 
@@ -26,7 +31,7 @@ type PlayerVarsType = {
 
 export const Player = () => {
   const { song, toggledSong } = useSong();
-  const { isMusicToggled, setIsMusicToggled } = useToggleMusic();
+  const { plugins, remove: removePlugin } = useStationPluginsStore();
 
   const [player, setPlayer] = useState<IPlayer>();
   const [playAudio, setPlayAudio] = useState(true);
@@ -42,10 +47,10 @@ export const Player = () => {
   }, [toggledSong]);
 
   useEffect(() => {
-    if (!isMusicToggled) {
+    if (!plugins.includes(StationPlugin.LofiPlayer)) {
       onPauseVideo();
     }
-  }, [isMusicToggled]);
+  }, [plugins]);
 
   const onReady = (e: any) => {
     setPlayer(e.target);
@@ -78,48 +83,46 @@ export const Player = () => {
     },
   };
   return (
-    <>
-      <div className="py-4 px-3 mb-2 mt-2 w-72  sm:w-96 max-w-sm bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700">
-        <div className="flex items-center space-x-6 justify-between">
-          <div>{song?.artist}</div>
-          <div className="flex space-x-2">
-            <IconContext.Provider value={{ size: "1.1rem" }}>
-              <FaYoutube />
-            </IconContext.Provider>
-            <IconContext.Provider value={{ size: "1.1rem" }}>
-              <IoCloseSharp
-                className="text-red-500 cursor-pointer hover:bg-red-200"
-                onClick={() => setIsMusicToggled(false)}
-              />
-            </IconContext.Provider>
-          </div>
-        </div>
-        <YouTube
-          className="hidden"
-          videoId={song.id}
-          onReady={onReady}
-          // @ts-ignore
-          opts={opts}
-        />
-        <div className="space-y-2">
-          <div className="flex items-center space-x-3">
-            <IconContext.Provider value={{ size: "1.5rem" }}>
-              {playAudio ? (
-                <FaPlayCircle onClick={triggerAudio} />
-              ) : (
-                <FaPauseCircle onClick={triggerAudio} />
-              )}
-            </IconContext.Provider>
-            <Slider
-              defaultValue={75}
-              onChange={(value) => {
-                onVolumeChange(value);
-              }}
+    <div className="p-4">
+      <div className="flex items-center space-x-6 justify-between">
+        <div>{song?.artist}</div>
+        <div className="flex space-x-2">
+          <IconContext.Provider value={{ size: "1.1rem" }}>
+            <FaYoutube />
+          </IconContext.Provider>
+          <IconContext.Provider value={{ size: "1.1rem" }}>
+            <IoCloseSharp
+              className="text-red-500 cursor-pointer hover:bg-red-200"
+              onClick={() => removePlugin(StationPlugin.LofiPlayer)}
             />
-          </div>
-          <StationSelector />
+          </IconContext.Provider>
         </div>
       </div>
-    </>
+      <YouTube
+        className="hidden"
+        videoId={song.id}
+        onReady={onReady}
+        // @ts-ignore
+        opts={opts}
+      />
+      <div className="space-y-2">
+        <div className="flex items-center space-x-3">
+          <IconContext.Provider value={{ size: "1.5rem" }}>
+            {playAudio ? (
+              <FaPlayCircle onClick={triggerAudio} />
+            ) : (
+              <FaPauseCircle onClick={triggerAudio} />
+            )}
+          </IconContext.Provider>
+          <Slider
+            defaultValue={75}
+            onChange={(value) => {
+              onVolumeChange(value);
+            }}
+          />
+        </div>
+        <StationSelector />
+      </div>
+    </div>
   );
 };

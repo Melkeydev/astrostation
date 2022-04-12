@@ -2,7 +2,6 @@ import { useState, useEffect, useRef } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { Button } from "../Common/Button";
 import {
-  useToggleTimer,
   useShortBreakTimer,
   useLongBreakTimer,
   usePomodoroTimer,
@@ -10,6 +9,8 @@ import {
   useSetPomodoroCounter,
   useTimer,
   useBreakStarted,
+  useStationPluginsStore,
+  StationPlugin,
 } from "../../store";
 
 export const Timer = () => {
@@ -25,8 +26,8 @@ export const Timer = () => {
   const [timerSeconds, setTimerSeconds] = useState("00");
   const [timerIntervalId, setTimerIntervalId] = useState(null);
   const [sessionType, setSessionType] = useState("Session");
-  const { setIsTimerToggled } = useToggleTimer();
   const { setPomodoroCounter } = useSetPomodoroCounter();
+  const { remove: removePlugin } = useStationPluginsStore()
 
   const audioRef = useRef();
 
@@ -136,13 +137,13 @@ export const Timer = () => {
   }
 
   return (
-    <div className="py-2 px-1 mb-2 max-w-sm w-72 sm:w-96 bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700">
+    <div className="p-4">
       <div className="text-center">
-        <div className="text-center p-2 rounded">
+        <div className="text-center rounded">
           <div className="flex justify-end">
             <IoCloseSharp
               className="text-red-500 cursor-pointer hover:bg-red-200"
-              onClick={() => setIsTimerToggled(false)}
+              onClick={() => removePlugin(StationPlugin.Timer)}
             />
           </div>
           {/* Controls */}
