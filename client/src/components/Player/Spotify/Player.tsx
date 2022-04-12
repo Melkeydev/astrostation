@@ -22,7 +22,7 @@ export const Spotify = () => {
   }
 
   return (
-    <div className="py-2 mb-2 max-w-sm text-gray-800 shadow-md rounded-lg dark:text-gray-300 bg-white dark:bg-gray-800 dark:border-gray-700 w-1/2 justify-between">
+    <div className="py-2 mb-2 w-72 sm:w-96 max-w-sm text-gray-800 shadow-md rounded-lg dark:text-gray-300 bg-white dark:bg-gray-800 dark:border-gray-700 justify-between">
       <div className="flex justify-between items-center p-1">
         <p>Spotify</p>
         <IoCloseSharp
