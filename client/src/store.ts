@@ -1,3 +1,4 @@
+import { DropResult } from "react-beautiful-dnd";
 import create from "zustand";
 import { persist } from "zustand/middleware";
 
@@ -30,21 +31,6 @@ export const useSetPomodoroCounter = create<PomodoroCounter>((set) => ({
   pomodoroCounts: 0,
   setPomodoroCounter: () =>
     set((state) => ({ pomodoroCounts: state.pomodoroCounts + 1 })),
-}));
-
-/**
- * Toggle Settings Store
- * ---
- * Handler for Settings
- */
-interface IToggleSettings {
-  isSettingsToggled: boolean;
-  setIsSettingsToggled: (isSettingsToggled: boolean) => void;
-}
-
-export const useToggleSettings = create<IToggleSettings>((set) => ({
-  isSettingsToggled: false,
-  setIsSettingsToggled: (isSettingsToggled) => set({ isSettingsToggled }),
 }));
 
 /**
@@ -359,93 +345,6 @@ export const useSetBackground = create<IBackground>(
 );
 
 /**
- * Tasks Section Store
- * ---
- * Handle the visibility of the tasks section
- */
-type IToggleTasks = {
-  isTasksToggled: boolean;
-  setIsTasksToggled: (isTasksToggled: boolean) => void;
-};
-
-export const useToggleTasks = create<IToggleTasks>(
-  persist(
-    (set, _) => ({
-      isTasksToggled: true,
-      setIsTasksToggled: (isTasksToggled) => set({ isTasksToggled }),
-    }),
-    {
-      name: "show_tasks_section",
-    }
-  )
-);
-
-/**
- * Music Section Store
- * ---
- * Handle the visibility of the music section
- */
-type IToggleMusic = {
-  isMusicToggled: boolean;
-  setIsMusicToggled: (isMusicToggled: boolean) => void;
-};
-
-export const useToggleMusic = create<IToggleMusic>(
-  persist(
-    (set, _) => ({
-      isMusicToggled: true,
-      setIsMusicToggled: (isMusicToggled) => set({ isMusicToggled }),
-    }),
-    {
-      name: "show_music_section",
-    }
-  )
-);
-
-/**
- * Spotify Section Store
- * ---
- * Handle the visibility of the Spotify section
- */
-
-type IToggleSpotify = {
-  isSpotifyToggled: boolean;
-  setIsSpotifyToggled: (isSpotifyToggled: boolean) => void;
-};
-
-export const useSpotifyMusic = create<IToggleSpotify>(
-  persist(
-    (set, _) => ({
-      isSpotifyToggled: true,
-      setIsSpotifyToggled: (isSpotifyToggled) => set({ isSpotifyToggled }),
-    }),
-    {
-      name: "show_spotify_section",
-    }
-  )
-);
-
-/**
- * Timer Section Store
- * ---
- * Handle the visibility of the timer section
- */
-type IToggleTimer = {
-  isTimerToggled: boolean;
-  setIsTimerToggled: (isTimerToggled: boolean) => void;
-};
-
-export const useToggleTimer = create<IToggleTimer>(
-  persist(
-    (set, _) => ({
-      isTimerToggled: true,
-      setIsTimerToggled: (isTimerToggled) => set({ isTimerToggled }),
-    }),
-    { name: "show_timer_section" }
-  )
-);
-
-/**
  * Dark Mode Store
  * ---
  * Handle different styling between app dark and light mode
@@ -462,5 +361,80 @@ export const useDarkToggleStore = create<DarkModeState>(
       toggleDarkMode: () => set((oldState) => ({ isDark: !oldState.isDark })),
     }),
     { name: "darkmode" }
+  )
+);
+
+/**
+ * Station addons store
+ * ---
+ * Handle the visibility of station plugins on screen
+ */
+export enum StationPlugin {
+  LofiPlayer,
+  SpotifyPlayer,
+  Timer,
+  TimerSettings,
+  TaskTracker,
+}
+
+type StationPluginsState = {
+  plugins: StationPlugin[];
+  toggle: (plugin: StationPlugin) => void;
+  add: (plugin: StationPlugin) => void;
+  remove: (plugin: StationPlugin) => void;
+  reorder: (result: DropResult) => void;
+};
+
+/**
+ * Reorder an array of StationPlugin enums
+ */
+const reorderPlugins = (
+  list: StationPlugin[],
+  startIndex: number,
+  endIndex: number
+): StationPlugin[] => {
+  const result = Array.from(list);
+  const [removed] = result.splice(startIndex, 1);
+  result.splice(endIndex, 0, removed);
+
+  return result;
+};
+
+export const useStationPluginsStore = create<StationPluginsState>(
+  persist(
+    (set, _) => ({
+      plugins: [StationPlugin.LofiPlayer, StationPlugin.Timer],
+
+      toggle: (plugin) => set((oldState) => {
+        if (oldState.plugins.includes(plugin)) {
+          return {
+            plugins: oldState.plugins.filter(item => item !== plugin)
+          }
+        } else {
+          return {
+            plugins: [plugin, ...oldState.plugins]
+          }
+        }
+      }),
+
+      add: (plugin) =>
+        set((oldState) => ({ plugins: [plugin, ...oldState.plugins] })),
+
+      remove: (plugin) =>
+        set((oldState) => ({
+          plugins: oldState.plugins.filter((item) => item !== plugin),
+        })),
+
+      reorder: (result) =>
+        set((oldState) => ({
+          plugins: reorderPlugins(
+            oldState.plugins,
+            result.source.index,
+            result.destination.index
+          ),
+        })),
+    }),
+
+    { name: "station_plugins" }
   )
 );
