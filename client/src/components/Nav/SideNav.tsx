@@ -5,37 +5,16 @@ import { CgNotes } from "react-icons/cg";
 import { MdOutlineTimer, MdWbSunny, MdDarkMode } from "react-icons/md";
 import { FaSpotify } from "react-icons/fa";
 import {
-  useToggleMusic,
-  useToggleTimer,
-  useToggleTasks,
-  useSpotifyMusic,
   useDarkToggleStore,
+  useStationPluginsStore,
+  StationPlugin,
 } from "../../store";
 import { useState } from "react";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
   const [active, setActive] = useState(false);
-  const { isMusicToggled, setIsMusicToggled } = useToggleMusic();
-  const { isTimerToggled, setIsTimerToggled } = useToggleTimer();
-  const { isTasksToggled, setIsTasksToggled } = useToggleTasks();
-  const { isSpotifyToggled, setIsSpotifyToggled } = useSpotifyMusic();
-
-  function toggleMusicPlayer() {
-    setIsMusicToggled(!isMusicToggled);
-  }
-
-  function toggleTimerPlayer() {
-    setIsTimerToggled(!isTimerToggled);
-  }
-
-  function toggleTaskTracker() {
-    setIsTasksToggled(!isTasksToggled);
-  }
-
-  function toggleSpotify() {
-    setIsSpotifyToggled(!isSpotifyToggled);
-  }
+  const { toggle: togglePlugin } = useStationPluginsStore()
 
   const toggleNavBar = () => {
     setActive((oldDate) => !oldDate);
@@ -56,16 +35,16 @@ export const SideNav = () => {
                 active ? "" : "hidden"
               } w-full sm:flex sm:flex-grow sm:w-auto sm:flex-col`}
             >
-              <NavItem onClick={toggleMusicPlayer}>
+              <NavItem onClick={() => togglePlugin(StationPlugin.LofiPlayer)}>
                 <IoMusicalNotesOutline className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleSpotify}>
+              <NavItem onClick={() => togglePlugin(StationPlugin.SpotifyPlayer)}>
                 <FaSpotify className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleTaskTracker}>
+              <NavItem onClick={() => togglePlugin(StationPlugin.TaskTracker)}>
                 <CgNotes className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleTimerPlayer}>
+              <NavItem onClick={() => togglePlugin(StationPlugin.Timer)}>
                 <MdOutlineTimer className="h-6 w-6" />
               </NavItem>
               <NavItem onClick={toggleDarkMode}>
