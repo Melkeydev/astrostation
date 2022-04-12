@@ -35,34 +35,22 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         </button>
         <BackgroundNav backgrounds={backgrounds} />
       </div>
-      <div
-        className={`flex justify-center ${isMusicToggled ? "block" : "hidden"}`}
-      >
-        <Player />
-      </div>
-      <div
-        className={`flex justify-center ${
-          isSpotifyToggled ? "block" : "hidden"
-        }`}
-      >
-        <Spotify />
-      </div>
-      <div
-        className={`flex justify-center ${
-          isSettingsToggled ? "block" : "hidden"
-        }`}
-      >
-        <TimerSettings />
-      </div>
-      <div
-        className={`flex justify-center ${isTimerToggled ? "block" : "hidden"}`}
-      >
-        <Timer />
-      </div>
-      <div
-        className={`flex justify-center ${isTasksToggled ? "block" : "hidden"}`}
-      >
-        <TaskTracker />
+      <div className="flex flex-col items-center ml-8">
+        <div className={`${isMusicToggled ? "block" : "hidden"}`}>
+          <Player />
+        </div>
+        <div className={`${isSpotifyToggled ? "block" : "hidden"}`}>
+          <Spotify />
+        </div>
+        <div className={`${isSettingsToggled ? "block" : "hidden"}`}>
+          <TimerSettings />
+        </div>
+        <div className={`${isTimerToggled ? "block" : "hidden"}`}>
+          <Timer />
+        </div>
+        <div className={`${isTasksToggled ? "block" : "hidden"}`}>
+          <TaskTracker />
+        </div>
       </div>
       <div className="fixed bottom-0">
         <Donations />

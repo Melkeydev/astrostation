@@ -48,7 +48,7 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
 
         {showMenu && (
           <div
-            className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none"
+            className="origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-10"
             role="menu"
             ref={menuRef}
           >
