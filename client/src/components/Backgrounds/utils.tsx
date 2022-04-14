@@ -1,6 +1,9 @@
-import { Space } from "./Space/Space";
 import { ShootingStars } from "./ShootingStars/ShootingStars";
 import { City } from "./City/City";
+import { Dots } from "./Dots/Dots";
+import { Snow } from "./Snow/Snow";
+import { Fade } from "./Fade/Fade";
+import { Gradient } from "./Gradient/Gradient";
 import { useSetBackground } from "../../store";
 
 export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
@@ -9,9 +12,12 @@ export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
     <div className="fixed inset-0 bg-black">
       {
         {
-          [backgrounds.SPACE]: <Space />,
           [backgrounds.STARS]: <ShootingStars />,
           [backgrounds.CITY]: <City />,
+          [backgrounds.DOTS]: <Dots />,
+          [backgrounds.SNOW]: <Snow />,
+          [backgrounds.FADE]: <Fade />,
+          [backgrounds.GRADIENT]: <Gradient />,
         }[isBackground]
       }
     </div>

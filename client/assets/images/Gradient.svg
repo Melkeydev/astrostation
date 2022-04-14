@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Flevix.com  -->
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" xml:space="preserve">
+
+<g id="Circle-5">
+</g>
+<g id="Circle-1">
+	<path fill="#AB4298" d="M287.591,1784.46C5.314,1502.184,188.187,861.649,729.206,320.63s1235.313-777.652,1517.589-495.375
+		s45.645,976.57-495.375,1517.59S569.868,2066.737,287.591,1784.46z">
+		<animateTransform attributeName="transform"
+                          attributeType="XML"
+                          type="translate"
+                          dur="2s"
+                          begin="1.8"
+                          values="0,50;0,-50;0,50;"
+                          repeatCount="indefinite"/>
+	</path>
+</g>
+<g id="Circle-2">
+	<path fill="#A453A0" d="M184.744,1641.976c-282.277-282.277-72.524-949.69,468.495-1490.71
+		c515.932-515.932,1208.433-750.772,1490.71-468.495s45.645,976.57-495.375,1517.59S467.02,1924.253,184.744,1641.976z">
+		<animateTransform attributeName="transform"
+                          attributeType="XML"
+                          type="translate"
+                          dur="2s"
+                          begin="1.6"
+                          values="0,50;0,-50;0,50;"
+                          repeatCount="indefinite"/>
+	</path>
+</g>
+<g id="Circle-3">
+	<path fill="#9965AB" d="M54.411,1511.644c-282.277-282.277-72.524-949.691,468.495-1490.71s1208.433-750.772,1490.71-468.495
+		s45.645,976.57-495.375,1517.59S336.688,1793.921,54.411,1511.644z">
+		<animateTransform attributeName="transform"
+                          attributeType="XML"
+                          type="translate"
+                          dur="2s"
+                          begin="1.4"
+                          values="0,50;0,-50;0,50;"
+                          repeatCount="indefinite"/>
+	</path>
+</g>
+<g id="Circle-4">
+	<path fill="#8B78B7" d="M-98.295,1398.574C-380.572,1116.297-170.82,448.884,370.2-92.136s1208.433-750.772,1490.71-468.495
+		s45.645,976.57-495.375,1517.59S183.982,1680.851-98.295,1398.574z">
+		<animateTransform attributeName="transform"
+                          attributeType="XML"
+                          type="translate"
+                          dur="2s"
+                          begin="1.2"
+                          values="0,50;0,-50;0,50;"
+                          repeatCount="indefinite"/>
+	</path>
+</g>
+<g id="Circle-6">
+	<path fill="#5C9AD3" d="M-231.183,1265.686c-282.277-282.277-72.524-949.691,468.495-1490.71s1208.433-750.772,1490.71-468.495
+		s45.645,976.57-495.375,1517.59S51.094,1547.963-231.183,1265.686z">
+		<animateTransform attributeName="transform"
+                          attributeType="XML"
+                          type="translate"
+                          dur="2s"
+                          begin="1"
+                          values="0,50;0,-50;0,50;"
+                          repeatCount="indefinite"/>
+	</path>
+</g>
+<g id="Circle-7">
+	<path fill="#4BAEE2" d="M-361.516,1135.354c-282.277-282.277-72.524-949.69,468.495-1490.71s1208.433-750.772,1490.71-468.495
+		s45.645,976.57-495.375,1517.59S-79.239,1417.631-361.516,1135.354z">
+		<animateTransform attributeName="transform"
+                          attributeType="XML"
+                          type="translate"
+                          dur="2s"
+                          begin=".8"
+                          values="0,50;0,-50;0,50;"
+                          repeatCount="indefinite"/>
+	</path>
+</g>
+<g id="Circle-8">
+	<path fill="#37C6F4" d="M-496.237,991.557C-778.514,709.28-568.762,41.866-27.742-499.153s1208.433-750.772,1490.71-468.495
+		s45.645,976.57-495.375,1517.59S-213.96,1273.834-496.237,991.557z">
+		<animateTransform attributeName="transform"
+                          attributeType="XML"
+                          type="translate"
+                          dur="2s"
+                          begin=".6"
+                          values="0,50;0,-50;0,50;"
+                          repeatCount="indefinite"/>
+	</path>
+</g>
+<g id="Circle-9">
+	<path fill="#4FC8EC" d="M-643.688,844.106c-282.277-282.277-72.524-949.691,468.495-1490.71s1208.433-750.772,1490.71-468.495
+		s45.645,976.57-495.375,1517.59S-361.412,1126.383-643.688,844.106z">
+		<animateTransform attributeName="transform"
+                          attributeType="XML"
+                          type="translate"
+                          dur="2s"
+                          begin=".4"
+                          values="0,50;0,-50;0,50;"
+                          repeatCount="indefinite"/>
+	</path>
+</g>
+<g id="Circle-10">
+	<path fill="#5ECAE6" d="M-1186.249,596.169c-423.656-423.656-273.697-1260.497,334.942-1869.136s1445.48-758.598,1869.136-334.942
+		S1261.287-317.174,652.648,291.466S-762.593,1019.825-1186.249,596.169z">
+		<animateTransform attributeName="transform"
+                          attributeType="XML"
+                          type="translate"
+                          dur="2s"
+                          begin=".2"
+                          values="0,50;0,-50;0,50;"
+                          repeatCount="indefinite"/>
+	</path>
+</g>
+</svg>
