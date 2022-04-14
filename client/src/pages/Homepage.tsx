@@ -15,6 +15,8 @@ import { GoGear } from "react-icons/go";
 
 import { Donations } from "../components/Crypto/Donations";
 
+import Draggable from "react-draggable";
+
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
@@ -23,7 +25,12 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isSettingsToggled, setIsSettingsToggled } = useToggleSettings();
 
   return (
-    <div className="h-full w-full space-y-1">
+    <div className="h-70 w-70 space-y-1">
+      <Draggable bounds="parent">
+        <div className="box">
+          <Player />
+        </div>
+      </Draggable>
       <div className="flex justify-end space-x-6">
         <button
           type="button"
