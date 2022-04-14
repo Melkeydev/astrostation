@@ -17,6 +17,8 @@ import { Donations } from "../components/Crypto/Donations";
 
 import Draggable from "react-draggable";
 
+import { DWrapper } from "../components/Dragggable/Draggable";
+
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
@@ -25,12 +27,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isSettingsToggled, setIsSettingsToggled } = useToggleSettings();
 
   return (
-    <div className="h-70 w-70 space-y-1">
-      <Draggable bounds="parent">
-        <div className="box">
-          <Player />
-        </div>
-      </Draggable>
+    <div className="h-screen w-70 space-y-1">
       <div className="flex justify-end space-x-6">
         <button
           type="button"
@@ -42,23 +39,21 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         </button>
         <BackgroundNav backgrounds={backgrounds} />
       </div>
-      <div className="flex flex-col items-center ml-8">
-        <div className={`${isMusicToggled ? "block" : "hidden"}`}>
-          <Player />
-        </div>
-        <div className={`${isSpotifyToggled ? "block" : "hidden"}`}>
-          <Spotify />
-        </div>
-        <div className={`${isSettingsToggled ? "block" : "hidden"}`}>
-          <TimerSettings />
-        </div>
-        <div className={`${isTimerToggled ? "block" : "hidden"}`}>
-          <Timer />
-        </div>
-        <div className={`${isTasksToggled ? "block" : "hidden"}`}>
-          <TaskTracker />
-        </div>
-      </div>
+      <DWrapper toggleHook={isMusicToggled}>
+        <Player />
+      </DWrapper>
+      <DWrapper toggleHook={isSpotifyToggled}>
+        <Spotify />
+      </DWrapper>
+      <DWrapper toggleHook={isSettingsToggled}>
+        <TimerSettings />
+      </DWrapper>
+      <DWrapper toggleHook={isTimerToggled}>
+        <Timer />
+      </DWrapper>
+      <DWrapper toggleHook={isTasksToggled}>
+        <TaskTracker />
+      </DWrapper>
       <div className="fixed bottom-0">
         <Donations />
       </div>
