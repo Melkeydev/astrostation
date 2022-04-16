@@ -15,12 +15,10 @@ export const DWrapper = ({
   const handleDrag = (e, ui) => {
     let deltaX = defaultX + ui.deltaX;
     let deltaY = defaultY + ui.deltaY;
-    console.log(deltaX, deltaY);
   };
 
   function trackPosition(data) {
     setZ(++int);
-    //console.log(data.x, data.y);
   }
 
   function changePosition(data) {

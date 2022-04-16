@@ -30,7 +30,6 @@
   -webkit-animation-duration: 0.4s;
   animation-name: slide-in;
   animation-duration: 0.5s;
-  z-index: 9998;
 }
 
 .modal-header,
@@ -38,12 +37,10 @@
   display: flex;
   align-items: center;
   padding: 1rem;
-  z-index: 9998;
 }
 
 .modal-header {
   justify-content: space-between;
-  z-index: 9998;
 }
 
 .modal-footer {
@@ -59,12 +56,10 @@
 
 .modal-body {
   overflow: auto;
-  z-index: 9998;
 }
 
 .modal-content {
   padding: 1rem;
-  z-index: 9998;
 }
 
 @keyframes appear {
