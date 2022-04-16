@@ -8,7 +8,6 @@ import {
   usePosTask,
   usePosMusic,
   usePosSpotify,
-  usePosTimerSettings,
   usePosTimer,
 } from "../store";
 import { Player } from "../components/Player/Player";
@@ -18,26 +17,26 @@ import { Spotify } from "../components/Player/Spotify/Player";
 import { BackgroundNav } from "../components/Nav/BackgroundNav";
 import { TimerSettings } from "../components/Timer/Settings";
 import { GoGear } from "react-icons/go";
-import { Donations } from "../components/Crypto/Donations";
 import { DWrapper } from "../components/Dragggable/Draggable";
 
-import { Modal } from "../components/Timer/Modal";
+import { SettingsModal } from "../components/Timer/Modal";
+import { CryptoModal } from "../components/Crypto/Modal";
+import { FaEthereum } from "react-icons/fa";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
   const { isTasksToggled } = useToggleTasks();
   const { isSpotifyToggled } = useSpotifyMusic();
-  const { isSettingsToggled, setIsSettingsToggled } = useToggleSettings();
+  const { isSettingsToggled } = useToggleSettings();
   const [isMobile, setIsMobile] = useState(false);
-  const [isModal, setModal] = useState(false);
+  const [isSettingsModal, setSettingsModal] = useState(false);
+  const [isCryptoModal, setCryptoModal] = useState(false);
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
   const { musicPosX, musicPosY, setMusicPos } = usePosMusic();
   const { spotifyPosX, spotifyPosY, setSpotifyPos } = usePosSpotify();
-  const { timerSettingsPosX, timerSettingsPosY, setTimerSettingsPos } =
-    usePosTimerSettings();
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
 
   const [screenSize, getDimension] = useState({
@@ -69,7 +68,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         <button
           type="button"
           className="flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
-          onClick={() => setModal(true)}
+          onClick={() => setSettingsModal(true)}
         >
           Settings
           <GoGear className="-mr-1 ml-2" />
@@ -77,7 +76,26 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         <BackgroundNav backgrounds={backgrounds} />
       </div>
       <div className="flex justify-end space-x-6">
-        <Modal isVisible={isModal} onClose={() => setModal(false)} />
+        <SettingsModal
+          isVisible={isSettingsModal}
+          onClose={() => setSettingsModal(false)}
+        />
+      </div>
+      <div className="flex justify-end space-x-6">
+        <CryptoModal
+          isVisible={isCryptoModal}
+          onClose={() => setCryptoModal(false)}
+        />
+      </div>
+      <div className="fixed bottom-0">
+        <button
+          type="button"
+          className="flex items-center rounded-md shadow-sm px-4 py-2 bg-violet-700 text-white font-medium focus:outline-none dark:bg-violet-700 dark:text-violet-200"
+          onClick={() => setCryptoModal(true)}
+        >
+          Donate
+          <FaEthereum />
+        </button>
       </div>
       {isMobile ? (
         <div className="flex flex-col items-center ml-8">
@@ -131,22 +149,8 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           >
             <Spotify />
           </DWrapper>
-
-          {/*
-          <DWrapper
-            toggleHook={isSettingsToggled}
-            defaultX={timerSettingsPosX}
-            defaultY={timerSettingsPosY}
-            setPosition={setTimerSettingsPos}
-          >
-            <TimerSettings />
-          </DWrapper>
-          */}
         </>
       )}
-      <div className="fixed bottom-0">
-        <Donations />
-      </div>
     </div>
   );
 };

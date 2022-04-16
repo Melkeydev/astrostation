@@ -36,7 +36,7 @@ const isMetaMaskConnected = async () => {
   return accounts.length > 0;
 };
 
-export const Modal = ({ isVisible = false, onClose }) => {
+export const CryptoModal = ({ isVisible = false, onClose }) => {
   const [error, setError] = useState("");
   const [txs, setTxs] = useState([]);
   const [metaMaskConnected, setMetaMaskConnected] = useState(false);

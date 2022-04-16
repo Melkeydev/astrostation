@@ -2,7 +2,7 @@ import "./Modal.scss";
 import { useEffect } from "react";
 import { TimerSettings } from "../Timer/Settings";
 
-export const Modal = ({ isVisible = false, onClose }) => {
+export const SettingsModal = ({ isVisible = false, onClose }) => {
   const keydownHandler = ({ key }) => {
     switch (key) {
       case "Escape":

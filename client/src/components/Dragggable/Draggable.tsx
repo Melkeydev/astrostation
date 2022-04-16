@@ -12,8 +12,15 @@ export const DWrapper = ({
   const [z, setZ] = useState(0);
   const ref = useRef();
 
+  const handleDrag = (e, ui) => {
+    let deltaX = defaultX + ui.deltaX;
+    let deltaY = defaultY + ui.deltaY;
+    console.log(deltaX, deltaY);
+  };
+
   function trackPosition(data) {
     setZ(++int);
+    //console.log(data.x, data.y);
   }
 
   function changePosition(data) {
@@ -48,11 +55,16 @@ export const DWrapper = ({
       onStop={(e, data) => changePosition(data)}
     >
       <div
-        style={{ zIndex: z }}
-        className="box dwidth"
+        style={{ zIndex: z, position: "absolute" }}
+        className="dcard box dwidth"
         onClick={() => setZ(++int)}
       >
-        <div ref={ref} className={`${toggleHook ? "absolute" : "hidden"}`}>
+        <div
+          ref={ref}
+          className={`inline-block ${
+            toggleHook ? "visible" : "hidden pointer-events-none"
+          }`}
+        >
           {children}
         </div>
       </div>
