@@ -36,7 +36,7 @@ export const Settings = ({ setOpenSettings, Task }) => {
 
   return (
     <div className="space-y-2 py-2 px-1 mb-2 w-full bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 ">
-      <div>
+      <div className="flex">
         <input
           className="w-full h-10 m-1 py-2 px-3 text-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-500"
           type="text"
