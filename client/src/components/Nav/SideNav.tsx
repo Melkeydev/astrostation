@@ -32,13 +32,13 @@ export const SideNav = () => {
   const { setMusicPosDefault } = usePosMusic();
   const { setSpotifyPosDefault } = usePosSpotify();
   const { setTimerPosDefault } = usePosTimer();
-  const { setTimerSettingsPosDefault } = usePosTimerSettings();
 
   function toggleDefaultPositions() {
     setTaskPosDefault();
     setMusicPosDefault();
     setSpotifyPosDefault();
     setTimerPosDefault();
+    window.location.reload();
   }
 
   function toggleMusicPlayer() {
