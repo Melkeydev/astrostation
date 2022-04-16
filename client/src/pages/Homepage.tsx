@@ -1,10 +1,15 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import {
   useToggleMusic,
   useToggleTimer,
   useToggleTasks,
   useSpotifyMusic,
   useToggleSettings,
+  usePosTask,
+  usePosMusic,
+  usePosSpotify,
+  usePosTimerSettings,
+  usePosTimer,
 } from "../store";
 import { Player } from "../components/Player/Player";
 import { Timer } from "../components/Timer/Timer";
@@ -16,6 +21,8 @@ import { GoGear } from "react-icons/go";
 import { Donations } from "../components/Crypto/Donations";
 import { DWrapper } from "../components/Dragggable/Draggable";
 
+import { Modal } from "../components/Timer/Modal";
+
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
@@ -23,32 +30,15 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isSpotifyToggled } = useSpotifyMusic();
   const { isSettingsToggled, setIsSettingsToggled } = useToggleSettings();
   const [isMobile, setIsMobile] = useState(false);
+  const [isModal, setModal] = useState(false);
 
-  const [testX, setTestX] = useState(window.innerWidth * 0.8);
-
-  console.log(testX);
-
-  const ref = useRef();
-
-  useEffect(() => {
-    const listener = () => {
-      triggerMouseEvent(ref.current, "mouseover");
-      triggerMouseEvent(ref.current, "mousedown");
-      triggerMouseEvent(document, "mousemove");
-      triggerMouseEvent(ref.current, "mouseup");
-      triggerMouseEvent(ref.current, "click");
-    };
-
-    addEventListener("resize", listener);
-    return () => removeEventListener("resize", listener);
-  }, []);
-
-  const triggerMouseEvent = (element, eventType) => {
-    const mouseEvent = document.createEvent("MouseEvents");
-
-    mouseEvent.initEvent(eventType, true, true);
-    element.dispatchEvent(mouseEvent);
-  };
+  // Position hooks
+  const { taskPosX, taskPosY, setTaskPos } = usePosTask();
+  const { musicPosX, musicPosY, setMusicPos } = usePosMusic();
+  const { spotifyPosX, spotifyPosY, setSpotifyPos } = usePosSpotify();
+  const { timerSettingsPosX, timerSettingsPosY, setTimerSettingsPos } =
+    usePosTimerSettings();
+  const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
 
   const [screenSize, getDimension] = useState({
     dynamicWidth: window.innerWidth,
@@ -63,8 +53,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
     getDimension({
       dynamicWidth: window.innerWidth,
     });
-
-    setTestX(window.innerWidth * 0.5);
   };
 
   useEffect(() => {
@@ -73,20 +61,23 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
     return () => {
       window.removeEventListener("resize", setDimension);
     };
-  }, [screenSize, testX]);
+  }, [screenSize]);
 
   return (
-    <div className="h-screen w-70 space-y-1">
+    <div className="h-screen w-70 space-y-1 overflow-hidden">
       <div className="flex justify-end space-x-6">
         <button
           type="button"
           className="flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
-          onClick={() => setIsSettingsToggled(!isSettingsToggled)}
+          onClick={() => setModal(true)}
         >
           Settings
           <GoGear className="-mr-1 ml-2" />
         </button>
         <BackgroundNav backgrounds={backgrounds} />
+      </div>
+      <div className="flex justify-end space-x-6">
+        <Modal isVisible={isModal} onClose={() => setModal(false)} />
       </div>
       {isMobile ? (
         <div className="flex flex-col items-center ml-8">
@@ -109,45 +100,48 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
       ) : (
         <>
           <DWrapper
-            toggleHook={isMusicToggled}
-            defaultX={750}
-            defaultY={0}
-            dragRef={ref}
-          >
-            <Player />
-          </DWrapper>
-          <DWrapper
-            toggleHook={isSpotifyToggled}
-            defaultX={300}
-            defaultY={100}
-            dragRef={ref}
-          >
-            <Spotify />
-          </DWrapper>
-          <DWrapper
-            toggleHook={isSettingsToggled}
-            defaultX={750}
-            defaultY={-200}
-            dragRef={ref}
-          >
-            <TimerSettings />
-          </DWrapper>
-          <DWrapper
             toggleHook={isTimerToggled}
-            defaultX={750}
-            defaultY={-745}
-            dragRef={ref}
+            defaultX={timerPosX}
+            defaultY={timerPosY}
+            setPosition={setTimerPos}
           >
             <Timer />
           </DWrapper>
           <DWrapper
             toggleHook={isTasksToggled}
-            defaultX={300}
-            defaultY={-1215}
-            dragRef={ref}
+            defaultX={taskPosX}
+            defaultY={taskPosY}
+            setPosition={setTaskPos}
           >
             <TaskTracker />
           </DWrapper>
+          <DWrapper
+            toggleHook={isMusicToggled}
+            defaultX={musicPosX}
+            defaultY={musicPosY}
+            setPosition={setMusicPos}
+          >
+            <Player />
+          </DWrapper>
+          <DWrapper
+            toggleHook={isSpotifyToggled}
+            defaultX={spotifyPosX}
+            defaultY={spotifyPosY}
+            setPosition={setSpotifyPos}
+          >
+            <Spotify />
+          </DWrapper>
+
+          {/*
+          <DWrapper
+            toggleHook={isSettingsToggled}
+            defaultX={timerSettingsPosX}
+            defaultY={timerSettingsPosY}
+            setPosition={setTimerSettingsPos}
+          >
+            <TimerSettings />
+          </DWrapper>
+          */}
         </>
       )}
       <div className="fixed bottom-0">
