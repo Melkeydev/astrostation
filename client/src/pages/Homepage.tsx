@@ -55,9 +55,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
       <div className="fixed bottom-0">
         <Donations />
       </div>
-      <div className="fixed bottom-0">
-        <Donations />
-      </div>
     </div>
   );
 };
