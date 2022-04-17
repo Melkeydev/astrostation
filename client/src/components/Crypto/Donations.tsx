@@ -1,4 +1,4 @@
-import { Modal } from "./Modal";
+import { CryptoModal } from "./Modal";
 import { FaEthereum } from "react-icons/fa";
 import { useState } from "react";
 export const Donations = () => {
@@ -13,7 +13,7 @@ export const Donations = () => {
         Donate
         <FaEthereum />
       </button>
-      <Modal isVisible={isModal} onClose={() => setModal(false)} />
+      <CryptoModal isVisible={isModal} onClose={() => setModal(false)} />
     </>
   );
 };

@@ -3,6 +3,7 @@ import { IoMusicalNotesOutline } from "react-icons/io5";
 import { IoMenu } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
 import { MdOutlineTimer, MdWbSunny, MdDarkMode } from "react-icons/md";
+import { VscDebugRestartFrame } from "react-icons/vsc";
 import { FaSpotify } from "react-icons/fa";
 import {
   useToggleMusic,
@@ -10,8 +11,14 @@ import {
   useToggleTasks,
   useSpotifyMusic,
   useDarkToggleStore,
+  usePosTask,
+  usePosMusic,
+  usePosSpotify,
+  usePosTimerSettings,
+  usePosTimer,
 } from "../../store";
 import { useState } from "react";
+import { SetDefault } from "../Dragggable/Default";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
@@ -20,6 +27,19 @@ export const SideNav = () => {
   const { isTimerToggled, setIsTimerToggled } = useToggleTimer();
   const { isTasksToggled, setIsTasksToggled } = useToggleTasks();
   const { isSpotifyToggled, setIsSpotifyToggled } = useSpotifyMusic();
+
+  const { setTaskPosDefault } = usePosTask();
+  const { setMusicPosDefault } = usePosMusic();
+  const { setSpotifyPosDefault } = usePosSpotify();
+  const { setTimerPosDefault } = usePosTimer();
+
+  function toggleDefaultPositions() {
+    setTaskPosDefault();
+    setMusicPosDefault();
+    setSpotifyPosDefault();
+    setTimerPosDefault();
+    window.location.reload();
+  }
 
   function toggleMusicPlayer() {
     setIsMusicToggled(!isMusicToggled);
@@ -67,6 +87,9 @@ export const SideNav = () => {
               </NavItem>
               <NavItem onClick={toggleTimerPlayer}>
                 <MdOutlineTimer className="h-6 w-6" />
+              </NavItem>
+              <NavItem onClick={toggleDefaultPositions}>
+                <VscDebugRestartFrame className="h-6 w-6" />
               </NavItem>
               <NavItem onClick={toggleDarkMode}>
                 {isDark ? (

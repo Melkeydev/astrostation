@@ -47,6 +47,29 @@ export const useToggleSettings = create<IToggleSettings>((set) => ({
   setIsSettingsToggled: (isSettingsToggled) => set({ isSettingsToggled }),
 }));
 
+type IPosTimerSettings = {
+  timerSettingsPosX: number;
+  timerSettingsPosY: number;
+  setTimerSettingsPos: (X: number, Y: number) => void;
+  setTimerSettingsPosDefault: () => void;
+};
+
+export const usePosTimerSettings = create<IPosTimerSettings>(
+  persist(
+    (set, _) => ({
+      timerSettingsPosX: 750,
+      timerSettingsPosY: -200,
+      setTimerSettingsPos: (X, Y) =>
+        set({ timerSettingsPosX: X, timerSettingsPosY: Y }),
+      setTimerSettingsPosDefault: () =>
+        set(() => ({ timerSettingsPosX: 750, timerSettingsPosY: -200 })),
+    }),
+    {
+      name: "set_timer_settings_position",
+    }
+  )
+);
+
 /**
  * Max Pomodoro Store
  * ---
@@ -380,6 +403,27 @@ export const useToggleTasks = create<IToggleTasks>(
   )
 );
 
+type IPosTask = {
+  taskPosX: number;
+  taskPosY: number;
+  setTaskPos: (X: number, Y: number) => void;
+  setTaskPosDefault: () => void;
+};
+
+export const usePosTask = create<IPosTask>(
+  persist(
+    (set, _) => ({
+      taskPosX: 800,
+      taskPosY: 325,
+      setTaskPos: (X, Y) => set({ taskPosX: X, taskPosY: Y }),
+      setTaskPosDefault: () => set(() => ({ taskPosX: 800, taskPosY: 325 })),
+    }),
+    {
+      name: "set_task_position",
+    }
+  )
+);
+
 /**
  * Music Section Store
  * ---
@@ -398,6 +442,27 @@ export const useToggleMusic = create<IToggleMusic>(
     }),
     {
       name: "show_music_section",
+    }
+  )
+);
+
+type IPosMusic = {
+  musicPosX: number;
+  musicPosY: number;
+  setMusicPos: (X: number, Y: number) => void;
+  setMusicPosDefault: () => void;
+};
+
+export const usePosMusic = create<IPosMusic>(
+  persist(
+    (set, _) => ({
+      musicPosX: 400,
+      musicPosY: 0,
+      setMusicPos: (X, Y) => set({ musicPosX: X, musicPosY: Y }),
+      setMusicPosDefault: () => set(() => ({ musicPosX: 400, musicPosY: 0 })),
+    }),
+    {
+      name: "set_music_position",
     }
   )
 );
@@ -425,6 +490,28 @@ export const useSpotifyMusic = create<IToggleSpotify>(
   )
 );
 
+type IPosSpotify = {
+  spotifyPosX: number;
+  spotifyPosY: number;
+  setSpotifyPos: (X: number, Y: number) => void;
+  setSpotifyPosDefault: () => void;
+};
+
+export const usePosSpotify = create<IPosSpotify>(
+  persist(
+    (set, _) => ({
+      spotifyPosX: 400,
+      spotifyPosY: 150,
+      setSpotifyPos: (X, Y) => set({ spotifyPosX: X, spotifyPosY: Y }),
+      setSpotifyPosDefault: () =>
+        set(() => ({ spotifyPosX: 400, spotifyPosY: 150 })),
+    }),
+    {
+      name: "set_spotify_position",
+    }
+  )
+);
+
 /**
  * Timer Section Store
  * ---
@@ -442,6 +529,27 @@ export const useToggleTimer = create<IToggleTimer>(
       setIsTimerToggled: (isTimerToggled) => set({ isTimerToggled }),
     }),
     { name: "show_timer_section" }
+  )
+);
+
+type IPosTimer = {
+  timerPosX: number;
+  timerPosY: number;
+  setTimerPos: (X: number, Y: number) => void;
+  setTimerPosDefault: () => void;
+};
+
+export const usePosTimer = create<IPosTimer>(
+  persist(
+    (set, _) => ({
+      timerPosX: 800,
+      timerPosY: 0,
+      setTimerPos: (X, Y) => set({ timerPosX: X, timerPosY: Y }),
+      setTimerPosDefault: () => set(() => ({ timerPosX: 800, timerPosY: 0 })),
+    }),
+    {
+      name: "set_timers_position",
+    }
   )
 );
 
