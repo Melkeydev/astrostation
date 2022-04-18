@@ -6,10 +6,10 @@ import {
   //useParams,
 } from "react-router-dom";
 import { useEffect } from "react";
-import { Backgrounds } from "./components/Backgrounds/utils";
-import { HomePage } from "./pages/Homepage";
-import { SideNav } from "./components/Nav/SideNav";
-import { useDarkToggleStore } from "./store";
+import { Backgrounds } from "@Components/Backgrounds/utils";
+import { HomePage } from "@Pages/Homepage";
+import { SideNav } from "@Components/Nav/SideNav";
+import { useDarkToggleStore } from "@Store";
 
 enum backgrounds {
   CITY,

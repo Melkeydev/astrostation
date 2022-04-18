@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { IoCloseSharp } from "react-icons/io5";
-import { Button } from "../Common/Button";
+import { Button } from "@Components/Common/Button";
 import {
   useToggleTimer,
   useShortBreakTimer,
