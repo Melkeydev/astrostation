@@ -4,7 +4,7 @@ import {
   usePosSpotify,
   usePosTimerSettings,
   usePosTimer,
-} from "../../store";
+} from "@Store";
 
 const { setTaskPosDefault } = usePosTask();
 const { setMusicPosDefault } = usePosMusic();

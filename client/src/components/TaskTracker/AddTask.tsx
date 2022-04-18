@@ -1,6 +1,6 @@
 import { useCallback, useState } from "react";
-import { useTask, useBreakStarted } from "../../store";
-import { Button } from "../Common/Button";
+import { useTask, useBreakStarted } from "@Store";
+import { Button } from "@Components/Common/Button";
 
 export const AddTask = () => {
   const limit = 100;

@@ -3,7 +3,7 @@ import { FaCheck } from "react-icons/fa";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
 import { Settings } from "./Settings";
-import { useTask, useTimer, useBreakStarted } from "../../store";
+import { useTask, useTimer, useBreakStarted } from "@Store";
 
 export const Task = ({ task }: any) => {
   const [openSettings, setOpenSettings] = useState(false);
