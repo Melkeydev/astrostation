@@ -45,7 +45,7 @@ export const TimerSettings = () => {
 
     setPomoCount(pomodoroLength);
     setShortBreakState(shortBreakLength);
-    setLongBreakState(longBreak);
+    setLongBreakState(longBreakLength);
     setMaxPomo(maxPomodoro);
   }
 
