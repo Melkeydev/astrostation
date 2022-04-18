@@ -56,6 +56,14 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
     };
   }, []);
 
+  useEffect(() => {
+    if (window.innerWidth < 641) {
+      setIsMobile(true);
+    } else {
+      setIsMobile(false);
+    }
+  }, []);
+
   return (
     <div className="h-screen w-70 space-y-1 overflow-hidden">
       <div className="flex justify-end space-x-6">
