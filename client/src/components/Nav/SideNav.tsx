@@ -14,11 +14,9 @@ import {
   usePosTask,
   usePosMusic,
   usePosSpotify,
-  usePosTimerSettings,
   usePosTimer,
 } from "../../store";
 import { useState } from "react";
-import { SetDefault } from "../Dragggable/Default";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
