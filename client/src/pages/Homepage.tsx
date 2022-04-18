@@ -41,28 +41,20 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { spotifyPosX, spotifyPosY, setSpotifyPos } = usePosSpotify();
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
 
-  const [screenSize, getDimension] = useState({
-    dynamicWidth: window.innerWidth,
-  });
-
-  const setDimension = () => {
-    if (window.innerWidth < 641) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-    getDimension({
-      dynamicWidth: window.innerWidth,
-    });
-  };
-
   useEffect(() => {
-    window.addEventListener("resize", setDimension);
+    const handler = () => {
+      if (window.innerWidth < 641) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+    window.addEventListener("resize", handler);
 
     return () => {
-      window.removeEventListener("resize", setDimension);
+      window.removeEventListener("resize", handler);
     };
-  }, [screenSize]);
+  }, []);
 
   return (
     <div className="h-screen w-70 space-y-1 overflow-hidden">
