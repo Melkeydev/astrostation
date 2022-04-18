@@ -23,6 +23,8 @@ import { SettingsModal } from "../components/Timer/Modal";
 import { CryptoModal } from "../components/Crypto/Modal";
 import { FaEthereum } from "react-icons/fa";
 
+import { Donations } from "../components/Crypto/Donations";
+
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
