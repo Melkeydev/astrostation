@@ -3,115 +3,63 @@
 }
 
 .cityContainer {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  overflow:hidden;
-  background-size:cover;
+ background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg");
+ background-size: cover;
+ position: absolute;
+ top: 0;
+ bottom: 0;
+ left: 0;
+ right: 0;
+ display: block;
+ z-index: 0;
 }
 
-.cityBackground {
-  display: block;
-  position: relative;
-  top: 0;
-  left: 0;
-  object-fit: cover;
-  width: 100%;
-  height: 100%;
-
-  mask-image: radial-gradient(white 0%, white 30%, transparent 80%, transparent);
+@function random_range($min, $max) {
+  $rand: random();
+  $random_range: $min + floor($rand * (($max - $min) + 1));
+  @return $random_range;
 }
 
-.circleContainer {
-  $particleNum: 200;
-  $particleColor: hsl(180, 100%, 80%);
-
+.falling {
+  $total: 200;
   position: absolute;
-  transform: translateY(-10vh);
-  animation-iteration-count: infinite;
-  animation-timing-function: linear;
+  width: 10px;
+  height: 10px;
+  background: white;
+  border-radius: 50%;
+  background-image: radial-gradient(
+    hsl(180, 100%, 80%),
+    hsl(180, 100%, 80%) 40%,
+    hsla(180, 100%, 80%, 0) 86%
+  );
 
-  .circle {
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    mix-blend-mode: screen;
-    background-image: radial-gradient(
-      hsl(180, 100%, 80%),
-      hsl(180, 100%, 80%) 40%,
-      hsla(180, 100%, 80%, 0) 86%
-    );
+  @for $i from 1 through $total {
+    $random-x: random(1000000) * 0.0001vw;
+    //$random-x: -100000000;
+    $random-offset: random_range(-100000, 100000) * 0.0001vw;
+    $random-x-end: $random-x + $random-offset;
+    $random-x-end-yoyo: $random-x + calc($random-offset / 2);
+    $random-yoyo-time: calc(random_range(30000, 80000) / 100000);
+    $random-yoyo-y: $random-yoyo-time;
 
-    animation: fadein-frames 200ms infinite, scale-frames 2s infinite;
 
-    @keyframes fade-frames {
-      0% {
-        opacity: 1;
-      }
+    $random-scale: random(10000) * 0.0001;
+    $fall-duration: random_range(10, 30) * 1s;
+    $fall-delay: random(30) * -1s;
 
-      50% {
-        opacity: 0.7;
-      }
-
-      100% {
-        opacity: 1;
-      }
-    }
-
-    @keyframes scale-frames {
-      0% {
-        transform: scale3d(0.4, 0.4, 1);
-      }
-
-      50% {
-        transform: scale3d(2.2, 2.2, 1);
-      }
-
-      100% {
-        transform: scale3d(0.4, 0.4, 1);
-      }
-    }
-  }
-
-  $particleBaseSize: 8;
-
-  
-  @for $i from 1 through $particleNum {
     &:nth-child(#{$i}) {
-      $circleSize: random($particleBaseSize);
-      width: $circleSize + px;
-      height: $circleSize + px;
+      opacity: random(10000) * 0.0001;
+      transform: translate($random-x, -10px) scale($random-scale);
+      animation: fall-#{$i} $fall-duration $fall-delay linear infinite;
+    }
 
-      $startPositionY: random(10) + 100;
-      $framesName: "move-frames-" + $i;
-      $moveDuration: 28000 + random(9000) + ms;
-
-      animation-name: #{$framesName};
-      animation-duration: $moveDuration;
-      animation-delay: random(37000) + ms;
-
-      @keyframes #{$framesName} {
-        from {
-          transform: translate3d(
-            #{random(100) + vw},
-            #{$startPositionY + vh},
-            0
-          );
-        }
-
-        to {
-          transform: translate3d(
-            #{random(100) + vw},
-            #{- $startPositionY - random(30) + vh},
-            0
-          );
-        }
+    @keyframes fall-#{$i} {
+      #{percentage($random-yoyo-time)} {
+        transform: translate($random-x-end, random-yoyo-y) scale($random-scale);
       }
 
-      .circle {
-        animation-delay: random(4000) + ms;
+      to {
+        transform: translate($random-x-end-yoyo, 100vh) scale($random-scale);
       }
     }
   }
