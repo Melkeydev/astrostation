@@ -1,5 +1,5 @@
 import Draggable from "react-draggable";
-import { usePosTask } from "../../store";
+import { usePosTask } from "@Store";
 import { useState } from "react";
 import "./Draggable.scss";
 export const Test = () => {

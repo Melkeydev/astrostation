@@ -1,4 +1,4 @@
-import { cls } from "../../utils/utils";
+import { cls } from "@Utils/utils";
 
 const classes: { [key: string]: any } = {
   base: "focus:outline-none transition ease-in-out duration-300",

@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect } from "react";
-import { useSetBackground } from "../../store";
+import { useSetBackground } from "@Store";
 export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
   const [showMenu, setShowMenu] = useState(false);
   const { setIsBackground } = useSetBackground();

@@ -1,4 +1,4 @@
-import { useSong } from "../../store";
+import { useSong } from "@Store";
 
 export const StationSelector = () => {
   const { setSong, setToggledSong } = useSong();

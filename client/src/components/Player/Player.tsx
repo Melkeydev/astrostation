@@ -5,7 +5,7 @@ import { IconContext } from "react-icons";
 import { FaPauseCircle, FaPlayCircle, FaYoutube } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import YouTube from "react-youtube";
-import { useSong, useToggleMusic } from "../../store";
+import { useSong, useToggleMusic } from "@Store";
 import "./Player.scss";
 import { StationSelector } from "./StationSelector";
 
