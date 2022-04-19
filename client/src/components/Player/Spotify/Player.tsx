@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { AiOutlineReload } from "react-icons/ai";
-import { useSpotifyMusic } from "../../../store";
+import { useSpotifyMusic } from "@Store";
 export const Spotify = () => {
   const { setIsSpotifyToggled } = useSpotifyMusic();
   const [text, setText] = useState("");

@@ -1,4 +1,4 @@
-import { Button } from "../Common/Button";
+import { Button } from "@Components/Common/Button";
 
 export const Header = ({ title, onAdd, showAdd }) => {
   return (

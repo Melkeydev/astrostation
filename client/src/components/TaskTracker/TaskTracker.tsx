@@ -3,7 +3,7 @@ import { Header } from "./Header";
 import { Tasks } from "./Tasks";
 import { AddTask } from "./AddTask";
 import { IoCloseSharp } from "react-icons/io5";
-import { useTask, useToggleTasks } from "../../store";
+import { useTask, useToggleTasks } from "@Store";
 
 export const TaskTracker = () => {
   const [showAddTask, setShowAddTask] = useState(false);

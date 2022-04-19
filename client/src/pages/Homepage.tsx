@@ -9,18 +9,18 @@ import {
   usePosMusic,
   usePosSpotify,
   usePosTimer,
-} from "../store";
-import { Player } from "../components/Player/Player";
-import { Timer } from "../components/Timer/Timer";
-import { TaskTracker } from "../components/TaskTracker/TaskTracker";
-import { Spotify } from "../components/Player/Spotify/Player";
-import { BackgroundNav } from "../components/Nav/BackgroundNav";
-import { TimerSettings } from "../components/Timer/Settings";
+} from "@Store";
+import { Player } from "@Components/Player/Player";
+import { Timer } from "@Components/Timer/Timer";
+import { TaskTracker } from "@Components/TaskTracker/TaskTracker";
+import { Spotify } from "@Components/Player/Spotify/Player";
+import { BackgroundNav } from "@Components/Nav/BackgroundNav";
+import { TimerSettings } from "@Components/Timer/Settings";
 import { GoGear } from "react-icons/go";
-import { DWrapper } from "../components/Dragggable/Draggable";
+import { DWrapper } from "@Components/Dragggable/Draggable";
 
-import { SettingsModal } from "../components/Timer/Modal";
-import { CryptoModal } from "../components/Crypto/Modal";
+import { SettingsModal } from "@Components/Timer/Modal";
+import { CryptoModal } from "@Components/Crypto/Modal";
 import { FaEthereum } from "react-icons/fa";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
