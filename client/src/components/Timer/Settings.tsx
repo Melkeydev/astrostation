@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import {
   useShortBreakTimer,
   useLongBreakTimer,
@@ -10,7 +10,9 @@ import {
 import { IoCloseSharp } from "react-icons/io5";
 import { Button } from "../Common/Button";
 import { ToggleOption } from "./ToggleOption";
-export const TimerSettings = () => {
+import toast from "react-hot-toast";
+
+export const TimerSettings = ({ onClose }) => {
   const { setIsSettingsToggled } = useToggleSettings();
   const { shortBreakLength, defaultShortBreakLength, setShortBreak } =
     useShortBreakTimer();
@@ -31,7 +33,8 @@ export const TimerSettings = () => {
     setLongBreak(longBreak);
     setPomodoroLength(pomoCount);
     setMaxPomodoro(maxPomo);
-    setIsSettingsToggled(false);
+    onClose();
+    toast.success("Settings saved");
   }
 
   function handleDefaults() {
@@ -43,10 +46,10 @@ export const TimerSettings = () => {
     defaultPomodoroLength();
     defaultMaxPomodoro();
 
-    setPomoCount(pomodoroLength);
-    setShortBreakState(shortBreakLength);
-    setLongBreakState(longBreakLength);
-    setMaxPomo(maxPomodoro);
+    setPomoCount(60);
+    setShortBreakState(60);
+    setLongBreakState(60);
+    setMaxPomo(3);
   }
 
   function handleLengthChange(
@@ -74,7 +77,7 @@ export const TimerSettings = () => {
         <div className="flex justify-end">
           <IoCloseSharp
             className="text-red-500 cursor-pointer hover:bg-red-200"
-            onClick={() => setIsSettingsToggled(false)}
+            onClick={onClose}
           />
         </div>
         <div className="text-center p-2 rounded">Time (minutes)</div>
@@ -188,7 +191,7 @@ export const TimerSettings = () => {
         <Button
           className="text-gray-800 font-normal hover:text-white dark:text-white"
           variant="cold"
-          onClick={() => onSubmit()}
+          onClick={onSubmit}
         >
           Okay
         </Button>
