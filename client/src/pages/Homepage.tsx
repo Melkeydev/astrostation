@@ -63,7 +63,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   }, []);
 
   return (
-    <div className="h-screen w-70 space-y-1 overflow-hidden">
+    <div className="h-screen w-70 space-y-1">
       <div className="flex justify-end space-x-6">
         <button
           type="button"
