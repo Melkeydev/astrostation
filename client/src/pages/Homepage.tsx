@@ -23,8 +23,6 @@ import { SettingsModal } from "../components/Timer/Modal";
 import { CryptoModal } from "../components/Crypto/Modal";
 import { FaEthereum } from "react-icons/fa";
 
-import { Donations } from "../components/Crypto/Donations";
-
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
@@ -41,28 +39,28 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { spotifyPosX, spotifyPosY, setSpotifyPos } = usePosSpotify();
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
 
-  const [screenSize, getDimension] = useState({
-    dynamicWidth: window.innerWidth,
-  });
+  useEffect(() => {
+    const handler = () => {
+      if (window.innerWidth < 641) {
+        setIsMobile(true);
+      } else {
+        setIsMobile(false);
+      }
+    };
+    window.addEventListener("resize", handler);
 
-  const setDimension = () => {
+    return () => {
+      window.removeEventListener("resize", handler);
+    };
+  }, []);
+
+  useEffect(() => {
     if (window.innerWidth < 641) {
       setIsMobile(true);
     } else {
       setIsMobile(false);
     }
-    getDimension({
-      dynamicWidth: window.innerWidth,
-    });
-  };
-
-  useEffect(() => {
-    window.addEventListener("resize", setDimension);
-
-    return () => {
-      window.removeEventListener("resize", setDimension);
-    };
-  }, [screenSize]);
+  }, []);
 
   return (
     <div className="h-screen w-70 space-y-1 overflow-hidden">
