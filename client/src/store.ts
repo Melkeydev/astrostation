@@ -332,9 +332,9 @@ const songs = [
     link: "https://www.youtube.com/watch?v=aLqc8TdoLJ0",
   },
   {
-    id: "jWIqKujW0NY",
+    id: "6uddGul0oAc",
     artist: "Tokyo Station",
-    link: "https://www.youtube.com/watch?v=jWIqKujW0NY",
+    link: "https://www.youtube.com/watch?v=6uddGul0oAc",
   },
 ];
 
