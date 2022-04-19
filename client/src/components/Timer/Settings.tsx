@@ -10,7 +10,7 @@ import {
 import { IoCloseSharp } from "react-icons/io5";
 import { Button } from "../Common/Button";
 import { ToggleOption } from "./ToggleOption";
-export const TimerSettings = () => {
+export const TimerSettings = ({ onClose }) => {
   const { setIsSettingsToggled } = useToggleSettings();
   const { shortBreakLength, defaultShortBreakLength, setShortBreak } =
     useShortBreakTimer();
@@ -74,7 +74,7 @@ export const TimerSettings = () => {
         <div className="flex justify-end">
           <IoCloseSharp
             className="text-red-500 cursor-pointer hover:bg-red-200"
-            onClick={() => setIsSettingsToggled(false)}
+            onClick={onClose}
           />
         </div>
         <div className="text-center p-2 rounded">Time (minutes)</div>
