@@ -77,6 +77,8 @@ export const Player = () => {
       autoplay: autoplay as number,
     },
   };
+
+  console.log(song.id);
   return (
     <>
       <div className="py-4 px-3 mb-2 w-72 sm:w-96 bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 ">
