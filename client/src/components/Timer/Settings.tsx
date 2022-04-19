@@ -31,7 +31,7 @@ export const TimerSettings = ({ onClose }) => {
     setLongBreak(longBreak);
     setPomodoroLength(pomoCount);
     setMaxPomodoro(maxPomo);
-    setIsSettingsToggled(false);
+    onClose();
   }
 
   function handleDefaults() {
