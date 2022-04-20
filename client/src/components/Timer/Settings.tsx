@@ -37,7 +37,6 @@ export const TimerSettings = ({ onClose }) => {
     setMaxPomodoro(maxPomo);
     onClose();
     // Move this to a separate component
-    //
     if (isDark) {
       toast.success("Settings saved", {
         style: {

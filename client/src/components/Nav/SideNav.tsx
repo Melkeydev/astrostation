@@ -52,28 +52,10 @@ export const SideNav = () => {
     }
   }
 
-  function toggleMusicPlayer() {
-    setIsMusicToggled(!isMusicToggled);
-  }
-
-  function toggleTimerPlayer() {
-    setIsTimerToggled(!isTimerToggled);
-  }
-
-  function toggleTaskTracker() {
-    setIsTasksToggled(!isTasksToggled);
-  }
-
-  function toggleSpotify() {
-    setIsSpotifyToggled(!isSpotifyToggled);
-  }
-
-  function toggleNavBar() {
-    setActive((oldDate) => !oldDate);
-  }
-
-  useEffect(() => {
-    if (isDark) {
+  function toggleDark() {
+    const nextVal = !isDark;
+    toggleDarkMode();
+    if (nextVal) {
       toast("Dark Mode", {
         icon: "🌙",
         style: {
@@ -90,7 +72,74 @@ export const SideNav = () => {
         },
       });
     }
-  }, [isDark]);
+  }
+
+  function toggleMusicPlayer() {
+    const nextVal = !isMusicToggled;
+    setIsMusicToggled(nextVal);
+    if (nextVal) {
+      toast("Music Toggled", {
+        duration: 750,
+        icon: "🎵",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    }
+  }
+  function toggleTimerPlayer() {
+    const nextVal = !isTimerToggled;
+    setIsTimerToggled(nextVal);
+    if (nextVal) {
+      toast("Timer Toggled", {
+        duration: 750,
+        icon: "⏳",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    }
+  }
+
+  function toggleTaskTracker() {
+    const nextVal = !isTasksToggled;
+    setIsTasksToggled(nextVal);
+    if (nextVal) {
+      toast("Timer Toggled", {
+        duration: 750,
+        icon: "📓",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    }
+  }
+
+  function toggleSpotify() {
+    const nextVal = !isSpotifyToggled;
+    setIsSpotifyToggled(nextVal);
+    if (nextVal) {
+      toast("Spotify Toggled", {
+        duration: 750,
+        icon: "🎧",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    }
+  }
+
+  function toggleNavBar() {
+    setActive((oldDate) => !oldDate);
+  }
 
   return (
     <>
@@ -122,7 +171,7 @@ export const SideNav = () => {
               <NavItem onClick={toggleDefaultPositions}>
                 <VscDebugRestartFrame className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleDarkMode}>
+              <NavItem onClick={toggleDark}>
                 {isDark ? (
                   <MdWbSunny className="h-6 w-6" />
                 ) : (
