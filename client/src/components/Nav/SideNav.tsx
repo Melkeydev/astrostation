@@ -16,7 +16,7 @@ import {
   usePosSpotify,
   usePosTimer,
 } from "../../store";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import toast from "react-hot-toast";
 
 export const SideNav = () => {
