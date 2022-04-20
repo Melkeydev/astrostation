@@ -40,16 +40,18 @@ export const TimerSettings = ({ onClose }) => {
   function handleDefaults() {
     if (hasStarted) return;
 
-    alert("Are you sure you want to reset to defaults?");
-    defaultShortBreakLength();
-    defaultLongBreakLength();
-    defaultPomodoroLength();
-    defaultMaxPomodoro();
+    var answer = window.confirm("Are you sure you want to reset to defaults?");
+    if (answer) {
+      defaultShortBreakLength();
+      defaultLongBreakLength();
+      defaultPomodoroLength();
+      defaultMaxPomodoro();
 
-    setPomoCount(60);
-    setShortBreakState(60);
-    setLongBreakState(60);
-    setMaxPomo(3);
+      setPomoCount(60);
+      setShortBreakState(60);
+      setLongBreakState(60);
+      setMaxPomo(3);
+    }
   }
 
   function handleLengthChange(
