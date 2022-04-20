@@ -74,16 +74,16 @@ export const SideNav = () => {
                 active ? "" : "hidden"
               } w-full sm:flex sm:flex-grow sm:w-auto sm:flex-col`}
             >
-              <NavItem onClick={toggleMusicPlayer}>
+              <NavItem onClick={toggleMusicPlayer} toggled={isMusicToggled}>
                 <IoMusicalNotesOutline className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleSpotify}>
+              <NavItem onClick={toggleSpotify} toggled={isSpotifyToggled}>
                 <FaSpotify className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleTaskTracker}>
+              <NavItem onClick={toggleTaskTracker} toggled={isTasksToggled}>
                 <CgNotes className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleTimerPlayer}>
+              <NavItem onClick={toggleTimerPlayer} toggled={isTimerToggled}>
                 <MdOutlineTimer className="h-6 w-6" />
               </NavItem>
               <NavItem onClick={toggleDefaultPositions}>
