@@ -11,13 +11,14 @@ import {
   useTimer,
   useBreakStarted,
 } from "../../store";
+import toast, { ToastBar, Toaster } from "react-hot-toast";
 
 export const Timer = () => {
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();
   const { longBreakLength, setLongBreak } = useLongBreakTimer();
   const { pomodoroLength, setPomodoroLength } = usePomodoroTimer();
   const { hasStarted, setHasStarted } = useHasStarted();
-  const { setBreakStarted } = useBreakStarted();
+  const { breakStarted, setBreakStarted } = useBreakStarted();
   const [breakLength, setBreakLength] = useState(shortBreakLength);
   const [timer, setTimer] = useState(60);
   const { setTimerQueue } = useTimer();
@@ -44,6 +45,34 @@ export const Timer = () => {
         setSessionType("Break");
         setTimer(breakLength);
         setBreakStarted(true);
+        toast("Break Mode", {
+          icon: "😇",
+          duration: breakLength * 1000,
+          style: {
+            borderRadius: "10px",
+            padding: "16px",
+            background: "#333",
+            color: "#fff",
+          },
+        });
+        toast(
+          (t) => (
+            <span>
+              Custom and <b>bold</b>
+              <button onClick={() => toast.dismiss(t.id)}>Dismiss</button>
+            </span>
+          ),
+          {
+            duration: breakLength * 1000,
+            icon: "😇",
+            style: {
+              borderRadius: "10px",
+              padding: "16px",
+              background: "#333",
+              color: "#fff",
+            },
+          }
+        );
       } else {
         setSessionType("Session");
         setTimer(pomodoroLength);
@@ -136,7 +165,11 @@ export const Timer = () => {
   }
 
   return (
-    <div className="py-2 px-1 mb-2 max-w-sm w-72 sm:w-96 bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700">
+    <div
+      className={`${
+        breakStarted && "shadow-lg bg-slate-200"
+      } shadow-lg py-2 px-1 mb-2 max-w-sm w-72 sm:w-96 bg-white text-gray-800 rounded-lg border border-gray-200 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700`}
+    >
       <div className="text-center">
         <div className="text-center p-2 rounded">
           <div className="flex justify-end">
