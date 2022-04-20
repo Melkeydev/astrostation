@@ -11,7 +11,7 @@ import {
   useTimer,
   useBreakStarted,
 } from "../../store";
-import toast, { ToastBar, Toaster } from "react-hot-toast";
+import toast from "react-hot-toast";
 
 export const Timer = () => {
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();
@@ -45,22 +45,15 @@ export const Timer = () => {
         setSessionType("Break");
         setTimer(breakLength);
         setBreakStarted(true);
-        toast("Break Mode", {
-          icon: "😇",
-          duration: breakLength * 1000,
-          style: {
-            borderRadius: "10px",
-            padding: "16px",
-            background: "#333",
-            color: "#fff",
-          },
-        });
         toast(
           (t) => (
-            <span>
-              Custom and <b>bold</b>
-              <button onClick={() => toast.dismiss(t.id)}>Dismiss</button>
-            </span>
+            <div className="flex justify-between items-center">
+              <div>Break Mode</div>
+              <IoCloseSharp
+                className="text-red-500 cursor-pointer hover:bg-red-200"
+                onClick={() => toast.dismiss(t.id)}
+              />
+            </div>
           ),
           {
             duration: breakLength * 1000,
@@ -78,6 +71,28 @@ export const Timer = () => {
         setTimer(pomodoroLength);
         setBreakStarted(false);
         setTimerQueue(pomodoroLength);
+        toast.dismiss();
+        toast(
+          (t) => (
+            <div className="flex justify-between items-center">
+              <div>Work Mode</div>
+              <IoCloseSharp
+                className="text-red-500 cursor-pointer hover:bg-red-200"
+                onClick={() => toast.dismiss(t.id)}
+              />
+            </div>
+          ),
+          {
+            duration: breakLength * 1000,
+            icon: "📚",
+            style: {
+              borderRadius: "10px",
+              padding: "16px",
+              background: "#333",
+              color: "#fff",
+            },
+          }
+        );
       }
     }
   }, [timer, sessionType]);
