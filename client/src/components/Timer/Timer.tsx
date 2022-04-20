@@ -170,28 +170,28 @@ export const Timer = () => {
 
           {/* Timer */}
           <div className="rounded p-4 inline-block">
-            <p id="timer-label">{sessionType}</p>
-            <div className="text-7xl sm:text-9xl font-bold">
+            <p id="timer-label tabular-nums">{sessionType}</p>
+            <div className="text-7xl sm:text-9xl font-bold tabular-nums">
               {/*// @ts-ignore */}
               {formatDisplayTime(timerMinutes)}:{/*// @ts-ignore */}
               {formatDisplayTime(timerSeconds)}
             </div>
           </div>
 
-          <div className="timer-control">
+          <div className="timer-control tabular-nums">
             <Button
-              className="text-gray-800 font-normal hover:text-white dark:text-white"
+              className="text-gray-800 font-normal hover:text-white dark:text-white tabular-nums"
               onClick={() => toggleCountDown()}
               variant="cold"
             >
-              {hasStarted ? "Stop" : "Start"}
+              <p className="tabular-nums">{hasStarted ? "Stop" : "Start"}</p>
             </Button>
             <Button
-              className="text-gray-800 font-normal hover:text-white dark:text-white ml-4"
+              className="text-gray-800 font-normal hover:text-white dark:text-white ml-4 tabular-nums"
               variant="cold"
               onClick={handleResetTimer}
             >
-              Reset
+              <p className="tabular-nums">Reset</p>
             </Button>
           </div>
         </div>

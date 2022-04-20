@@ -15,7 +15,6 @@ import { Timer } from "@Components/Timer/Timer";
 import { TaskTracker } from "@Components/TaskTracker/TaskTracker";
 import { Spotify } from "@Components/Player/Spotify/Player";
 import { BackgroundNav } from "@Components/Nav/BackgroundNav";
-import { TimerSettings } from "@Components/Timer/Settings";
 import { GoGear } from "react-icons/go";
 import { DWrapper } from "@Components/Dragggable/Draggable";
 
@@ -28,7 +27,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isTimerToggled } = useToggleTimer();
   const { isTasksToggled } = useToggleTasks();
   const { isSpotifyToggled } = useSpotifyMusic();
-  const { isSettingsToggled } = useToggleSettings();
   const [isMobile, setIsMobile] = useState(false);
   const [isSettingsModal, setSettingsModal] = useState(false);
   const [isCryptoModal, setCryptoModal] = useState(false);
@@ -104,9 +102,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           </div>
           <div className={`${isSpotifyToggled ? "block" : "hidden"}`}>
             <Spotify />
-          </div>
-          <div className={`${isSettingsToggled ? "block" : "hidden"}`}>
-            <TimerSettings />
           </div>
           <div className={`${isTimerToggled ? "block" : "hidden"}`}>
             <Timer />
