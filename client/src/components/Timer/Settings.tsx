@@ -64,9 +64,9 @@ export const TimerSettings = ({ onClose }) => {
       defaultPomodoroLength();
       defaultMaxPomodoro();
 
-      setPomoCount(60);
-      setShortBreakState(60);
-      setLongBreakState(60);
+      setPomoCount(1500);
+      setShortBreakState(300);
+      setLongBreakState(900);
       setMaxPomo(3);
     }
   }

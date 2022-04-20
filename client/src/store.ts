@@ -137,8 +137,8 @@ interface ShortBreakTime {
 export const useShortBreakTimer = create<ShortBreakTime>(
   persist(
     (set, _) => ({
-      shortBreakLength: 60,
-      defaultShortBreakLength: () => set(() => ({ shortBreakLength: 60 })),
+      shortBreakLength: 300,
+      defaultShortBreakLength: () => set(() => ({ shortBreakLength: 300 })),
       setShortBreak: (value) => set({ shortBreakLength: value }),
     }),
     { name: "short_break_timer_length" }
@@ -159,8 +159,8 @@ interface LongBreakTime {
 export const useLongBreakTimer = create<LongBreakTime>(
   persist(
     (set, _) => ({
-      longBreakLength: 60,
-      defaultLongBreakLength: () => set(() => ({ longBreakLength: 60 })),
+      longBreakLength: 900,
+      defaultLongBreakLength: () => set(() => ({ longBreakLength: 900 })),
       setLongBreak: (value) => set({ longBreakLength: value }),
     }),
     { name: "long_break_timer_length" }
@@ -181,8 +181,8 @@ interface PomodoroTime {
 export const usePomodoroTimer = create<PomodoroTime>(
   persist(
     (set, _) => ({
-      pomodoroLength: 60,
-      defaultPomodoroLength: () => set(() => ({ pomodoroLength: 60 })),
+      pomodoroLength: 1500,
+      defaultPomodoroLength: () => set(() => ({ pomodoroLength: 1500 })),
       setPomodoroLength: (value) => set({ pomodoroLength: value }),
     }),
     { name: "pomodoro_timer_length" }
