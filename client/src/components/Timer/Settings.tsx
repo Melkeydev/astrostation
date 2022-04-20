@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
+  useDarkToggleStore,
   useShortBreakTimer,
   useLongBreakTimer,
   usePomodoroTimer,
@@ -13,6 +14,7 @@ import { ToggleOption } from "./ToggleOption";
 import toast from "react-hot-toast";
 
 export const TimerSettings = ({ onClose }) => {
+  const { isDark } = useDarkToggleStore();
   const { setIsSettingsToggled } = useToggleSettings();
   const { shortBreakLength, defaultShortBreakLength, setShortBreak } =
     useShortBreakTimer();
@@ -34,7 +36,23 @@ export const TimerSettings = ({ onClose }) => {
     setPomodoroLength(pomoCount);
     setMaxPomodoro(maxPomo);
     onClose();
-    toast.success("Settings saved");
+    // Move this to a separate component
+    //
+    if (isDark) {
+      toast.success("Settings saved", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    } else {
+      toast.success("Settings saved", {
+        style: {
+          borderRadius: "10px",
+        },
+      });
+    }
   }
 
   function handleDefaults() {

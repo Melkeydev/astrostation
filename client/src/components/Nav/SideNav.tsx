@@ -16,7 +16,8 @@ import {
   usePosSpotify,
   usePosTimer,
 } from "../../store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import toast from "react-hot-toast";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
@@ -40,6 +41,13 @@ export const SideNav = () => {
       setMusicPosDefault();
       setSpotifyPosDefault();
       setTimerPosDefault();
+      toast("Positions reset", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
       window.location.reload();
     }
   }
@@ -63,6 +71,26 @@ export const SideNav = () => {
   function toggleNavBar() {
     setActive((oldDate) => !oldDate);
   }
+
+  useEffect(() => {
+    if (isDark) {
+      toast("Dark Mode", {
+        icon: "🌙",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    } else {
+      toast("Light Mode", {
+        icon: "☀️",
+        style: {
+          borderRadius: "10px",
+        },
+      });
+    }
+  }, [isDark]);
 
   return (
     <>
