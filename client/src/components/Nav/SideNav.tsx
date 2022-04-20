@@ -32,11 +32,16 @@ export const SideNav = () => {
   const { setTimerPosDefault } = usePosTimer();
 
   function toggleDefaultPositions() {
-    setTaskPosDefault();
-    setMusicPosDefault();
-    setSpotifyPosDefault();
-    setTimerPosDefault();
-    window.location.reload();
+    var answer = window.confirm(
+      "This will reset tiles to default positon - are you sure?"
+    );
+    if (answer) {
+      setTaskPosDefault();
+      setMusicPosDefault();
+      setSpotifyPosDefault();
+      setTimerPosDefault();
+      window.location.reload();
+    }
   }
 
   function toggleMusicPlayer() {
@@ -55,9 +60,9 @@ export const SideNav = () => {
     setIsSpotifyToggled(!isSpotifyToggled);
   }
 
-  const toggleNavBar = () => {
+  function toggleNavBar() {
     setActive((oldDate) => !oldDate);
-  };
+  }
 
   return (
     <>
