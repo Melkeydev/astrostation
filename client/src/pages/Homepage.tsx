@@ -4,11 +4,12 @@ import {
   useToggleTimer,
   useToggleTasks,
   useSpotifyMusic,
-  useToggleSettings,
   usePosTask,
   usePosMusic,
   usePosSpotify,
   usePosTimer,
+  useStickyNote,
+  useToggleStickyNotes,
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -21,12 +22,23 @@ import { DWrapper } from "@Components/Dragggable/Draggable";
 import { SettingsModal } from "@Components/Timer/Modal";
 import { CryptoModal } from "@Components/Crypto/Modal";
 import { FaEthereum } from "react-icons/fa";
+import { Sticky } from "@Components/Sticky/Sticky";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
   const { isTasksToggled } = useToggleTasks();
   const { isSpotifyToggled } = useSpotifyMusic();
+  const { stickyNotes } = useStickyNote();
+  const {
+    isStickyNotesToggled,
+    setIsStickyNotesToggled,
+    stickyNotesPosX,
+    stickyNotesPosY,
+    stickyNotesAddPosX,
+    stickyNotesAddPosY,
+    setStickyNotesPos,
+  } = useToggleStickyNotes();
   const [isMobile, setIsMobile] = useState(false);
   const [isSettingsModal, setSettingsModal] = useState(false);
   const [isCryptoModal, setCryptoModal] = useState(false);
@@ -112,6 +124,18 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         </div>
       ) : (
         <>
+          {stickyNotes.map((stickyNote) => {
+            return (
+              <DWrapper
+                toggleHook={isStickyNotesToggled}
+                defaultX={stickyNotesPosX}
+                defaultY={stickyNotesPosY}
+                setPosition={setStickyNotesPos}
+              >
+                <Sticky />
+              </DWrapper>
+            );
+          })}
           <DWrapper
             toggleHook={isTimerToggled}
             defaultX={timerPosX}

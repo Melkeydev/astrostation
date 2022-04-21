@@ -20,6 +20,7 @@
     "react-youtube": "^7.13.1",
     "sass": "^1.49.8",
     "uuid": "^8.3.2",
+    "uuidv4": "^6.2.13",
     "zustand": "^3.7.0"
   },
   "devDependencies": {

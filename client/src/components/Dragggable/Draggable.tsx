@@ -1,7 +1,9 @@
 import "./Draggable.scss";
 import { useState, useEffect, useRef } from "react";
 import Draggable from "react-draggable";
+import { FC } from "react";
 let int = 0;
+
 export const DWrapper = ({
   children,
   toggleHook,

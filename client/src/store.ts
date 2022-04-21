@@ -190,6 +190,88 @@ export const usePomodoroTimer = create<PomodoroTime>(
 );
 
 /**
+ * Sticky Note Store
+ * ---
+ * Handle the sticky notes created in the tasks section
+ */
+
+type IToggleStickyNotes = {
+  isStickyNotesToggled: boolean;
+  stickyNotesPosX: number;
+  stickyNotesPosY: number;
+  stickyNotesAddPosX: number;
+  stickyNotesAddPosY: number;
+  setStickyNotesPos: (X: number, Y: number) => void;
+  setIsStickyNotesToggled: (isStickyNotesToggled: boolean) => void;
+};
+
+export const useToggleStickyNotes = create<IToggleStickyNotes>(
+  persist(
+    (set, _) => ({
+      isStickyNotesToggled: true,
+      stickyNotesPosX: 165,
+      stickyNotesPosY: 0,
+      stickyNotesAddPosX: 165,
+      stickyNotesAddPosY: 0,
+      setIsStickyNotesToggled: (isStickyNotesToggled) =>
+        set({ isStickyNotesToggled }),
+      setStickyNotesPos: (X, Y) =>
+        set({ stickyNotesPosX: X, stickyNotesPosY: Y }),
+    }),
+    { name: "show_sticky_notes_section" }
+  )
+);
+
+interface StickyNote {
+  id: number;
+  text: string;
+}
+
+interface StickyNoteState {
+  stickyNotes: StickyNote[];
+  addStickyNote: (text: string) => void;
+  editNote: (id: number, newText: string) => void;
+  removeNote: (id: number) => void;
+}
+
+export const useStickyNote = create<StickyNoteState>(
+  persist(
+    (set, _) => ({
+      stickyNotes: [],
+      addStickyNote: (text: string) => {
+        set((state) => ({
+          stickyNotes: [
+            ...state.stickyNotes,
+            {
+              id: Date.now() + state.stickyNotes.length,
+              text: text,
+            } as StickyNote,
+          ],
+        }));
+      },
+      editNote: (id, newText) => {
+        set((state) => ({
+          stickyNotes: state.stickyNotes.map((note) =>
+            note.id === id
+              ? ({
+                  ...note,
+                  task: newText,
+                } as StickyNote)
+              : note
+          ),
+        }));
+      },
+      removeNote: (id) => {
+        set((state) => ({
+          stickyNotes: state.stickyNotes.filter((note) => note.id !== id),
+        }));
+      },
+    }),
+    { name: "user_sticky_notes" }
+  )
+);
+
+/**
  * Task Store
  * ---
  * Handle the tasks created in the tasks section
