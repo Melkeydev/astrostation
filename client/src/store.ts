@@ -197,11 +197,6 @@ export const usePomodoroTimer = create<PomodoroTime>(
 
 type IToggleStickyNotes = {
   isStickyNotesToggled: boolean;
-  stickyNotesPosX: number;
-  stickyNotesPosY: number;
-  stickyNotesAddPosX: number;
-  stickyNotesAddPosY: number;
-  setStickyNotesPos: (X: number, Y: number) => void;
   setIsStickyNotesToggled: (isStickyNotesToggled: boolean) => void;
 };
 
@@ -209,14 +204,8 @@ export const useToggleStickyNotes = create<IToggleStickyNotes>(
   persist(
     (set, _) => ({
       isStickyNotesToggled: true,
-      stickyNotesPosX: 165,
-      stickyNotesPosY: 0,
-      stickyNotesAddPosX: 165,
-      stickyNotesAddPosY: 0,
       setIsStickyNotesToggled: (isStickyNotesToggled) =>
         set({ isStickyNotesToggled }),
-      setStickyNotesPos: (X, Y) =>
-        set({ stickyNotesPosX: X, stickyNotesPosY: Y }),
     }),
     { name: "show_sticky_notes_section" }
   )
@@ -225,6 +214,8 @@ export const useToggleStickyNotes = create<IToggleStickyNotes>(
 interface StickyNote {
   id: number;
   text: string;
+  stickyNotesPosX: number;
+  stickyNotesPosY: number;
 }
 
 interface StickyNoteState {
@@ -232,6 +223,7 @@ interface StickyNoteState {
   addStickyNote: (text: string) => void;
   editNote: (id: number, newText: string) => void;
   removeNote: (id: number) => void;
+  setStickyNotesPos: (id: number, X: number, Y: number) => void;
 }
 
 export const useStickyNote = create<StickyNoteState>(
@@ -245,6 +237,8 @@ export const useStickyNote = create<StickyNoteState>(
             {
               id: Date.now() + state.stickyNotes.length,
               text: text,
+              stickyNotesPosX: 165,
+              stickyNotesPosY: 0,
             } as StickyNote,
           ],
         }));
@@ -264,6 +258,19 @@ export const useStickyNote = create<StickyNoteState>(
       removeNote: (id) => {
         set((state) => ({
           stickyNotes: state.stickyNotes.filter((note) => note.id !== id),
+        }));
+      },
+      setStickyNotesPos: (id, X, Y) => {
+        set((state) => ({
+          stickyNotes: state.stickyNotes.map((note) =>
+            note.id === id
+              ? ({
+                  ...note,
+                  stickyNotesPosX: X,
+                  stickyNotesPosY: Y,
+                } as StickyNote)
+              : note
+          ),
         }));
       },
     }),

@@ -40,6 +40,8 @@ export const Timer = () => {
       setPomodoroCounter();
       setTimerQueue(0);
       // @ts-ignore
+      audioRef.current.volume = 0;
+      // @ts-ignore
       audioRef.current.play();
       if (sessionType === "Session") {
         setSessionType("Break");

@@ -1,7 +1,7 @@
 import "./Draggable.scss";
 import { useState, useEffect, useRef } from "react";
 import Draggable from "react-draggable";
-import { FC } from "react";
+import { useStickyNote } from "@Store";
 let int = 0;
 
 export const DWrapper = ({
@@ -10,21 +10,31 @@ export const DWrapper = ({
   defaultX,
   defaultY,
   setPosition,
+  isSticky,
+  stickyID,
+}: {
+  children: any;
+  toggleHook: boolean;
+  defaultX: number;
+  defaultY: number;
+  setPosition: any;
+  isSticky: boolean;
+  stickyID?: any;
 }) => {
+  const { setStickyNotesPos } = useStickyNote();
   const [z, setZ] = useState(0);
   const ref = useRef();
 
-  const handleDrag = (e, ui) => {
-    let deltaX = defaultX + ui.deltaX;
-    let deltaY = defaultY + ui.deltaY;
-  };
-
-  function trackPosition(data) {
+  function trackPosition() {
     setZ(++int);
   }
 
-  function changePosition(data) {
-    setPosition(data.x, data.y);
+  function changePosition(data: any) {
+    if (isSticky) {
+      setStickyNotesPos(stickyID, data.x, data.y);
+    } else {
+      setPosition(data.x, data.y);
+    }
   }
 
   const triggerMouseEvent = (element, eventType) => {
@@ -51,7 +61,7 @@ export const DWrapper = ({
     <Draggable
       bounds="parent"
       defaultPosition={{ x: defaultX, y: defaultY }}
-      onDrag={(e, data) => trackPosition(data)}
+      onDrag={(e, data) => trackPosition()}
       onStop={(e, data) => changePosition(data)}
     >
       <div

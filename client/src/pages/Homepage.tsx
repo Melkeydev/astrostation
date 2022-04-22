@@ -29,16 +29,10 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isTimerToggled } = useToggleTimer();
   const { isTasksToggled } = useToggleTasks();
   const { isSpotifyToggled } = useSpotifyMusic();
-  const { stickyNotes } = useStickyNote();
-  const {
-    isStickyNotesToggled,
-    setIsStickyNotesToggled,
-    stickyNotesPosX,
-    stickyNotesPosY,
-    stickyNotesAddPosX,
-    stickyNotesAddPosY,
-    setStickyNotesPos,
-  } = useToggleStickyNotes();
+  const { stickyNotes, stickyNotesPosX, stickyNotesPosY, setStickyNotesPos } =
+    useStickyNote();
+  const { isStickyNotesToggled, setIsStickyNotesToggled } =
+    useToggleStickyNotes();
   const [isMobile, setIsMobile] = useState(false);
   const [isSettingsModal, setSettingsModal] = useState(false);
   const [isCryptoModal, setCryptoModal] = useState(false);
@@ -128,11 +122,13 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             return (
               <DWrapper
                 toggleHook={isStickyNotesToggled}
-                defaultX={stickyNotesPosX}
-                defaultY={stickyNotesPosY}
+                defaultX={stickyNote.stickyNotesPosX}
+                defaultY={stickyNote.stickyNotesPosY}
                 setPosition={setStickyNotesPos}
+                isSticky={true}
+                stickyID={stickyNote.id}
               >
-                <Sticky />
+                <Sticky id={stickyNote.id} />
               </DWrapper>
             );
           })}
@@ -141,6 +137,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultX={timerPosX}
             defaultY={timerPosY}
             setPosition={setTimerPos}
+            isSticky={false}
           >
             <Timer />
           </DWrapper>
@@ -149,6 +146,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultX={taskPosX}
             defaultY={taskPosY}
             setPosition={setTaskPos}
+            isSticky={false}
           >
             <TaskTracker />
           </DWrapper>
@@ -157,6 +155,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultX={musicPosX}
             defaultY={musicPosY}
             setPosition={setMusicPos}
+            isSticky={false}
           >
             <Player />
           </DWrapper>
@@ -165,6 +164,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultX={spotifyPosX}
             defaultY={spotifyPosY}
             setPosition={setSpotifyPos}
+            isSticky={false}
           >
             <Spotify />
           </DWrapper>
