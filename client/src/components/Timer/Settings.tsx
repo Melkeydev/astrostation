@@ -20,7 +20,8 @@ export const TimerSettings = ({ onClose }) => {
     useLongBreakTimer();
   const { pomodoroLength, defaultPomodoroLength, setPomodoroLength } =
     usePomodoroTimer();
-  const { maxPomodoro, defaultMaxPomodoro, setMaxPomodoro } = useMaxPomodoro();
+  const { maxPomodoro, defaultMaxPomodoro, setMaxPomodoro } = 
+    useMaxPomodoro();
   const { hasStarted } = useHasStarted();
 
   const [pomoCount, setPomoCount] = useState(pomodoroLength);
@@ -66,8 +67,10 @@ export const TimerSettings = ({ onClose }) => {
 
     if (e.target.id === decrement && propertyLength > minLength) {
       setStateFunc(propertyLength - step);
+      e.target.nextSibling.value=(Math.floor((propertyLength-step)/60));
     } else if (e.target.id === increment && propertyLength < maxLength) {
       setStateFunc(propertyLength + step);
+      e.target.previousSibling.value=(Math.floor((propertyLength+step)/60));
     }
   }
 
@@ -81,7 +84,7 @@ export const TimerSettings = ({ onClose }) => {
           />
         </div>
         <div className="text-center p-2 rounded">Time (minutes)</div>
-        <div className="flex justify-between items-center">
+        <div className="flex justify-between items-center text-center gap-6">
           <ToggleOption
             title="Pomodoro"
             decrement="session-decrement"
@@ -98,7 +101,13 @@ export const TimerSettings = ({ onClose }) => {
                 60
               )
             }
+            onChange={(e) => {
+                if (hasStarted) {e.target.readOnly=true; return;} 
+                setPomoCount(e.target.value*60);
+              }
+            }
             propertyLength={Math.floor(pomoCount / 60)}
+            hasStarted={hasStarted}
           />
           <ToggleOption
             title="Short Break"
@@ -116,7 +125,13 @@ export const TimerSettings = ({ onClose }) => {
                 60
               )
             }
+            onChange={(e) => {
+                if (hasStarted) {e.target.readOnly=true; return;}
+                setShortBreakState(e.target.value*60);
+              }
+            }
             propertyLength={Math.floor(shortBreak / 60)}
+            hasStarted={hasStarted}
           />
           <ToggleOption
             title="Long Break"
@@ -134,50 +149,43 @@ export const TimerSettings = ({ onClose }) => {
                 60
               )
             }
+            onChange={(e) => {
+                if (hasStarted) {e.target.readOnly=true; return;}
+                setLongBreakState(e.target.value*60);
+              }
+            }
             propertyLength={Math.floor(longBreak / 60)}
+            hasStarted={hasStarted}
           />
         </div>
       </div>
       <div className="flex justify-between border-b-2 border-gray-100 px-2 pb-2 items-center">
-        <div>Max Pomodoro's</div>
+        <div>Max Pomodoros</div>
         <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-200">
-          <div className="flex p-2 space-x-5">
-            <button
-              id="pomodoro-decrement"
-              onClick={(e) =>
-                handleLengthChange(
-                  e,
-                  "pomodoro-decrement",
-                  "pomodoro-increment",
-                  1,
-                  10,
-                  maxPomo,
-                  setMaxPomo,
-                  1
-                )
+          <ToggleOption
+            title=""
+            decrement="pomodoro-decrement"
+            increment="pomodoro-increment"
+            onClick={(e) =>
+              handleLengthChange(
+                e,
+                "pomodoro-decrement",
+                "pomodoro-increment",
+                60,
+                3600,
+                maxPomo,
+                setMaxPomo,
+                60
+              )
+            }
+            onChange={(e) => {
+                if (hasStarted) {e.target.readOnly=true; return;} 
+                setMaxPomo(e.target.value*60);
               }
-            >
-              &lt;
-            </button>
-            <div>{Math.floor(maxPomo)}</div>
-            <button
-              id="pomodoro-increment"
-              onClick={(e) =>
-                handleLengthChange(
-                  e,
-                  "pomodoro-decrement",
-                  "pomodoro-increment",
-                  1,
-                  10,
-                  maxPomo,
-                  setMaxPomo,
-                  1
-                )
-              }
-            >
-              &gt;
-            </button>
-          </div>
+            }
+            propertyLength={Math.floor(maxPomo / 60)}
+            hasStarted={hasStarted}
+          />
         </div>
       </div>
       <div className="flex justify-between">

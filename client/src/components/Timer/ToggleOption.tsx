@@ -3,13 +3,17 @@ export const ToggleOption = ({
   decrement,
   increment,
   onClick,
+  onChange,
   propertyLength,
+  hasStarted
 }: {
   title: string;
   decrement: string;
   increment: string;
   onClick: any;
+  onChange: any;
   propertyLength: number;
+  hasStarted: boolean;
 }) => {
   return (
     <div>
@@ -19,7 +23,7 @@ export const ToggleOption = ({
           <button id={decrement} onClick={onClick}>
             &lt;
           </button>
-          {propertyLength}
+          <input className="text-center dark:bg-gray-700 w-9/12" defaultValue={propertyLength} onChange={onChange} readOnly={hasStarted}/>
           <button id={increment} onClick={onClick}>
             &gt;
           </button>
