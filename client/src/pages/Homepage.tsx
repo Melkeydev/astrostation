@@ -128,7 +128,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
                 isSticky={true}
                 stickyID={stickyNote.id}
               >
-                <Sticky id={stickyNote.id} />
+                <Sticky id={stickyNote.id} text={stickyNote.text} />
               </DWrapper>
             );
           })}
