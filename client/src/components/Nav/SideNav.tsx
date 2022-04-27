@@ -2,8 +2,12 @@ import { NavItem } from "./NavItems";
 import { IoMusicalNotesOutline } from "react-icons/io5";
 import { IoMenu } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
-import { MdOutlineTimer, MdWbSunny, MdDarkMode } from "react-icons/md";
-import { BiNote } from "react-icons/bi";
+import {
+  MdOutlineTimer,
+  MdWbSunny,
+  MdDarkMode,
+  MdOutlineNoteAdd,
+} from "react-icons/md";
 import { VscDebugRestartFrame } from "react-icons/vsc";
 import { FaSpotify } from "react-icons/fa";
 import {
@@ -17,11 +21,9 @@ import {
   usePosSpotify,
   usePosTimer,
   useStickyNote,
-  useToggleStickyNotes,
 } from "../../store";
 import { useState } from "react";
 import toast from "react-hot-toast";
-import { AddTask } from "../TaskTracker/AddTask";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
@@ -35,10 +37,7 @@ export const SideNav = () => {
   const { setMusicPosDefault } = usePosMusic();
   const { setSpotifyPosDefault } = usePosSpotify();
   const { setTimerPosDefault } = usePosTimer();
-
-  const { addStickyNote, stickyNotes } = useStickyNote();
-  const { isStickyNotesToggled, setIsStickyNotesToggled } =
-    useToggleStickyNotes();
+  const { addStickyNote } = useStickyNote();
 
   function toggleDefaultPositions() {
     var answer = window.confirm(
@@ -145,22 +144,6 @@ export const SideNav = () => {
     }
   }
 
-  function toggleStickyNotes() {
-    const nextVal = !isStickyNotesToggled;
-    setIsStickyNotesToggled(nextVal);
-    if (nextVal) {
-      toast("Sticky Notes Toggled", {
-        duration: 750,
-        icon: "🎧",
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-    }
-  }
-
   function addNewStickyNote() {
     addStickyNote("");
   }
@@ -196,11 +179,8 @@ export const SideNav = () => {
               <NavItem onClick={toggleTimerPlayer} toggled={isTimerToggled}>
                 <MdOutlineTimer className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleStickyNotes}>
-                <BiNote className="h-6 w-6" />
-              </NavItem>
               <NavItem onClick={addNewStickyNote}>
-                <BiNote className="h-6 w-6" />
+                <MdOutlineNoteAdd className="h-6 w-6" />
               </NavItem>
               <NavItem onClick={toggleDefaultPositions}>
                 <VscDebugRestartFrame className="h-6 w-6" />

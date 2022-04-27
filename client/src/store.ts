@@ -195,22 +195,6 @@ export const usePomodoroTimer = create<PomodoroTime>(
  * Handle the sticky notes created in the tasks section
  */
 
-type IToggleStickyNotes = {
-  isStickyNotesToggled: boolean;
-  setIsStickyNotesToggled: (isStickyNotesToggled: boolean) => void;
-};
-
-export const useToggleStickyNotes = create<IToggleStickyNotes>(
-  persist(
-    (set, _) => ({
-      isStickyNotesToggled: true,
-      setIsStickyNotesToggled: (isStickyNotesToggled) =>
-        set({ isStickyNotesToggled }),
-    }),
-    { name: "show_sticky_notes_section" }
-  )
-);
-
 interface StickyNote {
   id: number;
   text: string;
@@ -249,7 +233,7 @@ export const useStickyNote = create<StickyNoteState>(
             note.id === id
               ? ({
                   ...note,
-                  task: newText,
+                  text: newText,
                 } as StickyNote)
               : note
           ),

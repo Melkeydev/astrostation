@@ -9,7 +9,6 @@ import {
   usePosSpotify,
   usePosTimer,
   useStickyNote,
-  useToggleStickyNotes,
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -29,10 +28,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isTimerToggled } = useToggleTimer();
   const { isTasksToggled } = useToggleTasks();
   const { isSpotifyToggled } = useSpotifyMusic();
-  const { stickyNotes, stickyNotesPosX, stickyNotesPosY, setStickyNotesPos } =
-    useStickyNote();
-  const { isStickyNotesToggled, setIsStickyNotesToggled } =
-    useToggleStickyNotes();
+  const { stickyNotes, setStickyNotesPos } = useStickyNote();
   const [isMobile, setIsMobile] = useState(false);
   const [isSettingsModal, setSettingsModal] = useState(false);
   const [isCryptoModal, setCryptoModal] = useState(false);
@@ -121,7 +117,8 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           {stickyNotes.map((stickyNote) => {
             return (
               <DWrapper
-                toggleHook={isStickyNotesToggled}
+                key={stickyNote.id}
+                toggleHook={true}
                 defaultX={stickyNote.stickyNotesPosX}
                 defaultY={stickyNote.stickyNotesPosY}
                 setPosition={setStickyNotesPos}
