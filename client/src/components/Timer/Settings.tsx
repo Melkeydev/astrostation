@@ -161,7 +161,7 @@ export const TimerSettings = ({ onClose }) => {
       </div>
       <div className="flex justify-between border-b-2 border-gray-100 px-2 pb-2 items-center">
         <div>Max Pomodoros</div>
-        <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-200">
+        <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-200 max-w-[103.33px]">
           <ToggleOption
             title=""
             decrement="pomodoro-decrement"
