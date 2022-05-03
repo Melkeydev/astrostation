@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { AiOutlineReload } from "react-icons/ai";
 import { useSpotifyMusic } from "@Store";
+import { Tooltip } from '@mui/material';
 export const Spotify = () => {
   const { setIsSpotifyToggled } = useSpotifyMusic();
   const [text, setText] = useState("");
@@ -23,13 +24,15 @@ export const Spotify = () => {
 
   return (
     <div className="py-2 mb-2 w-72 sm:w-96 max-w-sm text-gray-800 shadow-md rounded-lg dark:text-gray-300 bg-white dark:bg-gray-800 dark:border-gray-700 justify-between">
-      <div className="flex justify-between items-center p-1">
-        <p>Spotify</p>
-        <IoCloseSharp
-          className="text-red-500 cursor-pointer hover:bg-red-200"
-          onClick={() => setIsSpotifyToggled(false)}
-        />
-      </div>
+      <Tooltip title="Make sure to refresh after logging in" placement="top">
+        <div className="flex justify-between items-center p-1">
+          <p>Spotify</p>
+          <IoCloseSharp
+            className="text-red-500 cursor-pointer hover:bg-red-200"
+            onClick={() => setIsSpotifyToggled(false)}
+          />
+        </div>
+      </Tooltip>
       <div className="justify-center">
         <iframe
           src={`${playlist}?utm_source=generator&theme=0`}
