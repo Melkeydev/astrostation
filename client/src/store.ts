@@ -137,8 +137,8 @@ interface ShortBreakTime {
 export const useShortBreakTimer = create<ShortBreakTime>(
   persist(
     (set, _) => ({
-      shortBreakLength: 60,
-      defaultShortBreakLength: () => set(() => ({ shortBreakLength: 60 })),
+      shortBreakLength: 300,
+      defaultShortBreakLength: () => set(() => ({ shortBreakLength: 300 })),
       setShortBreak: (value) => set({ shortBreakLength: value }),
     }),
     { name: "short_break_timer_length" }
@@ -159,8 +159,8 @@ interface LongBreakTime {
 export const useLongBreakTimer = create<LongBreakTime>(
   persist(
     (set, _) => ({
-      longBreakLength: 60,
-      defaultLongBreakLength: () => set(() => ({ longBreakLength: 60 })),
+      longBreakLength: 900,
+      defaultLongBreakLength: () => set(() => ({ longBreakLength: 900 })),
       setLongBreak: (value) => set({ longBreakLength: value }),
     }),
     { name: "long_break_timer_length" }
@@ -181,11 +181,84 @@ interface PomodoroTime {
 export const usePomodoroTimer = create<PomodoroTime>(
   persist(
     (set, _) => ({
-      pomodoroLength: 60,
-      defaultPomodoroLength: () => set(() => ({ pomodoroLength: 60 })),
+      pomodoroLength: 1500,
+      defaultPomodoroLength: () => set(() => ({ pomodoroLength: 1500 })),
       setPomodoroLength: (value) => set({ pomodoroLength: value }),
     }),
     { name: "pomodoro_timer_length" }
+  )
+);
+
+/**
+ * Sticky Note Store
+ * ---
+ * Handle the sticky notes created in the tasks section
+ */
+
+interface StickyNote {
+  id: number;
+  text: string;
+  stickyNotesPosX: number;
+  stickyNotesPosY: number;
+}
+
+interface StickyNoteState {
+  stickyNotes: StickyNote[];
+  addStickyNote: (text: string) => void;
+  editNote: (id: number, newText: string) => void;
+  removeNote: (id: number) => void;
+  setStickyNotesPos: (id: number, X: number, Y: number) => void;
+}
+
+export const useStickyNote = create<StickyNoteState>(
+  persist(
+    (set, _) => ({
+      stickyNotes: [],
+      addStickyNote: (text: string) => {
+        set((state) => ({
+          stickyNotes: [
+            ...state.stickyNotes,
+            {
+              id: Date.now() + state.stickyNotes.length,
+              text: text,
+              stickyNotesPosX: 165,
+              stickyNotesPosY: 0,
+            } as StickyNote,
+          ],
+        }));
+      },
+      editNote: (id, newText) => {
+        set((state) => ({
+          stickyNotes: state.stickyNotes.map((note) =>
+            note.id === id
+              ? ({
+                  ...note,
+                  text: newText,
+                } as StickyNote)
+              : note
+          ),
+        }));
+      },
+      removeNote: (id) => {
+        set((state) => ({
+          stickyNotes: state.stickyNotes.filter((note) => note.id !== id),
+        }));
+      },
+      setStickyNotesPos: (id, X, Y) => {
+        set((state) => ({
+          stickyNotes: state.stickyNotes.map((note) =>
+            note.id === id
+              ? ({
+                  ...note,
+                  stickyNotesPosX: X,
+                  stickyNotesPosY: Y,
+                } as StickyNote)
+              : note
+          ),
+        }));
+      },
+    }),
+    { name: "user_sticky_notes" }
   )
 );
 
