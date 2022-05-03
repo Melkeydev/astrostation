@@ -1,5 +1,6 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
+  useDarkToggleStore,
   useShortBreakTimer,
   useLongBreakTimer,
   usePomodoroTimer,
@@ -13,6 +14,7 @@ import { ToggleOption } from "./ToggleOption";
 import toast from "react-hot-toast";
 
 export const TimerSettings = ({ onClose }) => {
+  const { isDark } = useDarkToggleStore();
   const { setIsSettingsToggled } = useToggleSettings();
   const { shortBreakLength, defaultShortBreakLength, setShortBreak } =
     useShortBreakTimer();
@@ -34,22 +36,39 @@ export const TimerSettings = ({ onClose }) => {
     setPomodoroLength(pomoCount);
     setMaxPomodoro(maxPomo);
     onClose();
-    toast.success("Settings saved");
+    // Move this to a separate component
+    if (isDark) {
+      toast.success("Settings saved", {
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    } else {
+      toast.success("Settings saved", {
+        style: {
+          borderRadius: "10px",
+        },
+      });
+    }
   }
 
   function handleDefaults() {
     if (hasStarted) return;
 
-    alert("Are you sure you want to reset to defaults?");
-    defaultShortBreakLength();
-    defaultLongBreakLength();
-    defaultPomodoroLength();
-    defaultMaxPomodoro();
+    var answer = window.confirm("Are you sure you want to reset to defaults?");
+    if (answer) {
+      defaultShortBreakLength();
+      defaultLongBreakLength();
+      defaultPomodoroLength();
+      defaultMaxPomodoro();
 
-    setPomoCount(60);
-    setShortBreakState(60);
-    setLongBreakState(60);
-    setMaxPomo(3);
+      setPomoCount(1500);
+      setShortBreakState(300);
+      setLongBreakState(900);
+      setMaxPomo(3);
+    }
   }
 
   function handleLengthChange(

@@ -1,13 +1,17 @@
 import { FC } from "react";
 
-export const NavItem: FC<{ onClick?: () => void }> = ({
+export const NavItem: FC<{ onClick?: () => void; toggled?: boolean }> = ({
   children,
   onClick,
+  toggled,
 }) => {
   return (
     <li>
       <button
-        className="sm:h-16 sm:px-6  flex justify-center items-center w-full text-gray-300 hover:bg-gray-200 hover:text-gray-800 h-14 px-4"
+        className={`${
+          toggled &&
+          "bg-gray-200 text-black dark:text-black border-black border-b-2 dark:bg-violet-500"
+        } sm:h-16 sm:px-6  flex justify-center items-center w-full text-gray-300 hover:bg-gray-200 hover:text-gray-800 h-14 px-4 dark:hover:bg-violet-500`}
         onClick={onClick}
       >
         {children}
