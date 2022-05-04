@@ -155,7 +155,8 @@ export const SideNav = () => {
     setActive((oldDate) => !oldDate);
   }
 
-  function openFullscreen(elem) {
+  function openFullscreen() {
+    let elem = document.documentElement;
     if (elem.requestFullscreen) {
       elem.requestFullscreen();
     } else if (elem.webkitRequestFullscreen) { /* Safari */
@@ -165,7 +166,7 @@ export const SideNav = () => {
     }
   }
 
-  function closeFullscreen(elem) {
+  function closeFullscreen() {
     if (document.exitFullscreen) {
       document.exitFullscreen();
     } else if (document.webkitExitFullscreen) { /* Safari */
@@ -177,12 +178,11 @@ export const SideNav = () => {
 
   function toggleFullScreen() {
     toggleFullscreenMode();
-    let elem = document.documentElement;
     try {
       if (document.fullscreenElement) {
-        closeFullscreen(elem);
+        closeFullscreen();
       } else {
-        openFullscreen(elem);
+        openFullscreen();
       }
     } catch (err) {
       alert("Cannot go into fullscreen mode: browser too old");
