@@ -116,7 +116,7 @@ export const SideNav = () => {
     const nextVal = !isTasksToggled;
     setIsTasksToggled(nextVal);
     if (nextVal) {
-      toast("Timer Toggled", {
+      toast("Task Toggled", {
         duration: 750,
         icon: "📓",
         style: {
