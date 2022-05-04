@@ -4,7 +4,7 @@ import { Dots } from "./Dots/Dots";
 import { Snow } from "./Snow/Snow";
 import { Fade } from "./Fade/Fade";
 import { Gradient } from "./Gradient/Gradient";
-import { useSetBackground } from "../../store";
+import { useSetBackground } from "@Store";
 
 export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
   const { isBackground } = useSetBackground();

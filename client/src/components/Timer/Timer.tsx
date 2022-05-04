@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { IoCloseSharp } from "react-icons/io5";
-import { Button } from "../Common/Button";
+import { Button } from "@Components/Common/Button";
 import {
   useToggleTimer,
   useShortBreakTimer,
@@ -11,13 +11,14 @@ import {
   useTimer,
   useBreakStarted,
 } from "../../store";
+import toast from "react-hot-toast";
 
 export const Timer = () => {
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();
   const { longBreakLength, setLongBreak } = useLongBreakTimer();
   const { pomodoroLength, setPomodoroLength } = usePomodoroTimer();
   const { hasStarted, setHasStarted } = useHasStarted();
-  const { setBreakStarted } = useBreakStarted();
+  const { breakStarted, setBreakStarted } = useBreakStarted();
   const [breakLength, setBreakLength] = useState(shortBreakLength);
   const [timer, setTimer] = useState(60);
   const { setTimerQueue } = useTimer();
@@ -39,16 +40,61 @@ export const Timer = () => {
       setPomodoroCounter();
       setTimerQueue(0);
       // @ts-ignore
+      audioRef.current.volume = 0;
+      // @ts-ignore
       audioRef.current.play();
       if (sessionType === "Session") {
         setSessionType("Break");
         setTimer(breakLength);
         setBreakStarted(true);
+        toast(
+          (t) => (
+            <div className="flex justify-between items-center">
+              <div>Break Mode</div>
+              <IoCloseSharp
+                className="text-red-500 cursor-pointer hover:bg-red-200"
+                onClick={() => toast.dismiss(t.id)}
+              />
+            </div>
+          ),
+          {
+            duration: breakLength * 1000,
+            icon: "😇",
+            style: {
+              borderRadius: "10px",
+              padding: "16px",
+              background: "#333",
+              color: "#fff",
+            },
+          }
+        );
       } else {
         setSessionType("Session");
         setTimer(pomodoroLength);
         setBreakStarted(false);
         setTimerQueue(pomodoroLength);
+        toast.dismiss();
+        toast(
+          (t) => (
+            <div className="flex justify-between items-center">
+              <div>Work Mode</div>
+              <IoCloseSharp
+                className="text-red-500 cursor-pointer hover:bg-red-200"
+                onClick={() => toast.dismiss(t.id)}
+              />
+            </div>
+          ),
+          {
+            duration: breakLength * 1000,
+            icon: "📚",
+            style: {
+              borderRadius: "10px",
+              padding: "16px",
+              background: "#333",
+              color: "#fff",
+            },
+          }
+        );
       }
     }
   }, [timer, sessionType]);
@@ -136,7 +182,11 @@ export const Timer = () => {
   }
 
   return (
-    <div className="py-2 px-1 mb-2 max-w-sm w-72 sm:w-96 bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700">
+    <div
+      className={`${
+        breakStarted && "shadow-lg bg-slate-200"
+      } shadow-lg py-2 px-1 mb-2 max-w-sm w-72 sm:w-96 bg-white text-gray-800 rounded-lg border border-gray-200 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700`}
+    >
       <div className="text-center">
         <div className="text-center p-2 rounded">
           <div className="flex justify-end">
@@ -170,28 +220,28 @@ export const Timer = () => {
 
           {/* Timer */}
           <div className="rounded p-4 inline-block">
-            <p id="timer-label">{sessionType}</p>
-            <div className="text-7xl sm:text-9xl font-bold">
+            <p id="timer-label tabular-nums">{sessionType}</p>
+            <div className="text-7xl sm:text-9xl font-bold tabular-nums">
               {/*// @ts-ignore */}
               {formatDisplayTime(timerMinutes)}:{/*// @ts-ignore */}
               {formatDisplayTime(timerSeconds)}
             </div>
           </div>
 
-          <div className="timer-control">
+          <div className="timer-control tabular-nums">
             <Button
-              className="text-gray-800 font-normal hover:text-white dark:text-white"
+              className="text-gray-800 font-normal hover:text-white dark:text-white tabular-nums"
               onClick={() => toggleCountDown()}
               variant="cold"
             >
-              {hasStarted ? "Stop" : "Start"}
+              <p className="tabular-nums">{hasStarted ? "Stop" : "Start"}</p>
             </Button>
             <Button
-              className="text-gray-800 font-normal hover:text-white dark:text-white ml-4"
+              className="text-gray-800 font-normal hover:text-white dark:text-white ml-4 tabular-nums"
               variant="cold"
               onClick={handleResetTimer}
             >
-              Reset
+              <p className="tabular-nums">Reset</p>
             </Button>
           </div>
         </div>

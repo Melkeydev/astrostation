@@ -1,6 +1,6 @@
 import "./Modal.scss";
 import { useEffect } from "react";
-import { TimerSettings } from "../Timer/Settings";
+import { TimerSettings } from "./Settings";
 
 export const SettingsModal = ({ isVisible = false, onClose }) => {
   const keydownHandler = ({ key }) => {
@@ -20,7 +20,7 @@ export const SettingsModal = ({ isVisible = false, onClose }) => {
   return !isVisible ? null : (
     <div className="modal" onClick={onClose}>
       <div className="" onClick={(e) => e.stopPropagation()}>
-        <TimerSettings />
+        <TimerSettings onClose={onClose} />
       </div>
     </div>
   );

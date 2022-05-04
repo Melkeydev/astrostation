@@ -1,10 +1,10 @@
 import { useState } from "react";
-import { Button } from "../Common/Button";
+import { Button } from "@Components/Common/Button";
 import { AiFillDelete } from "react-icons/ai";
-import { useTask, useMaxPomodoro } from "../../store";
+import { useTask, useMaxPomodoro } from "@Store";
 export const Settings = ({ setOpenSettings, Task }) => {
   const [text, setText] = useState(Task.description);
-  const { removeTask, setPomodoro, alertTask } = useTask();
+  const { removeTask, setPomodoro, alertTask, renameTask } = useTask();
   const { maxPomodoro } = useMaxPomodoro();
 
   const [changePomo, setChangePomo] = useState(Task.pomodoro);
@@ -16,6 +16,7 @@ export const Settings = ({ setOpenSettings, Task }) => {
       alertTask(Task.id, false);
     }
     setPomodoro(Task.id, changePomo);
+    renameTask(Task.id, text);
     setOpenSettings(false);
   };
 
