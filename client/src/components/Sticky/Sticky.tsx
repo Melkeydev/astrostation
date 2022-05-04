@@ -15,9 +15,8 @@ export const Sticky = ({ id, text }) => {
       </div>
       <TextareaAutosize
         rows={4}
-        defaultValue="Just a single line..."
+        placeholder="Add a note"
         value={text}
-        placeholder={id}
         onChange={(e) => {
           editNote(id, e.target.value);
         }}
