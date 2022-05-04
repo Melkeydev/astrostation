@@ -156,23 +156,36 @@ export const SideNav = () => {
   }
 
   function openFullscreen() {
-    let elem = document.documentElement;
-    if (elem.requestFullscreen) {
-      elem.requestFullscreen();
-    } else if (elem.webkitRequestFullscreen) { /* Safari */
-      elem.webkitRequestFullscreen();
-    } else if (elem.msRequestFullscreen) { /* IE11 */
-      elem.msRequestFullscreen();
+    const docFullScreenFunctions = document.documentElement as HTMLElement & {
+      requestFullscreen(): Promise<void>;
+      mozRequestFullScreen(): Promise<void>;
+      webkitRequestFullscreen(): Promise<void>;
+      msRequestFullscreen(): Promise<void>;
+    };
+
+    if (docFullScreenFunctions.requestFullscreen) {
+      docFullScreenFunctions.requestFullscreen();
+    } else if (docFullScreenFunctions.webkitRequestFullscreen) { /* Safari */
+      docFullScreenFunctions.webkitRequestFullscreen();
+    } else if (docFullScreenFunctions.msRequestFullscreen) { /* IE11 */
+      docFullScreenFunctions.msRequestFullscreen();
     }
   }
 
   function closeFullscreen() {
-    if (document.exitFullscreen) {
-      document.exitFullscreen();
-    } else if (document.webkitExitFullscreen) { /* Safari */
-      document.webkitExitFullscreen();
-    } else if (document.msExitFullscreen) { /* IE11 */
-      document.msExitFullscreen();
+    const docExitFunctions = document as Document & {
+      exitFullscreen(): Promise<void>;
+      mozCancelFullScreen(): Promise<void>;
+      webkitExitFullscreen(): Promise<void>;
+      msExitFullscreen(): Promise<void>;
+    };
+
+    if (docExitFunctions.exitFullscreen) {
+      docExitFunctions.exitFullscreen();
+    } else if (docExitFunctions.webkitExitFullscreen) { /* Safari */
+      docExitFunctions.webkitExitFullscreen();
+    } else if (docExitFunctions.msExitFullscreen) { /* IE11 */
+      docExitFunctions.msExitFullscreen();
     }
   }
 
