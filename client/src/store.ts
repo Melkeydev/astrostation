@@ -645,3 +645,23 @@ export const useDarkToggleStore = create<DarkModeState>(
     { name: "darkmode" }
   )
 );
+
+/**
+ * Fullscreen Mode Store
+ * ---
+ * Handle state of fullscreen vs normal app view
+ */
+ type FullscreenState = {
+  isFullscreen: boolean;
+  toggleFullscreenMode: () => void;
+};
+
+export const useFullScreenToggleStore = create<FullscreenState>(
+  persist(
+    (set, _) => ({
+      isFullscreen: false,
+      toggleFullscreenMode: () => set((oldState) => ({ isFullscreen: !oldState.isFullscreen })),
+    }),
+    { name: "fullscreen" }
+  )
+);

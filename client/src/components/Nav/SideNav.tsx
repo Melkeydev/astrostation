@@ -9,6 +9,7 @@ import {
   MdOutlineNoteAdd,
 } from "react-icons/md";
 import { VscDebugRestartFrame } from "react-icons/vsc";
+import { BsArrowsFullscreen } from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa";
 import {
   useToggleMusic,
@@ -16,6 +17,7 @@ import {
   useToggleTasks,
   useSpotifyMusic,
   useDarkToggleStore,
+  useFullScreenToggleStore,
   usePosTask,
   usePosMusic,
   usePosSpotify,
@@ -27,6 +29,7 @@ import toast from "react-hot-toast";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
+  const { isFullscreen, toggleFullscreenMode } = useFullScreenToggleStore();
   const [active, setActive] = useState(false);
   const { isMusicToggled, setIsMusicToggled } = useToggleMusic();
   const { isTimerToggled, setIsTimerToggled } = useToggleTimer();
@@ -152,6 +155,40 @@ export const SideNav = () => {
     setActive((oldDate) => !oldDate);
   }
 
+  function openFullscreen() {
+    let elem = document.documentElement;
+    if (elem.requestFullscreen) {
+      elem.requestFullscreen();
+    } else if (elem.webkitRequestFullscreen) { /* Safari */
+      elem.webkitRequestFullscreen();
+    } else if (elem.msRequestFullscreen) { /* IE11 */
+      elem.msRequestFullscreen();
+    }
+  }
+
+  function closeFullscreen() {
+    if (document.exitFullscreen) {
+      document.exitFullscreen();
+    } else if (document.webkitExitFullscreen) { /* Safari */
+      document.webkitExitFullscreen();
+    } else if (document.msExitFullscreen) { /* IE11 */
+      document.msExitFullscreen();
+    }
+  }
+
+  function toggleFullScreen() {
+    toggleFullscreenMode();
+    try {
+      if (document.fullscreenElement) {
+        closeFullscreen();
+      } else {
+        openFullscreen();
+      }
+    } catch (err) {
+      alert("Cannot go into fullscreen mode: browser too old");
+    }
+  }
+
   return (
     <>
       <div className="flex absolute">
@@ -191,6 +228,9 @@ export const SideNav = () => {
                 ) : (
                   <MdDarkMode className="h-6 w-6" />
                 )}
+              </NavItem>
+              <NavItem onClick={toggleFullScreen} toggled={isFullscreen}>
+                <BsArrowsFullscreen className="h-6 w-6" />
               </NavItem>
             </div>
           </ul>
