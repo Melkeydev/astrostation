@@ -1,7 +1,7 @@
 import "./Modal.scss";
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
-import { Button } from "../Common/Button";
+import { Button } from "@Components/Common/Button";
 import ErrorMessage from "./Error";
 import TxList from "./HashList";
 import { IoCloseSharp } from "react-icons/io5";

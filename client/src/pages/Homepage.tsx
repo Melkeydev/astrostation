@@ -4,33 +4,31 @@ import {
   useToggleTimer,
   useToggleTasks,
   useSpotifyMusic,
-  useToggleSettings,
   usePosTask,
   usePosMusic,
   usePosSpotify,
   usePosTimer,
-} from "../store";
-import { Player } from "../components/Player/Player";
-import { Timer } from "../components/Timer/Timer";
-import { TaskTracker } from "../components/TaskTracker/TaskTracker";
-import { Spotify } from "../components/Player/Spotify/Player";
-import { BackgroundNav } from "../components/Nav/BackgroundNav";
-import { TimerSettings } from "../components/Timer/Settings";
+  useStickyNote,
+} from "@Store";
+import { Player } from "@Components/Player/Player";
+import { Timer } from "@Components/Timer/Timer";
+import { TaskTracker } from "@Components/TaskTracker/TaskTracker";
+import { Spotify } from "@Components/Player/Spotify/Player";
+import { BackgroundNav } from "@Components/Nav/BackgroundNav";
 import { GoGear } from "react-icons/go";
-import { DWrapper } from "../components/Dragggable/Draggable";
+import { DWrapper } from "@Components/Dragggable/Draggable";
 
-import { SettingsModal } from "../components/Timer/Modal";
-import { CryptoModal } from "../components/Crypto/Modal";
+import { SettingsModal } from "@Components/Timer/Modal";
+import { CryptoModal } from "@Components/Crypto/Modal";
 import { FaEthereum } from "react-icons/fa";
-
-import { Donations } from "../components/Crypto/Donations";
+import { Sticky } from "@Components/Sticky/Sticky";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
   const { isTasksToggled } = useToggleTasks();
   const { isSpotifyToggled } = useSpotifyMusic();
-  const { isSettingsToggled } = useToggleSettings();
+  const { stickyNotes, setStickyNotesPos } = useStickyNote();
   const [isMobile, setIsMobile] = useState(false);
   const [isSettingsModal, setSettingsModal] = useState(false);
   const [isCryptoModal, setCryptoModal] = useState(false);
@@ -65,7 +63,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   }, []);
 
   return (
-    <div className="h-screen w-70 space-y-1 overflow-hidden">
+    <div className="h-screen w-70 space-y-1">
       <div className="flex justify-end space-x-6">
         <button
           type="button"
@@ -107,9 +105,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           <div className={`${isSpotifyToggled ? "block" : "hidden"}`}>
             <Spotify />
           </div>
-          <div className={`${isSettingsToggled ? "block" : "hidden"}`}>
-            <TimerSettings />
-          </div>
           <div className={`${isTimerToggled ? "block" : "hidden"}`}>
             <Timer />
           </div>
@@ -119,11 +114,27 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         </div>
       ) : (
         <>
+          {stickyNotes.map((stickyNote) => {
+            return (
+              <DWrapper
+                key={stickyNote.id}
+                toggleHook={true}
+                defaultX={stickyNote.stickyNotesPosX}
+                defaultY={stickyNote.stickyNotesPosY}
+                setPosition={setStickyNotesPos}
+                isSticky={true}
+                stickyID={stickyNote.id}
+              >
+                <Sticky id={stickyNote.id} text={stickyNote.text} />
+              </DWrapper>
+            );
+          })}
           <DWrapper
             toggleHook={isTimerToggled}
             defaultX={timerPosX}
             defaultY={timerPosY}
             setPosition={setTimerPos}
+            isSticky={false}
           >
             <Timer />
           </DWrapper>
@@ -132,6 +143,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultX={taskPosX}
             defaultY={taskPosY}
             setPosition={setTaskPos}
+            isSticky={false}
           >
             <TaskTracker />
           </DWrapper>
@@ -140,6 +152,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultX={musicPosX}
             defaultY={musicPosY}
             setPosition={setMusicPos}
+            isSticky={false}
           >
             <Player />
           </DWrapper>
@@ -148,6 +161,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultX={spotifyPosX}
             defaultY={spotifyPosY}
             setPosition={setSpotifyPos}
+            isSticky={false}
           >
             <Spotify />
           </DWrapper>

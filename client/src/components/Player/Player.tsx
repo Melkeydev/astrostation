@@ -5,7 +5,7 @@ import { IconContext } from "react-icons";
 import { FaPauseCircle, FaPlayCircle, FaYoutube } from "react-icons/fa";
 import { IoCloseSharp } from "react-icons/io5";
 import YouTube from "react-youtube";
-import { useSong, useToggleMusic } from "../../store";
+import { useSong, useToggleMusic } from "@Store";
 import "./Player.scss";
 import { StationSelector } from "./StationSelector";
 
@@ -77,6 +77,7 @@ export const Player = () => {
       autoplay: autoplay as number,
     },
   };
+
   return (
     <>
       <div className="py-4 px-3 mb-2 w-72 sm:w-96 bg-white text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700 ">
