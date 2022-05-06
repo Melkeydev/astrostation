@@ -24,7 +24,7 @@ import {
   usePosTimer,
   useStickyNote,
 } from "../../store";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 
 export const SideNav = () => {
@@ -41,6 +41,24 @@ export const SideNav = () => {
   const { setSpotifyPosDefault } = usePosSpotify();
   const { setTimerPosDefault } = usePosTimer();
   const { addStickyNote } = useStickyNote();
+
+  useEffect(() => {
+    document.addEventListener('fullscreenchange', fullscreenChanged);
+    document.addEventListener("keyup", function(e) {
+      if (e.key === "F11" || (e.key === "Escape" && document.fullscreenElement)) {
+        toggleFullScreen();
+      }
+    });
+  }, []);
+
+  function fullscreenChanged() {
+    toggleFullscreenMode();
+    if (document.fullscreenElement) {
+      openFullscreen();
+    } else {
+      closeFullscreen();
+    }
+  };
 
   function toggleDefaultPositions() {
     var answer = window.confirm(
@@ -190,7 +208,6 @@ export const SideNav = () => {
   }
 
   function toggleFullScreen() {
-    toggleFullscreenMode();
     try {
       if (document.fullscreenElement) {
         closeFullscreen();
