@@ -202,6 +202,7 @@ export const Timer = () => {
                 className="text-gray-800 hover:text-white dark:text-white"
                 variant="cold"
                 onClick={selectShortBreak}
+                disabled={hasStarted}
               >
                 Short Break
               </Button>
@@ -212,6 +213,7 @@ export const Timer = () => {
                 className="text-gray-800 hover:text-white dark:text-white"
                 variant="cold"
                 onClick={selectLongBreak}
+                disabled={hasStarted}
               >
                 Long Break
               </Button>
