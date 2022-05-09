@@ -273,9 +273,12 @@ export const SideNav = () => {
                   <MdDarkMode className="h-6 w-6" />
                 )}
               </NavItem>
-              <NavItem onClick={toggleFullScreen} toggled={isFullscreen}>
-                <BsArrowsFullscreen className="h-6 w-6" />
-              </NavItem>
+
+              {isDesktop && (
+                <NavItem onClick={toggleFullScreen} toggled={isFullscreen}>
+                  <BsArrowsFullscreen className="h-6 w-6" />
+                </NavItem>
+              )}
             </div>
           </ul>
         </aside>
