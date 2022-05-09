@@ -67,7 +67,7 @@ export const Task = ({ task }: any) => {
                   />
                 )}
               </div>
-              <div className="break-all">{task.description}</div>
+              <div className="whitespace-normal">{task.description}</div>
             </div>
             <div className="flex items-center">
               <div className="flex justify-end">
