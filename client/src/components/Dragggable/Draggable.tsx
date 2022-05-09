@@ -64,20 +64,37 @@ export const DWrapper = ({
       onDrag={(e, data) => trackPosition()}
       onStop={(e, data) => changePosition(data)}
     >
-      <div
-        style={{ zIndex: z, position: "absolute" }}
-        className="dcard box dwidth"
-        onClick={() => setZ(++int)}
-      >
+      {isSticky ? (
         <div
-          ref={ref}
-          className={`inline-block ${
-            toggleHook ? "visible" : "hidden pointer-events-none"
-          }`}
+          style={{ zIndex: z, position: "absolute" }}
+          className=""
+          onClick={() => setZ(++int)}
         >
-          {children}
+          <div
+            ref={ref}
+            className={`inline-block ${
+              toggleHook ? "visible" : "hidden pointer-events-none"
+            }`}
+          >
+            {children}
+          </div>
         </div>
-      </div>
+      ) : (
+        <div
+          style={{ zIndex: z, position: "absolute" }}
+          className="dcard box dwidth"
+          onClick={() => setZ(++int)}
+        >
+          <div
+            ref={ref}
+            className={`inline-block ${
+              toggleHook ? "visible" : "hidden pointer-events-none"
+            }`}
+          >
+            {children}
+          </div>
+        </div>
+      )}
     </Draggable>
   );
 };
