@@ -23,13 +23,15 @@ import { CryptoModal } from "@Components/Crypto/Modal";
 import { FaEthereum } from "react-icons/fa";
 import { Sticky } from "@Components/Sticky/Sticky";
 
+import useMediaQuery from "../utils/hooks/useMediaQuery";
+
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
   const { isTasksToggled } = useToggleTasks();
   const { isSpotifyToggled } = useSpotifyMusic();
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
-  const [isMobile, setIsMobile] = useState(false);
+  //const [isMobile, setIsMobile] = useState(false);
   const [isSettingsModal, setSettingsModal] = useState(false);
   const [isCryptoModal, setCryptoModal] = useState(false);
 
@@ -38,29 +40,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { musicPosX, musicPosY, setMusicPos } = usePosMusic();
   const { spotifyPosX, spotifyPosY, setSpotifyPos } = usePosSpotify();
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
-
-  useEffect(() => {
-    const handler = () => {
-      if (window.innerWidth < 641) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    };
-    window.addEventListener("resize", handler);
-
-    return () => {
-      window.removeEventListener("resize", handler);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (window.innerWidth < 641) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  }, []);
+  const isDesktop = useMediaQuery("(min-width: 641px)");
 
   return (
     <div className="h-screen w-70 space-y-1">
@@ -97,7 +77,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           <FaEthereum />
         </button>
       </div>
-      {isMobile ? (
+      {!isDesktop ? (
         <div className="flex flex-col items-center ml-8">
           <div className={`${isMusicToggled ? "block" : "hidden"}`}>
             <Player />
