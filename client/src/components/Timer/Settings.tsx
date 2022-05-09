@@ -1,4 +1,5 @@
 import { useState } from "react";
+import Slider from "rc-slider";
 import {
   useDarkToggleStore,
   useShortBreakTimer,
@@ -7,6 +8,7 @@ import {
   useHasStarted,
   useMaxPomodoro,
   useToggleSettings,
+  useAudioVolume,
 } from "../../store";
 import { IoCloseSharp } from "react-icons/io5";
 import { Button } from "../Common/Button";
@@ -22,14 +24,18 @@ export const TimerSettings = ({ onClose }) => {
     useLongBreakTimer();
   const { pomodoroLength, defaultPomodoroLength, setPomodoroLength } =
     usePomodoroTimer();
-  const { maxPomodoro, defaultMaxPomodoro, setMaxPomodoro } = 
-    useMaxPomodoro();
+  const { maxPomodoro, defaultMaxPomodoro, setMaxPomodoro } = useMaxPomodoro();
   const { hasStarted } = useHasStarted();
 
   const [pomoCount, setPomoCount] = useState(pomodoroLength);
   const [shortBreak, setShortBreakState] = useState(shortBreakLength);
   const [longBreak, setLongBreakState] = useState(longBreakLength);
   const [maxPomo, setMaxPomo] = useState(maxPomodoro);
+  const { audioVolume, setAudioVolume } = useAudioVolume();
+
+  function onVolumeChange(value) {
+    setAudioVolume(value);
+  }
 
   function onSubmit() {
     setShortBreak(shortBreak);
@@ -55,6 +61,7 @@ export const TimerSettings = ({ onClose }) => {
     }
   }
 
+  // TODO: add audio volume
   function handleDefaults() {
     if (hasStarted) return;
 
@@ -86,10 +93,10 @@ export const TimerSettings = ({ onClose }) => {
 
     if (e.target.id === decrement && propertyLength > minLength) {
       setStateFunc(propertyLength - step);
-      e.target.nextSibling.value=(Math.floor((propertyLength-step)/60));
+      e.target.nextSibling.value = Math.floor((propertyLength - step) / 60);
     } else if (e.target.id === increment && propertyLength < maxLength) {
       setStateFunc(propertyLength + step);
-      e.target.previousSibling.value=(Math.floor((propertyLength+step)/60));
+      e.target.previousSibling.value = Math.floor((propertyLength + step) / 60);
     }
   }
 
@@ -121,10 +128,12 @@ export const TimerSettings = ({ onClose }) => {
               )
             }
             onChange={(e) => {
-                if (hasStarted) {e.target.readOnly=true; return;} 
-                setPomoCount(e.target.value*60);
+              if (hasStarted) {
+                e.target.readOnly = true;
+                return;
               }
-            }
+              setPomoCount(e.target.value * 60);
+            }}
             propertyLength={Math.floor(pomoCount / 60)}
             hasStarted={hasStarted}
           />
@@ -145,10 +154,12 @@ export const TimerSettings = ({ onClose }) => {
               )
             }
             onChange={(e) => {
-                if (hasStarted) {e.target.readOnly=true; return;}
-                setShortBreakState(e.target.value*60);
+              if (hasStarted) {
+                e.target.readOnly = true;
+                return;
               }
-            }
+              setShortBreakState(e.target.value * 60);
+            }}
             propertyLength={Math.floor(shortBreak / 60)}
             hasStarted={hasStarted}
           />
@@ -169,10 +180,12 @@ export const TimerSettings = ({ onClose }) => {
               )
             }
             onChange={(e) => {
-                if (hasStarted) {e.target.readOnly=true; return;}
-                setLongBreakState(e.target.value*60);
+              if (hasStarted) {
+                e.target.readOnly = true;
+                return;
               }
-            }
+              setLongBreakState(e.target.value * 60);
+            }}
             propertyLength={Math.floor(longBreak / 60)}
             hasStarted={hasStarted}
           />
@@ -198,14 +211,28 @@ export const TimerSettings = ({ onClose }) => {
               )
             }
             onChange={(e) => {
-                if (hasStarted) {e.target.readOnly=true; return;} 
-                setMaxPomo(e.target.value*60);
+              if (hasStarted) {
+                e.target.readOnly = true;
+                return;
               }
-            }
+              setMaxPomo(e.target.value * 60);
+            }}
             propertyLength={Math.floor(maxPomo / 60)}
             hasStarted={hasStarted}
           />
         </div>
+      </div>
+      <div className="flex flex-col border-b-2 border-gray-100 px-2 pb-2 items-center">
+        <div>Alarm Volume</div>
+        <Slider
+          defaultValue={audioVolume}
+          onChange={(value) => {
+            onVolumeChange(value);
+          }}
+          step={0.1}
+          min={0}
+          max={1}
+        />
       </div>
       <div className="flex justify-between">
         <Button

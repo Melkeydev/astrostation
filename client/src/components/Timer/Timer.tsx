@@ -10,8 +10,10 @@ import {
   useSetPomodoroCounter,
   useTimer,
   useBreakStarted,
+  useAudioVolume,
 } from "../../store";
 import toast from "react-hot-toast";
+import Slider from "rc-slider";
 
 export const Timer = () => {
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();
@@ -30,6 +32,7 @@ export const Timer = () => {
   const { setPomodoroCounter } = useSetPomodoroCounter();
 
   const audioRef = useRef();
+  const { audioVolume } = useAudioVolume();
 
   useEffect(() => {
     setHasStarted(timerIntervalId !== null);
@@ -40,7 +43,7 @@ export const Timer = () => {
       setPomodoroCounter();
       setTimerQueue(0);
       // @ts-ignore
-      audioRef.current.volume = 0;
+      audioRef.current.volume = audioVolume;
       // @ts-ignore
       audioRef.current.play();
       if (sessionType === "Session") {
@@ -97,7 +100,7 @@ export const Timer = () => {
         );
       }
     }
-  }, [timer, sessionType]);
+  }, [timer, sessionType, audioVolume]);
 
   useEffect(() => {
     setTimer(pomodoroLength);
@@ -217,7 +220,6 @@ export const Timer = () => {
               </Button>
             </div>
           </div>
-
           {/* Timer */}
           <div>
             <p id="tabular-nums">{sessionType}</p>
