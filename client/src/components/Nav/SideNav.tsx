@@ -26,6 +26,7 @@ import {
 } from "../../store";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import useMediaQuery from "../../utils/hooks/hooks";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
@@ -42,10 +43,15 @@ export const SideNav = () => {
   const { setTimerPosDefault } = usePosTimer();
   const { addStickyNote } = useStickyNote();
 
+  const isDesktop = useMediaQuery("(min-width: 641px)");
+
   useEffect(() => {
-    document.addEventListener('fullscreenchange', fullscreenChanged);
-    document.addEventListener("keyup", function(e) {
-      if (e.key === "F11" || (e.key === "Escape" && document.fullscreenElement)) {
+    document.addEventListener("fullscreenchange", fullscreenChanged);
+    document.addEventListener("keyup", function (e) {
+      if (
+        e.key === "F11" ||
+        (e.key === "Escape" && document.fullscreenElement)
+      ) {
         toggleFullScreen();
       }
     });
@@ -58,7 +64,7 @@ export const SideNav = () => {
     } else {
       closeFullscreen();
     }
-  };
+  }
 
   function toggleDefaultPositions() {
     var answer = window.confirm(
@@ -183,9 +189,11 @@ export const SideNav = () => {
 
     if (docFullScreenFunctions.requestFullscreen) {
       docFullScreenFunctions.requestFullscreen();
-    } else if (docFullScreenFunctions.webkitRequestFullscreen) { /* Safari */
+    } else if (docFullScreenFunctions.webkitRequestFullscreen) {
+      /* Safari */
       docFullScreenFunctions.webkitRequestFullscreen();
-    } else if (docFullScreenFunctions.msRequestFullscreen) { /* IE11 */
+    } else if (docFullScreenFunctions.msRequestFullscreen) {
+      /* IE11 */
       docFullScreenFunctions.msRequestFullscreen();
     }
   }
@@ -200,9 +208,11 @@ export const SideNav = () => {
 
     if (docExitFunctions.exitFullscreen) {
       docExitFunctions.exitFullscreen();
-    } else if (docExitFunctions.webkitExitFullscreen) { /* Safari */
+    } else if (docExitFunctions.webkitExitFullscreen) {
+      /* Safari */
       docExitFunctions.webkitExitFullscreen();
-    } else if (docExitFunctions.msExitFullscreen) { /* IE11 */
+    } else if (docExitFunctions.msExitFullscreen) {
+      /* IE11 */
       docExitFunctions.msExitFullscreen();
     }
   }
@@ -246,9 +256,13 @@ export const SideNav = () => {
               <NavItem onClick={toggleTimerPlayer} toggled={isTimerToggled}>
                 <MdOutlineTimer className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={addNewStickyNote}>
-                <MdOutlineNoteAdd className="h-6 w-6" />
-              </NavItem>
+
+              {isDesktop && (
+                <NavItem onClick={addNewStickyNote}>
+                  <MdOutlineNoteAdd className="h-6 w-6" />
+                </NavItem>
+              )}
+
               <NavItem onClick={toggleDefaultPositions}>
                 <VscDebugRestartFrame className="h-6 w-6" />
               </NavItem>
