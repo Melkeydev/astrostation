@@ -26,7 +26,7 @@ import {
 } from "../../store";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
-import useMediaQuery from "../../utils/hooks/hooks";
+import useMediaQuery from "../../utils/hooks/useMediaQuery";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
