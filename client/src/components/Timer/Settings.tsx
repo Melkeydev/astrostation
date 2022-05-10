@@ -65,7 +65,6 @@ export const TimerSettings = ({ onClose }) => {
     }
   }
 
-  // TODO: add alarm option
   function handleDefaults() {
     if (hasStarted) return;
 
