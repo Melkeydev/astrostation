@@ -665,3 +665,46 @@ export const useFullScreenToggleStore = create<FullscreenState>(
     { name: "fullscreen" }
   )
 );
+
+/**
+ * Quote Section Store
+ * ---
+ * Handle the visibility of motivational/programming quotes
+ */
+ type IToggleQuote = {
+  isQuoteToggled: boolean;
+  setIsQuoteToggled: (isQuoteToggled: boolean) => void;
+};
+
+export const useToggleQuote = create<IToggleQuote>(
+  persist(
+    (set, _) => ({
+      isQuoteToggled: false,
+      setIsQuoteToggled: (isQuoteToggled) => set({ isQuoteToggled }),
+    }),
+    {
+      name: "show_quote_section",
+    }
+  )
+);
+
+type IPosQuote = {
+  quotePosX: number;
+  quotePosY: number;
+  setQuotePos: (X: number, Y: number) => void;
+  setQuotePosDefault: () => void;
+};
+
+export const usePosQuote = create<IPosQuote>(
+  persist(
+    (set, _) => ({
+      quotePosX: 800,
+      quotePosY: 325,
+      setQuotePos: (X, Y) => set({ quotePosX: X, quotePosY: Y }),
+      setQuotePosDefault: () => set(() => ({ quotePosX: 800, quotePosY: 325 })),
+    }),
+    {
+      name: "set_quote_position",
+    }
+  )
+);
