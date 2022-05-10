@@ -108,7 +108,9 @@ export const TimerSettings = ({ onClose }) => {
   }
 
   function changeAlarm(alarmPath: string) {
-    new Audio(alarmPath).play();
+    let audioRef = new Audio(alarmPath);
+    audioRef.volume = currentVolume;
+    audioRef.play();
     setCurrentAlarm(alarmPath);
   }
 
