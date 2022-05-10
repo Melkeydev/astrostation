@@ -11,9 +11,9 @@ import {
   useTimer,
   useBreakStarted,
   useAudioVolume,
+  useAlarmOption,
 } from "../../store";
 import toast from "react-hot-toast";
-import Slider from "rc-slider";
 
 export const Timer = () => {
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();
@@ -30,6 +30,7 @@ export const Timer = () => {
   const [sessionType, setSessionType] = useState("Session");
   const { setIsTimerToggled } = useToggleTimer();
   const { setPomodoroCounter } = useSetPomodoroCounter();
+  const { alarm } = useAlarmOption();
 
   const audioRef = useRef();
   const { audioVolume } = useAudioVolume();
@@ -248,12 +249,7 @@ export const Timer = () => {
           </div>
         </div>
       </div>
-      <audio
-        id="beep"
-        preload="auto"
-        ref={audioRef}
-        src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
-      />
+      <audio id="beep" preload="auto" ref={audioRef} src={alarm} />
     </div>
   );
 };

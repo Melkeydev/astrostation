@@ -7,17 +7,17 @@ import {
   usePomodoroTimer,
   useHasStarted,
   useMaxPomodoro,
-  useToggleSettings,
   useAudioVolume,
+  useAlarmOption,
 } from "../../store";
 import { IoCloseSharp } from "react-icons/io5";
+import { BsMusicPlayerFill } from "react-icons/bs";
 import { Button } from "../Common/Button";
 import { ToggleOption } from "./ToggleOption";
 import toast from "react-hot-toast";
 
 export const TimerSettings = ({ onClose }) => {
   const { isDark } = useDarkToggleStore();
-  const { setIsSettingsToggled } = useToggleSettings();
   const { shortBreakLength, defaultShortBreakLength, setShortBreak } =
     useShortBreakTimer();
   const { longBreakLength, defaultLongBreakLength, setLongBreak } =
@@ -32,9 +32,12 @@ export const TimerSettings = ({ onClose }) => {
   const [longBreak, setLongBreakState] = useState(longBreakLength);
   const [maxPomo, setMaxPomo] = useState(maxPomodoro);
   const { audioVolume, setAudioVolume } = useAudioVolume();
+  const [currentVolume, setCurrentVolume] = useState(audioVolume);
+  const { alarm, setAlarm } = useAlarmOption();
+  const [currentAlarm, setCurrentAlarm] = useState(alarm);
 
   function onVolumeChange(value) {
-    setAudioVolume(value);
+    setCurrentVolume(value);
   }
 
   function onSubmit() {
@@ -42,8 +45,9 @@ export const TimerSettings = ({ onClose }) => {
     setLongBreak(longBreak);
     setPomodoroLength(pomoCount);
     setMaxPomodoro(maxPomo);
+    setAudioVolume(currentVolume);
+    setAlarm(currentAlarm);
     onClose();
-    // Move this to a separate component
     if (isDark) {
       toast.success("Settings saved", {
         style: {
@@ -61,7 +65,7 @@ export const TimerSettings = ({ onClose }) => {
     }
   }
 
-  // TODO: add audio volume
+  // TODO: add alarm option
   function handleDefaults() {
     if (hasStarted) return;
 
@@ -76,6 +80,10 @@ export const TimerSettings = ({ onClose }) => {
       setShortBreakState(300);
       setLongBreakState(900);
       setMaxPomo(3);
+      setAudioVolume(0.7);
+      setAlarm(
+        "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+      );
     }
   }
 
@@ -98,6 +106,11 @@ export const TimerSettings = ({ onClose }) => {
       setStateFunc(propertyLength + step);
       e.target.previousSibling.value = Math.floor((propertyLength + step) / 60);
     }
+  }
+
+  function changeAlarm(alarmPath: string) {
+    new Audio(alarmPath).play();
+    setCurrentAlarm(alarmPath);
   }
 
   return (
@@ -222,8 +235,8 @@ export const TimerSettings = ({ onClose }) => {
           />
         </div>
       </div>
+      <div className="text-center p-2 rounded">Alarm Volume</div>
       <div className="flex flex-col border-b-2 border-gray-100 px-2 pb-2 items-center">
-        <div>Alarm Volume</div>
         <Slider
           defaultValue={audioVolume}
           onChange={(value) => {
@@ -233,6 +246,45 @@ export const TimerSettings = ({ onClose }) => {
           min={0}
           max={1}
         />
+      </div>
+      <div className="text-center p-2 rounded">Alarm Sound</div>
+      <div className="flex justify-between items-center text-center gap-2 pb-2 border-b-2 border-gray-100">
+        <div className="w-1/4">
+          Retro
+          <div
+            className="cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200"
+            onClick={() => changeAlarm("/assets/music/arcade.wav")}
+          >
+            <BsMusicPlayerFill />
+          </div>
+        </div>
+        <div className="w-1/4">
+          Bells
+          <div
+            className="cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200"
+            onClick={() => changeAlarm("/assets/music/bells.wav")}
+          >
+            <BsMusicPlayerFill />
+          </div>
+        </div>
+        <div className="w-1/4">
+          Flute
+          <div
+            className="cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200"
+            onClick={() => changeAlarm("/assets/music/flute.wav")}
+          >
+            <BsMusicPlayerFill />
+          </div>
+        </div>
+        <div className="w-1/4">
+          Piano
+          <div
+            className="cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200"
+            onClick={() => changeAlarm("/assets/music/piano.wav")}
+          >
+            <BsMusicPlayerFill />
+          </div>
+        </div>
       </div>
       <div className="flex justify-between">
         <Button
