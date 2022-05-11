@@ -10,6 +10,8 @@ import {
   useSetPomodoroCounter,
   useTimer,
   useBreakStarted,
+  useAudioVolume,
+  useAlarmOption,
 } from "../../store";
 import toast from "react-hot-toast";
 
@@ -28,8 +30,10 @@ export const Timer = () => {
   const [sessionType, setSessionType] = useState("Session");
   const { setIsTimerToggled } = useToggleTimer();
   const { setPomodoroCounter } = useSetPomodoroCounter();
+  const { alarm } = useAlarmOption();
 
   const audioRef = useRef();
+  const { audioVolume } = useAudioVolume();
 
   useEffect(() => {
     setHasStarted(timerIntervalId !== null);
@@ -40,7 +44,7 @@ export const Timer = () => {
       setPomodoroCounter();
       setTimerQueue(0);
       // @ts-ignore
-      audioRef.current.volume = 0;
+      audioRef.current.volume = audioVolume;
       // @ts-ignore
       audioRef.current.play();
       if (sessionType === "Session") {
@@ -97,7 +101,7 @@ export const Timer = () => {
         );
       }
     }
-  }, [timer, sessionType]);
+  }, [timer, sessionType, audioVolume]);
 
   useEffect(() => {
     setTimer(pomodoroLength);
@@ -219,7 +223,6 @@ export const Timer = () => {
               </Button>
             </div>
           </div>
-
           {/* Timer */}
           <div>
             <p id="tabular-nums">{sessionType}</p>
@@ -248,12 +251,7 @@ export const Timer = () => {
           </div>
         </div>
       </div>
-      <audio
-        id="beep"
-        preload="auto"
-        ref={audioRef}
-        src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
-      />
+      <audio id="beep" preload="auto" ref={audioRef} src={alarm} />
     </div>
   );
 };
