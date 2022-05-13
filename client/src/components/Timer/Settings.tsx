@@ -16,15 +16,14 @@ import { Button } from "../Common/Button";
 import { ToggleOption } from "./ToggleOption";
 import toast from "react-hot-toast";
 
+import useSetDefault from "@App/utils/hooks/useSetDefault";
+
 export const TimerSettings = ({ onClose }) => {
   const { isDark } = useDarkToggleStore();
-  const { shortBreakLength, defaultShortBreakLength, setShortBreak } =
-    useShortBreakTimer();
-  const { longBreakLength, defaultLongBreakLength, setLongBreak } =
-    useLongBreakTimer();
-  const { pomodoroLength, defaultPomodoroLength, setPomodoroLength } =
-    usePomodoroTimer();
-  const { maxPomodoro, defaultMaxPomodoro, setMaxPomodoro } = useMaxPomodoro();
+  const { shortBreakLength, setShortBreak } = useShortBreakTimer();
+  const { longBreakLength, setLongBreak } = useLongBreakTimer();
+  const { pomodoroLength, setPomodoroLength } = usePomodoroTimer();
+  const { maxPomodoro, setMaxPomodoro } = useMaxPomodoro();
   const { hasStarted } = useHasStarted();
 
   const [pomoCount, setPomoCount] = useState(pomodoroLength);
@@ -35,6 +34,8 @@ export const TimerSettings = ({ onClose }) => {
   const [currentVolume, setCurrentVolume] = useState(audioVolume);
   const { alarm, setAlarm } = useAlarmOption();
   const [currentAlarm, setCurrentAlarm] = useState(alarm);
+
+  const setDefault = useSetDefault();
 
   function onVolumeChange(value) {
     setCurrentVolume(value);
@@ -70,10 +71,7 @@ export const TimerSettings = ({ onClose }) => {
 
     var answer = window.confirm("Are you sure you want to reset to defaults?");
     if (answer) {
-      defaultShortBreakLength();
-      defaultLongBreakLength();
-      defaultPomodoroLength();
-      defaultMaxPomodoro();
+      setDefault(false, true, false);
 
       setPomoCount(1500);
       setShortBreakState(300);
