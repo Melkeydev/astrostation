@@ -9,8 +9,6 @@ import { useSong, useToggleMusic } from "@Store";
 import "./Player.scss";
 import { StationSelector } from "./StationSelector";
 
-import { version } from "../../../package.json";
-
 interface IPlayer {
   playVideo: () => void;
   pauseVideo: () => void;
