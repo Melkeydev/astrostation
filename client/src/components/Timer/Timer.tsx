@@ -184,8 +184,8 @@ export const Timer = () => {
   return (
     <div
       className={`${
-        breakStarted && "shadow-lg bg-slate-200"
-      } shadow-lg py-2 px-1 mb-2 max-w-sm w-72 sm:w-96 bg-white text-gray-800 rounded-lg border border-gray-200 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700`}
+        breakStarted && "shadow-lg bg-slate-200/[.96]"
+      } shadow-lg py-2 px-1 mb-2 max-w-sm w-72 sm:w-96 bg-white/[.96] text-gray-800 rounded-lg border border-gray-200 dark:text-gray-300 dark:bg-gray-800/[.96] dark:border-gray-700`}
     >
       <div className="text-center">
         <div className="text-center p-2 rounded">
