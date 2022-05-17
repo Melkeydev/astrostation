@@ -57,6 +57,12 @@ export const DWrapper = ({
     return () => removeEventListener("resize", listener);
   }, []);
 
+  useEffect(() => {
+    if (toggleHook) {
+      setZ(++int);
+    }
+  }, [toggleHook]);
+
   return (
     <Draggable
       bounds="parent"
@@ -67,7 +73,6 @@ export const DWrapper = ({
       {isSticky ? (
         <div
           style={{ zIndex: z, position: "absolute" }}
-          className=""
           onClick={() => setZ(++int)}
         >
           <div

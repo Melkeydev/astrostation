@@ -29,6 +29,7 @@ import {
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
 import useMediaQuery from "../../utils/hooks/useMediaQuery";
+import useSetDefault from "@App/utils/hooks/useSetDefault";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
@@ -49,6 +50,8 @@ export const SideNav = () => {
   
 
   const isDesktop = useMediaQuery("(min-width: 641px)");
+
+  const setDefault = useSetDefault();
 
   useEffect(() => {
     document.addEventListener("fullscreenchange", fullscreenChanged);
@@ -76,11 +79,8 @@ export const SideNav = () => {
       "This will reset tiles to default positon - are you sure?"
     );
     if (answer) {
-      setTaskPosDefault();
-      setMusicPosDefault();
-      setSpotifyPosDefault();
-      setTimerPosDefault();
-      setQuotePosDefault();
+      setDefault(false, false, true);
+
       toast("Positions reset", {
         style: {
           borderRadius: "10px",
