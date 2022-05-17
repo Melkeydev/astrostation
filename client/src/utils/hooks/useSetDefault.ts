@@ -7,6 +7,7 @@ import {
   useLongBreakTimer,
   usePomodoroTimer,
   useMaxPomodoro,
+  usePosQuote
 } from "../../store";
 
 function useSetDefault() {
@@ -14,6 +15,7 @@ function useSetDefault() {
   const { setMusicPosDefault } = usePosMusic();
   const { setSpotifyPosDefault } = usePosSpotify();
   const { setTimerPosDefault } = usePosTimer();
+  const { setQuotePosDefault } = usePosQuote();
   const { defaultShortBreakLength } = useShortBreakTimer();
   const { defaultLongBreakLength } = useLongBreakTimer();
   const { defaultPomodoroLength } = usePomodoroTimer();
@@ -42,6 +44,7 @@ function useSetDefault() {
       setMusicPosDefault();
       setSpotifyPosDefault();
       setTimerPosDefault();
+      setQuotePosDefault();
     }
   };
 }

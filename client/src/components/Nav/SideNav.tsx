@@ -9,7 +9,7 @@ import {
   MdOutlineNoteAdd,
 } from "react-icons/md";
 import { VscDebugRestartFrame } from "react-icons/vsc";
-import { BsArrowsFullscreen } from "react-icons/bs";
+import { BsArrowsFullscreen, BsFillChatLeftQuoteFill } from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa";
 import {
   useToggleMusic,
@@ -18,11 +18,13 @@ import {
   useSpotifyMusic,
   useDarkToggleStore,
   useFullScreenToggleStore,
+  useToggleQuote,
   usePosTask,
   usePosMusic,
   usePosSpotify,
   usePosTimer,
   useStickyNote,
+  usePosQuote
 } from "../../store";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -37,12 +39,15 @@ export const SideNav = () => {
   const { isTimerToggled, setIsTimerToggled } = useToggleTimer();
   const { isTasksToggled, setIsTasksToggled } = useToggleTasks();
   const { isSpotifyToggled, setIsSpotifyToggled } = useSpotifyMusic();
+  const { isQuoteToggled, setIsQuoteToggled } = useToggleQuote();
 
   const { setTaskPosDefault } = usePosTask();
   const { setMusicPosDefault } = usePosMusic();
   const { setSpotifyPosDefault } = usePosSpotify();
   const { setTimerPosDefault } = usePosTimer();
+  const { setQuotePosDefault } = usePosQuote();
   const { addStickyNote } = useStickyNote();
+  
 
   const isDesktop = useMediaQuery("(min-width: 641px)");
 
@@ -230,6 +235,22 @@ export const SideNav = () => {
     }
   }
 
+  function toggleQuote() {
+    const nextVal = !isQuoteToggled;
+    setIsQuoteToggled(!isQuoteToggled);
+    if (nextVal) {
+      toast("Quote Toggled", {
+        duration: 750,
+        icon: "💬",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
+    }
+  }
+
   return (
     <>
       <div className="flex absolute">
@@ -280,6 +301,10 @@ export const SideNav = () => {
                   <BsArrowsFullscreen className="h-6 w-6" />
                 </NavItem>
               )}
+
+              <NavItem onClick={toggleQuote} toggled={isQuoteToggled}>
+                <BsFillChatLeftQuoteFill className="h-6 w-6" />
+              </NavItem>
             </div>
           </ul>
         </aside>
