@@ -80,6 +80,7 @@ export const SideNav = () => {
       setMusicPosDefault();
       setSpotifyPosDefault();
       setTimerPosDefault();
+      setQuotePosDefault();
       toast("Positions reset", {
         style: {
           borderRadius: "10px",
