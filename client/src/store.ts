@@ -522,10 +522,10 @@ type IPosTask = {
 export const usePosTask = create<IPosTask>(
   persist(
     (set, _) => ({
-      taskPosX: 800,
-      taskPosY: 325,
+      taskPosX: 804,
+      taskPosY: 302,
       setTaskPos: (X, Y) => set({ taskPosX: X, taskPosY: Y }),
-      setTaskPosDefault: () => set(() => ({ taskPosX: 800, taskPosY: 325 })),
+      setTaskPosDefault: () => set(() => ({ taskPosX: 804, taskPosY: 302 })),
     }),
     {
       name: "set_task_position",
@@ -610,10 +610,10 @@ export const usePosSpotify = create<IPosSpotify>(
   persist(
     (set, _) => ({
       spotifyPosX: 400,
-      spotifyPosY: 150,
+      spotifyPosY: 158,
       setSpotifyPos: (X, Y) => set({ spotifyPosX: X, spotifyPosY: Y }),
       setSpotifyPosDefault: () =>
-        set(() => ({ spotifyPosX: 400, spotifyPosY: 150 })),
+        set(() => ({ spotifyPosX: 400, spotifyPosY: 158 })),
     }),
     {
       name: "set_spotify_position",
@@ -651,10 +651,10 @@ type IPosTimer = {
 export const usePosTimer = create<IPosTimer>(
   persist(
     (set, _) => ({
-      timerPosX: 800,
+      timerPosX: 804,
       timerPosY: 0,
       setTimerPos: (X, Y) => set({ timerPosX: X, timerPosY: Y }),
-      setTimerPosDefault: () => set(() => ({ timerPosX: 800, timerPosY: 0 })),
+      setTimerPosDefault: () => set(() => ({ timerPosX: 804, timerPosY: 0 })),
     }),
     {
       name: "set_timers_position",
@@ -700,5 +700,48 @@ export const useFullScreenToggleStore = create<FullscreenState>(
         set((oldState) => ({ isFullscreen: !oldState.isFullscreen })),
     }),
     { name: "fullscreen" }
+  )
+);
+
+/**
+ * Quote Section Store
+ * ---
+ * Handle the visibility of motivational/programming quotes
+ */
+ type IToggleQuote = {
+  isQuoteToggled: boolean;
+  setIsQuoteToggled: (isQuoteToggled: boolean) => void;
+};
+
+export const useToggleQuote = create<IToggleQuote>(
+  persist(
+    (set, _) => ({
+      isQuoteToggled: false,
+      setIsQuoteToggled: (isQuoteToggled) => set({ isQuoteToggled }),
+    }),
+    {
+      name: "show_quote_section",
+    }
+  )
+);
+
+type IPosQuote = {
+  quotePosX: number;
+  quotePosY: number;
+  setQuotePos: (X: number, Y: number) => void;
+  setQuotePosDefault: () => void;
+};
+
+export const usePosQuote = create<IPosQuote>(
+  persist(
+    (set, _) => ({
+      quotePosX: 804,
+      quotePosY: 436,
+      setQuotePos: (X, Y) => set({ quotePosX: X, quotePosY: Y }),
+      setQuotePosDefault: () => set(() => ({ quotePosX: 804, quotePosY: 436 })),
+    }),
+    {
+      name: "set_quote_position",
+    }
   )
 );
