@@ -62,22 +62,16 @@ export const SideNav = () => {
   }
 
   useEffect(() => {
-    document.addEventListener('fullscreenchange', fullscreenChanged);
-    document.addEventListener("keyup", function(e) {
-      if (e.key === "F11" || (e.key === "Escape" && document.fullscreenElement)) {
+    document.addEventListener("fullscreenchange", fullscreenChanged);
+    document.addEventListener("keyup", function (e) {
+      if (
+        e.key === "F11" ||
+        (e.key === "Escape" && document.fullscreenElement)
+      ) {
         toggleFullScreen();
       }
     });
   }, []);
-
-  function fullscreenChanged() {
-    toggleFullscreenMode();
-    if (document.fullscreenElement) {
-      openFullscreen();
-    } else {
-      closeFullscreen();
-    }
-  };
 
   function toggleDefaultPositions() {
     var answer = window.confirm(
