@@ -1,6 +1,7 @@
 package main
 
 import (
+	"astrostation.server/internal/data"
 	"fmt"
 	"log"
 	"net/http"
@@ -24,6 +25,7 @@ type config struct {
 type application struct {
 	config config
 	logger *log.Logger
+	models data.Models
 }
 
 func main() {
@@ -33,22 +35,26 @@ func main() {
 
 	// host needs to be name of the docker container
 	// TODO: add these into .env files and not push to git
-	cfg.db.dsn = "host=localhost user=astro_admin password=password123 dbname=postgres port=5432 sslmode=disable"
+	cfg.db.dsn = "host=localhost user=astro_admin password=password123 dbname=astrostation_db port=5432 sslmode=disable"
 	cfg.db.maxOpenConns = 25
 	cfg.db.maxIdleConns = 25
 	cfg.db.maxIdleTime = "15m"
 
 	logger := log.New(os.Stdout, "", log.Ldate|log.Ltime)
 
-	app := &application{
-		config: cfg,
-		logger: logger,
-	}
-
-	db, err := app.openDB(cfg)
+	db, err := openDB(cfg)
 	if err != nil {
 		logger.Fatal(err)
 	}
+
+	app := &application{
+		config: cfg,
+		logger: logger,
+		models: data.NewModels(db),
+	}
+
+	// we can write db functions like this
+	//app.models.Info.Insert(...)
 
 	defer db.Close()
 	logger.Printf("database connection successful")

@@ -45,9 +45,10 @@ curl -i -d "$BODY" localhost:4000/v1/test_info
 
 ## Credentials
 
+DB Name = astrostation_db
 Username = astro_admin
 Password = password123
 
 ## Login
 
-`psql --host=0.0.0.0 --dbname=postgres --username=astro_admin`
+`psql --host=0.0.0.0 --dbname=astrostation_db --username=astro_admin`

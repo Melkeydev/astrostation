@@ -35,10 +35,14 @@ func (app *application) createInfoHandler(w http.ResponseWriter, r *http.Request
 		return
 	}
 
+	info := &data.Info{
+		Title:       input.Title,
+		Description: input.Description,
+	}
+
 	// We use a validator to check the inputs
 	// TODO: potentially look at making this into a separate func
 	v := validator.New()
-
 
 	// Title checks
 	v.Check(input.Title != "", "title", "must be provided")
@@ -53,7 +57,20 @@ func (app *application) createInfoHandler(w http.ResponseWriter, r *http.Request
 		return
 	}
 
-	fmt.Fprintf(w, "%+v\n", input)
+	// Call the DB
+	err = app.models.Info.Insert(info)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
+	headers := make(http.Header)
+	headers.Set("Location", fmt.Sprintf("/v1/test_info/%d", info.ID))
+
+	err = app.writeJSON(w, http.StatusCreated, envelope{"info":info}, headers)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+	}
 }
 
 func (app *application) showInfoHandler(w http.ResponseWriter, r *http.Request) {

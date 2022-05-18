@@ -6,13 +6,12 @@ import (
 	"time"
 )
 
-func (app *application) openDB(cfg config) (*sql.DB, error) {
+func openDB(cfg config) (*sql.DB, error) {
 	db, err := sql.Open("postgres", cfg.db.dsn)
 	if err != nil {
 		return nil, err
 	}
 
-	
 	// NOTE: These two values need to be tweaked to our hardware constraints
 	// Set the maximum number of open (in-use + idle) connections in the pool.
 	db.SetMaxOpenConns(cfg.db.maxOpenConns)
