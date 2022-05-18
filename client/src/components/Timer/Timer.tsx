@@ -10,6 +10,8 @@ import {
   useSetPomodoroCounter,
   useTimer,
   useBreakStarted,
+  useAudioVolume,
+  useAlarmOption,
 } from "../../store";
 import toast from "react-hot-toast";
 
@@ -28,8 +30,10 @@ export const Timer = () => {
   const [sessionType, setSessionType] = useState("Session");
   const { setIsTimerToggled } = useToggleTimer();
   const { setPomodoroCounter } = useSetPomodoroCounter();
+  const { alarm } = useAlarmOption();
 
   const audioRef = useRef();
+  const { audioVolume } = useAudioVolume();
 
   useEffect(() => {
     setHasStarted(timerIntervalId !== null);
@@ -40,7 +44,7 @@ export const Timer = () => {
       setPomodoroCounter();
       setTimerQueue(0);
       // @ts-ignore
-      audioRef.current.volume = 0;
+      audioRef.current.volume = audioVolume;
       // @ts-ignore
       audioRef.current.play();
       if (sessionType === "Session") {
@@ -97,7 +101,7 @@ export const Timer = () => {
         );
       }
     }
-  }, [timer, sessionType]);
+  }, [timer, sessionType, audioVolume]);
 
   useEffect(() => {
     setTimer(pomodoroLength);
@@ -184,8 +188,8 @@ export const Timer = () => {
   return (
     <div
       className={`${
-        breakStarted && "shadow-lg bg-slate-200"
-      } shadow-lg py-2 px-1 mb-2 max-w-sm w-72 sm:w-96 bg-white text-gray-800 rounded-lg border border-gray-200 dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700`}
+        breakStarted && "shadow-lg bg-slate-200/[.96]"
+      } shadow-lg py-2 px-1 mb-2 max-w-sm w-72 sm:w-96 bg-white/[.96] text-gray-800 rounded-lg border border-gray-200 dark:text-gray-300 dark:bg-gray-800/[.96] dark:border-gray-700`}
     >
       <div className="text-center">
         <div className="text-center p-2 rounded">
@@ -202,6 +206,7 @@ export const Timer = () => {
                 className="text-gray-800 hover:text-white dark:text-white"
                 variant="cold"
                 onClick={selectShortBreak}
+                disabled={hasStarted}
               >
                 Short Break
               </Button>
@@ -212,12 +217,12 @@ export const Timer = () => {
                 className="text-gray-800 hover:text-white dark:text-white"
                 variant="cold"
                 onClick={selectLongBreak}
+                disabled={hasStarted}
               >
                 Long Break
               </Button>
             </div>
           </div>
-
           {/* Timer */}
           <div>
             <p id="tabular-nums">{sessionType}</p>
@@ -246,12 +251,7 @@ export const Timer = () => {
           </div>
         </div>
       </div>
-      <audio
-        id="beep"
-        preload="auto"
-        ref={audioRef}
-        src="https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
-      />
+      <audio id="beep" preload="auto" ref={audioRef} src={alarm} />
     </div>
   );
 };

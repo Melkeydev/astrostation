@@ -5,6 +5,9 @@ import { HomePage } from "@Pages/Homepage";
 import { SideNav } from "@Components/Nav/SideNav";
 import { useDarkToggleStore } from "@Store";
 import { Toaster } from "react-hot-toast";
+import { version } from "../package.json";
+
+import useSetDefault from "@App/utils/hooks/useSetDefault";
 
 enum backgrounds {
   CITY,
@@ -17,6 +20,7 @@ enum backgrounds {
 
 function App() {
   const isDark = useDarkToggleStore((state) => state.isDark);
+  const setDefault = useSetDefault();
 
   useEffect(() => {
     if (isDark) {
@@ -25,6 +29,21 @@ function App() {
       document.documentElement.classList.remove("dark");
     }
   }, [isDark]);
+
+  useEffect(() => {
+    if (
+      typeof localStorage.APP_VERSION === "undefined" ||
+      localStorage.APP_VERSION === null
+    ) {
+      // We want to clear the state of anyone without this to be safe
+      setDefault(true, true, true);
+      localStorage.setItem("APP_VERSION", version);
+    }
+
+    if (localStorage.APP_VERSION != version) {
+      setDefault(true, true, true);
+    }
+  }, []);
 
   return (
     <Router>
