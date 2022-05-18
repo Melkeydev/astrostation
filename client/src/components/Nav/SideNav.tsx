@@ -19,12 +19,7 @@ import {
   useDarkToggleStore,
   useFullScreenToggleStore,
   useToggleQuote,
-  usePosTask,
-  usePosMusic,
-  usePosSpotify,
-  usePosTimer,
   useStickyNote,
-  usePosQuote
 } from "../../store";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -41,16 +36,8 @@ export const SideNav = () => {
   const { isSpotifyToggled, setIsSpotifyToggled } = useSpotifyMusic();
   const { isQuoteToggled, setIsQuoteToggled } = useToggleQuote();
 
-  const { setTaskPosDefault } = usePosTask();
-  const { setMusicPosDefault } = usePosMusic();
-  const { setSpotifyPosDefault } = usePosSpotify();
-  const { setTimerPosDefault } = usePosTimer();
-  const { setQuotePosDefault } = usePosQuote();
   const { addStickyNote } = useStickyNote();
-  
-
   const isDesktop = useMediaQuery("(min-width: 641px)");
-
   const setDefault = useSetDefault();
 
   useEffect(() => {
@@ -278,13 +265,11 @@ export const SideNav = () => {
               <NavItem onClick={toggleTimerPlayer} toggled={isTimerToggled}>
                 <MdOutlineTimer className="h-6 w-6" />
               </NavItem>
-
               {isDesktop && (
                 <NavItem onClick={addNewStickyNote}>
                   <MdOutlineNoteAdd className="h-6 w-6" />
                 </NavItem>
               )}
-
               <NavItem onClick={toggleDefaultPositions}>
                 <VscDebugRestartFrame className="h-6 w-6" />
               </NavItem>
@@ -295,16 +280,15 @@ export const SideNav = () => {
                   <MdDarkMode className="h-6 w-6" />
                 )}
               </NavItem>
+              <NavItem onClick={toggleQuote} toggled={isQuoteToggled}>
+                <BsFillChatLeftQuoteFill className="h-6 w-6" />
+              </NavItem>
 
               {isDesktop && (
                 <NavItem onClick={toggleFullScreen} toggled={isFullscreen}>
                   <BsArrowsFullscreen className="h-6 w-6" />
                 </NavItem>
               )}
-
-              <NavItem onClick={toggleQuote} toggled={isQuoteToggled}>
-                <BsFillChatLeftQuoteFill className="h-6 w-6" />
-              </NavItem>
             </div>
           </ul>
         </aside>

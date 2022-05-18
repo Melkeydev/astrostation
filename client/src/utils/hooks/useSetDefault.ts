@@ -7,7 +7,7 @@ import {
   useLongBreakTimer,
   usePomodoroTimer,
   useMaxPomodoro,
-  usePosQuote
+  usePosQuote,
 } from "../../store";
 
 function useSetDefault() {
@@ -45,6 +45,7 @@ function useSetDefault() {
       setSpotifyPosDefault();
       setTimerPosDefault();
       setQuotePosDefault();
+      window.location.reload();
     }
   };
 }
