@@ -1,14 +1,16 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import {
   useToggleMusic,
   useToggleTimer,
   useToggleTasks,
   useSpotifyMusic,
   usePosTask,
+  useStickyNote,
+  useToggleQuote,
   usePosMusic,
   usePosSpotify,
   usePosTimer,
-  useStickyNote,
+  usePosQuote
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -22,14 +24,18 @@ import { SettingsModal } from "@Components/Timer/Modal";
 import { CryptoModal } from "@Components/Crypto/Modal";
 import { FaEthereum } from "react-icons/fa";
 import { Sticky } from "@Components/Sticky/Sticky";
+import { Quotes } from "@App/components/Quotes/Quotes";
+
+import useMediaQuery from "../utils/hooks/useMediaQuery";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled } = useToggleMusic();
   const { isTimerToggled } = useToggleTimer();
   const { isTasksToggled } = useToggleTasks();
   const { isSpotifyToggled } = useSpotifyMusic();
+  const { isQuoteToggled } = useToggleQuote();
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
-  const [isMobile, setIsMobile] = useState(false);
+
   const [isSettingsModal, setSettingsModal] = useState(false);
   const [isCryptoModal, setCryptoModal] = useState(false);
 
@@ -37,30 +43,10 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
   const { musicPosX, musicPosY, setMusicPos } = usePosMusic();
   const { spotifyPosX, spotifyPosY, setSpotifyPos } = usePosSpotify();
+  const { quotePosX, quotePosY, setQuotePos } = usePosQuote();
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
 
-  useEffect(() => {
-    const handler = () => {
-      if (window.innerWidth < 641) {
-        setIsMobile(true);
-      } else {
-        setIsMobile(false);
-      }
-    };
-    window.addEventListener("resize", handler);
-
-    return () => {
-      window.removeEventListener("resize", handler);
-    };
-  }, []);
-
-  useEffect(() => {
-    if (window.innerWidth < 641) {
-      setIsMobile(true);
-    } else {
-      setIsMobile(false);
-    }
-  }, []);
+  const isDesktop = useMediaQuery("(min-width: 641px)");
 
   return (
     <div className="h-screen w-70 space-y-1">
@@ -97,7 +83,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           <FaEthereum />
         </button>
       </div>
-      {isMobile ? (
+      {!isDesktop ? (
         <div className="flex flex-col items-center ml-8">
           <div className={`${isMusicToggled ? "block" : "hidden"}`}>
             <Player />
@@ -110,6 +96,9 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           </div>
           <div className={`${isTasksToggled ? "block" : "hidden"}`}>
             <TaskTracker />
+          </div>
+          <div className={`${isQuoteToggled ? "block" : "hidden"}`}>
+            <Quotes />
           </div>
         </div>
       ) : (
@@ -164,6 +153,15 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             isSticky={false}
           >
             <Spotify />
+          </DWrapper>
+          <DWrapper
+            toggleHook={isQuoteToggled}
+            defaultX={quotePosX}
+            defaultY={quotePosY}
+            setPosition={setQuotePos}
+            isSticky={false}
+          >
+            <Quotes />
           </DWrapper>
         </>
       )}

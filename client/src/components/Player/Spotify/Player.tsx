@@ -23,7 +23,7 @@ export const Spotify = () => {
   }
 
   return (
-    <div className="py-2 mb-2 w-72 sm:w-96 max-w-sm text-gray-800 shadow-md rounded-lg dark:text-gray-300 bg-white dark:bg-gray-800 dark:border-gray-700 justify-between">
+    <div className="py-2 mb-2 w-72 sm:w-96 max-w-sm text-gray-800 shadow-md rounded-lg dark:text-gray-300 bg-white/[.96] dark:bg-gray-800/[.96] dark:border-gray-700 justify-between">
       <Tooltip title="Make sure to refresh after logging in" placement="top">
         <div className="flex justify-between items-center p-1">
           <p>Spotify</p>
@@ -44,7 +44,7 @@ export const Spotify = () => {
       </div>
       <div className="flex items-center space-x-1 p-1">
         <input
-          className="w-full p-1 border border-gray-300 dark:bg-gray-700 dark:border-gray-500"
+          className="w-full p-1 border border-gray-300 dark:bg-gray-700/[.96] dark:border-gray-500"
           type="text"
           value={text}
           placeholder="Ctrl-V Spotify URL here"

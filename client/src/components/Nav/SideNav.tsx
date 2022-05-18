@@ -9,7 +9,7 @@ import {
   MdOutlineNoteAdd,
 } from "react-icons/md";
 import { VscDebugRestartFrame } from "react-icons/vsc";
-import { BsArrowsFullscreen } from "react-icons/bs";
+import { BsArrowsFullscreen, BsFillChatLeftQuoteFill } from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa";
 import {
   useToggleMusic,
@@ -18,14 +18,13 @@ import {
   useSpotifyMusic,
   useDarkToggleStore,
   useFullScreenToggleStore,
-  usePosTask,
-  usePosMusic,
-  usePosSpotify,
-  usePosTimer,
+  useToggleQuote,
   useStickyNote,
 } from "../../store";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
+import useMediaQuery from "../../utils/hooks/useMediaQuery";
+import useSetDefault from "@App/utils/hooks/useSetDefault";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
@@ -35,12 +34,32 @@ export const SideNav = () => {
   const { isTimerToggled, setIsTimerToggled } = useToggleTimer();
   const { isTasksToggled, setIsTasksToggled } = useToggleTasks();
   const { isSpotifyToggled, setIsSpotifyToggled } = useSpotifyMusic();
+  const { isQuoteToggled, setIsQuoteToggled } = useToggleQuote();
 
-  const { setTaskPosDefault } = usePosTask();
-  const { setMusicPosDefault } = usePosMusic();
-  const { setSpotifyPosDefault } = usePosSpotify();
-  const { setTimerPosDefault } = usePosTimer();
   const { addStickyNote } = useStickyNote();
+  const isDesktop = useMediaQuery("(min-width: 641px)");
+  const setDefault = useSetDefault();
+
+  useEffect(() => {
+    document.addEventListener("fullscreenchange", fullscreenChanged);
+    document.addEventListener("keyup", function (e) {
+      if (
+        e.key === "F11" ||
+        (e.key === "Escape" && document.fullscreenElement)
+      ) {
+        toggleFullScreen();
+      }
+    });
+  }, []);
+
+  function fullscreenChanged() {
+    toggleFullscreenMode();
+    if (document.fullscreenElement) {
+      openFullscreen();
+    } else {
+      closeFullscreen();
+    }
+  }
 
   useEffect(() => {
     document.addEventListener('fullscreenchange', fullscreenChanged);
@@ -65,10 +84,8 @@ export const SideNav = () => {
       "This will reset tiles to default positon - are you sure?"
     );
     if (answer) {
-      setTaskPosDefault();
-      setMusicPosDefault();
-      setSpotifyPosDefault();
-      setTimerPosDefault();
+      setDefault(false, false, true);
+
       toast("Positions reset", {
         style: {
           borderRadius: "10px",
@@ -183,9 +200,11 @@ export const SideNav = () => {
 
     if (docFullScreenFunctions.requestFullscreen) {
       docFullScreenFunctions.requestFullscreen();
-    } else if (docFullScreenFunctions.webkitRequestFullscreen) { /* Safari */
+    } else if (docFullScreenFunctions.webkitRequestFullscreen) {
+      /* Safari */
       docFullScreenFunctions.webkitRequestFullscreen();
-    } else if (docFullScreenFunctions.msRequestFullscreen) { /* IE11 */
+    } else if (docFullScreenFunctions.msRequestFullscreen) {
+      /* IE11 */
       docFullScreenFunctions.msRequestFullscreen();
     }
   }
@@ -200,9 +219,11 @@ export const SideNav = () => {
 
     if (docExitFunctions.exitFullscreen) {
       docExitFunctions.exitFullscreen();
-    } else if (docExitFunctions.webkitExitFullscreen) { /* Safari */
+    } else if (docExitFunctions.webkitExitFullscreen) {
+      /* Safari */
       docExitFunctions.webkitExitFullscreen();
-    } else if (docExitFunctions.msExitFullscreen) { /* IE11 */
+    } else if (docExitFunctions.msExitFullscreen) {
+      /* IE11 */
       docExitFunctions.msExitFullscreen();
     }
   }
@@ -216,6 +237,22 @@ export const SideNav = () => {
       }
     } catch (err) {
       alert("Cannot go into fullscreen mode: browser too old");
+    }
+  }
+
+  function toggleQuote() {
+    const nextVal = !isQuoteToggled;
+    setIsQuoteToggled(!isQuoteToggled);
+    if (nextVal) {
+      toast("Quote Toggled", {
+        duration: 750,
+        icon: "💬",
+        style: {
+          borderRadius: "10px",
+          background: "#333",
+          color: "#fff",
+        },
+      });
     }
   }
 
@@ -246,9 +283,11 @@ export const SideNav = () => {
               <NavItem onClick={toggleTimerPlayer} toggled={isTimerToggled}>
                 <MdOutlineTimer className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={addNewStickyNote}>
-                <MdOutlineNoteAdd className="h-6 w-6" />
-              </NavItem>
+              {isDesktop && (
+                <NavItem onClick={addNewStickyNote}>
+                  <MdOutlineNoteAdd className="h-6 w-6" />
+                </NavItem>
+              )}
               <NavItem onClick={toggleDefaultPositions}>
                 <VscDebugRestartFrame className="h-6 w-6" />
               </NavItem>
@@ -259,9 +298,15 @@ export const SideNav = () => {
                   <MdDarkMode className="h-6 w-6" />
                 )}
               </NavItem>
-              <NavItem onClick={toggleFullScreen} toggled={isFullscreen}>
-                <BsArrowsFullscreen className="h-6 w-6" />
+              <NavItem onClick={toggleQuote} toggled={isQuoteToggled}>
+                <BsFillChatLeftQuoteFill className="h-6 w-6" />
               </NavItem>
+
+              {isDesktop && (
+                <NavItem onClick={toggleFullScreen} toggled={isFullscreen}>
+                  <BsArrowsFullscreen className="h-6 w-6" />
+                </NavItem>
+              )}
             </div>
           </ul>
         </aside>
