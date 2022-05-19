@@ -708,7 +708,7 @@ export const useFullScreenToggleStore = create<FullscreenState>(
  * ---
  * Handle the visibility of motivational/programming quotes
  */
- type IToggleQuote = {
+type IToggleQuote = {
   isQuoteToggled: boolean;
   setIsQuoteToggled: (isQuoteToggled: boolean) => void;
 };
