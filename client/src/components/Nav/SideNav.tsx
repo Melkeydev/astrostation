@@ -20,6 +20,8 @@ import {
   useFullScreenToggleStore,
   useToggleQuote,
   useStickyNote,
+  useToggleStickyNote,
+  useToggleWidgetReset
 } from "../../store";
 import { useState, useEffect } from "react";
 import toast from "react-hot-toast";
@@ -35,6 +37,16 @@ export const SideNav = () => {
   const { isTasksToggled, setIsTasksToggled } = useToggleTasks();
   const { isSpotifyToggled, setIsSpotifyToggled } = useSpotifyMusic();
   const { isQuoteToggled, setIsQuoteToggled } = useToggleQuote();
+
+  const { isTimerShown } = useToggleTimer();
+  const { isStickyNoteShown } = useToggleStickyNote();
+  const { isTasksShown } = useToggleTasks();
+  const { isMusicShown } = useToggleMusic();
+  const { isSpotifyShown } = useSpotifyMusic();
+  const { isDarkModeShown } = useDarkToggleStore();
+  const { isFullscreenShown } = useFullScreenToggleStore();
+  const { isQuoteShown } = useToggleQuote();
+  const { isWidgetResetShown } = useToggleWidgetReset();
 
   const { addStickyNote } = useStickyNote();
   const isDesktop = useMediaQuery("(min-width: 641px)");
@@ -116,6 +128,7 @@ export const SideNav = () => {
       });
     }
   }
+
   function toggleTimerPlayer() {
     const nextVal = !isTimerToggled;
     setIsTimerToggled(nextVal);
@@ -253,39 +266,39 @@ export const SideNav = () => {
                 active ? "" : "hidden"
               } w-full sm:flex sm:flex-grow sm:w-auto sm:flex-col`}
             >
-              <NavItem onClick={toggleMusicPlayer} toggled={isMusicToggled}>
+              <NavItem onClick={toggleMusicPlayer} toggled={isMusicToggled} shown={isMusicShown}>
                 <IoMusicalNotesOutline className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleSpotify} toggled={isSpotifyToggled}>
+              <NavItem onClick={toggleSpotify} toggled={isSpotifyToggled} shown={isSpotifyShown}>
                 <FaSpotify className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleTaskTracker} toggled={isTasksToggled}>
+              <NavItem onClick={toggleTaskTracker} toggled={isTasksToggled} shown={isTasksShown}>
                 <CgNotes className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleTimerPlayer} toggled={isTimerToggled}>
+              <NavItem onClick={toggleTimerPlayer} toggled={isTimerToggled} shown={isTimerShown}>
                 <MdOutlineTimer className="h-6 w-6" />
               </NavItem>
               {isDesktop && (
-                <NavItem onClick={addNewStickyNote}>
+                <NavItem onClick={addNewStickyNote} shown={isStickyNoteShown}>
                   <MdOutlineNoteAdd className="h-6 w-6" />
                 </NavItem>
               )}
-              <NavItem onClick={toggleDefaultPositions}>
+              <NavItem onClick={toggleDefaultPositions} shown={isWidgetResetShown}>
                 <VscDebugRestartFrame className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleDark}>
+              <NavItem onClick={toggleDark} shown={isDarkModeShown}>
                 {isDark ? (
                   <MdWbSunny className="h-6 w-6" />
                 ) : (
                   <MdDarkMode className="h-6 w-6" />
                 )}
               </NavItem>
-              <NavItem onClick={toggleQuote} toggled={isQuoteToggled}>
+              <NavItem onClick={toggleQuote} toggled={isQuoteToggled} shown={isQuoteShown}>
                 <BsFillChatLeftQuoteFill className="h-6 w-6" />
               </NavItem>
 
               {isDesktop && (
-                <NavItem onClick={toggleFullScreen} toggled={isFullscreen}>
+                <NavItem onClick={toggleFullScreen} toggled={isFullscreen} shown={isFullscreenShown}>
                   <BsArrowsFullscreen className="h-6 w-6" />
                 </NavItem>
               )}
