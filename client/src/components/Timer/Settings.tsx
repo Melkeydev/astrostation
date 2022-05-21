@@ -41,8 +41,6 @@ export const TimerSettings = ({ onClose }) => {
     setCurrentVolume(value);
   }
 
-  console.log(alarm);
-
   function onSubmit() {
     setShortBreak(shortBreak);
     setLongBreak(longBreak);
