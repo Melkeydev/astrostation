@@ -41,6 +41,8 @@ export const TimerSettings = ({ onClose }) => {
     setCurrentVolume(value);
   }
 
+  console.log(alarm);
+
   function onSubmit() {
     setShortBreak(shortBreak);
     setLongBreak(longBreak);
@@ -255,7 +257,7 @@ export const TimerSettings = ({ onClose }) => {
               currentAlarm == "/assets/music/arcade.wav" &&
               "border border-gray-200"
             }`}
-            onClick={() => changeAlarm("/assets/images/arcade.wav")}
+            onClick={() => changeAlarm("/arcade.wav")}
           >
             <BsMusicPlayerFill />
           </div>
@@ -267,7 +269,7 @@ export const TimerSettings = ({ onClose }) => {
               currentAlarm == "/assets/music/bells.wav" &&
               "border border-gray-200"
             }`}
-            onClick={() => changeAlarm("/assets/images/bells.wav")}
+            onClick={() => changeAlarm("/bells.wav")}
           >
             <BsMusicPlayerFill />
           </div>
@@ -279,7 +281,7 @@ export const TimerSettings = ({ onClose }) => {
               currentAlarm == "/assets/music/flute.wav" &&
               "border border-gray-200"
             }`}
-            onClick={() => changeAlarm("/assets/images/flute.wav")}
+            onClick={() => changeAlarm("/flute.wav")}
           >
             <BsMusicPlayerFill />
           </div>
@@ -291,7 +293,7 @@ export const TimerSettings = ({ onClose }) => {
               currentAlarm == "/assets/music/piano.wav" &&
               "border border-gray-200"
             }`}
-            onClick={() => changeAlarm("/assets/images/piano.wav")}
+            onClick={() => changeAlarm("/piano.wav")}
           >
             <BsMusicPlayerFill />
           </div>
