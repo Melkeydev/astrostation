@@ -521,9 +521,9 @@ type IToggleTasks = {
 export const useToggleTasks = create<IToggleTasks>(
   persist(
     (set, _) => ({
-      isTasksToggled: false,
+      isTasksToggled: true,
       setIsTasksToggled: (isTasksToggled) => set({ isTasksToggled }),
-      isTasksShown: false,
+      isTasksShown: true,
       setIsTasksShown: (isTasksShown) => set({ isTasksShown })
     }),
     {
@@ -568,9 +568,9 @@ type IToggleMusic = {
 export const useToggleMusic = create<IToggleMusic>(
   persist(
     (set, _) => ({
-      isMusicToggled: false,
+      isMusicToggled: true,
       setIsMusicToggled: (isMusicToggled) => set({ isMusicToggled }),
-      isMusicShown: false,
+      isMusicShown: true,
       setIsMusicShown: (isMusicShown) => set({ isMusicShown })
     }),
     {
@@ -615,9 +615,9 @@ type IToggleSpotify = {
 export const useSpotifyMusic = create<IToggleSpotify>(
   persist(
     (set, _) => ({
-      isSpotifyToggled: false,
+      isSpotifyToggled: true,
       setIsSpotifyToggled: (isSpotifyToggled) => set({ isSpotifyToggled }),
-      isSpotifyShown: false,
+      isSpotifyShown: true,
       setIsSpotifyShown: (isSpotifyShown) => set({ isSpotifyShown })
     }),
     {
@@ -663,9 +663,9 @@ type IToggleTimer = {
 export const useToggleTimer = create<IToggleTimer>(
   persist(
     (set, _) => ({
-      isTimerToggled: false,
+      isTimerToggled: true,
       setIsTimerToggled: (isTimerToggled) => set({ isTimerToggled }),
-      isTimerShown: false,
+      isTimerShown: true,
       setIsTimerShown: (isTimerShown) => set({ isTimerShown })
     }),
     { name: "state_timer_section" }

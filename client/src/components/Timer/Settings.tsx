@@ -412,7 +412,7 @@ export const TimerSettings = ({ onClose }) => {
               variant="primary"
               onClick={()=>setIsWidgetModalOpen(true)}
             >
-              Alter Widgets
+              Configure Widgets
             </Button>
           </div>
           <div className="flex justify-between p-2">
