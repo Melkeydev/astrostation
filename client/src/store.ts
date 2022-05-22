@@ -809,3 +809,23 @@ export const useToggleWidgetReset = create<IToggleWidgetReset>(
     }
   )
 );
+
+/**
+ * First-time user Store
+ * ---
+ * Handles storing key for whether current user is a new user
+ */
+type FirstTimeUserState = {
+  isFirstTimeUser: boolean;
+  toggleIsFirstTimeUser: ()=> void;
+};
+
+export const useFirstTimeUserStore = create<FirstTimeUserState>(
+  persist(
+    (set, _) => ({
+      isFirstTimeUser: true,
+      toggleIsFirstTimeUser: () => set((oldState) => ({ isFirstTimeUser: !oldState.isFirstTimeUser }))
+    }),
+    { name: "firstTimeUser"}
+  )
+)

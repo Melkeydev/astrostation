@@ -53,7 +53,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
       <div className="flex justify-end space-x-6">
         <button
           type="button"
-          className="flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
+          className="settingsButton flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
           onClick={() => setSettingsModal(true)}
         >
           Settings
@@ -76,7 +76,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
       <div className="fixed bottom-0">
         <button
           type="button"
-          className="flex items-center rounded-md shadow-sm px-4 py-2 bg-violet-700 text-white font-medium focus:outline-none dark:bg-violet-700 dark:text-violet-200"
+          className="donateButton flex items-center rounded-md shadow-sm px-4 py-2 bg-violet-700 text-white font-medium focus:outline-none dark:bg-violet-700 dark:text-violet-200"
           onClick={() => setCryptoModal(true)}
         >
           Donate
