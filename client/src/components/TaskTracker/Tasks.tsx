@@ -3,9 +3,6 @@ import { Button } from "@Components/Common/Button";
 import { useTask } from "@Store";
 
 export const Tasks = ({ tasks }: any) => {
-  // TODO: Add Clear all at the bottom of this component
-  // TODO: add the hook funcitonality to delete all the tasks in the list
-  //
   const { removeAllTasks } = useTask();
 
   function confirmClearTasks() {
