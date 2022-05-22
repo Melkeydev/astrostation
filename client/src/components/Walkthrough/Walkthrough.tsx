@@ -15,7 +15,7 @@ export const Walkthrough = () => {
         },
         {
             target: ".settingsButton",
-            content: "In the settings, you can configure Astrostation to you liking by controlling your active widgets and their functionality.",
+            content: "In the settings, you can configure Astrostation to your liking by controlling your active widgets and their functionality.",
         },
         {
             target: ".donateButton",
