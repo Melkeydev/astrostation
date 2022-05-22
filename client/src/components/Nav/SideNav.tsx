@@ -266,7 +266,7 @@ export const SideNav = () => {
         <aside className="flex flex-col">
           <ul>
             <div className="sm:hidden">
-              <NavItem onClick={toggleNavBar}>
+              <NavItem onClick={toggleNavBar} shown={true}>
                 <IoMenu className="h-6 w-6" />
               </NavItem>
             </div>
