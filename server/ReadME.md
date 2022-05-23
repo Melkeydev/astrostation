@@ -41,6 +41,15 @@ BODY='{"title":"TitleTest","description":"This is the post request test"}'
 curl -i -d "$BODY" localhost:4000/v1/test_info
 ```
 
+## psql commands
+
+List Relationships in DB
+
+`\dt`
+
+List Schema of a \description
+`\d <table_name>`
+
 # DB commands
 
 ## Credentials
