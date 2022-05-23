@@ -318,6 +318,7 @@ interface TaskState {
   addTask: (description: string, count: number, isBreak: boolean) => void;
   renameTask: (id: number, newName: string) => void;
   removeTask: (id: number) => void;
+  removeAllTasks: () => void;
   toggleInProgressState: (id: number) => void;
   completeTask: (id: number) => void;
   setPomodoroCounter: (id: number) => void;
@@ -362,6 +363,7 @@ export const useTask = create<TaskState>(
           tasks: state.tasks.filter((task) => task.id !== id),
         }));
       },
+      removeAllTasks: () => set({ tasks: [] }),
       toggleInProgressState: (id) => {
         set((state) => ({
           tasks: state.tasks.map((task) =>
@@ -708,7 +710,7 @@ export const useFullScreenToggleStore = create<FullscreenState>(
  * ---
  * Handle the visibility of motivational/programming quotes
  */
- type IToggleQuote = {
+type IToggleQuote = {
   isQuoteToggled: boolean;
   setIsQuoteToggled: (isQuoteToggled: boolean) => void;
 };
