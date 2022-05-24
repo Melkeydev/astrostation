@@ -22,6 +22,7 @@ import { DWrapper } from "@Components/Dragggable/Draggable";
 
 import { SettingsModal } from "@Components/Timer/Modal";
 import { CryptoModal } from "@Components/Crypto/Modal";
+import { WidgetControlModal } from "@Components/WidgetControl/WidgetControlModal";
 import { FaEthereum } from "react-icons/fa";
 import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
@@ -38,6 +39,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
 
   const [isSettingsModal, setSettingsModal] = useState(false);
   const [isCryptoModal, setCryptoModal] = useState(false);
+  const [isConfigureWidgetModal, setIsWidgetModal ] = useState(false);
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -50,7 +52,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
 
   return (
     <div className="h-screen w-70 space-y-1">
-      <div className="flex justify-end space-x-6">
+      <div className={"flex justify-end " + (isDesktop ? " space-x-6" : " grid gap-y-[5%]")}>
         <button
           type="button"
           className="flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
@@ -59,12 +61,26 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           Settings
           <GoGear className="-mr-1 ml-2" />
         </button>
+        <button
+          type="button"
+          className="flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
+          onClick={() => setIsWidgetModal(true)}
+        >
+          Configure Widgets
+          <GoGear className="-mr-1 ml-2" />
+        </button>
         <BackgroundNav backgrounds={backgrounds} />
       </div>
       <div className="flex justify-end space-x-6">
         <SettingsModal
           isVisible={isSettingsModal}
           onClose={() => setSettingsModal(false)}
+        />
+      </div>
+      <div className="flex justify-end space-x-6">
+        <WidgetControlModal
+          isVisible={isConfigureWidgetModal}
+          onClose={() => setIsWidgetModal(false)}
         />
       </div>
       <div className="flex justify-end space-x-6">
