@@ -18,6 +18,7 @@ import { TaskTracker } from "@Components/TaskTracker/TaskTracker";
 import { Spotify } from "@Components/Player/Spotify/Player";
 import { BackgroundNav } from "@Components/Nav/BackgroundNav";
 import { GoGear } from "react-icons/go";
+import { MdWidgets } from "react-icons/md";
 import { DWrapper } from "@Components/Dragggable/Draggable";
 
 import { SettingsModal } from "@Components/Timer/Modal";
@@ -67,7 +68,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           onClick={() => setIsWidgetModal(true)}
         >
           Configure Widgets
-          <GoGear className="-mr-1 ml-2" />
+          <MdWidgets className="-mr-1 ml-2" />
         </button>
         <BackgroundNav backgrounds={backgrounds} />
       </div>
