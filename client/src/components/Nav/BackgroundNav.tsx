@@ -2,7 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { useSetBackground } from "@Store";
 export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
   const [showMenu, setShowMenu] = useState(false);
-  const { setIsBackground } = useSetBackground();
+  const { isBackground, setIsBackground } = useSetBackground();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -53,7 +53,7 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
             ref={menuRef}
           >
             <div
-              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
+              className={"py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md " + (isBackground==0 && " bg-gray-100 dark:bg-gray-900 rounded-md")}
               onClick={() => setIsBackground(backgrounds.STARS)}
             >
               <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
@@ -61,7 +61,7 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
               </div>
             </div>
             <div
-              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
+              className={"py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md " + (isBackground==1 && " bg-gray-100 dark:bg-gray-900 rounded-md")}
               onClick={() => setIsBackground(backgrounds.CITY)}
             >
               <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
@@ -69,7 +69,7 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
               </div>
             </div>
             <div
-              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
+              className={"py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md " + (isBackground==2 && " bg-gray-100 dark:bg-gray-900 rounded-md")}
               onClick={() => setIsBackground(backgrounds.DOTS)}
             >
               <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
@@ -77,7 +77,7 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
               </div>
             </div>
             <div
-              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
+              className={"py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md " + (isBackground==3 && " bg-gray-100 dark:bg-gray-900 rounded-md")}
               onClick={() => setIsBackground(backgrounds.SNOW)}
             >
               <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
@@ -85,7 +85,7 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
               </div>
             </div>
             <div
-              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
+              className={"py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md " + (isBackground==4 && " bg-gray-100 dark:bg-gray-900 rounded-md")}
               onClick={() => setIsBackground(backgrounds.FADE)}
             >
               <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
@@ -93,7 +93,7 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
               </div>
             </div>
             <div
-              className="py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md"
+              className={"py-1 cursor-pointer hover:bg-gray-100 dark:hover:bg-gray-900 hover:rounded-md " + (isBackground==5 && " bg-gray-100 dark:bg-gray-900 rounded-md")}
               onClick={() => setIsBackground(backgrounds.GRADIENT)}
             >
               <div className="text-gray-700 dark:text-gray-200 block px-4 py-2 text-sm">
