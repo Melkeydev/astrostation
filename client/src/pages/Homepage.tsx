@@ -5,6 +5,7 @@ import {
   useToggleTasks,
   useSpotifyMusic,
   usePosTask,
+  useToggleStickyNote,
   useStickyNote,
   useToggleQuote,
   usePosMusic,
@@ -31,12 +32,14 @@ import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "../utils/hooks/useMediaQuery";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
-  const { isMusicToggled } = useToggleMusic();
-  const { isTimerToggled } = useToggleTimer();
-  const { isTasksToggled } = useToggleTasks();
-  const { isSpotifyToggled } = useSpotifyMusic();
-  const { isQuoteToggled } = useToggleQuote();
+  const { isMusicToggled, isMusicShown } = useToggleMusic();
+  const { isTimerToggled, isTimerShown } = useToggleTimer();
+  const { isTasksToggled, isTasksShown } = useToggleTasks();
+  const { isSpotifyToggled, isSpotifyShown } = useSpotifyMusic();
+  const { isQuoteToggled, isQuoteShown } = useToggleQuote();
+  const { isStickyNoteShown } = useToggleStickyNote();
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
+
 
   const [isSettingsModal, setSettingsModal] = useState(false);
   const [isCryptoModal, setCryptoModal] = useState(false);
@@ -124,7 +127,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             return (
               <DWrapper
                 key={stickyNote.id}
-                toggleHook={true}
+                toggleHook={isStickyNoteShown}
                 defaultX={stickyNote.stickyNotesPosX}
                 defaultY={stickyNote.stickyNotesPosY}
                 setPosition={setStickyNotesPos}
@@ -136,7 +139,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             );
           })}
           <DWrapper
-            toggleHook={isTimerToggled}
+            toggleHook={isTimerToggled && isTimerShown}
             defaultX={timerPosX}
             defaultY={timerPosY}
             setPosition={setTimerPos}
@@ -145,7 +148,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             <Timer />
           </DWrapper>
           <DWrapper
-            toggleHook={isTasksToggled}
+            toggleHook={isTasksToggled && isTasksShown}
             defaultX={taskPosX}
             defaultY={taskPosY}
             setPosition={setTaskPos}
@@ -154,7 +157,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             <TaskTracker />
           </DWrapper>
           <DWrapper
-            toggleHook={isMusicToggled}
+            toggleHook={isMusicToggled && isMusicShown}
             defaultX={musicPosX}
             defaultY={musicPosY}
             setPosition={setMusicPos}
@@ -163,7 +166,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             <Player />
           </DWrapper>
           <DWrapper
-            toggleHook={isSpotifyToggled}
+            toggleHook={isSpotifyToggled && isSpotifyShown}
             defaultX={spotifyPosX}
             defaultY={spotifyPosY}
             setPosition={setSpotifyPos}
@@ -172,7 +175,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             <Spotify />
           </DWrapper>
           <DWrapper
-            toggleHook={isQuoteToggled}
+            toggleHook={isQuoteToggled && isQuoteShown}
             defaultX={quotePosX}
             defaultY={quotePosY}
             setPosition={setQuotePos}
