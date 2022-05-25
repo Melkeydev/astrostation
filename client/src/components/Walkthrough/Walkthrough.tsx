@@ -19,7 +19,7 @@ export const Walkthrough = () => {
         },
         {
             target: ".donateButton",
-            content: "Astrostation is 100% free to use. If you are feeling generous, you can donate Etherum."
+            content: "Astrostation is 100% free to use. If you are feeling generous, you can donate Ethereum."
         }
     ];
   
