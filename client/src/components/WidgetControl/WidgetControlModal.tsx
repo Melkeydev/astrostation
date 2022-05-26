@@ -209,59 +209,59 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
                     <div className="grid grid-cols-[30%,30%,30%] grid-rows-[100px,100px,100px] justify-center gap-1 text-center p-4">
                         <div 
                             onClick={() => toggleSpotifyWidget() }
-                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer " + (isSpotifyShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
+                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer rounded " + (isSpotifyShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
                             Spotify
                             <FaSpotify className="h-6 w-full"/>
                         </div>
                         <div 
                             onClick={() => toggleMusicWidget() }
-                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer " + (isMusicShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
+                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer rounded " + (isMusicShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
                             Chill Music
                             <IoMusicalNotesOutline className="h-6 w-full"/>
                         </div>
                         <div 
                             onClick={() => toggleTaskTrackerWidget() }
-                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer " + (isTasksShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
+                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer rounded " + (isTasksShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
                             Task Tracker
                             <CgNotes className="h-6 w-full"/>
                         </div>
                         <div 
                             onClick={() => toggleTimerWidget() }
-                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer " + (isTimerShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
+                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer rounded " + (isTimerShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
                             Pomodoro Timer
                             <MdOutlineTimer className="h-6 w-full"/>
                         </div>
                         <div 
                             onClick={() => toggleDarkModeWidget() }
-                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer " + (isDarkModeShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
+                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer rounded " + (isDarkModeShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
                             Theme
                             <MdWbSunny className="h-6 w-full"/>
                         </div>
                         {isDesktop &&                     
                             <div
                                 onClick={() => toggleStickyNoteWidget() }
-                                className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer " + (isStickyNoteShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
+                                className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer rounded " + (isStickyNoteShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
                                 Sticky Notes
                                 <MdOutlineNoteAdd className="h-6 w-full"/>
                             </div>
                         }
                         <div
                             onClick={() => toggleResetWidget() }
-                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer " + (isWidgetResetShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
+                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer rounded " + (isWidgetResetShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
                             Reset
                             <VscDebugRestartFrame className="h-6 w-full"/>
                         </div>
                         {isDesktop &&                     
                             <div
                                 onClick={() => toggleFullscreentWidget() } 
-                                className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer " + (isFullscreenShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
+                                className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer rounded " + (isFullscreenShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
                                 Fullscreen
                                 <BsArrowsFullscreen className="h-6 w-full"/>
                             </div>
                         }
                         <div
                             onClick={() => toggleQuoteWidget() }
-                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer " + (isQuoteShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
+                            className={"grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer rounded " + (isQuoteShown && "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")}>
                             Quotes
                             <BsFillChatLeftQuoteFill className="h-6 w-full"/>
                         </div>
