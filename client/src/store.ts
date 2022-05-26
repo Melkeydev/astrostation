@@ -334,6 +334,7 @@ interface TaskState {
   addTask: (description: string, count: number, isBreak: boolean) => void;
   renameTask: (id: number, newName: string) => void;
   removeTask: (id: number) => void;
+  removeAllTasks: () => void;
   toggleInProgressState: (id: number) => void;
   completeTask: (id: number) => void;
   setPomodoroCounter: (id: number) => void;
@@ -378,6 +379,7 @@ export const useTask = create<TaskState>(
           tasks: state.tasks.filter((task) => task.id !== id),
         }));
       },
+      removeAllTasks: () => set({ tasks: [] }),
       toggleInProgressState: (id) => {
         set((state) => ({
           tasks: state.tasks.map((task) =>
@@ -521,7 +523,7 @@ type IToggleTasks = {
 export const useToggleTasks = create<IToggleTasks>(
   persist(
     (set, _) => ({
-      isTasksToggled: true,
+      isTasksToggled: false,
       setIsTasksToggled: (isTasksToggled) => set({ isTasksToggled }),
       isTasksShown: true,
       setIsTasksShown: (isTasksShown) => set({ isTasksShown })
@@ -568,7 +570,7 @@ type IToggleMusic = {
 export const useToggleMusic = create<IToggleMusic>(
   persist(
     (set, _) => ({
-      isMusicToggled: true,
+      isMusicToggled: false,
       setIsMusicToggled: (isMusicToggled) => set({ isMusicToggled }),
       isMusicShown: true,
       setIsMusicShown: (isMusicShown) => set({ isMusicShown })
@@ -615,7 +617,7 @@ type IToggleSpotify = {
 export const useSpotifyMusic = create<IToggleSpotify>(
   persist(
     (set, _) => ({
-      isSpotifyToggled: true,
+      isSpotifyToggled: false,
       setIsSpotifyToggled: (isSpotifyToggled) => set({ isSpotifyToggled }),
       isSpotifyShown: true,
       setIsSpotifyShown: (isSpotifyShown) => set({ isSpotifyShown })
@@ -663,7 +665,7 @@ type IToggleTimer = {
 export const useToggleTimer = create<IToggleTimer>(
   persist(
     (set, _) => ({
-      isTimerToggled: true,
+      isTimerToggled: false,
       setIsTimerToggled: (isTimerToggled) => set({ isTimerToggled }),
       isTimerShown: true,
       setIsTimerShown: (isTimerShown) => set({ isTimerShown })
@@ -746,7 +748,7 @@ export const useFullScreenToggleStore = create<FullscreenState>(
  * ---
  * Handle the visibility of motivational/programming quotes
  */
- type IToggleQuote = {
+type IToggleQuote = {
   isQuoteToggled: boolean;
   setIsQuoteToggled: (isQuoteToggled: boolean) => void;
   isQuoteShown: boolean;
