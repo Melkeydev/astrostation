@@ -5,6 +5,7 @@ import {
   useToggleTasks,
   useSpotifyMusic,
   usePosTask,
+  useToggleStickyNote,
   useStickyNote,
   useToggleQuote,
   usePosMusic,
@@ -18,10 +19,12 @@ import { TaskTracker } from "@Components/TaskTracker/TaskTracker";
 import { Spotify } from "@Components/Player/Spotify/Player";
 import { BackgroundNav } from "@Components/Nav/BackgroundNav";
 import { GoGear } from "react-icons/go";
+import { MdWidgets } from "react-icons/md";
 import { DWrapper } from "@Components/Dragggable/Draggable";
 
 import { SettingsModal } from "@Components/Timer/Modal";
 import { CryptoModal } from "@Components/Crypto/Modal";
+import { WidgetControlModal } from "@Components/WidgetControl/WidgetControlModal";
 import { FaEthereum } from "react-icons/fa";
 import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
@@ -29,15 +32,18 @@ import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "../utils/hooks/useMediaQuery";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
-  const { isMusicToggled } = useToggleMusic();
-  const { isTimerToggled } = useToggleTimer();
-  const { isTasksToggled } = useToggleTasks();
-  const { isSpotifyToggled } = useSpotifyMusic();
-  const { isQuoteToggled } = useToggleQuote();
+  const { isMusicToggled, isMusicShown } = useToggleMusic();
+  const { isTimerToggled, isTimerShown } = useToggleTimer();
+  const { isTasksToggled, isTasksShown } = useToggleTasks();
+  const { isSpotifyToggled, isSpotifyShown } = useSpotifyMusic();
+  const { isQuoteToggled, isQuoteShown } = useToggleQuote();
+  const { isStickyNoteShown } = useToggleStickyNote();
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
+
 
   const [isSettingsModal, setSettingsModal] = useState(false);
   const [isCryptoModal, setCryptoModal] = useState(false);
+  const [isConfigureWidgetModal, setIsWidgetModal ] = useState(false);
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -50,7 +56,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
 
   return (
     <div className="h-screen w-70 space-y-1">
-      <div className="flex justify-end space-x-6">
+      <div className={"flex justify-end " + (isDesktop ? " space-x-6" : " grid gap-y-[5%]")}>
         <button
           type="button"
           className="flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
@@ -59,12 +65,26 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           Settings
           <GoGear className="-mr-1 ml-2" />
         </button>
+        <button
+          type="button"
+          className="flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
+          onClick={() => setIsWidgetModal(true)}
+        >
+          Configure Widgets
+          <MdWidgets className="-mr-1 ml-2" />
+        </button>
         <BackgroundNav backgrounds={backgrounds} />
       </div>
       <div className="flex justify-end space-x-6">
         <SettingsModal
           isVisible={isSettingsModal}
           onClose={() => setSettingsModal(false)}
+        />
+      </div>
+      <div className="flex justify-end space-x-6">
+        <WidgetControlModal
+          isVisible={isConfigureWidgetModal}
+          onClose={() => setIsWidgetModal(false)}
         />
       </div>
       <div className="flex justify-end space-x-6">
@@ -107,7 +127,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             return (
               <DWrapper
                 key={stickyNote.id}
-                toggleHook={true}
+                toggleHook={isStickyNoteShown}
                 defaultX={stickyNote.stickyNotesPosX}
                 defaultY={stickyNote.stickyNotesPosY}
                 setPosition={setStickyNotesPos}
@@ -119,7 +139,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             );
           })}
           <DWrapper
-            toggleHook={isTimerToggled}
+            toggleHook={isTimerToggled && isTimerShown}
             defaultX={timerPosX}
             defaultY={timerPosY}
             setPosition={setTimerPos}
@@ -128,7 +148,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             <Timer />
           </DWrapper>
           <DWrapper
-            toggleHook={isTasksToggled}
+            toggleHook={isTasksToggled && isTasksShown}
             defaultX={taskPosX}
             defaultY={taskPosY}
             setPosition={setTaskPos}
@@ -137,7 +157,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             <TaskTracker />
           </DWrapper>
           <DWrapper
-            toggleHook={isMusicToggled}
+            toggleHook={isMusicToggled && isMusicShown}
             defaultX={musicPosX}
             defaultY={musicPosY}
             setPosition={setMusicPos}
@@ -146,7 +166,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             <Player />
           </DWrapper>
           <DWrapper
-            toggleHook={isSpotifyToggled}
+            toggleHook={isSpotifyToggled && isSpotifyShown}
             defaultX={spotifyPosX}
             defaultY={spotifyPosY}
             setPosition={setSpotifyPos}
@@ -155,7 +175,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             <Spotify />
           </DWrapper>
           <DWrapper
-            toggleHook={isQuoteToggled}
+            toggleHook={isQuoteToggled && isQuoteShown}
             defaultX={quotePosX}
             defaultY={quotePosY}
             setPosition={setQuotePos}

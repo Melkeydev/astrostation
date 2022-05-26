@@ -230,7 +230,6 @@ export const usePomodoroTimer = create<PomodoroTime>(
  * ---
  * Handle the sticky notes created in the tasks section
  */
-
 interface StickyNote {
   id: number;
   text: string;
@@ -245,6 +244,23 @@ interface StickyNoteState {
   removeNote: (id: number) => void;
   setStickyNotesPos: (id: number, X: number, Y: number) => void;
 }
+
+interface IToggleStickyNote {
+  isStickyNoteShown: boolean;
+  setIsStickyNoteShown: (isStickyNoteShown: boolean) => void;
+};
+
+export const useToggleStickyNote = create<IToggleStickyNote>(
+  persist(
+    (set, _) => ({
+      isStickyNoteShown: false,
+      setIsStickyNoteShown: (isStickyNoteShown) => set({ isStickyNoteShown })
+    }),
+    {
+      name: "state_sticky_note",
+    }
+  )
+);
 
 export const useStickyNote = create<StickyNoteState>(
   persist(
@@ -500,16 +516,20 @@ export const useSetBackground = create<IBackground>(
 type IToggleTasks = {
   isTasksToggled: boolean;
   setIsTasksToggled: (isTasksToggled: boolean) => void;
+  isTasksShown: boolean;
+  setIsTasksShown: (isTasksShown: boolean) => void;
 };
 
 export const useToggleTasks = create<IToggleTasks>(
   persist(
     (set, _) => ({
-      isTasksToggled: true,
+      isTasksToggled: false,
       setIsTasksToggled: (isTasksToggled) => set({ isTasksToggled }),
+      isTasksShown: true,
+      setIsTasksShown: (isTasksShown) => set({ isTasksShown })
     }),
     {
-      name: "show_tasks_section",
+      name: "state_tasks_section",
     }
   )
 );
@@ -543,16 +563,20 @@ export const usePosTask = create<IPosTask>(
 type IToggleMusic = {
   isMusicToggled: boolean;
   setIsMusicToggled: (isMusicToggled: boolean) => void;
+  isMusicShown: boolean;
+  setIsMusicShown: (isMusicShown: boolean) => void;
 };
 
 export const useToggleMusic = create<IToggleMusic>(
   persist(
     (set, _) => ({
-      isMusicToggled: true,
+      isMusicToggled: false,
       setIsMusicToggled: (isMusicToggled) => set({ isMusicToggled }),
+      isMusicShown: true,
+      setIsMusicShown: (isMusicShown) => set({ isMusicShown })
     }),
     {
-      name: "show_music_section",
+      name: "state_music_section",
     }
   )
 );
@@ -583,20 +607,23 @@ export const usePosMusic = create<IPosMusic>(
  * ---
  * Handle the visibility of the Spotify section
  */
-
 type IToggleSpotify = {
   isSpotifyToggled: boolean;
   setIsSpotifyToggled: (isSpotifyToggled: boolean) => void;
+  isSpotifyShown: boolean;
+  setIsSpotifyShown: (isSpotifyShown: boolean) => void;
 };
 
 export const useSpotifyMusic = create<IToggleSpotify>(
   persist(
     (set, _) => ({
-      isSpotifyToggled: true,
+      isSpotifyToggled: false,
       setIsSpotifyToggled: (isSpotifyToggled) => set({ isSpotifyToggled }),
+      isSpotifyShown: true,
+      setIsSpotifyShown: (isSpotifyShown) => set({ isSpotifyShown })
     }),
     {
-      name: "show_spotify_section",
+      name: "state_spotify_section",
     }
   )
 );
@@ -631,15 +658,19 @@ export const usePosSpotify = create<IPosSpotify>(
 type IToggleTimer = {
   isTimerToggled: boolean;
   setIsTimerToggled: (isTimerToggled: boolean) => void;
+  isTimerShown: boolean;
+  setIsTimerShown: (isTimerShown: boolean) => void;
 };
 
 export const useToggleTimer = create<IToggleTimer>(
   persist(
     (set, _) => ({
-      isTimerToggled: true,
+      isTimerToggled: false,
       setIsTimerToggled: (isTimerToggled) => set({ isTimerToggled }),
+      isTimerShown: true,
+      setIsTimerShown: (isTimerShown) => set({ isTimerShown })
     }),
-    { name: "show_timer_section" }
+    { name: "state_timer_section" }
   )
 );
 
@@ -672,6 +703,8 @@ export const usePosTimer = create<IPosTimer>(
 type DarkModeState = {
   isDark: boolean;
   toggleDarkMode: () => void;
+  isDarkModeShown: boolean;
+  setIsDarkModeShown: (isDarkModeShown: boolean) => void; 
 };
 
 export const useDarkToggleStore = create<DarkModeState>(
@@ -679,8 +712,10 @@ export const useDarkToggleStore = create<DarkModeState>(
     (set, _) => ({
       isDark: true,
       toggleDarkMode: () => set((oldState) => ({ isDark: !oldState.isDark })),
+      isDarkModeShown: false,
+      setIsDarkModeShown: (isDarkModeShown) => set({ isDarkModeShown })
     }),
-    { name: "darkmode" }
+    { name: "state_darkmode" }
   )
 );
 
@@ -692,16 +727,19 @@ export const useDarkToggleStore = create<DarkModeState>(
 type FullscreenState = {
   isFullscreen: boolean;
   toggleFullscreenMode: () => void;
+  isFullscreenShown: boolean;
+  setIsFullscreenShown: (isFullscreenShown: boolean) => void;
 };
 
 export const useFullScreenToggleStore = create<FullscreenState>(
   persist(
     (set, _) => ({
       isFullscreen: false,
-      toggleFullscreenMode: () =>
-        set((oldState) => ({ isFullscreen: !oldState.isFullscreen })),
+      toggleFullscreenMode: () => set((oldState) => ({ isFullscreen: !oldState.isFullscreen })),
+      isFullscreenShown: false,
+      setIsFullscreenShown: (isFullscreenShown) => set({ isFullscreenShown })
     }),
-    { name: "fullscreen" }
+    { name: "state_fullscreen" }
   )
 );
 
@@ -713,6 +751,8 @@ export const useFullScreenToggleStore = create<FullscreenState>(
 type IToggleQuote = {
   isQuoteToggled: boolean;
   setIsQuoteToggled: (isQuoteToggled: boolean) => void;
+  isQuoteShown: boolean;
+  setIsQuoteShown: (isQuoteShown: boolean) => void;
 };
 
 export const useToggleQuote = create<IToggleQuote>(
@@ -720,9 +760,11 @@ export const useToggleQuote = create<IToggleQuote>(
     (set, _) => ({
       isQuoteToggled: false,
       setIsQuoteToggled: (isQuoteToggled) => set({ isQuoteToggled }),
+      isQuoteShown: false,
+      setIsQuoteShown: (isQuoteShown) => set({ isQuoteShown }),
     }),
     {
-      name: "show_quote_section",
+      name: "state_quote_section",
     }
   )
 );
@@ -744,6 +786,28 @@ export const usePosQuote = create<IPosQuote>(
     }),
     {
       name: "set_quote_position",
+    }
+  )
+);
+
+/**
+ * Reset Widgets Section Store
+ * ---
+ * Handle the visibility of the reset widget nav item
+ */
+interface IToggleWidgetReset {
+  isWidgetResetShown: boolean;
+  setIsWidgetResetShown: (isWidgetResetShown: boolean) => void;
+};
+
+export const useToggleWidgetReset = create<IToggleWidgetReset>(
+  persist(
+    (set, _) => ({
+      isWidgetResetShown: false,
+      setIsWidgetResetShown: (isWidgetResetShown) => set({ isWidgetResetShown })
+    }),
+    {
+      name: "state_widget_reset",
     }
   )
 );
