@@ -26,7 +26,7 @@ export const BackgroundNav = ({ backgrounds }: { backgrounds: any }) => {
         <div>
           <button
             type="button"
-            className="inline-flex justify-center w-full rounded shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 focus:outline-none"
+            className="chooseBackgroundButton inline-flex justify-center w-full rounded shadow-sm px-4 py-2 bg-white dark:bg-gray-800 text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 focus:outline-none"
             onClick={() => setShowMenu(!showMenu)}
           >
             Choose Background

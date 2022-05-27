@@ -11,11 +11,19 @@ export const Walkthrough = () => {
         },
         {
             target: ".sideNav",
-            content: "This is your navigation. Here, you can switch widgets on/off and organize them by dragging.",
+            content: "This is your navigation. Here, you can switch widgets on/off.",
         },
         {
             target: ".settingsButton",
-            content: "In the settings, you can configure Astrostation to your liking by controlling your active widgets and their functionality.",
+            content: "In the settings, you can configure certain Astrostation widgets to your liking.",
+        },
+        {
+            target: ".configureWidgetsButton",
+            content: "This is your widget configuration screen — add the widgets you want, remove the ones you don't.",
+        },
+        {
+            target: ".chooseBackgroundButton",
+            content: "Not feeling this background? Switch it up!",
         },
         {
             target: ".donateButton",
