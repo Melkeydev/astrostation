@@ -828,6 +828,6 @@ export const useFirstTimeUserStore = create<FirstTimeUserState>(
       isFirstTimeUser: true,
       toggleIsFirstTimeUser: () => set((oldState) => ({ isFirstTimeUser: !oldState.isFirstTimeUser }))
     }),
-    { name: "firstTimeUser"}
+    { name: "first_time_user"}
   )
 )
