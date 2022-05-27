@@ -82,15 +82,6 @@ export const SideNav = () => {
     });
   }, []);
 
-  function fullscreenChanged() {
-    toggleFullscreenMode();
-    if (document.fullscreenElement) {
-      openFullscreen();
-    } else {
-      closeFullscreen();
-    }
-  };
-
   function toggleDefaultPositions() {
     var answer = window.confirm(
       "This will reset tiles to default positon - are you sure?"
@@ -271,7 +262,7 @@ export const SideNav = () => {
 
   return (
     <>
-      <div className="flex absolute">
+      <div className="sideNav flex absolute">
         <aside className="flex flex-col">
           <ul>
             <div className="sm:hidden">
