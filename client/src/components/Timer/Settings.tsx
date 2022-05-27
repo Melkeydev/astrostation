@@ -36,6 +36,7 @@ export const TimerSettings = ({ onClose }) => {
   const [currentVolume, setCurrentVolume] = useState(audioVolume);
   const { alarm, setAlarm } = useAlarmOption();
   const [currentAlarm, setCurrentAlarm] = useState(alarm);
+  const [isWidgetModalOpen, setIsWidgetModalOpen ] = useState(false);
 
   const setDefault = useSetDefault();
 
