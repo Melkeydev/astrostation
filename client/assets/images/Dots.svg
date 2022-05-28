@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!-- Generator: Adobe Illustrator 17.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
-<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1800px"
+<svg style="transform: translateZ(0);" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" width="1800px"
 	 height="1200px" viewBox="0 0 1800 1200" enable-background="new 0 0 1800 1200" xml:space="preserve">
 
 <g id="Background">
@@ -9,14 +9,6 @@
 </g>
 
 <g id="_x31__1_">
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="134.667" cy="1026.861" r="13.917">
-		<animateMotion dur="10s" repeatCount="indefinite"
-      path="M20,-50 C20,-50 -180,-350 -280,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="230.752" cy="941.853" r="10.002">
-		<animateMotion dur="11s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -300,50 C180-50 20,150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#F1F2F2" stroke="#000000" stroke-miterlimit="10" cx="50.74" cy="923.852" r="4.6">
 		<animateMotion dur="12s" repeatCount="indefinite"
       path="M20,50 C20,50 180,150 -250,50 C180-50 20,150 20,50 z" />
@@ -31,14 +23,6 @@
 	</circle>
 	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="150.667" cy="1012.944" r="8.327">
 		<animateMotion dur="15s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -200,50 C180-50 20,-150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="498.385" cy="1092.809" r="13.917">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,-50 -180,150 -300,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="494.47" cy="1007.802" r="10.002">
-		<animateMotion dur="17s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 -200,50 C180-50 20,-150 20,50 z" />
 	</circle>
 	<circle opacity="0.7" fill="#F1F2F2" stroke="#000000" stroke-miterlimit="10" cx="371.457" cy="989.8" r="4.6">
@@ -64,22 +48,6 @@
 	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="331.283" cy="1114.639" r="10.002">
 		<animateMotion dur="17s" repeatCount="indefinite"
       path="M20,50 C20,-50 -180,150 -300,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="95.447" cy="1144.615" r="13.917">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -250,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="91.532" cy="1059.608" r="10.002">
-		<animateMotion dur="15s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -200,50 C180-50 20,-150 20,-50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="34.446" cy="1130.698" r="8.327">
-		<animateMotion dur="14s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -100,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#F1F2F2" stroke="#000000" stroke-miterlimit="10" cx="208.27" cy="1096.637" r="4.6">
-		<animateMotion dur="13s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,-50 C180-50 20,150 20,50 z" />
 	</circle>
 	<circle opacity="0.7" fill="#EE2A7B" stroke="#000000" stroke-miterlimit="10" cx="185.927" cy="1175.729" r="17.743">
 		<animateMotion dur="12s" repeatCount="indefinite"
@@ -108,22 +76,6 @@
 	<circle opacity="0.7" fill="url(#SVGID_1_)" stroke="#000000" stroke-miterlimit="10" cx="276.393" cy="837.07" r="17.743">
 		<animateMotion dur="13s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 -400,50 C180-50 -20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="329.379" cy="920.978" r="10.874">
-		<animateMotion dur="14s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -350,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="364.662" cy="847.07" r="8.327">
-		<animateMotion dur="15s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -300,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="196.462" cy="784.35" r="13.917">
-		<animateMotion dur="10s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -400,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="192.547" cy="699.342" r="10.002">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,50 180,150 -300,50 C180-50 20,150 20,50 z" />
 	</circle>
 	<circle opacity="0.7" fill="#EF4136" stroke="#000000" stroke-miterlimit="10" cx="69.534" cy="681.341" r="4.6">
 		<animateMotion dur="17s" repeatCount="indefinite"
@@ -155,22 +107,6 @@
 		<stop  offset="0.8876" style="stop-color:#ED683C"/>
 		<stop  offset="1" style="stop-color:#E93E3A"/>
 	</linearGradient>
-	<circle opacity="0.7" fill="url(#SVGID_2_)" stroke="#000000" stroke-miterlimit="10" cx="216.422" cy="444.128" r="10.002">
-		<animateMotion dur="12s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#F1F2F2" stroke="#000000" stroke-miterlimit="10" cx="93.41" cy="426.126" r="4.6">
-		<animateMotion dur="19s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#F7941E" stroke="#000000" stroke-miterlimit="10" cx="71.067" cy="505.219" r="17.743">
-		<animateMotion dur="18s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,-150 -150,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="124.054" cy="589.126" r="10.874">
-		<animateMotion dur="17s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#EC008C" stroke="#000000" stroke-miterlimit="10" cx="159.336" cy="515.219" r="8.327">
 		<animateMotion dur="16s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
@@ -197,18 +133,6 @@
 		<stop  offset="0.8876" style="stop-color:#ED683C"/>
 		<stop  offset="1" style="stop-color:#E93E3A"/>
 	</linearGradient>
-	<circle opacity="0.7" fill="url(#SVGID_3_)" stroke="#000000" stroke-miterlimit="10" cx="291.94" cy="594.455" r="17.743">
-		<animateMotion dur="13s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="344.927" cy="678.363" r="10.874">
-		<animateMotion dur="12s" repeatCount="indefinite"
-      path="M30,-50 C20,-50 180,150 -300,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EF4136" stroke="#000000" stroke-miterlimit="10" cx="380.21" cy="604.455" r="8.327">
-		<animateMotion dur="11s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,150 C180-50 20,150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="416.802" cy="373.263" r="13.917">
 		<animateMotion dur="10s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 -200,50 C180-50 20,150 20,50 z" />
@@ -220,22 +144,6 @@
 	<circle opacity="0.7" fill="#EF4136" stroke="#000000" stroke-miterlimit="10" cx="289.874" cy="270.254" r="4.6">
 		<animateMotion dur="12s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#662D91" stroke="#000000" stroke-miterlimit="10" cx="267.531" cy="349.347" r="17.743">
-		<animateMotion dur="10s" repeatCount="indefinite"
-      path="M20,50 C20,-50 110,150 -180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="320.518" cy="433.254" r="10.874">
-		<animateMotion dur="13s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="355.801" cy="359.347" r="8.327">
-		<animateMotion dur="14s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 -20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#F15A29" stroke="#000000" stroke-miterlimit="10" cx="189.728" cy="284.027" r="13.917">
-		<animateMotion dur="15s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
 	</circle>
 	<linearGradient id="SVGID_4_" gradientUnits="userSpaceOnUse" x1="175.8114" y1="199.0193" x2="195.815" y2="199.0193">
 		<stop  offset="0" style="stop-color:#2484C6"/>
@@ -273,18 +181,6 @@
 		<animateMotion dur="19s" repeatCount="indefinite"
       path="M20,50 C20,-50 110,150 180,-50 C180-50 20,150 20,50 z" />
 	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="393.152" cy="43.147" r="10.002">
-		<animateMotion dur="18s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 80,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#00AEEF" stroke="#000000" stroke-miterlimit="10" cx="270.139" cy="25.146" r="4.6">
-		<animateMotion dur="17s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,140 -50,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#F9ED32" stroke="#000000" stroke-miterlimit="10" cx="247.797" cy="104.238" r="17.743">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,15 180,50 C180-50 20,150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="300.783" cy="188.146" r="10.874">
 		<animateMotion dur="15s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 -150,50 C180-50 20,150 20,50 z" />
@@ -296,18 +192,6 @@
 	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="180.867" cy="61.52" r="13.917">
 		<animateMotion dur="13s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EE2A7B" stroke="#000000" stroke-miterlimit="10" cx="31.597" cy="37.603" r="17.743">
-		<animateMotion dur="12s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="84.584" cy="121.51" r="10.874">
-		<animateMotion dur="11s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="119.867" cy="47.603" r="8.327">
-		<animateMotion dur="10s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,50 180,50 C180-50 20,150 20,50 z" />
 	</circle>
 	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="708.353" cy="168.103" r="13.917">
 		<animateMotion dur="11s" repeatCount="indefinite"
@@ -329,14 +213,6 @@
 		<animateMotion dur="15s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
 	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="769.353" cy="182.019" r="8.327">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="444.635" cy="102.154" r="13.917">
-		<animateMotion dur="17s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="448.55" cy="187.162" r="10.002">
 		<animateMotion dur="18s" repeatCount="indefinite"
       path="M20,50 C20,-50 -180,150 180,50 C180-50 20,150 20,50 z" />
@@ -353,22 +229,6 @@
 		<animateMotion dur="19s" repeatCount="indefinite"
       path="M20,-50 C20,-50 180,150 -200,50 C180-50 20,150 20,50 z" />
 	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="505.636" cy="116.071" r="8.327">
-		<animateMotion dur="18s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="607.822" cy="-4.683" r="13.917">
-		<animateMotion dur="17s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="611.737" cy="80.325" r="10.002">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="847.573" cy="50.348" r="13.917">
-		<animateMotion dur="15s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="851.488" cy="135.356" r="10.002">
 		<animateMotion dur="14s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,-50 z" />
@@ -384,22 +244,6 @@
 	<circle opacity="0.7" fill="#EE2A7B" stroke="#000000" stroke-miterlimit="10" cx="757.093" cy="19.234" r="17.743">
 		<animateMotion dur="11s" repeatCount="indefinite"
       path="M20,-50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="668.823" cy="9.234" r="8.327">
-		<animateMotion dur="10s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="517.357" cy="333.976" r="13.917">
-		<animateMotion dur="11s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -250,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="521.272" cy="418.984" r="10.002">
-		<animateMotion dur="12s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#F1F2F2" stroke="#000000" stroke-miterlimit="10" cx="644.284" cy="436.986" r="4.6">
-		<animateMotion dur="13s" repeatCount="indefinite"
-      path="M20,50 C20,-50 -180,150 180,50 C180-50 20,150 20,50 z" />
 	</circle>
 	
 		<linearGradient id="SVGID_5_" gradientUnits="userSpaceOnUse" x1="1489.3623" y1="851.0175" x2="1524.8494" y2="851.0175" gradientTransform="matrix(-1 0 0 -1 2173.7332 1208.9106)">
@@ -425,22 +269,6 @@
 	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="750.473" cy="495.621" r="10.002">
 		<animateMotion dur="18s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 -20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EF4136" stroke="#000000" stroke-miterlimit="10" cx="873.486" cy="513.623" r="4.6">
-		<animateMotion dur="19s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EE2A7B" stroke="#000000" stroke-miterlimit="10" cx="895.829" cy="434.53" r="17.743">
-		<animateMotion dur="20s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,-150 -150,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="842.842" cy="350.623" r="10.874">
-		<animateMotion dur="19s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="807.559" cy="424.53" r="8.327">
-		<animateMotion dur="18s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
 	</circle>
 	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="722.683" cy="665.828" r="13.917">
 		<animateMotion dur="17s" repeatCount="indefinite"
@@ -469,18 +297,6 @@
 		<animateMotion dur="14s" repeatCount="indefinite"
       path="M20,50 C20,-50 -180,150 180,50 C180-50 20,150 20,50 z" />
 	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="818.966" cy="605.837" r="10.874">
-		<animateMotion dur="13s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EC008C" stroke="#000000" stroke-miterlimit="10" cx="783.684" cy="679.745" r="8.327">
-		<animateMotion dur="12s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="501.809" cy="576.591" r="13.917">
-		<animateMotion dur="11s" repeatCount="indefinite"
-      path="M20,-50 C20,-50 180,150 -80,50 C180-50 20,150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="505.724" cy="661.599" r="10.002">
 		<animateMotion dur="10s" repeatCount="indefinite"
       path="M20,50 C20,-50 -180,150 180,50 C180-50 20,150 20,50 z" />
@@ -507,22 +323,6 @@
 	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="598.093" cy="516.601" r="10.874">
 		<animateMotion dur="13s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 -60,50 C180-50 20,-150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EF4136" stroke="#000000" stroke-miterlimit="10" cx="562.81" cy="590.508" r="8.327">
-		<animateMotion dur="14s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 -20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="526.218" cy="821.7" r="13.917">
-		<animateMotion dur="15s" repeatCount="indefinite"
-      path="M20,-50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="530.133" cy="906.707" r="10.002">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EF4136" stroke="#000000" stroke-miterlimit="10" cx="653.146" cy="924.709" r="4.6">
-		<animateMotion dur="17s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 -20,50 z" />
 	</circle>
 	<circle opacity="0.7" fill="#662D91" stroke="#000000" stroke-miterlimit="10" cx="675.489" cy="845.617" r="17.743">
 		<animateMotion dur="18s" repeatCount="indefinite"
@@ -561,22 +361,6 @@
 		<animateMotion dur="17s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
 	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="814.292" cy="924.853" r="8.327">
-		<animateMotion dur="17s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="545.953" cy="1066.809" r="13.917">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,-150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="549.868" cy="1151.816" r="10.002">
-		<animateMotion dur="15s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#00AEEF" stroke="#000000" stroke-miterlimit="10" cx="672.88" cy="1169.818" r="4.6">
-		<animateMotion dur="14s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#F9ED32" stroke="#000000" stroke-miterlimit="10" cx="695.223" cy="1090.725" r="17.743">
 		<animateMotion dur="13s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 -60,-50 C180-50 20,150 20,50 z" />
@@ -596,22 +380,6 @@
 	<circle opacity="0.7" fill="#EE2A7B" stroke="#000000" stroke-miterlimit="10" cx="911.423" cy="1157.361" r="17.743">
 		<animateMotion dur="11s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,50 C180-50 -20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="858.436" cy="1073.453" r="10.874">
-		<animateMotion dur="12s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,-150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="823.153" cy="1147.361" r="8.327">
-		<animateMotion dur="13s" repeatCount="indefinite"
-      path="M20,50 C20,-50 -180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="1137.715" cy="1012.144" r="13.917">
-		<animateMotion dur="14s" repeatCount="indefinite"
-      path="M20,-50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="1133.8" cy="927.136" r="10.002">
-		<animateMotion dur="15s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,-150 180,50 C180-50 20,150 20,50 z" />
 	</circle>
 	<circle opacity="0.7" fill="#F1F2F2" stroke="#000000" stroke-miterlimit="10" cx="1010.787" cy="909.134" r="4.6">
 		<animateMotion dur="16s" repeatCount="indefinite"
@@ -633,22 +401,6 @@
 		<animateMotion dur="20s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 -20,50 z" />
 	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="1397.517" cy="993.085" r="10.002">
-		<animateMotion dur="19s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#F1F2F2" stroke="#000000" stroke-miterlimit="10" cx="1274.505" cy="975.083" r="4.6">
-		<animateMotion dur="18s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EE2A7B" stroke="#000000" stroke-miterlimit="10" cx="1252.162" cy="1054.175" r="17.743">
-		<animateMotion dur="17s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 -20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="1305.149" cy="1138.083" r="10.874">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 -20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="1340.432" cy="1064.175" r="8.327">
 		<animateMotion dur="15s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
@@ -660,26 +412,6 @@
 	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="1234.33" cy="1099.921" r="10.002">
 		<animateMotion dur="13s" repeatCount="indefinite"
       path="M20,50 C20,-50 -180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="998.495" cy="1129.898" r="13.917">
-		<animateMotion dur="12s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 -20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="994.58" cy="1044.89" r="10.002">
-		<animateMotion dur="11s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="937.494" cy="1115.981" r="8.327">
-		<animateMotion dur="10s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#F1F2F2" stroke="#000000" stroke-miterlimit="10" cx="1111.318" cy="1081.92" r="4.6">
-		<animateMotion dur="11s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -150,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EE2A7B" stroke="#000000" stroke-miterlimit="10" cx="1088.975" cy="1161.012" r="17.743">
-		<animateMotion dur="12s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 -20,150 20,50 z" />
 	</circle>
 	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="1177.245" cy="1171.012" r="8.327">
 		<animateMotion dur="13s" repeatCount="indefinite"
@@ -701,18 +433,6 @@
 		<stop  offset="0" style="stop-color:#2484C6"/>
 		<stop  offset="1" style="stop-color:#2484C6;stop-opacity:0"/>
 	</linearGradient>
-	<circle opacity="0.7" fill="url(#SVGID_9_)" stroke="#000000" stroke-miterlimit="10" cx="1179.44" cy="822.353" r="17.743">
-		<animateMotion dur="11s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="1232.427" cy="906.261" r="10.874">
-		<animateMotion dur="10s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 -20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="1267.71" cy="832.353" r="8.327">
-		<animateMotion dur="10s" repeatCount="indefinite"
-      path="M20,-50 C20,-50 180,150 -200,50 C180-50 20,150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="1099.509" cy="769.633" r="13.917">
 		<animateMotion dur="11s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
@@ -755,18 +475,6 @@
 		<animateMotion dur="18s" repeatCount="indefinite"
       path="M50,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
 	</circle>
-	<circle opacity="0.7" fill="#F1F2F2" stroke="#000000" stroke-miterlimit="10" cx="996.457" cy="411.409" r="4.6">
-		<animateMotion dur="19s" repeatCount="indefinite"
-      path="M20,50 C30,-50 180,-150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#F7941E" stroke="#000000" stroke-miterlimit="10" cx="974.114" cy="490.502" r="17.743">
-		<animateMotion dur="20s" repeatCount="indefinite"
-      path="M20,-50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="1027.101" cy="574.409" r="10.874">
-		<animateMotion dur="19s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#EC008C" stroke="#000000" stroke-miterlimit="10" cx="1062.384" cy="500.502" r="8.327">
 		<animateMotion dur="18s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
@@ -801,18 +509,6 @@
 		<animateMotion dur="15s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
 	</circle>
-	<circle opacity="0.7" fill="#EF4136" stroke="#000000" stroke-miterlimit="10" cx="1283.258" cy="589.738" r="8.327">
-		<animateMotion dur="14s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,-150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="1319.849" cy="358.546" r="13.917">
-		<animateMotion dur="13s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="1315.934" cy="273.539" r="10.002">
-		<animateMotion dur="12s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 -20,150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#EF4136" stroke="#000000" stroke-miterlimit="10" cx="1192.922" cy="255.537" r="4.6">
 		<animateMotion dur="11s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 -20,50 z" />
@@ -837,22 +533,6 @@
 		<stop  offset="0" style="stop-color:#2484C6"/>
 		<stop  offset="1" style="stop-color:#2484C6;stop-opacity:0"/>
 	</linearGradient>
-	<circle opacity="0.7" fill="url(#SVGID_12_)" stroke="#000000" stroke-miterlimit="10" cx="1088.861" cy="184.302" r="10.002">
-		<animateMotion dur="14s" repeatCount="indefinite"
-      path="M20,-50 C20,-50 180,150 -150,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#F1F2F2" stroke="#000000" stroke-miterlimit="10" cx="965.849" cy="166.3" r="4.6">
-		<animateMotion dur="15s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EE2A7B" stroke="#000000" stroke-miterlimit="10" cx="943.506" cy="245.393" r="17.743">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 -20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="996.492" cy="329.3" r="10.874">
-		<animateMotion dur="17s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,-50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="1031.775" cy="255.393" r="8.327">
 		<animateMotion dur="18s" repeatCount="indefinite"
       path="M20,50 C20,50 180,150 180,50 C180-50 20,150 20,50 z" />
@@ -884,18 +564,6 @@
 	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="1083.915" cy="46.802" r="13.917">
 		<animateMotion dur="15s" repeatCount="indefinite"
       path="M20,-50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EE2A7B" stroke="#000000" stroke-miterlimit="10" cx="934.644" cy="22.886" r="17.743">
-		<animateMotion dur="14s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 -20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="987.631" cy="106.793" r="10.874">
-		<animateMotion dur="13s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 -20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="1022.914" cy="32.886" r="8.327">
-		<animateMotion dur="12s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 -20,50 z" />
 	</circle>
 	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="1611.4" cy="153.386" r="13.917">
 		<animateMotion dur="11s" repeatCount="indefinite"
@@ -932,22 +600,6 @@
 	<circle opacity="0.7" fill="#F1F2F2" stroke="#000000" stroke-miterlimit="10" cx="1474.61" cy="190.446" r="4.6">
 		<animateMotion dur="17s" repeatCount="indefinite"
       path="M20,50 C20,-50 -180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EE2A7B" stroke="#000000" stroke-miterlimit="10" cx="1496.953" cy="111.354" r="17.743">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="1443.966" cy="27.446" r="10.874">
-		<animateMotion dur="15s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="1408.683" cy="101.354" r="8.327">
-		<animateMotion dur="14s" repeatCount="indefinite"
-      path="M20,-50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="1514.785" cy="65.608" r="10.002">
-		<animateMotion dur="13s" repeatCount="indefinite"
-      path="M20,50 C20,50 180,150 180,50 C180-50 20,150 20,50 z" />
 	</circle>
 	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="1750.621" cy="35.631" r="13.917">
 		<animateMotion dur="13s" repeatCount="indefinite"
@@ -998,18 +650,6 @@
 		<animateMotion dur="17s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
 	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="1481.405" cy="333.176" r="8.327">
-		<animateMotion dur="18s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="1649.606" cy="395.896" r="13.917">
-		<animateMotion dur="19s" repeatCount="indefinite"
-      path="M20,-50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="1653.521" cy="480.904" r="10.002">
-		<animateMotion dur="20s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#EF4136" stroke="#000000" stroke-miterlimit="10" cx="1776.533" cy="498.906" r="4.6">
 		<animateMotion dur="19s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
@@ -1053,18 +693,6 @@
 		<animateMotion dur="13s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
 	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="1722.014" cy="591.12" r="10.874">
-		<animateMotion dur="14s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,-150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EC008C" stroke="#000000" stroke-miterlimit="10" cx="1686.731" cy="665.028" r="8.327">
-		<animateMotion dur="15s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="1404.857" cy="561.874" r="13.917">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,-50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="1408.772" cy="646.882" r="10.002">
 		<animateMotion dur="17s" repeatCount="indefinite"
       path="M20,50 C60,-50 180,150 180,50 C180-50 20,150 20,50 z" />
@@ -1092,22 +720,6 @@
 		<animateMotion dur="20s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,50 C180-50 -20,150 20,50 z" />
 	</circle>
-	<circle opacity="0.7" fill="#EF4136" stroke="#000000" stroke-miterlimit="10" cx="1465.857" cy="575.791" r="8.327">
-		<animateMotion dur="21s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 18,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="1429.266" cy="806.983" r="13.917">
-		<animateMotion dur="19s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="1433.181" cy="891.99" r="10.002">
-		<animateMotion dur="18s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,-150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EF4136" stroke="#000000" stroke-miterlimit="10" cx="1556.193" cy="909.992" r="4.6">
-		<animateMotion dur="17s" repeatCount="indefinite"
-      path="M20,-50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#662D91" stroke="#000000" stroke-miterlimit="10" cx="1578.536" cy="830.9" r="17.743">
 		<animateMotion dur="16s" repeatCount="indefinite"
       path="M20,50 C20,50 180,150 180,50 C180-50 20,150 20,50 z" />
@@ -1129,18 +741,6 @@
 		<stop  offset="0" style="stop-color:#2484C6"/>
 		<stop  offset="1" style="stop-color:#2484C6;stop-opacity:0"/>
 	</linearGradient>
-	<circle opacity="0.7" fill="url(#SVGID_16_)" stroke="#000000" stroke-miterlimit="10" cx="1660.254" cy="981.227" r="10.002">
-		<animateMotion dur="12s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,-150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#F1F2F2" stroke="#000000" stroke-miterlimit="10" cx="1783.267" cy="999.229" r="4.6">
-		<animateMotion dur="11s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 -180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#EE2A7B" stroke="#000000" stroke-miterlimit="10" cx="1805.61" cy="920.136" r="17.743">
-		<animateMotion dur="10s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
 	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="1752.623" cy="836.229" r="10.874">
 		<animateMotion dur="11s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
@@ -1152,18 +752,6 @@
 	<circle opacity="0.7" fill="#27AAE1" stroke="#000000" stroke-miterlimit="10" cx="1449.001" cy="1052.091" r="13.917">
 		<animateMotion dur="13s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,50 C180-50 -30,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#92278F" stroke="#000000" stroke-miterlimit="10" cx="1452.916" cy="1137.099" r="10.002">
-		<animateMotion dur="14s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,-50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#00AEEF" stroke="#000000" stroke-miterlimit="10" cx="1575.928" cy="1155.101" r="4.6">
-		<animateMotion dur="15s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,-50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#F9ED32" stroke="#000000" stroke-miterlimit="10" cx="1598.271" cy="1076.008" r="17.743">
-		<animateMotion dur="16s" repeatCount="indefinite"
-      path="M20,50 C20,-50 -180,150 180,50 C180-50 20,150 20,50 z" />
 	</circle>
 	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="1545.284" cy="992.101" r="10.874">
 		<animateMotion dur="17s" repeatCount="indefinite"
@@ -1180,14 +768,6 @@
 	<circle opacity="0.7" fill="#EE2A7B" stroke="#000000" stroke-miterlimit="10" cx="1814.471" cy="1142.644" r="17.743">
 		<animateMotion dur="20s" repeatCount="indefinite"
       path="M20,50 C20,-50 180,150 180,50 C180-50 -20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#FBB040" stroke="#000000" stroke-miterlimit="10" cx="1761.484" cy="1058.736" r="10.874">
-		<animateMotion dur="10s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
-	</circle>
-	<circle opacity="0.7" fill="#8DC63F" stroke="#000000" stroke-miterlimit="10" cx="1726.201" cy="1132.644" r="8.327">
-		<animateMotion dur="10s" repeatCount="indefinite"
-      path="M20,50 C20,-50 180,150 180,50 C180-50 20,150 20,50 z" />
 	</circle>
 </g>
 </svg>
