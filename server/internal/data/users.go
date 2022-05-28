@@ -93,15 +93,18 @@ func ValidateUser(v *validator.Validator, user *User) {
 	}
 }
 
+
+// NOTE: This is where I stopped streaming last week
 /*
 RAW QUERIES
+This communicate directly with our DB and our internal system
 */
 
 func (u UsersModel) Insert(user *User) error {
 	// Create raw query
 	query :=
 		`
-			INSERT into users (name, email, password)
+			INSERT into users (name, email, password_hash)
 			VALUES ($1, $2, $3)
 			RETURNING id, created_at, version
 		`

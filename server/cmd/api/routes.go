@@ -19,5 +19,9 @@ func (app *application) routes() *httprouter.Router {
 	router.HandlerFunc(http.MethodPatch, "/v1/test_info/:id", app.updateInfoHandler)
 	router.HandlerFunc(http.MethodDelete, "/v1/test_info/:id", app.deleteInfoHandler)
 
+	// USER routes
+	router.HandlerFunc(http.MethodPost, "/v1/users", app.registerUserHandler)
+	router.HandlerFunc(http.MethodPost, "/v1/login", app.logInUserHandler)
+
 	return router
 }
