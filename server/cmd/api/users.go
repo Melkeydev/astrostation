@@ -8,8 +8,9 @@ import (
 )
 
 // NOTE: This is going to handler our actual functions
-// Log in as a user
 // Update the user
+// We need to create tokens that will provision a user within the application
+// If a user is a mod, or a super users, or banned - these need to be handled separately
 
 func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Request) {
 	// An anonymous struct to hold the request data
