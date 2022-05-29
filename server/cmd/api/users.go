@@ -5,6 +5,7 @@ import (
 	"astrostation.server/internal/data"
 	"astrostation.server/internal/validator"
 	"net/http"
+	"time"
 )
 
 // NOTE: This is going to handler our actual functions
@@ -67,6 +68,7 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 }
 
 // TODO: add way better handling for client side as well
+// When a user logs in they will need a token right away
 func (app *application) logInUserHandler(w http.ResponseWriter, r *http.Request) {
 	// An anonymous struct to hold the request data
 	// The user will send a us a request to log in with an email and a password
@@ -84,15 +86,24 @@ func (app *application) logInUserHandler(w http.ResponseWriter, r *http.Request)
 	// Validator for client input
 	v := validator.New()
 
-	if data.ValidateEmail(v, input.Email); !v.Valid() {
+	data.ValidateEmail(v, input.Email)
+	data.ValidatePassword(v, input.Password)
+
+	// If something does not pass our validation checks
+	if !v.Valid() {
 		app.failedValidationResponse(w, r, v.Errors)
 		return
 	}
 
+
 	user, err := app.models.Users.GetUser(input.Email)
 	if err != nil {
-		// Definitely going to change this lol
-		app.errorResponse(w, r, http.StatusUnauthorized, "unauthorized get user")	
+		switch {
+		case errors.Is(err, data.ErrRecordNotFound):
+			app.invalidCredentialsResponse(w, r)
+		default:
+			app.serverErrorResponse(w, r, err)
+		}
 		return
 	}
 
@@ -104,12 +115,19 @@ func (app *application) logInUserHandler(w http.ResponseWriter, r *http.Request)
 
 	// If passwords do not match
 	if !matched {
-		// Change this to not say password
-		app.errorResponse(w, r, http.StatusUnauthorized, "cannot process request")	
+		app.invalidCredentialsResponse(w, r)
 		return
 	}
 
-	err = app.writeJSON(w, http.StatusCreated, envelope{"user": user}, nil)
+	// This is where we will now send back a token
+	token, err := app.models.Tokens.New(user.ID, 24*time.Hour, data.ScopeAuthentication)
+	if err != nil {
+		// If there is any error from our DB communication
+		app.serverErrorResponse(w,r, err)
+		return
+	}
+
+	err = app.writeJSON(w, http.StatusCreated, envelope{"token": token}, nil)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 	}

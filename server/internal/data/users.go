@@ -94,7 +94,6 @@ func ValidateUser(v *validator.Validator, user *User) {
 }
 
 
-// NOTE: This is where I stopped streaming last week
 /*
 RAW QUERIES
 This communicate directly with our DB and our internal system

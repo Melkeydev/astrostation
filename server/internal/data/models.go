@@ -8,13 +8,15 @@ import (
 
 // We can have multiple models in here
 type Models struct {
-	Users UsersModel
-	Info  InfoModel
+	Users  UsersModel
+	Info   InfoModel
+	Tokens TokenModel
 }
 
 func NewModels(db *sql.DB) Models {
 	return Models{
-		Users: UsersModel{DB: db},
-		Info:  InfoModel{DB: db},
+		Users:  UsersModel{DB: db},
+		Info:   InfoModel{DB: db},
+		Tokens: TokenModel{DB: db},
 	}
 }
