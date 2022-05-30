@@ -4,7 +4,6 @@ import { Tasks } from "./Tasks";
 import { AddTask } from "./AddTask";
 import { IoCloseSharp } from "react-icons/io5";
 import { useTask, useToggleTasks } from "@Store";
-import { Button } from "@Components/Common/Button";
 
 export const TaskTracker = () => {
   const [showAddTask, setShowAddTask] = useState(false);
