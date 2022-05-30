@@ -69,6 +69,7 @@ export const DWrapper = ({
       defaultPosition={{ x: defaultX, y: defaultY }}
       onDrag={(e, data) => trackPosition()}
       onStop={(e, data) => changePosition(data)}
+      nodeRef={ref}
     >
       {isSticky ? (
         <div
