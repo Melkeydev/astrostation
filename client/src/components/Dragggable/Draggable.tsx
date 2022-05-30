@@ -19,7 +19,7 @@ export const DWrapper = ({
   defaultY: number;
   setPosition: any;
   isSticky: boolean;
-  stickyID?: any;
+  stickyID?: number;
 }) => {
   const { setStickyNotesPos } = useStickyNote();
   const [z, setZ] = useState(0);
@@ -67,8 +67,8 @@ export const DWrapper = ({
     <Draggable
       bounds="parent"
       defaultPosition={{ x: defaultX, y: defaultY }}
-      onDrag={(e, data) => trackPosition()}
-      onStop={(e, data) => changePosition(data)}
+      onDrag={() => trackPosition()}
+      onStop={(_, data) => changePosition(data)}
     >
       {isSticky ? (
         <div

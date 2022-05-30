@@ -21,16 +21,23 @@ import {
   useToggleQuote,
   useStickyNote,
   useToggleStickyNote,
-  useToggleWidgetReset
-} from "../../store";
+  useToggleWidgetReset,
+} from "@Store";
 import { useState, useEffect } from "react";
-import toast from "react-hot-toast";
-import useMediaQuery from "../../utils/hooks/useMediaQuery";
+import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
+
+import {
+  toggledToastNotification,
+  defaultToast,
+  toastThemeNotification,
+} from "@Utils/toast";
+
+import { fullscreenChanged, toggleFullScreen } from "@Utils/fullscreen";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
-  const { isFullscreen, toggleFullscreenMode } = useFullScreenToggleStore();
+  const { isFullscreen } = useFullScreenToggleStore();
   const [active, setActive] = useState(false);
   const { isMusicToggled, setIsMusicToggled } = useToggleMusic();
   const { isTimerToggled, setIsTimerToggled } = useToggleTimer();
@@ -64,19 +71,13 @@ export const SideNav = () => {
     });
   }, []);
 
-  function fullscreenChanged() {
-    toggleFullscreenMode();
-    if (document.fullscreenElement) {
-      openFullscreen();
-    } else {
-      closeFullscreen();
-    }
-  }
-
   useEffect(() => {
-    document.addEventListener('fullscreenchange', fullscreenChanged);
-    document.addEventListener("keyup", function(e) {
-      if (e.key === "F11" || (e.key === "Escape" && document.fullscreenElement)) {
+    document.addEventListener("fullscreenchange", fullscreenChanged);
+    document.addEventListener("keyup", function (e) {
+      if (
+        e.key === "F11" ||
+        (e.key === "Escape" && document.fullscreenElement)
+      ) {
         toggleFullScreen();
       }
     });
@@ -88,101 +89,8 @@ export const SideNav = () => {
     );
     if (answer) {
       setDefault(false, false, true);
-
-      toast("Positions reset", {
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
+      defaultToast("Positions reset");
       window.location.reload();
-    }
-  }
-
-  function toggleDark() {
-    const nextVal = !isDark;
-    toggleDarkMode();
-    if (nextVal) {
-      toast("Dark Mode", {
-        icon: "🌙",
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-    } else {
-      toast("Light Mode", {
-        icon: "☀️",
-        style: {
-          borderRadius: "10px",
-        },
-      });
-    }
-  }
-
-  function toggleMusicPlayer() {
-    const nextVal = !isMusicToggled;
-    setIsMusicToggled(nextVal);
-    if (nextVal) {
-      toast("Music Toggled", {
-        duration: 750,
-        icon: "🎵",
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-    }
-  }
-
-  function toggleTimerPlayer() {
-    const nextVal = !isTimerToggled;
-    setIsTimerToggled(nextVal);
-    if (nextVal) {
-      toast("Timer Toggled", {
-        duration: 750,
-        icon: "⏳",
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-    }
-  }
-
-  function toggleTaskTracker() {
-    const nextVal = !isTasksToggled;
-    setIsTasksToggled(nextVal);
-    if (nextVal) {
-      toast("Task Toggled", {
-        duration: 750,
-        icon: "📓",
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-    }
-  }
-
-  function toggleSpotify() {
-    const nextVal = !isSpotifyToggled;
-    setIsSpotifyToggled(nextVal);
-    if (nextVal) {
-      toast("Spotify Toggled", {
-        duration: 750,
-        icon: "🎧",
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
     }
   }
 
@@ -192,72 +100,6 @@ export const SideNav = () => {
 
   function toggleNavBar() {
     setActive((oldDate) => !oldDate);
-  }
-
-  function openFullscreen() {
-    const docFullScreenFunctions = document.documentElement as HTMLElement & {
-      requestFullscreen(): Promise<void>;
-      mozRequestFullScreen(): Promise<void>;
-      webkitRequestFullscreen(): Promise<void>;
-      msRequestFullscreen(): Promise<void>;
-    };
-
-    if (docFullScreenFunctions.requestFullscreen) {
-      docFullScreenFunctions.requestFullscreen();
-    } else if (docFullScreenFunctions.webkitRequestFullscreen) {
-      /* Safari */
-      docFullScreenFunctions.webkitRequestFullscreen();
-    } else if (docFullScreenFunctions.msRequestFullscreen) {
-      /* IE11 */
-      docFullScreenFunctions.msRequestFullscreen();
-    }
-  }
-
-  function closeFullscreen() {
-    const docExitFunctions = document as Document & {
-      exitFullscreen(): Promise<void>;
-      mozCancelFullScreen(): Promise<void>;
-      webkitExitFullscreen(): Promise<void>;
-      msExitFullscreen(): Promise<void>;
-    };
-
-    if (docExitFunctions.exitFullscreen) {
-      docExitFunctions.exitFullscreen();
-    } else if (docExitFunctions.webkitExitFullscreen) {
-      /* Safari */
-      docExitFunctions.webkitExitFullscreen();
-    } else if (docExitFunctions.msExitFullscreen) {
-      /* IE11 */
-      docExitFunctions.msExitFullscreen();
-    }
-  }
-
-  function toggleFullScreen() {
-    try {
-      if (document.fullscreenElement) {
-        closeFullscreen();
-      } else {
-        openFullscreen();
-      }
-    } catch (err) {
-      alert("Cannot go into fullscreen mode: browser too old");
-    }
-  }
-
-  function toggleQuote() {
-    const nextVal = !isQuoteToggled;
-    setIsQuoteToggled(!isQuoteToggled);
-    if (nextVal) {
-      toast("Quote Toggled", {
-        duration: 750,
-        icon: "💬",
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-    }
   }
 
   return (
@@ -275,16 +117,64 @@ export const SideNav = () => {
                 active ? "" : "hidden"
               } w-full sm:flex sm:flex-grow sm:w-auto sm:flex-col`}
             >
-              <NavItem onClick={toggleMusicPlayer} toggled={isMusicToggled} shown={isMusicShown}>
+              <NavItem
+                onClick={() =>
+                  toggledToastNotification(
+                    isMusicToggled,
+                    setIsMusicToggled,
+                    "Music Toggled",
+                    750,
+                    "🎵"
+                  )
+                }
+                toggled={isMusicToggled}
+                shown={isMusicShown}
+              >
                 <IoMusicalNotesOutline className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleSpotify} toggled={isSpotifyToggled} shown={isSpotifyShown}>
+              <NavItem
+                onClick={() =>
+                  toggledToastNotification(
+                    isSpotifyToggled,
+                    setIsSpotifyToggled,
+                    "Spotify Toggled",
+                    750,
+                    "🎧"
+                  )
+                }
+                toggled={isSpotifyToggled}
+                shown={isSpotifyShown}
+              >
                 <FaSpotify className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleTaskTracker} toggled={isTasksToggled} shown={isTasksShown}>
+              <NavItem
+                onClick={() =>
+                  toggledToastNotification(
+                    isTasksToggled,
+                    setIsTasksToggled,
+                    "Task Toggled",
+                    750,
+                    "📓"
+                  )
+                }
+                toggled={isTasksToggled}
+                shown={isTasksShown}
+              >
                 <CgNotes className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleTimerPlayer} toggled={isTimerToggled} shown={isTimerShown}>
+              <NavItem
+                onClick={() =>
+                  toggledToastNotification(
+                    isTimerToggled,
+                    setIsTimerToggled,
+                    "Timer Toggled",
+                    750,
+                    "⏳"
+                  )
+                }
+                toggled={isTimerToggled}
+                shown={isTimerShown}
+              >
                 <MdOutlineTimer className="h-6 w-6" />
               </NavItem>
               {isDesktop && (
@@ -292,22 +182,44 @@ export const SideNav = () => {
                   <MdOutlineNoteAdd className="h-6 w-6" />
                 </NavItem>
               )}
-              <NavItem onClick={toggleDefaultPositions} shown={isWidgetResetShown}>
+              <NavItem
+                onClick={toggleDefaultPositions}
+                shown={isWidgetResetShown}
+              >
                 <VscDebugRestartFrame className="h-6 w-6" />
               </NavItem>
-              <NavItem onClick={toggleDark} shown={isDarkModeShown}>
+              <NavItem
+                onClick={() => toastThemeNotification(isDark, toggleDarkMode)}
+                shown={isDarkModeShown}
+              >
                 {isDark ? (
                   <MdWbSunny className="h-6 w-6" />
                 ) : (
                   <MdDarkMode className="h-6 w-6" />
                 )}
               </NavItem>
-              <NavItem onClick={toggleQuote} toggled={isQuoteToggled} shown={isQuoteShown}>
+              <NavItem
+                onClick={() =>
+                  toggledToastNotification(
+                    isQuoteToggled,
+                    setIsQuoteToggled,
+                    "Quotes Toggled",
+                    750,
+                    "💬"
+                  )
+                }
+                toggled={isQuoteToggled}
+                shown={isQuoteShown}
+              >
                 <BsFillChatLeftQuoteFill className="h-6 w-6" />
               </NavItem>
 
               {isDesktop && (
-                <NavItem onClick={toggleFullScreen} toggled={isFullscreen} shown={isFullscreenShown}>
+                <NavItem
+                  onClick={toggleFullScreen}
+                  toggled={isFullscreen}
+                  shown={isFullscreenShown}
+                >
                   <BsArrowsFullscreen className="h-6 w-6" />
                 </NavItem>
               )}
