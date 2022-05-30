@@ -1,18 +1,20 @@
 import "./ShootingStars.scss";
 import "../Space/Space.scss";
 
-export const stars = 10;
+const getStars = () => {
+  const items = [];
+  for(let i=0; i<10; i++) {
+    items.push(<div className="star" key={i}></div>);
+  }
+  return items;
+}
 
 export const ShootingStars = () => {
   return (
     <div className="spaceContainer">
       <div className="spaceStars"></div>
       <div className="twinkling"></div>
-      <div className="stars">{Array(stars).fill(Star())}</div>
+      <div className="stars">{getStars()}</div>
     </div>
   );
-};
-
-const Star = () => {
-  return <div className="star"></div>;
 };
