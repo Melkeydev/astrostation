@@ -11,7 +11,7 @@ import {
   usePosMusic,
   usePosSpotify,
   usePosTimer,
-  usePosQuote
+  usePosQuote,
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -20,12 +20,14 @@ import { Spotify } from "@Components/Player/Spotify/Player";
 import { BackgroundNav } from "@Components/Nav/BackgroundNav";
 import { GoGear } from "react-icons/go";
 import { MdWidgets } from "react-icons/md";
+import { BsPersonCircle } from "react-icons/bs";
+import { FaEthereum } from "react-icons/fa";
 import { DWrapper } from "@Components/Dragggable/Draggable";
 
 import { SettingsModal } from "@Components/Timer/Modal";
 import { CryptoModal } from "@Components/Crypto/Modal";
+import { LoginModal } from "@Components/User/LoginModal";
 import { WidgetControlModal } from "@Components/WidgetControl/WidgetControlModal";
-import { FaEthereum } from "react-icons/fa";
 import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
 
@@ -40,10 +42,10 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isStickyNoteShown } = useToggleStickyNote();
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
 
-
   const [isSettingsModal, setSettingsModal] = useState(false);
   const [isCryptoModal, setCryptoModal] = useState(false);
-  const [isConfigureWidgetModal, setIsWidgetModal ] = useState(false);
+  const [isConfigureWidgetModal, setIsWidgetModal] = useState(false);
+  const [isLoginModal, setLoginModal] = useState(false);
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -54,9 +56,23 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
 
   const isDesktop = useMediaQuery("(min-width: 641px)");
 
+  console.log(isLoginModal);
+
   return (
     <div className="h-screen w-70 space-y-1">
-      <div className={"flex justify-end " + (isDesktop ? " space-x-6" : " grid gap-y-[5%]")}>
+      <div
+        className={
+          "flex justify-end " + (isDesktop ? " space-x-6" : " grid gap-y-[5%]")
+        }
+      >
+        <button
+          type="button"
+          className="settingsButton flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
+          onClick={() => setLoginModal(true)}
+        >
+          Login
+          <BsPersonCircle className="-mr-1 ml-2" />
+        </button>
         <button
           type="button"
           className="settingsButton flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
@@ -74,6 +90,12 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           <MdWidgets className="-mr-1 ml-2" />
         </button>
         <BackgroundNav backgrounds={backgrounds} />
+      </div>
+      <div className="flex justify-end space-x-6">
+        <LoginModal
+          isVisible={isLoginModal}
+          onClose={() => setLoginModal(false)}
+        />
       </div>
       <div className="flex justify-end space-x-6">
         <SettingsModal

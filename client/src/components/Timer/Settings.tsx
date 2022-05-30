@@ -8,7 +8,7 @@ import {
   useHasStarted,
   useMaxPomodoro,
   useAudioVolume,
-  useAlarmOption
+  useAlarmOption,
 } from "../../store";
 import { IoCloseSharp } from "react-icons/io5";
 import { BsMusicPlayerFill, BsBellFill } from "react-icons/bs";
@@ -36,7 +36,6 @@ export const TimerSettings = ({ onClose }) => {
   const [currentVolume, setCurrentVolume] = useState(audioVolume);
   const { alarm, setAlarm } = useAlarmOption();
   const [currentAlarm, setCurrentAlarm] = useState(alarm);
-  const [isWidgetModalOpen, setIsWidgetModalOpen ] = useState(false);
 
   const setDefault = useSetDefault();
 
@@ -123,208 +122,208 @@ export const TimerSettings = ({ onClose }) => {
           onClick={onClose}
         />
       </div>
-        <div className="grid">
-          <div className="text-center text-lg">Settings</div>
-          <div className="border-b-2 border-gray-100 p-4">
-            <div className="text-center p-2 rounded">
-              Time <span className="italic">(minutes)</span>
-            </div>
-            <div className="flex justify-between items-center text-center gap-6">
-              <ToggleOption
-                title="Pomodoro"
-                decrement="session-decrement"
-                increment="session-increment"
-                onClick={(e) =>
-                  handleLengthChange(
-                    e,
-                    "session-decrement",
-                    "session-increment",
-                    60,
-                    3600,
-                    pomoCount,
-                    setPomoCount,
-                    60
-                  )
-                }
-                onChange={(e) => {
-                  if (hasStarted) {
-                    e.target.readOnly = true;
-                    return;
-                  }
-                  setPomoCount(e.target.value * 60);
-                }}
-                propertyLength={Math.floor(pomoCount / 60)}
-                hasStarted={hasStarted}
-              />
-              <ToggleOption
-                title="Short Break"
-                decrement="short-break-decrement"
-                increment="short-break-increment"
-                onClick={(e) =>
-                  handleLengthChange(
-                    e,
-                    "short-break-decrement",
-                    "short-break-increment",
-                    60,
-                    3600,
-                    shortBreak,
-                    setShortBreakState,
-                    60
-                  )
-                }
-                onChange={(e) => {
-                  if (hasStarted) {
-                    e.target.readOnly = true;
-                    return;
-                  }
-                  setShortBreakState(e.target.value * 60);
-                }}
-                propertyLength={Math.floor(shortBreak / 60)}
-                hasStarted={hasStarted}
-              />
-              <ToggleOption
-                title="Long Break"
-                decrement="long-break-decrement"
-                increment="long-break-increment"
-                onClick={(e) =>
-                  handleLengthChange(
-                    e,
-                    "long-break-decrement",
-                    "long-break-increment",
-                    60,
-                    3600,
-                    longBreak,
-                    setLongBreakState,
-                    60
-                  )
-                }
-                onChange={(e) => {
-                  if (hasStarted) {
-                    e.target.readOnly = true;
-                    return;
-                  }
-                  setLongBreakState(e.target.value * 60);
-                }}
-                propertyLength={Math.floor(longBreak / 60)}
-                hasStarted={hasStarted}
-              />
-            </div>
+      <div className="grid">
+        <div className="text-center text-lg">Settings</div>
+        <div className="border-b-2 border-gray-100 p-4">
+          <div className="text-center p-2 rounded">
+            Time <span className="italic">(minutes)</span>
           </div>
-          <div className="flex justify-between items-center border-b-2 border-gray-100 p-4">
-            <div>Max Pomodoros</div>
-            <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-200 max-w-[100px]">
-              <ToggleOption
-                title=""
-                decrement="pomodoro-decrement"
-                increment="pomodoro-increment"
-                onClick={(e) =>
-                  handleLengthChange(
-                    e,
-                    "pomodoro-decrement",
-                    "pomodoro-increment",
-                    60,
-                    3600,
-                    maxPomo,
-                    setMaxPomo,
-                    60
-                  )
+          <div className="flex justify-between items-center text-center gap-6">
+            <ToggleOption
+              title="Pomodoro"
+              decrement="session-decrement"
+              increment="session-increment"
+              onClick={(e) =>
+                handleLengthChange(
+                  e,
+                  "session-decrement",
+                  "session-increment",
+                  60,
+                  3600,
+                  pomoCount,
+                  setPomoCount,
+                  60
+                )
+              }
+              onChange={(e) => {
+                if (hasStarted) {
+                  e.target.readOnly = true;
+                  return;
                 }
-                onChange={(e) => {
-                  if (hasStarted) {
-                    e.target.readOnly = true;
-                    return;
-                  }
-                  setMaxPomo(e.target.value * 60);
-                }}
-                propertyLength={Math.floor(maxPomo / 60)}
-                hasStarted={hasStarted}
-              />
-            </div>
-          </div>
-          <div className="border-b-2 border-gray-100 p-4">
-            <div className="text-center p-2 rounded">Alarm Volume</div>
-            <div className="px-2 pb-2 items-center">
-              <Slider
-                defaultValue={audioVolume}
-                onChange={(value) => {
-                  onVolumeChange(value);
-                }}
-                step={0.1}
-                min={0}
-                max={1}
-              />
-            </div>
-          </div>
-          <div className="border-b-2 border-gray-100 p-4">
-            <div className="text-center p-2 rounded">Alarm Sound</div>
-            <div className="flex justify-between items-center text-center gap-2 pb-2">
-              <div className="w-1/4">
-                Retro
-                <div
-                  className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                    currentAlarm == "/assets/music/arcade.wav" &&
-                    "border border-gray-200"
-                  }`}
-                  onClick={() => changeAlarm("/assets/music/arcade.wav")}
-                >
-                  <BsMusicPlayerFill />
-                </div>
-              </div>
-              <div className="w-1/4">
-                Bells
-                <div
-                  className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                    currentAlarm == "/assets/music/bells.wav" &&
-                    "border border-gray-200"
-                  }`}
-                  onClick={() => changeAlarm("/assets/music/bells.wav")}
-                >
-                  <BsBellFill />
-                </div>
-              </div>
-              <div className="w-1/4">
-                Flute
-                <div
-                  className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                    currentAlarm == "/assets/music/flute.wav" &&
-                    "border border-gray-200"
-                  }`}
-                  onClick={() => changeAlarm("/assets/music/flute.wav")}
-                >
-                  <GiPanFlute />
-                </div>
-              </div>
-              <div className="w-1/4">
-                Piano
-                <div
-                  className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                    currentAlarm == "/assets/music/piano.wav" &&
-                    "border border-gray-200"
-                  }`}
-                  onClick={() => changeAlarm("/assets/music/piano.wav")}
-                >
-                  <CgPiano />
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="flex justify-between p-2">
-            <Button
-              className="text-gray-800 font-normal hover:text-white dark:text-white"
-              variant="cold"
-              onClick={handleDefaults}
-            >
-              Default
-            </Button>
-            <Button
-              className="text-gray-800 font-normal hover:text-white dark:text-white"
-              variant="cold"
-              onClick={onSubmit}
-            >
-              Okay
-            </Button>
+                setPomoCount(e.target.value * 60);
+              }}
+              propertyLength={Math.floor(pomoCount / 60)}
+              hasStarted={hasStarted}
+            />
+            <ToggleOption
+              title="Short Break"
+              decrement="short-break-decrement"
+              increment="short-break-increment"
+              onClick={(e) =>
+                handleLengthChange(
+                  e,
+                  "short-break-decrement",
+                  "short-break-increment",
+                  60,
+                  3600,
+                  shortBreak,
+                  setShortBreakState,
+                  60
+                )
+              }
+              onChange={(e) => {
+                if (hasStarted) {
+                  e.target.readOnly = true;
+                  return;
+                }
+                setShortBreakState(e.target.value * 60);
+              }}
+              propertyLength={Math.floor(shortBreak / 60)}
+              hasStarted={hasStarted}
+            />
+            <ToggleOption
+              title="Long Break"
+              decrement="long-break-decrement"
+              increment="long-break-increment"
+              onClick={(e) =>
+                handleLengthChange(
+                  e,
+                  "long-break-decrement",
+                  "long-break-increment",
+                  60,
+                  3600,
+                  longBreak,
+                  setLongBreakState,
+                  60
+                )
+              }
+              onChange={(e) => {
+                if (hasStarted) {
+                  e.target.readOnly = true;
+                  return;
+                }
+                setLongBreakState(e.target.value * 60);
+              }}
+              propertyLength={Math.floor(longBreak / 60)}
+              hasStarted={hasStarted}
+            />
           </div>
         </div>
+        <div className="flex justify-between items-center border-b-2 border-gray-100 p-4">
+          <div>Max Pomodoros</div>
+          <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-200 max-w-[100px]">
+            <ToggleOption
+              title=""
+              decrement="pomodoro-decrement"
+              increment="pomodoro-increment"
+              onClick={(e) =>
+                handleLengthChange(
+                  e,
+                  "pomodoro-decrement",
+                  "pomodoro-increment",
+                  60,
+                  3600,
+                  maxPomo,
+                  setMaxPomo,
+                  60
+                )
+              }
+              onChange={(e) => {
+                if (hasStarted) {
+                  e.target.readOnly = true;
+                  return;
+                }
+                setMaxPomo(e.target.value * 60);
+              }}
+              propertyLength={Math.floor(maxPomo / 60)}
+              hasStarted={hasStarted}
+            />
+          </div>
+        </div>
+        <div className="border-b-2 border-gray-100 p-4">
+          <div className="text-center p-2 rounded">Alarm Volume</div>
+          <div className="px-2 pb-2 items-center">
+            <Slider
+              defaultValue={audioVolume}
+              onChange={(value) => {
+                onVolumeChange(value);
+              }}
+              step={0.1}
+              min={0}
+              max={1}
+            />
+          </div>
+        </div>
+        <div className="border-b-2 border-gray-100 p-4">
+          <div className="text-center p-2 rounded">Alarm Sound</div>
+          <div className="flex justify-between items-center text-center gap-2 pb-2">
+            <div className="w-1/4">
+              Retro
+              <div
+                className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
+                  currentAlarm == "/assets/music/arcade.wav" &&
+                  "border border-gray-200"
+                }`}
+                onClick={() => changeAlarm("/assets/music/arcade.wav")}
+              >
+                <BsMusicPlayerFill />
+              </div>
+            </div>
+            <div className="w-1/4">
+              Bells
+              <div
+                className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
+                  currentAlarm == "/assets/music/bells.wav" &&
+                  "border border-gray-200"
+                }`}
+                onClick={() => changeAlarm("/assets/music/bells.wav")}
+              >
+                <BsBellFill />
+              </div>
+            </div>
+            <div className="w-1/4">
+              Flute
+              <div
+                className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
+                  currentAlarm == "/assets/music/flute.wav" &&
+                  "border border-gray-200"
+                }`}
+                onClick={() => changeAlarm("/assets/music/flute.wav")}
+              >
+                <GiPanFlute />
+              </div>
+            </div>
+            <div className="w-1/4">
+              Piano
+              <div
+                className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
+                  currentAlarm == "/assets/music/piano.wav" &&
+                  "border border-gray-200"
+                }`}
+                onClick={() => changeAlarm("/assets/music/piano.wav")}
+              >
+                <CgPiano />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div className="flex justify-between p-2">
+          <Button
+            className="text-gray-800 font-normal hover:text-white dark:text-white"
+            variant="cold"
+            onClick={handleDefaults}
+          >
+            Default
+          </Button>
+          <Button
+            className="text-gray-800 font-normal hover:text-white dark:text-white"
+            variant="cold"
+            onClick={onSubmit}
+          >
+            Okay
+          </Button>
+        </div>
+      </div>
     </div>
   );
 };
