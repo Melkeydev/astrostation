@@ -5,12 +5,11 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Settings } from "./Settings";
 import { useTask, useTimer, useBreakStarted } from "@Store";
 
-export const Task = ({ task }: any) => {
+export const Task = ({ task }) => {
   const [openSettings, setOpenSettings] = useState(false);
   const { completeTask, toggleInProgressState, alertTask, setPomodoroCounter } =
     useTask();
   const { breakStarted } = useBreakStarted();
-
   const { timerQueue } = useTimer();
 
   function preventFalseInProgress() {

@@ -1,8 +1,8 @@
 import toast from "react-hot-toast";
 
-export const toggledToasNotification = (
+export const toggledToastNotification = (
   isToggled: boolean,
-  setToggler: any,
+  setToggler: (val: boolean) => void,
   toastText: string,
   duration: number,
   icon: string
@@ -32,7 +32,10 @@ export const defaultToast = (toastText: string) => {
   });
 };
 
-export const toastThemeNotification = (isDark: boolean, toggleMode: any) => {
+export const toastThemeNotification = (
+  isDark: boolean,
+  toggleMode: () => void
+) => {
   const nextVal = !isDark;
   toggleMode();
   if (nextVal) {
@@ -52,4 +55,48 @@ export const toastThemeNotification = (isDark: boolean, toggleMode: any) => {
       },
     });
   }
+};
+
+export const successToast = (
+  toastText: string,
+  isDark: boolean,
+  icon?: string
+) => {
+  if (isDark) {
+    toast.success(toastText, {
+      icon: icon,
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
+  } else {
+    toast.success("Settings saved", {
+      icon: icon,
+      style: {
+        borderRadius: "10px",
+      },
+    });
+  }
+};
+
+const darkModeToast = (toastText: string, icon: string) => {
+  toast(toastText, {
+    icon: icon,
+    style: {
+      borderRadius: "10px",
+      background: "#333",
+      color: "#fff",
+    },
+  });
+};
+
+const lightMOdeToast = (toastText: string, icon: string) => {
+  toast(toastText, {
+    icon: icon,
+    style: {
+      borderRadius: "10px",
+    },
+  });
 };

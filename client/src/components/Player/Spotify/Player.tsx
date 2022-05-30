@@ -2,7 +2,7 @@ import { useState } from "react";
 import { IoCloseSharp } from "react-icons/io5";
 import { AiOutlineReload } from "react-icons/ai";
 import { useSpotifyMusic } from "@Store";
-import { Tooltip } from '@mui/material';
+import { Tooltip } from "@mui/material";
 export const Spotify = () => {
   const { setIsSpotifyToggled } = useSpotifyMusic();
   const [text, setText] = useState("");
@@ -15,7 +15,7 @@ export const Spotify = () => {
       alert("Invalid spotify URL");
       return;
     }
-    const splitOn = (slicable, ...indices) =>
+    const splitOn = (slicable: string, ...indices: number[]) =>
       [0, ...indices].map((n, i, m) => slicable.slice(n, m[i + 1]));
     const stitchUrl = splitOn(text, 24)[0] + "/embed" + splitOn(text, 24)[1];
     setPlaylist(stitchUrl);

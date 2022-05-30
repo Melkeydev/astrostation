@@ -28,7 +28,7 @@ import useMediaQuery from "../../utils/hooks/useMediaQuery";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 
 import {
-  toggledToasNotification,
+  toggledToastNotification,
   defaultToast,
   toastThemeNotification,
 } from "../../utils/toast";
@@ -119,7 +119,7 @@ export const SideNav = () => {
             >
               <NavItem
                 onClick={() =>
-                  toggledToasNotification(
+                  toggledToastNotification(
                     isMusicToggled,
                     setIsMusicToggled,
                     "Music Toggled",
@@ -134,7 +134,7 @@ export const SideNav = () => {
               </NavItem>
               <NavItem
                 onClick={() =>
-                  toggledToasNotification(
+                  toggledToastNotification(
                     isSpotifyToggled,
                     setIsSpotifyToggled,
                     "Spotify Toggled",
@@ -149,7 +149,7 @@ export const SideNav = () => {
               </NavItem>
               <NavItem
                 onClick={() =>
-                  toggledToasNotification(
+                  toggledToastNotification(
                     isTasksToggled,
                     setIsTasksToggled,
                     "Task Toggled",
@@ -164,7 +164,7 @@ export const SideNav = () => {
               </NavItem>
               <NavItem
                 onClick={() =>
-                  toggledToasNotification(
+                  toggledToastNotification(
                     isTimerToggled,
                     setIsTimerToggled,
                     "Timer Toggled",
@@ -200,7 +200,7 @@ export const SideNav = () => {
               </NavItem>
               <NavItem
                 onClick={() =>
-                  toggledToasNotification(
+                  toggledToastNotification(
                     isQuoteToggled,
                     setIsQuoteToggled,
                     "Quotes Toggled",

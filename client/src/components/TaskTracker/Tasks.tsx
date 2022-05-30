@@ -1,8 +1,9 @@
 import { Task } from "./Task";
 import { Button } from "@Components/Common/Button";
 import { useTask } from "@Store";
+import { ITask } from "../../interfaces";
 
-export const Tasks = ({ tasks }: any) => {
+export const Tasks = ({ tasks }) => {
   const { removeAllTasks } = useTask();
 
   function confirmClearTasks() {
@@ -14,7 +15,7 @@ export const Tasks = ({ tasks }: any) => {
 
   return (
     <>
-      {tasks.map((task, index) => (
+      {tasks.map((task: ITask, index: number) => (
         <Task key={index} task={task} />
       ))}
       {tasks && (

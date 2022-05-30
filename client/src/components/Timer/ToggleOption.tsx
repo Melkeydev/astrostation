@@ -5,12 +5,12 @@ export const ToggleOption = ({
   onClick,
   onChange,
   propertyLength,
-  hasStarted
+  hasStarted,
 }: {
   title: string;
   decrement: string;
   increment: string;
-  onClick: any;
+  onClick: React.MouseEventHandler<HTMLButtonElement>;
   onChange: any;
   propertyLength: number;
   hasStarted: boolean;
@@ -23,7 +23,12 @@ export const ToggleOption = ({
           <button id={decrement} onClick={onClick}>
             &lt;
           </button>
-          <input className="text-center dark:bg-gray-700 w-9/12" defaultValue={propertyLength} onChange={onChange} readOnly={hasStarted}/>
+          <input
+            className="text-center dark:bg-gray-700 w-9/12"
+            defaultValue={propertyLength}
+            onChange={onChange}
+            readOnly={hasStarted}
+          />
           <button id={increment} onClick={onClick}>
             &gt;
           </button>
