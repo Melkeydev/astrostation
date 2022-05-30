@@ -1,6 +1,7 @@
 import { CryptoModal } from "./Modal";
 import { FaEthereum } from "react-icons/fa";
 import { useState } from "react";
+
 export const Donations = () => {
   const [isModal, setModal] = useState(false);
   return (
