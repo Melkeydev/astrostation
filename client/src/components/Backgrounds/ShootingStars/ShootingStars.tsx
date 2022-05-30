@@ -1,5 +1,4 @@
 import "./ShootingStars.scss";
-import "../Space/Space.scss";
 
 const getStars = () => {
   const items = [];
