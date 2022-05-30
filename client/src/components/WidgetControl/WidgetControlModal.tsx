@@ -17,8 +17,8 @@ import {
   useFullScreenToggleStore,
   useToggleWidgetReset,
 } from "@Store";
-import useMediaQuery from "../../utils/hooks/useMediaQuery";
-import { toggledToastNotification } from "../../utils/toast";
+import useMediaQuery from "@Utils/hooks/useMediaQuery";
+import { toggledToastNotification } from "@Utils/toast";
 
 export const WidgetControlModal = ({ isVisible = false, onClose }) => {
   const { isMusicShown, setIsMusicShown } = useToggleMusic();

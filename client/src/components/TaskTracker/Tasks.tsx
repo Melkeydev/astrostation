@@ -1,7 +1,7 @@
 import { Task } from "./Task";
 import { Button } from "@Components/Common/Button";
 import { useTask } from "@Store";
-import { ITask } from "../../interfaces";
+import { ITask } from "@App/interfaces";
 
 export const Tasks = ({ tasks }) => {
   const { removeAllTasks } = useTask();

@@ -12,9 +12,9 @@ import {
   useBreakStarted,
   useAudioVolume,
   useAlarmOption,
-} from "../../store";
+} from "@Store";
 import toast from "react-hot-toast";
-import { secondsToTime, formatDisplayTime } from "../../utils/utils";
+import { secondsToTime, formatDisplayTime } from "@Utils/utils";
 
 export const Timer = () => {
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();

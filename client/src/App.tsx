@@ -5,7 +5,7 @@ import { HomePage } from "@Pages/Homepage";
 import { SideNav } from "@Components/Nav/SideNav";
 import { useDarkToggleStore, useFirstTimeUserStore } from "@Store";
 import { Toaster } from "react-hot-toast";
-import { version } from "../package.json";
+import { version } from "@Root/package.json";
 import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
 
 import useSetDefault from "@App/utils/hooks/useSetDefault";

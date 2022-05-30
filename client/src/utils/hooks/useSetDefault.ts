@@ -8,7 +8,7 @@ import {
   usePomodoroTimer,
   useMaxPomodoro,
   usePosQuote,
-} from "../../store";
+} from "@Store";
 
 function useSetDefault() {
   const { setTaskPosDefault } = usePosTask();

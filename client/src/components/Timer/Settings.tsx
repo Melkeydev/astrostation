@@ -9,14 +9,13 @@ import {
   useMaxPomodoro,
   useAudioVolume,
   useAlarmOption,
-} from "../../store";
+} from "@Store";
 import { IoCloseSharp } from "react-icons/io5";
 import { BsMusicPlayerFill, BsBellFill } from "react-icons/bs";
 import { GiPanFlute } from "react-icons/gi";
 import { CgPiano } from "react-icons/cg";
-import { Button } from "../Common/Button";
+import { Button } from "@Components/Common/Button";
 import { ToggleOption } from "./ToggleOption";
-import toast from "react-hot-toast";
 
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 import { successToast } from "@App/utils/toast";

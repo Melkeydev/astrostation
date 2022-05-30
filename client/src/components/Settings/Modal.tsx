@@ -1,6 +1,6 @@
 import "./Modal.scss";
 import { useEffect } from "react";
-import { TimerSettings } from "../Timer/Settings";
+import { TimerSettings } from "@Components/Timer/Settings";
 
 export const SettingsModal = ({ isVisible = false, onClose }) => {
   const keydownHandler = ({ key }) => {

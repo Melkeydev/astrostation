@@ -1,4 +1,4 @@
-import { useFullScreenToggleStore } from "../store";
+import { useFullScreenToggleStore } from "@Store";
 
 export function fullscreenChanged() {
   const { toggleFullscreenMode } = useFullScreenToggleStore();

@@ -22,18 +22,18 @@ import {
   useStickyNote,
   useToggleStickyNote,
   useToggleWidgetReset,
-} from "../../store";
+} from "@Store";
 import { useState, useEffect } from "react";
-import useMediaQuery from "../../utils/hooks/useMediaQuery";
+import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 
 import {
   toggledToastNotification,
   defaultToast,
   toastThemeNotification,
-} from "../../utils/toast";
+} from "@Utils/toast";
 
-import { fullscreenChanged, toggleFullScreen } from "../../utils/fullscreen";
+import { fullscreenChanged, toggleFullScreen } from "@Utils/fullscreen";
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
