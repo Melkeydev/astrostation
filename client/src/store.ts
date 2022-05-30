@@ -99,11 +99,6 @@ export const useSetPomodoroCounter = create<IPomodoroCounter>((set) => ({
  * Handler for Settings
  */
 
-export const useToggleSettings = create<IToggleSettings>((set) => ({
-  isSettingsToggled: false,
-  setIsSettingsToggled: (isSettingsToggled) => set({ isSettingsToggled }),
-}));
-
 export const usePosTimerSettings = create<IPosTimerSettings>(
   persist(
     (set, _) => ({
