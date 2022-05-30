@@ -1,11 +1,10 @@
 import { useState } from "react";
 import { Button } from "@Components/Common/Button";
 import { AiFillDelete } from "react-icons/ai";
-import { useTask, useMaxPomodoro } from "@Store";
+import { useTask } from "@Store";
 export const Settings = ({ setOpenSettings, Task }) => {
   const [text, setText] = useState(Task.description);
   const { removeTask, setPomodoro, alertTask, renameTask } = useTask();
-  const { maxPomodoro } = useMaxPomodoro();
 
   const [changePomo, setChangePomo] = useState(Task.pomodoro);
 
@@ -30,7 +29,7 @@ export const Settings = ({ setOpenSettings, Task }) => {
   function handlePomoChange(e: any) {
     if (e.target.id === "decrement" && changePomo > Task.pomodoroCounter) {
       setChangePomo(changePomo - 1);
-    } else if (e.target.id === "increment" && changePomo < maxPomodoro) {
+    } else if (e.target.id === "increment") {
       setChangePomo(changePomo + 1);
     }
   }

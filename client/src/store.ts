@@ -5,7 +5,6 @@ import {
   IAlarmOption,
   ITimer,
   IPomodoroCounter,
-  IToggleSettings,
   IPosTimerSettings,
   IMaxPomo,
   IHasStarted,
@@ -112,23 +111,6 @@ export const usePosTimerSettings = create<IPosTimerSettings>(
     {
       name: "set_timer_settings_position",
     }
-  )
-);
-
-/**
- * Max Pomodoro Store
- * ---
- * Handle for the amount of pomodoro's per task
- */
-
-export const useMaxPomodoro = create<IMaxPomo>(
-  persist(
-    (set, _) => ({
-      maxPomodoro: 3,
-      defaultMaxPomodoro: () => set(() => ({ maxPomodoro: 3 })),
-      setMaxPomodoro: (value) => set({ maxPomodoro: value }),
-    }),
-    { name: "max_pomodoro_per_task" }
   )
 );
 

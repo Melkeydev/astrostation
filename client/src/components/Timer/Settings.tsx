@@ -6,7 +6,6 @@ import {
   useLongBreakTimer,
   usePomodoroTimer,
   useHasStarted,
-  useMaxPomodoro,
   useAudioVolume,
   useAlarmOption,
 } from "@Store";
@@ -25,13 +24,10 @@ export const TimerSettings = ({ onClose }) => {
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();
   const { longBreakLength, setLongBreak } = useLongBreakTimer();
   const { pomodoroLength, setPomodoroLength } = usePomodoroTimer();
-  const { maxPomodoro, setMaxPomodoro } = useMaxPomodoro();
   const { hasStarted } = useHasStarted();
-
   const [pomoCount, setPomoCount] = useState(pomodoroLength);
   const [shortBreak, setShortBreakState] = useState(shortBreakLength);
   const [longBreak, setLongBreakState] = useState(longBreakLength);
-  const [maxPomo, setMaxPomo] = useState(maxPomodoro);
   const { audioVolume, setAudioVolume } = useAudioVolume();
   const [currentVolume, setCurrentVolume] = useState(audioVolume);
   const { alarm, setAlarm } = useAlarmOption();
@@ -47,7 +43,6 @@ export const TimerSettings = ({ onClose }) => {
     setShortBreak(shortBreak);
     setLongBreak(longBreak);
     setPomodoroLength(pomoCount);
-    setMaxPomodoro(maxPomo);
     setAudioVolume(currentVolume);
     setAlarm(currentAlarm);
     onClose();
@@ -65,7 +60,6 @@ export const TimerSettings = ({ onClose }) => {
       setPomoCount(1500);
       setShortBreakState(300);
       setLongBreakState(900);
-      setMaxPomo(3);
       setAudioVolume(0.7);
       setAlarm(
         "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
@@ -192,37 +186,6 @@ export const TimerSettings = ({ onClose }) => {
                 setLongBreakState(e.target.value * 60);
               }}
               propertyLength={Math.floor(longBreak / 60)}
-              hasStarted={hasStarted}
-            />
-          </div>
-        </div>
-        <div className="flex justify-between items-center border-b-2 border-gray-100 p-4">
-          <div>Max Pomodoros</div>
-          <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-200 max-w-[100px]">
-            <ToggleOption
-              title=""
-              decrement="pomodoro-decrement"
-              increment="pomodoro-increment"
-              onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-                handleLengthChange(
-                  e,
-                  "pomodoro-decrement",
-                  "pomodoro-increment",
-                  60,
-                  3600,
-                  maxPomo,
-                  setMaxPomo,
-                  60
-                )
-              }
-              onChange={(e) => {
-                if (hasStarted) {
-                  e.target.readOnly = true;
-                  return;
-                }
-                setMaxPomo(e.target.value * 60);
-              }}
-              propertyLength={Math.floor(maxPomo / 60)}
               hasStarted={hasStarted}
             />
           </div>
