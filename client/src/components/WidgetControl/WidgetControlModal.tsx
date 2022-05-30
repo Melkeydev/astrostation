@@ -183,7 +183,7 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
         const nextVal = !isQuoteShown;
         setIsQuoteShown(nextVal);
         if (nextVal) {
-            toast("Fullscreen Widget Added", {
+            toast("Quote Widget Added", {
                 duration: 750,
                 icon: "💬",
                 style: {
