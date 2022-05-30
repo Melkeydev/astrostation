@@ -82,7 +82,7 @@ export const AddTask = () => {
         </div>
       </div>
 
-      <Button type="submit" variant="secondary">
+      <Button type="submit" variant="primary">
         Save
       </Button>
     </form>

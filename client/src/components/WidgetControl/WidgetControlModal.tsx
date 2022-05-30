@@ -51,7 +51,7 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
   return !isVisible ? null : (
     <div className="modal" onClick={onClose}>
       <div
-        className="p-2 px-1 w-72 sm:w-96 max-w-sm bg-white text-gray-800 rounded-lg shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700"
+        className="w-10/12 p-2 px-1 sm:w-96 max-w-sm bg-white text-gray-800 rounded-lg shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700"
         onClick={(e) => e.stopPropagation()}
       >
         <div className="flex justify-end">
