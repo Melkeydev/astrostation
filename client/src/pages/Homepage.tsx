@@ -1,4 +1,5 @@
 import { useState } from "react";
+
 import {
   useToggleMusic,
   useToggleTimer,
@@ -18,20 +19,20 @@ import { Timer } from "@Components/Timer/Timer";
 import { TaskTracker } from "@Components/TaskTracker/TaskTracker";
 import { Spotify } from "@Components/Player/Spotify/Player";
 import { BackgroundNav } from "@Components/Nav/BackgroundNav";
+import { DWrapper } from "@Components/Dragggable/Draggable";
+import { CryptoDonationButton } from "@App/components/Crypto/Donation";
+import { CustomizationButton } from "@App/components/Common/Buttons/CustomizationButton";
 import { GoGear } from "react-icons/go";
+import { SettingsModal } from "@App/components/Settings/Modal";
 import { MdWidgets } from "react-icons/md";
 import { BsPersonCircle } from "react-icons/bs";
-import { FaEthereum } from "react-icons/fa";
-import { DWrapper } from "@Components/Dragggable/Draggable";
-
-import { SettingsModal } from "@Components/Timer/Modal";
-import { CryptoModal } from "@Components/Crypto/Modal";
 import { LoginModal } from "@Components/User/LoginModal";
-import { WidgetControlModal } from "@Components/WidgetControl/WidgetControlModal";
+import { WidgetControlModal } from "@App/components/WidgetControl/WidgetControlModal";
+import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
 
-import useMediaQuery from "../utils/hooks/useMediaQuery";
+import useMediaQuery from "@Utils/hooks/useMediaQuery";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
@@ -42,11 +43,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isStickyNoteShown } = useToggleStickyNote();
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
 
-  const [isSettingsModal, setSettingsModal] = useState(false);
-  const [isCryptoModal, setCryptoModal] = useState(false);
-  const [isConfigureWidgetModal, setIsWidgetModal] = useState(false);
-  const [isLoginModal, setLoginModal] = useState(false);
-
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
   const { musicPosX, musicPosY, setMusicPos } = usePosMusic();
@@ -56,75 +52,67 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
 
   const isDesktop = useMediaQuery("(min-width: 641px)");
 
-  console.log(isLoginModal);
+  const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
+  const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen] =
+    useState(false);
+  const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
+  const [isLoginModal, setLoginModal] = useState(false);
 
   return (
-    <div className="h-screen w-70 space-y-1">
+    <div className="h-screen space-y-1">
       <div
         className={
-          "flex justify-end " + (isDesktop ? " space-x-6" : " grid gap-y-[5%]")
+          "flex justify-end " +
+          (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")
         }
       >
-        <button
-          type="button"
-          className="settingsButton flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
-          onClick={() => setLoginModal(true)}
-        >
-          Login
-          <BsPersonCircle className="-mr-1 ml-2" />
-        </button>
-        <button
-          type="button"
-          className="settingsButton flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
-          onClick={() => setSettingsModal(true)}
-        >
-          Settings
-          <GoGear className="-mr-1 ml-2" />
-        </button>
-        <button
-          type="button"
-          className="configureWidgetsButton flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
-          onClick={() => setIsWidgetModal(true)}
-        >
-          Configure Widgets
-          <MdWidgets className="-mr-1 ml-2" />
-        </button>
-        <BackgroundNav backgrounds={backgrounds} />
-      </div>
-      <div className="flex justify-end space-x-6">
-        <LoginModal
-          isVisible={isLoginModal}
-          onClose={() => setLoginModal(false)}
+        <CustomizationButton
+          title="Login"
+          icon={<BsPersonCircle className="-mr-1 ml-2" />}
+          modal={
+            <LoginModal
+              isVisible={isLoginModal}
+              onClose={() => setLoginModal(false)}
+            />
+          }
+          changeModal={setLoginModal}
+        />
+        <CustomizationButton
+          title="Settings"
+          icon={<GoGear className="-mr-1 ml-2" />}
+          modal={
+            <SettingsModal
+              isVisible={isSettingsModalOpen}
+              onClose={() => setSettingsModalOpen(false)}
+            />
+          }
+          changeModal={setSettingsModalOpen}
+        />
+        <CustomizationButton
+          title="Configure Widgets"
+          icon={<MdWidgets className="-mr-1 ml-2" />}
+          modal={
+            <WidgetControlModal
+              isVisible={isConfigureWidgetModalOpen}
+              onClose={() => setIsConfigureWidgetModalOpen(false)}
+            />
+          }
+          changeModal={setIsConfigureWidgetModalOpen}
+        />
+        <CustomizationButton
+          title="Choose Background"
+          icon={<IoMdArrowDropdownCircle className="-mr-1 ml-2" />}
+          modal={
+            <BackgroundNav
+              backgrounds={backgrounds}
+              isVisible={isBackgroundModalOpen}
+              onClose={() => setIsBackgroundModalOpen(false)}
+            />
+          }
+          changeModal={setIsBackgroundModalOpen}
         />
       </div>
-      <div className="flex justify-end space-x-6">
-        <SettingsModal
-          isVisible={isSettingsModal}
-          onClose={() => setSettingsModal(false)}
-        />
-      </div>
-      <div className="flex justify-end space-x-6">
-        <WidgetControlModal
-          isVisible={isConfigureWidgetModal}
-          onClose={() => setIsWidgetModal(false)}
-        />
-      </div>
-      <div className="flex justify-end space-x-6">
-        <CryptoModal
-          isVisible={isCryptoModal}
-          onClose={() => setCryptoModal(false)}
-        />
-      </div>
-      <div className="fixed bottom-0">
-        <button
-          type="button"
-          className="donateButton flex items-center rounded-md shadow-sm px-4 py-2 bg-violet-700 text-white font-medium focus:outline-none dark:bg-violet-700 dark:text-violet-200"
-          onClick={() => setCryptoModal(true)}
-        >
-          Donate
-          <FaEthereum />
-        </button>
-      </div>
+      <CryptoDonationButton />
       {!isDesktop ? (
         <div className="flex flex-col items-center ml-8">
           <div className={`${isMusicToggled ? "block" : "hidden"}`}>

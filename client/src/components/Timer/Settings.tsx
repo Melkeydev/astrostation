@@ -6,32 +6,28 @@ import {
   useLongBreakTimer,
   usePomodoroTimer,
   useHasStarted,
-  useMaxPomodoro,
   useAudioVolume,
   useAlarmOption,
-} from "../../store";
+} from "@Store";
 import { IoCloseSharp } from "react-icons/io5";
 import { BsMusicPlayerFill, BsBellFill } from "react-icons/bs";
 import { GiPanFlute } from "react-icons/gi";
 import { CgPiano } from "react-icons/cg";
-import { Button } from "../Common/Button";
+import { Button } from "@Components/Common/Button";
 import { ToggleOption } from "./ToggleOption";
-import toast from "react-hot-toast";
 
 import useSetDefault from "@App/utils/hooks/useSetDefault";
+import { successToast } from "@App/utils/toast";
 
 export const TimerSettings = ({ onClose }) => {
   const { isDark } = useDarkToggleStore();
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();
   const { longBreakLength, setLongBreak } = useLongBreakTimer();
   const { pomodoroLength, setPomodoroLength } = usePomodoroTimer();
-  const { maxPomodoro, setMaxPomodoro } = useMaxPomodoro();
   const { hasStarted } = useHasStarted();
-
   const [pomoCount, setPomoCount] = useState(pomodoroLength);
   const [shortBreak, setShortBreakState] = useState(shortBreakLength);
   const [longBreak, setLongBreakState] = useState(longBreakLength);
-  const [maxPomo, setMaxPomo] = useState(maxPomodoro);
   const { audioVolume, setAudioVolume } = useAudioVolume();
   const [currentVolume, setCurrentVolume] = useState(audioVolume);
   const { alarm, setAlarm } = useAlarmOption();
@@ -39,7 +35,7 @@ export const TimerSettings = ({ onClose }) => {
 
   const setDefault = useSetDefault();
 
-  function onVolumeChange(value) {
+  function onVolumeChange(value: number) {
     setCurrentVolume(value);
   }
 
@@ -47,25 +43,11 @@ export const TimerSettings = ({ onClose }) => {
     setShortBreak(shortBreak);
     setLongBreak(longBreak);
     setPomodoroLength(pomoCount);
-    setMaxPomodoro(maxPomo);
     setAudioVolume(currentVolume);
     setAlarm(currentAlarm);
     onClose();
-    if (isDark) {
-      toast.success("Settings saved", {
-        style: {
-          borderRadius: "10px",
-          background: "#333",
-          color: "#fff",
-        },
-      });
-    } else {
-      toast.success("Settings saved", {
-        style: {
-          borderRadius: "10px",
-        },
-      });
-    }
+
+    successToast("Settings saved", isDark);
   }
 
   function handleDefaults() {
@@ -78,7 +60,6 @@ export const TimerSettings = ({ onClose }) => {
       setPomoCount(1500);
       setShortBreakState(300);
       setLongBreakState(900);
-      setMaxPomo(3);
       setAudioVolume(0.7);
       setAlarm(
         "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
@@ -93,7 +74,7 @@ export const TimerSettings = ({ onClose }) => {
     minLength: number,
     maxLength: number,
     propertyLength: number,
-    setStateFunc: any,
+    setStateFunc: (val: number) => void,
     step: number
   ) {
     if (hasStarted) return; // guard against change when running
@@ -133,7 +114,7 @@ export const TimerSettings = ({ onClose }) => {
               title="Pomodoro"
               decrement="session-decrement"
               increment="session-increment"
-              onClick={(e) =>
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
                 handleLengthChange(
                   e,
                   "session-decrement",
@@ -159,7 +140,7 @@ export const TimerSettings = ({ onClose }) => {
               title="Short Break"
               decrement="short-break-decrement"
               increment="short-break-increment"
-              onClick={(e) =>
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
                 handleLengthChange(
                   e,
                   "short-break-decrement",
@@ -185,7 +166,7 @@ export const TimerSettings = ({ onClose }) => {
               title="Long Break"
               decrement="long-break-decrement"
               increment="long-break-increment"
-              onClick={(e) =>
+              onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
                 handleLengthChange(
                   e,
                   "long-break-decrement",
@@ -209,44 +190,13 @@ export const TimerSettings = ({ onClose }) => {
             />
           </div>
         </div>
-        <div className="flex justify-between items-center border-b-2 border-gray-100 p-4">
-          <div>Max Pomodoros</div>
-          <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-200 max-w-[100px]">
-            <ToggleOption
-              title=""
-              decrement="pomodoro-decrement"
-              increment="pomodoro-increment"
-              onClick={(e) =>
-                handleLengthChange(
-                  e,
-                  "pomodoro-decrement",
-                  "pomodoro-increment",
-                  60,
-                  3600,
-                  maxPomo,
-                  setMaxPomo,
-                  60
-                )
-              }
-              onChange={(e) => {
-                if (hasStarted) {
-                  e.target.readOnly = true;
-                  return;
-                }
-                setMaxPomo(e.target.value * 60);
-              }}
-              propertyLength={Math.floor(maxPomo / 60)}
-              hasStarted={hasStarted}
-            />
-          </div>
-        </div>
         <div className="border-b-2 border-gray-100 p-4">
           <div className="text-center p-2 rounded">Alarm Volume</div>
           <div className="px-2 pb-2 items-center">
             <Slider
               defaultValue={audioVolume}
               onChange={(value) => {
-                onVolumeChange(value);
+                onVolumeChange(value as number);
               }}
               step={0.1}
               min={0}
