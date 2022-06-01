@@ -19,6 +19,8 @@ import { ToggleOption } from "./ToggleOption";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 import { successToast } from "@App/utils/toast";
 
+import useSetDefault from "@App/utils/hooks/useSetDefault";
+
 export const TimerSettings = ({ onClose }) => {
   const { isDark } = useDarkToggleStore();
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();
@@ -28,6 +30,7 @@ export const TimerSettings = ({ onClose }) => {
   const [pomoCount, setPomoCount] = useState(pomodoroLength);
   const [shortBreak, setShortBreakState] = useState(shortBreakLength);
   const [longBreak, setLongBreakState] = useState(longBreakLength);
+
   const { audioVolume, setAudioVolume } = useAudioVolume();
   const [currentVolume, setCurrentVolume] = useState(audioVolume);
   const { alarm, setAlarm } = useAlarmOption();
