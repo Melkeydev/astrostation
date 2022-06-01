@@ -6,7 +6,7 @@ import (
 )
 
 
-func (app *application) routes() *httprouter.Router {
+func (app *application) routes() http.Handler {
 	router := httprouter.New()
 
 	// Add custom handling to overwrite existing ones
@@ -23,5 +23,5 @@ func (app *application) routes() *httprouter.Router {
 	router.HandlerFunc(http.MethodPost, "/v1/users", app.registerUserHandler)
 	router.HandlerFunc(http.MethodPost, "/v1/login", app.logInUserHandler)
 
-	return router
+	return app.authenticate(router)
 }
