@@ -4,7 +4,6 @@ import { Button } from "@Components/Common/Button";
 
 export const AddTask = () => {
   const limit = 100;
-
   const [text, setText] = useState("");
   const { addTask } = useTask();
   const [pomoCounter, setPomoCounter] = useState(1);
@@ -18,7 +17,7 @@ export const AddTask = () => {
     [limit, setCharCount]
   );
 
-  const onSubmit = (e: any) => {
+  const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     if (!text) {
@@ -28,22 +27,22 @@ export const AddTask = () => {
 
     // Might need to modify addTask to be aware of break time
     addTask(charCount, pomoCounter, breakStarted);
-
     setText("");
     setCharCount("");
     setPomoCounter(1);
   };
 
-  function handlePomodoroChange(e) {
-    if (e.target.id === "pomodoro-decrement" && pomoCounter > 1) {
+  function handlePomodoroChange(e: React.MouseEvent<HTMLButtonElement>) {
+    const target = e.target as Element;
+    if (target.id === "pomodoro-decrement" && pomoCounter > 1) {
       setPomoCounter(pomoCounter - 1);
-    } else if (e.target.id === "pomodoro-increment" && pomoCounter < 10) {
+    } else if (target.id === "pomodoro-increment" && pomoCounter < 10) {
       setPomoCounter(pomoCounter + 1);
     }
   }
 
   return (
-    <form className="mb-8" onSubmit={onSubmit}>
+    <form className="mb-8" onSubmit={(e) => onSubmit(e)}>
       <div className="my-5">
         <label className="block">Task</label>
         <input
@@ -83,7 +82,7 @@ export const AddTask = () => {
         </div>
       </div>
 
-      <Button type="submit" variant="secondary">
+      <Button type="submit" variant="primary">
         Save
       </Button>
     </form>
