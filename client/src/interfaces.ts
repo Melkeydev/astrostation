@@ -30,12 +30,6 @@ export interface IPosTimerSettings {
   setTimerSettingsPosDefault: () => void;
 }
 
-export interface IMaxPomo {
-  maxPomodoro: number;
-  defaultMaxPomodoro: () => void;
-  setMaxPomodoro: (value: number) => void;
-}
-
 export interface IHasStarted {
   hasStarted: boolean;
   setHasStarted: (hasStarted: boolean) => void;

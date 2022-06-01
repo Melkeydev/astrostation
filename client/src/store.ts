@@ -6,7 +6,6 @@ import {
   ITimer,
   IPomodoroCounter,
   IPosTimerSettings,
-  IMaxPomo,
   IHasStarted,
   IBreakStarted,
   IShortBreakTime,
@@ -59,42 +58,6 @@ export const useAudioVolume = create<IAudioVolume>(
  */
 
 export const useAlarmOption = create<IAlarmOption>(
-  persist(
-    (set, _) => ({
-      alarm:
-        "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav",
-      setAlarm: (alarmPath) => set({ alarm: alarmPath }),
-    }),
-    { name: "set_alarm" }
-  )
-);
-
-/**
- * Audio Volume Store
- * ---
- * Handler for Audio Volume
- */
-interface AudioVolume {
-  audioVolume: number;
-  setAudioVolume: (audioVolume: number) => void;
-}
-
-export const useAudioVolume = create<AudioVolume>(
-  persist(
-    (set, _) => ({
-      audioVolume: 0.7,
-      setAudioVolume: (volume) => set({ audioVolume: volume }),
-    }),
-    { name: "set_audio_volume" }
-  )
-);
-
-interface AlarmOption {
-  alarm: string;
-  setAlarm: (alarmPath: string) => void;
-}
-
-export const useAlarmOption = create<AlarmOption>(
   persist(
     (set, _) => ({
       alarm:
