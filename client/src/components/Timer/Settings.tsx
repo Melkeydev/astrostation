@@ -214,7 +214,7 @@ export const TimerSettings = ({ onClose }) => {
                   currentAlarm == "/assets/music/arcade.wav" &&
                   "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/assets/music/arcade.wav")}
+                onClick={() => changeAlarm("/arcade.wav")}
               >
                 <BsMusicPlayerFill />
               </div>
@@ -226,7 +226,7 @@ export const TimerSettings = ({ onClose }) => {
                   currentAlarm == "/assets/music/bells.wav" &&
                   "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/assets/music/bells.wav")}
+                onClick={() => changeAlarm("/bells.wav")}
               >
                 <BsBellFill />
               </div>
@@ -238,7 +238,7 @@ export const TimerSettings = ({ onClose }) => {
                   currentAlarm == "/assets/music/flute.wav" &&
                   "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/assets/music/flute.wav")}
+                onClick={() => changeAlarm("/flute.wav")}
               >
                 <GiPanFlute />
               </div>
@@ -250,7 +250,7 @@ export const TimerSettings = ({ onClose }) => {
                   currentAlarm == "/assets/music/piano.wav" &&
                   "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/assets/music/piano.wav")}
+                onClick={() => changeAlarm("/piano.wav")}
               >
                 <CgPiano />
               </div>
