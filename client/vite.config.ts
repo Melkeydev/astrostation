@@ -15,4 +15,5 @@ export default defineConfig({
       "@Pages": path.resolve(__dirname, "src/pages"),
     },
   },
+  assetsInclude: ["./assets/images/*.wav"],
 });

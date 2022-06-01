@@ -1,5 +1,4 @@
 import { useState } from 'react';
-
 import {
   useToggleMusic,
   useToggleTimer,
@@ -30,7 +29,6 @@ import { IoMdArrowDropdownCircle } from "react-icons/io";
 
 import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
-
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
@@ -54,6 +52,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen ] = useState(false);
   const [isBackgroundModalOpen, setIsBackgroundModalOpen ] = useState(false);
+
 
   return (
     <div className="h-screen space-y-1">
