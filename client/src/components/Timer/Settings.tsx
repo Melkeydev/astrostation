@@ -15,10 +15,7 @@ import { GiPanFlute } from "react-icons/gi";
 import { CgPiano } from "react-icons/cg";
 import { Button } from "@Components/Common/Button";
 import { ToggleOption } from "./ToggleOption";
-
-import useSetDefault from "@App/utils/hooks/useSetDefault";
 import { successToast } from "@App/utils/toast";
-
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 
 export const TimerSettings = ({ onClose }) => {
