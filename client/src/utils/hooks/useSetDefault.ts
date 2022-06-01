@@ -6,9 +6,8 @@ import {
   useShortBreakTimer,
   useLongBreakTimer,
   usePomodoroTimer,
-  useMaxPomodoro,
   usePosQuote,
-} from "../../store";
+} from "@Store";
 
 function useSetDefault() {
   const { setTaskPosDefault } = usePosTask();
@@ -19,7 +18,6 @@ function useSetDefault() {
   const { defaultShortBreakLength } = useShortBreakTimer();
   const { defaultLongBreakLength } = useLongBreakTimer();
   const { defaultPomodoroLength } = usePomodoroTimer();
-  const { defaultMaxPomodoro } = useMaxPomodoro();
 
   return (
     clearStorage: boolean,
@@ -35,7 +33,6 @@ function useSetDefault() {
       defaultShortBreakLength();
       defaultLongBreakLength();
       defaultPomodoroLength();
-      defaultMaxPomodoro();
     }
 
     if (clearPosition) {

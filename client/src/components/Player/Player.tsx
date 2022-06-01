@@ -8,21 +8,7 @@ import YouTube from "react-youtube";
 import { useSong, useToggleMusic } from "@Store";
 import "./Player.scss";
 import { StationSelector } from "./StationSelector";
-
-interface IPlayer {
-  playVideo: () => void;
-  pauseVideo: () => void;
-  changeVideo: () => void;
-  setVolume: (volume: number | number[]) => void;
-}
-
-type OptionType = {
-  playerVars: PlayerVarsType;
-};
-
-type PlayerVarsType = {
-  autoplay: number;
-};
+import { IPlayer, IOptionType } from "./interfaces";
 
 export const Player = () => {
   const { song, toggledSong } = useSong();
@@ -72,7 +58,7 @@ export const Player = () => {
     setPlayAudio(!playAudio);
   };
 
-  let opts: OptionType = {
+  let opts: IOptionType = {
     playerVars: {
       autoplay: autoplay as number,
     },

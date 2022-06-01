@@ -12,8 +12,9 @@ import {
   useBreakStarted,
   useAudioVolume,
   useAlarmOption,
-} from "../../store";
+} from "@Store";
 import toast from "react-hot-toast";
+import { secondsToTime, formatDisplayTime } from "@Utils/utils";
 
 export const Timer = () => {
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();
@@ -140,20 +141,6 @@ export const Timer = () => {
     }
   }
 
-  // return minutes and seconds of seconds
-  function secondsToTime(seconds: number) {
-    return [Math.floor(seconds / 60), seconds % 60];
-  }
-
-  // zero paddings if < 10
-  function formatDisplayTime(time: number) {
-    if (time < 10) {
-      return `0${time}`;
-    } else {
-      return time;
-    }
-  }
-
   function handleResetTimer() {
     // @ts-ignore
     audioRef?.current?.load();
@@ -169,20 +156,12 @@ export const Timer = () => {
     setTimerQueue(pomodoroLength);
   }
 
-  function selectShortBreak() {
+  function selectBreak(breakLength: number) {
     if (hasStarted) return; // guard against change when running
     if (sessionType == "Break") {
       return;
     }
-    setBreakLength(shortBreakLength);
-  }
-
-  function selectLongBreak() {
-    if (hasStarted) return; // guard against change when running
-    if (sessionType == "Break") {
-      return;
-    }
-    setBreakLength(longBreakLength);
+    setBreakLength(breakLength);
   }
 
   return (
@@ -205,7 +184,7 @@ export const Timer = () => {
               <Button
                 className="text-gray-800 hover:text-white dark:text-white"
                 variant="cold"
-                onClick={selectShortBreak}
+                onClick={() => selectBreak(shortBreakLength)}
                 disabled={hasStarted}
               >
                 Short Break
@@ -216,7 +195,7 @@ export const Timer = () => {
               <Button
                 className="text-gray-800 hover:text-white dark:text-white"
                 variant="cold"
-                onClick={selectLongBreak}
+                onClick={() => selectBreak(longBreakLength)}
                 disabled={hasStarted}
               >
                 Long Break

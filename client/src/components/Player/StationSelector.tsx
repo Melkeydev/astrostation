@@ -3,8 +3,9 @@ import { useSong } from "@Store";
 export const StationSelector = () => {
   const { setSong, setToggledSong } = useSong();
 
-  function setSongId(e: any) {
-    const id = e.target.id;
+  function setSongId(e: React.MouseEvent<HTMLInputElement>) {
+    const target = e.target as Element;
+    const id = target.id;
     setSong(id);
     songSelected(id);
   }
@@ -22,7 +23,7 @@ export const StationSelector = () => {
               type="radio"
               name="flexRadioDefault"
               id="5qap5aO4i9A"
-              onClick={setSongId}
+              onClick={(e) => setSongId(e)}
             />
             Default Lofi Station
           </label>
@@ -34,7 +35,7 @@ export const StationSelector = () => {
               type="radio"
               name="flexRadioDefault"
               id="0uw1Adx0psw"
-              onClick={setSongId}
+              onClick={(e) => setSongId(e)}
             />
             Lofi Hip Hop Station
           </label>
@@ -48,7 +49,7 @@ export const StationSelector = () => {
               type="radio"
               name="flexRadioDefault"
               id="aLqc8TdoLJ0"
-              onClick={setSongId}
+              onClick={(e) => setSongId(e)}
             />
             Rap Lofi Station
           </label>
@@ -60,7 +61,7 @@ export const StationSelector = () => {
               type="radio"
               name="flexRadioDefault"
               id="6uddGul0oAc"
-              onClick={setSongId}
+              onClick={(e) => setSongId(e)}
             />
             Tokyo Lofi Station
           </label>

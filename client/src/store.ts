@@ -1,17 +1,47 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
+import {
+  IAudioVolume,
+  IAlarmOption,
+  ITimer,
+  IPomodoroCounter,
+  IPosTimerSettings,
+  IHasStarted,
+  IBreakStarted,
+  IShortBreakTime,
+  ILongBreakTime,
+  IPomodoroTime,
+  IStickyNote,
+  IStickyNoteState,
+  IToggleStickyNote,
+  ITask,
+  ITaskState,
+  ISongTask,
+  ISongState,
+  IBackground,
+  IToggleTasks,
+  IPosTask,
+  IToggleMusic,
+  IPosMusic,
+  IToggleSpotify,
+  IPosSpotify,
+  IToggleTimer,
+  IPosTimer,
+  IDarkModeState,
+  IFullscreenState,
+  IToggleQuote,
+  IPosQuote,
+  IToggleWidgetReset,
+  IFirstTimeUserState,
+} from "./interfaces";
 
 /**
  * Audio Volume Store
  * ---
  * Handler for Audio Volume
  */
-interface AudioVolume {
-  audioVolume: number;
-  setAudioVolume: (audioVolume: number) => void;
-}
 
-export const useAudioVolume = create<AudioVolume>(
+export const useAudioVolume = create<IAudioVolume>(
   persist(
     (set, _) => ({
       audioVolume: 0.7,
@@ -21,12 +51,13 @@ export const useAudioVolume = create<AudioVolume>(
   )
 );
 
-interface AlarmOption {
-  alarm: string;
-  setAlarm: (alarmPath: string) => void;
-}
+/**
+ * Alarm Option Store
+ * ---
+ * Handler for Alarm Option
+ */
 
-export const useAlarmOption = create<AlarmOption>(
+export const useAlarmOption = create<IAlarmOption>(
   persist(
     (set, _) => ({
       alarm:
@@ -42,12 +73,8 @@ export const useAlarmOption = create<AlarmOption>(
  * ---
  * Handler for Timer
  */
-interface Timer {
-  timerQueue: number;
-  setTimerQueue: (newTime: number) => void;
-}
 
-export const useTimer = create<Timer>((set) => ({
+export const useTimer = create<ITimer>((set) => ({
   timerQueue: 60,
   setTimerQueue: (newTime) => set({ timerQueue: newTime }),
 }));
@@ -57,38 +84,18 @@ export const useTimer = create<Timer>((set) => ({
  * ---
  * Handler for Pomo Counts
  */
-interface PomodoroCounter {
-  pomodoroCounts: number;
-  setPomodoroCounter: () => void;
-}
 
-export const useSetPomodoroCounter = create<PomodoroCounter>((set) => ({
+export const useSetPomodoroCounter = create<IPomodoroCounter>((set) => ({
   pomodoroCounts: 0,
   setPomodoroCounter: () =>
     set((state) => ({ pomodoroCounts: state.pomodoroCounts + 1 })),
 }));
 
 /**
- * Toggle Settings Store
+ * Settings Store
  * ---
  * Handler for Settings
  */
-interface IToggleSettings {
-  isSettingsToggled: boolean;
-  setIsSettingsToggled: (isSettingsToggled: boolean) => void;
-}
-
-export const useToggleSettings = create<IToggleSettings>((set) => ({
-  isSettingsToggled: false,
-  setIsSettingsToggled: (isSettingsToggled) => set({ isSettingsToggled }),
-}));
-
-type IPosTimerSettings = {
-  timerSettingsPosX: number;
-  timerSettingsPosY: number;
-  setTimerSettingsPos: (X: number, Y: number) => void;
-  setTimerSettingsPosDefault: () => void;
-};
 
 export const usePosTimerSettings = create<IPosTimerSettings>(
   persist(
@@ -107,39 +114,12 @@ export const usePosTimerSettings = create<IPosTimerSettings>(
 );
 
 /**
- * Max Pomodoro Store
- * ---
- * Handle for the amount of pomodoro's per task
- */
-
-interface MaxPomo {
-  maxPomodoro: number;
-  defaultMaxPomodoro: () => void;
-  setMaxPomodoro: (value: number) => void;
-}
-
-export const useMaxPomodoro = create<MaxPomo>(
-  persist(
-    (set, _) => ({
-      maxPomodoro: 3,
-      defaultMaxPomodoro: () => set(() => ({ maxPomodoro: 3 })),
-      setMaxPomodoro: (value) => set({ maxPomodoro: value }),
-    }),
-    { name: "max_pomodoro_per_task" }
-  )
-);
-
-/**
  * Has Started Store
  * ---
  * Handler has started in timer sessions
  */
-interface HasStarted {
-  hasStarted: boolean;
-  setHasStarted: (hasStarted: boolean) => void;
-}
 
-export const useHasStarted = create<HasStarted>((set) => ({
+export const useHasStarted = create<IHasStarted>((set) => ({
   hasStarted: false,
   setHasStarted: (hasStarted) => set({ hasStarted }),
 }));
@@ -149,28 +129,19 @@ export const useHasStarted = create<HasStarted>((set) => ({
  * ---
  * Handler break started in timer sessions
  */
-interface BreakStarted {
-  breakStarted: boolean;
-  setBreakStarted: (breakStarted: boolean) => void;
-}
 
-export const useBreakStarted = create<BreakStarted>((set) => ({
+export const useBreakStarted = create<IBreakStarted>((set) => ({
   breakStarted: false,
   setBreakStarted: (breakStarted) => set({ breakStarted }),
 }));
 
 /**
- * Short Break Time Store
+ * Break Time Store
  * ---
- * Handle short break times
+ * Handle break times
  */
-interface ShortBreakTime {
-  shortBreakLength: number;
-  defaultShortBreakLength: () => void;
-  setShortBreak: (value: number) => void;
-}
 
-export const useShortBreakTimer = create<ShortBreakTime>(
+export const useShortBreakTimer = create<IShortBreakTime>(
   persist(
     (set, _) => ({
       shortBreakLength: 300,
@@ -181,18 +152,7 @@ export const useShortBreakTimer = create<ShortBreakTime>(
   )
 );
 
-/**
- * Long Break Time Store
- * ---
- * Handle long break times
- */
-interface LongBreakTime {
-  longBreakLength: number;
-  defaultLongBreakLength: () => void;
-  setLongBreak: (value: number) => void;
-}
-
-export const useLongBreakTimer = create<LongBreakTime>(
+export const useLongBreakTimer = create<ILongBreakTime>(
   persist(
     (set, _) => ({
       longBreakLength: 900,
@@ -208,13 +168,8 @@ export const useLongBreakTimer = create<LongBreakTime>(
  * ---
  * Handle pomodoro times
  */
-interface PomodoroTime {
-  pomodoroLength: number;
-  defaultPomodoroLength: () => void;
-  setPomodoroLength: (value: number) => void;
-}
 
-export const usePomodoroTimer = create<PomodoroTime>(
+export const usePomodoroTimer = create<IPomodoroTime>(
   persist(
     (set, _) => ({
       pomodoroLength: 1500,
@@ -231,22 +186,19 @@ export const usePomodoroTimer = create<PomodoroTime>(
  * Handle the sticky notes created in the tasks section
  */
 
-interface StickyNote {
-  id: number;
-  text: string;
-  stickyNotesPosX: number;
-  stickyNotesPosY: number;
-}
+export const useToggleStickyNote = create<IToggleStickyNote>(
+  persist(
+    (set, _) => ({
+      isStickyNoteShown: false,
+      setIsStickyNoteShown: (isStickyNoteShown) => set({ isStickyNoteShown }),
+    }),
+    {
+      name: "state_sticky_note",
+    }
+  )
+);
 
-interface StickyNoteState {
-  stickyNotes: StickyNote[];
-  addStickyNote: (text: string) => void;
-  editNote: (id: number, newText: string) => void;
-  removeNote: (id: number) => void;
-  setStickyNotesPos: (id: number, X: number, Y: number) => void;
-}
-
-export const useStickyNote = create<StickyNoteState>(
+export const useStickyNote = create<IStickyNoteState>(
   persist(
     (set, _) => ({
       stickyNotes: [],
@@ -259,7 +211,7 @@ export const useStickyNote = create<StickyNoteState>(
               text: text,
               stickyNotesPosX: 165,
               stickyNotesPosY: 0,
-            } as StickyNote,
+            } as IStickyNote,
           ],
         }));
       },
@@ -270,7 +222,7 @@ export const useStickyNote = create<StickyNoteState>(
               ? ({
                   ...note,
                   text: newText,
-                } as StickyNote)
+                } as IStickyNote)
               : note
           ),
         }));
@@ -288,7 +240,7 @@ export const useStickyNote = create<StickyNoteState>(
                   ...note,
                   stickyNotesPosX: X,
                   stickyNotesPosY: Y,
-                } as StickyNote)
+                } as IStickyNote)
               : note
           ),
         }));
@@ -303,29 +255,8 @@ export const useStickyNote = create<StickyNoteState>(
  * ---
  * Handle the tasks created in the tasks section
  */
-interface Task {
-  id: number;
-  description: string;
-  inProgress: boolean;
-  completed: boolean;
-  pomodoro: number;
-  pomodoroCounter: number;
-  alerted: boolean;
-}
 
-interface TaskState {
-  tasks: Task[];
-  addTask: (description: string, count: number, isBreak: boolean) => void;
-  renameTask: (id: number, newName: string) => void;
-  removeTask: (id: number) => void;
-  toggleInProgressState: (id: number) => void;
-  completeTask: (id: number) => void;
-  setPomodoroCounter: (id: number) => void;
-  alertTask: (id: number, flag: boolean) => void;
-  setPomodoro: (id: number, newVal: number) => void;
-}
-
-export const useTask = create<TaskState>(
+export const useTask = create<ITaskState>(
   persist(
     (set, _) => ({
       tasks: [],
@@ -341,7 +272,7 @@ export const useTask = create<TaskState>(
               pomodoro: count,
               pomodoroCounter: isBreak ? -1 : 0,
               alerted: false,
-            } as Task,
+            } as ITask,
           ],
         }));
       },
@@ -352,7 +283,7 @@ export const useTask = create<TaskState>(
               ? ({
                   ...task,
                   description: newName,
-                } as Task)
+                } as ITask)
               : task
           ),
         }));
@@ -362,11 +293,12 @@ export const useTask = create<TaskState>(
           tasks: state.tasks.filter((task) => task.id !== id),
         }));
       },
+      removeAllTasks: () => set({ tasks: [] }),
       toggleInProgressState: (id) => {
         set((state) => ({
           tasks: state.tasks.map((task) =>
             task.id === id
-              ? ({ ...task, inProgress: !task.inProgress } as Task)
+              ? ({ ...task, inProgress: !task.inProgress } as ITask)
               : task
           ),
         }));
@@ -375,7 +307,7 @@ export const useTask = create<TaskState>(
         set((state) => ({
           tasks: state.tasks.map((task) =>
             task.id === id
-              ? ({ ...task, completed: !task.completed } as Task)
+              ? ({ ...task, completed: !task.completed } as ITask)
               : task
           ),
         }));
@@ -390,7 +322,7 @@ export const useTask = create<TaskState>(
                     task.pomodoroCounter < task.pomodoro
                       ? task.pomodoroCounter + 1
                       : task.pomodoro,
-                } as Task)
+                } as ITask)
               : task
           ),
         }));
@@ -402,7 +334,7 @@ export const useTask = create<TaskState>(
               ? ({
                   ...task,
                   pomodoro: newVal,
-                } as Task)
+                } as ITask)
               : task
           ),
         }));
@@ -414,7 +346,7 @@ export const useTask = create<TaskState>(
               ? ({
                   ...task,
                   alerted: flag,
-                } as Task)
+                } as ITask)
               : task
           ),
         }));
@@ -423,6 +355,12 @@ export const useTask = create<TaskState>(
     { name: "user_tasks" }
   )
 );
+
+/**
+ * Song Store
+ * ---
+ * Handles the song played in the player
+ */
 
 const songs = [
   {
@@ -447,23 +385,10 @@ const songs = [
   },
 ];
 
-interface SongTask {
-  id: string;
-  artist: string;
-  link: string;
-}
-
-interface SongState {
-  song: SongTask;
-  setSong: (songID: string) => void;
-  toggledSong: string;
-  setToggledSong: (toggledSong: string) => void;
-}
-
-export const useSong = create<SongState>((set) => ({
+export const useSong = create<ISongState>((set) => ({
   song: songs[0],
   setSong: (songId) =>
-    set({ song: songs.find((s) => s.id === songId) as SongTask }),
+    set({ song: songs.find((s) => s.id === songId) as ISongTask }),
   toggledSong: "",
   setToggledSong: (toggledSong) => set({ toggledSong }),
 }));
@@ -473,10 +398,6 @@ export const useSong = create<SongState>((set) => ({
  * ---
  * Handles the background image state of app
  */
-type IBackground = {
-  isBackground: number;
-  setIsBackground: (isBackground: number) => void;
-};
 
 export const useSetBackground = create<IBackground>(
   persist(
@@ -495,29 +416,20 @@ export const useSetBackground = create<IBackground>(
  * ---
  * Handle the visibility of the tasks section
  */
-type IToggleTasks = {
-  isTasksToggled: boolean;
-  setIsTasksToggled: (isTasksToggled: boolean) => void;
-};
 
 export const useToggleTasks = create<IToggleTasks>(
   persist(
     (set, _) => ({
-      isTasksToggled: true,
+      isTasksToggled: false,
       setIsTasksToggled: (isTasksToggled) => set({ isTasksToggled }),
+      isTasksShown: true,
+      setIsTasksShown: (isTasksShown) => set({ isTasksShown }),
     }),
     {
-      name: "show_tasks_section",
+      name: "state_tasks_section",
     }
   )
 );
-
-type IPosTask = {
-  taskPosX: number;
-  taskPosY: number;
-  setTaskPos: (X: number, Y: number) => void;
-  setTaskPosDefault: () => void;
-};
 
 export const usePosTask = create<IPosTask>(
   persist(
@@ -536,31 +448,22 @@ export const usePosTask = create<IPosTask>(
 /**
  * Music Section Store
  * ---
- * Handle the visibility of the music section
+ * Handle the selection music section
  */
-type IToggleMusic = {
-  isMusicToggled: boolean;
-  setIsMusicToggled: (isMusicToggled: boolean) => void;
-};
 
 export const useToggleMusic = create<IToggleMusic>(
   persist(
     (set, _) => ({
-      isMusicToggled: true,
+      isMusicToggled: false,
       setIsMusicToggled: (isMusicToggled) => set({ isMusicToggled }),
+      isMusicShown: true,
+      setIsMusicShown: (isMusicShown) => set({ isMusicShown }),
     }),
     {
-      name: "show_music_section",
+      name: "state_music_section",
     }
   )
 );
-
-type IPosMusic = {
-  musicPosX: number;
-  musicPosY: number;
-  setMusicPos: (X: number, Y: number) => void;
-  setMusicPosDefault: () => void;
-};
 
 export const usePosMusic = create<IPosMusic>(
   persist(
@@ -579,32 +482,22 @@ export const usePosMusic = create<IPosMusic>(
 /**
  * Spotify Section Store
  * ---
- * Handle the visibility of the Spotify section
+ * Handle the Spotify section
  */
-
-type IToggleSpotify = {
-  isSpotifyToggled: boolean;
-  setIsSpotifyToggled: (isSpotifyToggled: boolean) => void;
-};
 
 export const useSpotifyMusic = create<IToggleSpotify>(
   persist(
     (set, _) => ({
-      isSpotifyToggled: true,
+      isSpotifyToggled: false,
       setIsSpotifyToggled: (isSpotifyToggled) => set({ isSpotifyToggled }),
+      isSpotifyShown: true,
+      setIsSpotifyShown: (isSpotifyShown) => set({ isSpotifyShown }),
     }),
     {
-      name: "show_spotify_section",
+      name: "state_spotify_section",
     }
   )
 );
-
-type IPosSpotify = {
-  spotifyPosX: number;
-  spotifyPosY: number;
-  setSpotifyPos: (X: number, Y: number) => void;
-  setSpotifyPosDefault: () => void;
-};
 
 export const usePosSpotify = create<IPosSpotify>(
   persist(
@@ -624,29 +517,20 @@ export const usePosSpotify = create<IPosSpotify>(
 /**
  * Timer Section Store
  * ---
- * Handle the visibility of the timer section
+ * Handle the timer section
  */
-type IToggleTimer = {
-  isTimerToggled: boolean;
-  setIsTimerToggled: (isTimerToggled: boolean) => void;
-};
 
 export const useToggleTimer = create<IToggleTimer>(
   persist(
     (set, _) => ({
-      isTimerToggled: true,
+      isTimerToggled: false,
       setIsTimerToggled: (isTimerToggled) => set({ isTimerToggled }),
+      isTimerShown: true,
+      setIsTimerShown: (isTimerShown) => set({ isTimerShown }),
     }),
-    { name: "show_timer_section" }
+    { name: "state_timer_section" }
   )
 );
-
-type IPosTimer = {
-  timerPosX: number;
-  timerPosY: number;
-  setTimerPos: (X: number, Y: number) => void;
-  setTimerPosDefault: () => void;
-};
 
 export const usePosTimer = create<IPosTimer>(
   persist(
@@ -667,18 +551,16 @@ export const usePosTimer = create<IPosTimer>(
  * ---
  * Handle different styling between app dark and light mode
  */
-type DarkModeState = {
-  isDark: boolean;
-  toggleDarkMode: () => void;
-};
 
-export const useDarkToggleStore = create<DarkModeState>(
+export const useDarkToggleStore = create<IDarkModeState>(
   persist(
     (set, _) => ({
       isDark: true,
       toggleDarkMode: () => set((oldState) => ({ isDark: !oldState.isDark })),
+      isDarkModeShown: false,
+      setIsDarkModeShown: (isDarkModeShown) => set({ isDarkModeShown }),
     }),
-    { name: "darkmode" }
+    { name: "state_darkmode" }
   )
 );
 
@@ -687,19 +569,17 @@ export const useDarkToggleStore = create<DarkModeState>(
  * ---
  * Handle state of fullscreen vs normal app view
  */
-type FullscreenState = {
-  isFullscreen: boolean;
-  toggleFullscreenMode: () => void;
-};
 
-export const useFullScreenToggleStore = create<FullscreenState>(
+export const useFullScreenToggleStore = create<IFullscreenState>(
   persist(
     (set, _) => ({
       isFullscreen: false,
       toggleFullscreenMode: () =>
         set((oldState) => ({ isFullscreen: !oldState.isFullscreen })),
+      isFullscreenShown: false,
+      setIsFullscreenShown: (isFullscreenShown) => set({ isFullscreenShown }),
     }),
-    { name: "fullscreen" }
+    { name: "state_fullscreen" }
   )
 );
 
@@ -708,29 +588,20 @@ export const useFullScreenToggleStore = create<FullscreenState>(
  * ---
  * Handle the visibility of motivational/programming quotes
  */
-type IToggleQuote = {
-  isQuoteToggled: boolean;
-  setIsQuoteToggled: (isQuoteToggled: boolean) => void;
-};
 
 export const useToggleQuote = create<IToggleQuote>(
   persist(
     (set, _) => ({
       isQuoteToggled: false,
       setIsQuoteToggled: (isQuoteToggled) => set({ isQuoteToggled }),
+      isQuoteShown: false,
+      setIsQuoteShown: (isQuoteShown) => set({ isQuoteShown }),
     }),
     {
-      name: "show_quote_section",
+      name: "state_quote_section",
     }
   )
 );
-
-type IPosQuote = {
-  quotePosX: number;
-  quotePosY: number;
-  setQuotePos: (X: number, Y: number) => void;
-  setQuotePosDefault: () => void;
-};
 
 export const usePosQuote = create<IPosQuote>(
   persist(
@@ -743,5 +614,41 @@ export const usePosQuote = create<IPosQuote>(
     {
       name: "set_quote_position",
     }
+  )
+);
+
+/**
+ * Reset Widgets Section Store
+ * ---
+ * Handle the visibility of the reset widget nav item
+ */
+
+export const useToggleWidgetReset = create<IToggleWidgetReset>(
+  persist(
+    (set, _) => ({
+      isWidgetResetShown: false,
+      setIsWidgetResetShown: (isWidgetResetShown) =>
+        set({ isWidgetResetShown }),
+    }),
+    {
+      name: "state_widget_reset",
+    }
+  )
+);
+
+/**
+ * First-time user Store
+ * ---
+ * Handles storing key for whether current user is a new user
+ */
+
+export const useFirstTimeUserStore = create<IFirstTimeUserState>(
+  persist(
+    (set, _) => ({
+      isFirstTimeUser: true,
+      toggleIsFirstTimeUser: () =>
+        set((oldState) => ({ isFirstTimeUser: !oldState.isFirstTimeUser })),
+    }),
+    { name: "first_time_user" }
   )
 );

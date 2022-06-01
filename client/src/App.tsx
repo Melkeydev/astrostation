@@ -3,15 +3,16 @@ import { useEffect } from "react";
 import { Backgrounds } from "@Components/Backgrounds/utils";
 import { HomePage } from "@Pages/Homepage";
 import { SideNav } from "@Components/Nav/SideNav";
-import { useDarkToggleStore } from "@Store";
+import { useDarkToggleStore, useFirstTimeUserStore } from "@Store";
 import { Toaster } from "react-hot-toast";
-import { version } from "../package.json";
+import { version } from "@Root/package.json";
+import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
 
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 
 enum backgrounds {
-  CITY,
   STARS,
+  CITY,
   DOTS,
   SNOW,
   FADE,
@@ -20,6 +21,8 @@ enum backgrounds {
 
 function App() {
   const isDark = useDarkToggleStore((state) => state.isDark);
+  const { isFirstTimeUser } = useFirstTimeUserStore();
+
   const setDefault = useSetDefault();
 
   useEffect(() => {
@@ -46,6 +49,8 @@ function App() {
   }, []);
 
   return (
+  <>
+    {isFirstTimeUser && <Walkthrough />}
     <Router>
       <Backgrounds backgrounds={backgrounds} />
       <div className="fixed inset-0 overflow-auto">
@@ -56,6 +61,7 @@ function App() {
         </Routes>
       </div>
     </Router>
+  </>
   );
 }
 
