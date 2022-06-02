@@ -23,7 +23,8 @@
       "@Store": ["./src/store.ts"],
       "@Store/*": ["./src/store/*"],
       "@Utils/*": ["./src/utils/*"],
-      "@Pages/*": ["./src/pages/*"]
+      "@Pages/*": ["./src/pages/*"],
+      "@Actions/*": ["./src/actions/*"]
     }
   },
   "include": ["src"],

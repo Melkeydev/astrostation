@@ -6,7 +6,6 @@ import {
   ITimer,
   IPomodoroCounter,
   IPosTimerSettings,
-  IMaxPomo,
   IHasStarted,
   IBreakStarted,
   IShortBreakTime,
@@ -34,6 +33,7 @@ import {
   IPosQuote,
   IToggleWidgetReset,
   IFirstTimeUserState,
+  ILoggedIn,
 } from "./interfaces";
 
 /**
@@ -651,5 +651,15 @@ export const useFirstTimeUserStore = create<IFirstTimeUserState>(
         set((oldState) => ({ isFirstTimeUser: !oldState.isFirstTimeUser })),
     }),
     { name: "first_time_user" }
+  )
+);
+
+export const useLoggedIn = create<ILoggedIn>(
+  persist(
+    (set, _) => ({
+      isLoggedIn: false,
+      setIsLoggedIn: (isLoggedIn) => set({ isLoggedIn }),
+    }),
+    { name: "is_user_logged_in" }
   )
 );

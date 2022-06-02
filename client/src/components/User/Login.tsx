@@ -1,14 +1,27 @@
 import { useState } from "react";
 import { Button } from "@Components/Common/Button";
+import { loginUser } from "@Actions/user";
+import { successToast } from "@Utils/toast";
+import toast from "react-hot-toast";
+import { useLoggedIn } from "@Store";
 export const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { setIsLoggedIn } = useLoggedIn();
 
-  function onSubmit(event) {
+  const onSubmit = async (event) => {
     event.preventDefault();
 
-    //TODO: add the actual backend request here
-  }
+    const data = { email, password };
+    const loginUserResponse = await loginUser(data);
+
+    if (!loginUserResponse || loginUserResponse.error) {
+      toast.error(loginUserResponse.error);
+      return;
+    }
+    successToast("login successful", false);
+    setIsLoggedIn(loginUserResponse);
+  };
 
   return (
     <div className="bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8">

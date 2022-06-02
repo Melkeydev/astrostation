@@ -1,18 +1,20 @@
 package data
 
 import (
+	"context"
 	"crypto/rand"
 	"crypto/sha256"
+	"database/sql"
 	"encoding/base32"
 	"time"
+
 	"astrostation.server/internal/validator"
-	"database/sql"
-	"context"
 )
 
 // Define all the different types of scopes can have
 const (
 	ScopeAuthentication = "authentication"
+	ScopeRefresh = "refresh"
 )
 
 type TokenModel struct {
@@ -21,7 +23,7 @@ type TokenModel struct {
 
 // Define our Token struct
 type Token struct {
-	Plaintext string    `json:"plaintext"`
+	Plaintext string    `json:"token"`
 	UserID    int64     `json:"id"`
 	Hash      []byte    `json:"-"`
 	Scope     string    `json:"scope"`
@@ -62,7 +64,6 @@ func (t TokenModel) New(userID int64, ttl time.Duration, scope string) (*Token, 
 		return nil, err
 	}
 
-	// Instead of just returning the Token struct, we will call Insert 
 	err = t.Insert(token)
 	return token, err
 }
@@ -89,16 +90,9 @@ func (t TokenModel) DeleteTokenForUser(userID int64, scope string) error {
 		WHERE user_id = $1 AND scope = $2
 	`
 
-	args := []interface{}{userID, scope}
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	_, err := t.DB.ExecContext(ctx, query, args...)
+	_, err := t.DB.ExecContext(ctx, query, userID, scope)
 	return err
 }
-
-
-
-
-
-

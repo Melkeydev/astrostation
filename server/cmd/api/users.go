@@ -1,17 +1,12 @@
 package main
 
 import (
-	"errors"
 	"astrostation.server/internal/data"
 	"astrostation.server/internal/validator"
+	"errors"
 	"net/http"
 	"time"
 )
-
-// NOTE: This is going to handler our actual functions
-// Update the user
-// We need to create tokens that will provision a user within the application
-// If a user is a mod, or a super users, or banned - these need to be handled separately
 
 func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Request) {
 	// An anonymous struct to hold the request data
@@ -51,7 +46,6 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 	if err != nil {
 		switch {
 		case errors.Is(err, errors.New("duplicate email")):
-			// TODO: fix this error handling
 			v.AddError("email", "a user with this email is already registered")
 			app.failedValidationResponse(w, r, v.Errors)
 		default:
@@ -61,13 +55,18 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
+	_, err = app.models.Tokens.New(user.ID, 24*time.Hour, data.ScopeAuthentication)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
 	err = app.writeJSON(w, http.StatusCreated, envelope{"user": user}, nil)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 	}
 }
 
-// TODO: add way better handling for client side as well
 // When a user logs in they will need a token right away
 func (app *application) logInUserHandler(w http.ResponseWriter, r *http.Request) {
 	// An anonymous struct to hold the request data
@@ -95,7 +94,6 @@ func (app *application) logInUserHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-
 	user, err := app.models.Users.GetUser(input.Email)
 	if err != nil {
 		switch {
@@ -119,15 +117,34 @@ func (app *application) logInUserHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
+	//NOTE: maybe delete old tokens?
+	err = app.models.Tokens.DeleteTokenForUser(user.ID, data.ScopeAuthentication)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+	}
+
 	// This is where we will now send back a token
-	token, err := app.models.Tokens.New(user.ID, 24*time.Hour, data.ScopeAuthentication)
+	token, err := app.models.Tokens.New(user.ID, 3*time.Minute, data.ScopeAuthentication)
 	if err != nil {
 		// If there is any error from our DB communication
-		app.serverErrorResponse(w,r, err)
+		app.serverErrorResponse(w, r, err)
 		return
 	}
 
-	err = app.writeJSON(w, http.StatusCreated, envelope{"token": token}, nil)
+	err = app.models.Tokens.DeleteTokenForUser(user.ID, data.ScopeRefresh)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+	}
+
+	// This is where we will now send back a token
+	refreshToken, err := app.models.Tokens.New(user.ID, 24*time.Hour, data.ScopeRefresh)
+	if err != nil {
+		// If there is any error from our DB communication
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
+	err = app.writeJSON(w, http.StatusCreated, envelope{"token": token, "refreshToken": refreshToken}, nil)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 	}

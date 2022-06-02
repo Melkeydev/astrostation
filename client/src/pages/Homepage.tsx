@@ -1,4 +1,7 @@
 import { useState } from "react";
+import { testCall } from "@Actions/test";
+import { successToast } from "@Utils/toast";
+import toast from "react-hot-toast";
 
 import {
   useToggleMusic,
@@ -13,6 +16,7 @@ import {
   usePosSpotify,
   usePosTimer,
   usePosQuote,
+  useLoggedIn,
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -58,6 +62,19 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
   const [isLoginModal, setLoginModal] = useState(false);
 
+  const { isLoggedIn } = useLoggedIn();
+
+  const testSubmitCall = async () => {
+    const testResponse = await testCall();
+    if (testResponse) {
+      successToast("login successful", false);
+    } else {
+      toast.error("login unsuccessful");
+    }
+  };
+
+  const loginTitle = isLoggedIn ? "logout" : "login";
+
   return (
     <div className="h-screen space-y-1">
       <div
@@ -67,7 +84,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         }
       >
         <CustomizationButton
-          title="Login"
+          title={loginTitle}
           icon={<BsPersonCircle className="-mr-1 ml-2" />}
           modal={
             <LoginModal
@@ -77,6 +94,13 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
           }
           changeModal={setLoginModal}
         />
+        <button
+          type="button"
+          className="settingsButton flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
+          onClick={testSubmitCall}
+        >
+          This is the test call
+        </button>
         <CustomizationButton
           title="Settings"
           icon={<GoGear className="-mr-1 ml-2" />}

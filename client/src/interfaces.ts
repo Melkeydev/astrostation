@@ -218,3 +218,8 @@ export interface IFirstTimeUserState {
   isFirstTimeUser: boolean;
   toggleIsFirstTimeUser: () => void;
 }
+
+export interface ILoggedIn {
+  isLoggedIn: boolean;
+  setIsLoggedIn: (isLoggedIn: boolean) => void;
+}

@@ -11,6 +11,7 @@
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
     "@mui/material": "^5.6.3",
+    "axios": "^0.27.2",
     "dotenv": "^16.0.0",
     "ethers": "^5.6.2",
     "rc-slider": "^10.0.0-alpha.4",
