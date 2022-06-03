@@ -208,6 +208,20 @@ export interface IToggleWidgetReset {
   setIsWidgetResetShown: (isWidgetResetShown: boolean) => void;
 }
 
+export interface IToggleTwitch {
+  isTwitchToggled: boolean;
+  setIsTwitchToggled: (isTwitchToggled: boolean) => void;
+  isTwitchShown: boolean;
+  setIsTwitchShown: (isTwitchShown: boolean) => void;
+}
+
+export interface IPosTwitch {
+  twitchPosX: number;
+  twitchPosY: number;
+  setTwitchPos: (X: number, Y: number) => void;
+  setTwitchPosDefault: () => void;
+}
+
 export interface IFirstTimeUserState {
   isFirstTimeUser: boolean;
   toggleIsFirstTimeUser: () => void;

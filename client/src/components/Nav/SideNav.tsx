@@ -9,7 +9,7 @@ import {
   MdOutlineNoteAdd,
 } from "react-icons/md";
 import { VscDebugRestartFrame } from "react-icons/vsc";
-import { BsArrowsFullscreen, BsFillChatLeftQuoteFill } from "react-icons/bs";
+import { BsArrowsFullscreen, BsFillChatLeftQuoteFill, BsTwitch } from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa";
 import {
   useToggleMusic,
@@ -22,6 +22,7 @@ import {
   useStickyNote,
   useToggleStickyNote,
   useToggleWidgetReset,
+  useToggleTwitch
 } from "@Store";
 import { useState, useEffect } from "react";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
@@ -35,7 +36,6 @@ import {
 
 import { fullscreenChanged, toggleFullScreen } from "@Utils/fullscreen";
 
-
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
   const { isFullscreen } = useFullScreenToggleStore();
@@ -45,6 +45,7 @@ export const SideNav = () => {
   const { isTasksToggled, setIsTasksToggled } = useToggleTasks();
   const { isSpotifyToggled, setIsSpotifyToggled } = useSpotifyMusic();
   const { isQuoteToggled, setIsQuoteToggled } = useToggleQuote();
+  const { isTwitchToggled, setIsTwitchToggled } = useToggleTwitch();
 
   const { isTimerShown } = useToggleTimer();
   const { isStickyNoteShown } = useToggleStickyNote();
@@ -55,7 +56,7 @@ export const SideNav = () => {
   const { isFullscreenShown } = useFullScreenToggleStore();
   const { isQuoteShown } = useToggleQuote();
   const { isWidgetResetShown } = useToggleWidgetReset();
-
+  const { isTwitchShown, setIsTwitchShown } = useToggleTwitch();
 
   const { addStickyNote } = useStickyNote();
   const isDesktop = useMediaQuery("(min-width: 641px)");
@@ -215,7 +216,21 @@ export const SideNav = () => {
               >
                 <BsFillChatLeftQuoteFill className="h-6 w-6" />
               </NavItem>
-
+              <NavItem
+                onClick={() =>
+                  toggledToastNotification(
+                    isTwitchToggled,
+                    setIsTwitchToggled,
+                    "Twitch Toggled",
+                    750,
+                    "📺"
+                  )
+                }
+                toggled={isTwitchToggled}
+                shown={isTwitchShown}
+              >
+                <BsTwitch className="h-6 w-6" />
+              </NavItem>
               {isDesktop && (
                 <NavItem
                   onClick={toggleFullScreen}
