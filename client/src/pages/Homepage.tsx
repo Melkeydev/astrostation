@@ -57,40 +57,46 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   return (
     <div className="h-screen space-y-1">
       <div className={"flex justify-end " + (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")}>
-        <CustomizationButton
-          title="Settings" 
-          icon={<GoGear className="-mr-1 ml-2" />}
-          modal={
-            <SettingsModal
-              isVisible={isSettingsModalOpen}
-              onClose={() => setSettingsModalOpen(false)} 
-            />
-          }
-          changeModal={setSettingsModalOpen}
-        />
-        <CustomizationButton
-          title="Configure Widgets" 
-          icon={<MdWidgets className="-mr-1 ml-2" />}
-          modal={
-            <WidgetControlModal
-              isVisible={isConfigureWidgetModalOpen}
-              onClose={() => setIsConfigureWidgetModalOpen(false)} 
-            />
-          }
-          changeModal={setIsConfigureWidgetModalOpen}
-        />
-        <CustomizationButton
-          title="Choose Background" 
-          icon={<IoMdArrowDropdownCircle className="-mr-1 ml-2" />}
-          modal={
-            <BackgroundNav
-              backgrounds={backgrounds}
-              isVisible={isBackgroundModalOpen}
-              onClose={() => setIsBackgroundModalOpen(false)}
-            />
-          }
-          changeModal={setIsBackgroundModalOpen}
-        />
+        <div className="settingsButton">
+          <CustomizationButton
+            title="Settings" 
+            icon={<GoGear className="-mr-1 ml-2" />}
+            modal={
+              <SettingsModal
+                isVisible={isSettingsModalOpen}
+                onClose={() => setSettingsModalOpen(false)} 
+              />
+            }
+            changeModal={setSettingsModalOpen}
+          />
+        </div>
+        <div className="configureWidgetsButton">
+          <CustomizationButton
+            title="Configure Widgets" 
+            icon={<MdWidgets className="-mr-1 ml-2" />}
+            modal={
+              <WidgetControlModal
+                isVisible={isConfigureWidgetModalOpen}
+                onClose={() => setIsConfigureWidgetModalOpen(false)} 
+              />
+            }
+            changeModal={setIsConfigureWidgetModalOpen}
+          />
+        </div>
+        <div className="chooseBackgroundButton">
+          <CustomizationButton
+            title="Choose Background"
+            icon={<IoMdArrowDropdownCircle className="-mr-1 ml-2" />}
+            modal={
+              <BackgroundNav
+                backgrounds={backgrounds}
+                isVisible={isBackgroundModalOpen}
+                onClose={() => setIsBackgroundModalOpen(false)}
+              />
+            }
+            changeModal={setIsBackgroundModalOpen}
+          />
+        </div>
       </div>
       <CryptoDonationButton />
       {!isDesktop ? (
