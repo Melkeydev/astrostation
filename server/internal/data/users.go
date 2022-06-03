@@ -1,13 +1,14 @@
 package data
 
 import (
-	"astrostation.server/internal/validator"
 	"context"
 	"crypto/sha256"
 	"database/sql"
 	"errors"
-	"golang.org/x/crypto/bcrypt"
 	"time"
+
+	"astrostation.server/internal/validator"
+	"golang.org/x/crypto/bcrypt"
 )
 
 type UsersModel struct {
@@ -241,7 +242,7 @@ func (m UsersModel) GetForToken(tokenScope, tokenPlaintext string) (*User, error
 	return &user, nil
 }
 
-func (m UsersModel) ConfirmToken(userID int64, tokenScope, tokenPlaintext string) (bool, error) {
+func (m UsersModel) ConfirmToken(tokenScope, tokenPlaintext string) (bool, error) {
 	tokenHash := sha256.Sum256([]byte(tokenPlaintext))
 
 	query := `
@@ -255,13 +256,7 @@ func (m UsersModel) ConfirmToken(userID int64, tokenScope, tokenPlaintext string
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	var user struct {
-		ID int64
-	}
-
-	err := m.DB.QueryRowContext(ctx, query, args...).Scan(
-		&user.ID,
-	)
+	_, err := m.DB.ExecContext(ctx, query, args...)
 
 	if err != nil {
 		switch {
@@ -272,5 +267,5 @@ func (m UsersModel) ConfirmToken(userID int64, tokenScope, tokenPlaintext string
 		}
 	}
 
-	return &user.ID == &userID, nil
+	return true, nil
 }

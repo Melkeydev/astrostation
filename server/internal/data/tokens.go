@@ -14,7 +14,7 @@ import (
 // Define all the different types of scopes can have
 const (
 	ScopeAuthentication = "authentication"
-	ScopeRefresh = "refresh"
+	ScopeRefresh        = "refresh"
 )
 
 type TokenModel struct {
@@ -70,7 +70,7 @@ func (t TokenModel) New(userID int64, ttl time.Duration, scope string) (*Token, 
 
 func (t TokenModel) Insert(token *Token) error {
 	query :=
-	`
+		`
 		INSERT INTO tokens (hash, user_id, expiry, scope)
 		VALUES ($1, $2, $3, $4)
 	`
@@ -84,8 +84,8 @@ func (t TokenModel) Insert(token *Token) error {
 }
 
 func (t TokenModel) DeleteTokenForUser(userID int64, scope string) error {
-	query := 
-	`
+	query :=
+		`
 		DELETE from tokens
 		WHERE user_id = $1 AND scope = $2
 	`

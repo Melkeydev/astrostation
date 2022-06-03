@@ -19,8 +19,6 @@ enum backgrounds {
   GRADIENT,
 }
 
-// TODO: refresh here
-
 function App() {
   const [hasCheckedLoginState, setHasCheckedLoginState] = useState(false);
   const { isLoggedIn, setIsLoggedIn } = useLoggedIn();

@@ -1,4 +1,3 @@
-import Axios from "axios";
 import { axiosApiInstance } from "./axios";
 import { useLoggedIn } from "@Store";
 
@@ -20,7 +19,7 @@ export const loginUser = async ({
       return data.error;
     } else {
       localStorage.setItem("token", data.token.token);
-      //localStorage.setItem("refreshToken", data.refresh_token);
+      localStorage.setItem("refreshToken", data.refreshToken.token);
       return true;
     }
   } catch (error) {
@@ -34,6 +33,7 @@ export const checkToken = async () => {
   try {
     const response = await axiosApiInstance.post(`/checktokenexpire`, {});
     const { data } = response;
+    console.log("hit1", response);
     return data;
   } catch {
     const refresh_token = localStorage.getItem("refreshToken");
@@ -50,7 +50,7 @@ export const checkToken = async () => {
     };
     const response = await axiosApiInstance.post(`/refreshtoken`, {}, config);
     const { data } = response;
-    localStorage.setItem("token", data.token);
+    localStorage.setItem("token", data.token.token);
     return true;
   }
 };

@@ -68,8 +68,23 @@ func (app *application) invalidAuthenticationTokenResponse(w http.ResponseWriter
 	app.errorResponse(w, r, http.StatusUnauthorized, message)
 }
 
+func (app *application) customResponse(w http.ResponseWriter, r *http.Request, message string) {
+	w.Header().Set("WWW-Authenticate", "Bearer")
+	app.errorResponse(w, r, http.StatusUnauthorized, message)
+}
+
 func (app *application) authenticationRequiredResponse(w http.ResponseWriter, r *http.Request) {
 	message := "you must be authorized to access this resource"
+	app.errorResponse(w, r, http.StatusUnauthorized, message)
+}
+
+func (app *application) tokenExpiredResponse(w http.ResponseWriter, r *http.Request) {
+	message := "Token expired"
+	app.errorResponse(w, r, http.StatusUnauthorized, message)
+}
+
+func (app *application) refreshTokenExpiredResponse(w http.ResponseWriter, r *http.Request) {
+	message := "Refresh Token expired"
 	app.errorResponse(w, r, http.StatusUnauthorized, message)
 }
 

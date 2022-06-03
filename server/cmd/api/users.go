@@ -124,7 +124,7 @@ func (app *application) logInUserHandler(w http.ResponseWriter, r *http.Request)
 	}
 
 	// This is where we will now send back a token
-	token, err := app.models.Tokens.New(user.ID, 3*time.Minute, data.ScopeAuthentication)
+	token, err := app.models.Tokens.New(user.ID, 2*time.Minute, data.ScopeAuthentication)
 	if err != nil {
 		// If there is any error from our DB communication
 		app.serverErrorResponse(w, r, err)
