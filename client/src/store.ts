@@ -420,7 +420,7 @@ export const useSetBackground = create<IBackground>(
 export const useToggleTasks = create<IToggleTasks>(
   persist(
     (set, _) => ({
-      isTasksToggled: false,
+      isTasksToggled: true,
       setIsTasksToggled: (isTasksToggled) => set({ isTasksToggled }),
       isTasksShown: true,
       setIsTasksShown: (isTasksShown) => set({ isTasksShown }),
@@ -454,7 +454,7 @@ export const usePosTask = create<IPosTask>(
 export const useToggleMusic = create<IToggleMusic>(
   persist(
     (set, _) => ({
-      isMusicToggled: false,
+      isMusicToggled: true,
       setIsMusicToggled: (isMusicToggled) => set({ isMusicToggled }),
       isMusicShown: true,
       setIsMusicShown: (isMusicShown) => set({ isMusicShown }),
@@ -488,7 +488,7 @@ export const usePosMusic = create<IPosMusic>(
 export const useSpotifyMusic = create<IToggleSpotify>(
   persist(
     (set, _) => ({
-      isSpotifyToggled: false,
+      isSpotifyToggled: true,
       setIsSpotifyToggled: (isSpotifyToggled) => set({ isSpotifyToggled }),
       isSpotifyShown: true,
       setIsSpotifyShown: (isSpotifyShown) => set({ isSpotifyShown }),
@@ -523,7 +523,7 @@ export const usePosSpotify = create<IPosSpotify>(
 export const useToggleTimer = create<IToggleTimer>(
   persist(
     (set, _) => ({
-      isTimerToggled: false,
+      isTimerToggled: true,
       setIsTimerToggled: (isTimerToggled) => set({ isTimerToggled }),
       isTimerShown: true,
       setIsTimerShown: (isTimerShown) => set({ isTimerShown }),
