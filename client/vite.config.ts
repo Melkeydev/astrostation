@@ -16,4 +16,5 @@ export default defineConfig({
       "@Actions": path.resolve(__dirname, "src/actions"),
     },
   },
+  assetsInclude: ["./assets/images/*.wav"],
 });

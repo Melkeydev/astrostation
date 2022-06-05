@@ -2,7 +2,6 @@ import { useState } from "react";
 import { logoutUser } from "@Actions/user";
 import { successToast } from "@Utils/toast";
 import toast from "react-hot-toast";
-
 import {
   useToggleMusic,
   useToggleTimer,
@@ -36,7 +35,6 @@ import { WidgetControlModal } from "@App/components/WidgetControl/WidgetControlM
 import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
-
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {

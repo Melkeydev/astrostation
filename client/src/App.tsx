@@ -42,6 +42,7 @@ function App() {
 
   const isDark = useDarkToggleStore((state) => state.isDark);
   const { isFirstTimeUser } = useFirstTimeUserStore();
+
   const setDefault = useSetDefault();
 
   useEffect(() => {

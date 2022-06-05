@@ -2,6 +2,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { AiOutlineReload } from "react-icons/ai";
 import { useEffect, useState } from "react";
 import { useToggleQuote } from "@Store";
+
 import quoteData from "./QuoteData.json";
 
 export const Quotes = () => {

@@ -35,6 +35,7 @@ import {
 
 import { fullscreenChanged, toggleFullScreen } from "@Utils/fullscreen";
 
+
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
   const { isFullscreen } = useFullScreenToggleStore();
@@ -54,6 +55,7 @@ export const SideNav = () => {
   const { isFullscreenShown } = useFullScreenToggleStore();
   const { isQuoteShown } = useToggleQuote();
   const { isWidgetResetShown } = useToggleWidgetReset();
+
 
   const { addStickyNote } = useStickyNote();
   const isDesktop = useMediaQuery("(min-width: 641px)");
