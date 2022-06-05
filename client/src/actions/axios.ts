@@ -1,4 +1,5 @@
 import axios from "axios";
+import { refreshAccessToken } from "./user";
 
 export const axiosApiInstance = axios.create({
   baseURL: "http://localhost:4000/v1/",
@@ -30,19 +31,19 @@ axiosApiInstance.interceptors.request.use(
 );
 
 // Response interceptor for API calls
-//axiosApiInstance.interceptors.response.use(
-//(response) => {
-//return response;
-//},
-//async function (error) {
-//const originalRequest = error.config;
-//console.log("Re-try axios logic");
-//if (error.response?.status === 401 && !originalRequest._retry) {
-//originalRequest._retry = true;
-//const access_token = await refreshAccessToken();
-//axios.defaults.headers.common["Authorization"] = "Bearer " + access_token;
-//return axiosApiInstance(originalRequest);
-//}
-//return Promise.reject(error);
-//}
-//);
+axiosApiInstance.interceptors.response.use(
+  (response) => {
+    return response;
+  },
+  async function (error) {
+    const originalRequest = error.config;
+    console.log("Re-try axios logic");
+    if (error.response?.status === 401 && !originalRequest._retry) {
+      originalRequest._retry = true;
+      const access_token = await refreshAccessToken();
+      axios.defaults.headers.common["Authorization"] = "Bearer " + access_token;
+      return axiosApiInstance(originalRequest);
+    }
+    return Promise.reject(error);
+  }
+);

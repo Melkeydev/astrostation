@@ -256,7 +256,13 @@ func (m UsersModel) ConfirmToken(tokenScope, tokenPlaintext string) (bool, error
 	ctx, cancel := context.WithTimeout(context.Background(), 3*time.Second)
 	defer cancel()
 
-	_, err := m.DB.ExecContext(ctx, query, args...)
+	var token struct {
+		id int64
+	}
+
+	err := m.DB.QueryRowContext(ctx, query, args...).Scan(
+		&token.id,
+	)
 
 	if err != nil {
 		switch {

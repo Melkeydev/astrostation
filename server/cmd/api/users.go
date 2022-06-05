@@ -1,11 +1,13 @@
 package main
 
 import (
-	"astrostation.server/internal/data"
-	"astrostation.server/internal/validator"
 	"errors"
 	"net/http"
+	"strings"
 	"time"
+
+	"astrostation.server/internal/data"
+	"astrostation.server/internal/validator"
 )
 
 func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Request) {
@@ -55,13 +57,19 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	_, err = app.models.Tokens.New(user.ID, 24*time.Hour, data.ScopeAuthentication)
+	refreshToken, err := app.models.Tokens.New(user.ID, 24*time.Hour, data.ScopeRefresh)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 		return
 	}
 
-	err = app.writeJSON(w, http.StatusCreated, envelope{"user": user}, nil)
+	token, err := app.models.Tokens.New(user.ID, 10*time.Minute, data.ScopeAuthentication)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+		return
+	}
+
+	err = app.writeJSON(w, http.StatusCreated, envelope{"token":token, "refreshToken": refreshToken}, nil)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 	}
@@ -124,7 +132,7 @@ func (app *application) logInUserHandler(w http.ResponseWriter, r *http.Request)
 	}
 
 	// This is where we will now send back a token
-	token, err := app.models.Tokens.New(user.ID, 2*time.Minute, data.ScopeAuthentication)
+	token, err := app.models.Tokens.New(user.ID, 10*time.Minute, data.ScopeAuthentication)
 	if err != nil {
 		// If there is any error from our DB communication
 		app.serverErrorResponse(w, r, err)
@@ -145,6 +153,55 @@ func (app *application) logInUserHandler(w http.ResponseWriter, r *http.Request)
 	}
 
 	err = app.writeJSON(w, http.StatusCreated, envelope{"token": token, "refreshToken": refreshToken}, nil)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+	}
+}
+
+func (app *application) logoutHandler(w http.ResponseWriter, r *http.Request) {
+	w.Header().Add("Vary", "Authorization")
+	authorizationHeader := r.Header.Get("Authorization")
+	if authorizationHeader == "" {
+		app.contextSetUser(r, data.AnonymousUser)
+		return
+	}
+
+	headerParts := strings.Split(authorizationHeader, " ")
+	if len(headerParts) != 2 || headerParts[0] != "Bearer" {
+		app.invalidAuthenticationTokenResponse(w, r)
+		return
+	}
+
+	token := headerParts[1]
+	v := validator.New()
+
+	if data.ValidateTokenPlaintext(v, token); !v.Valid() {
+		app.invalidAuthenticationTokenResponse(w, r)
+		return
+	}
+
+	user, err := app.models.Users.GetForToken(data.ScopeAuthentication, token)
+	if err != nil {
+		switch {
+		case errors.Is(err, data.ErrRecordNotFound):
+			app.invalidAuthenticationTokenResponse(w, r)
+		default:
+			app.serverErrorResponse(w, r, err)
+		}
+		return
+	}
+
+	err = app.models.Tokens.DeleteTokenForUser(user.ID, data.ScopeAuthentication)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+	}
+
+	err = app.models.Tokens.DeleteTokenForUser(user.ID, data.ScopeRefresh)
+	if err != nil {
+		app.serverErrorResponse(w, r, err)
+	}
+
+	err = app.writeJSON(w, http.StatusCreated, envelope{"success": true}, nil)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 	}

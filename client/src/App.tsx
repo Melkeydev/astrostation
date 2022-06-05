@@ -28,11 +28,9 @@ function App() {
       if (await checkToken()) {
         setIsLoggedIn(true);
       } else {
-        console.log("here2");
         setIsLoggedIn(false);
       }
     } catch (e) {
-      console.log("here");
       setIsLoggedIn(false);
     }
     setHasCheckedLoginState(true);

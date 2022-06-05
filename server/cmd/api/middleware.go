@@ -1,11 +1,11 @@
 package main
 
 import (
-	"astrostation.server/internal/data"
-	"astrostation.server/internal/validator"
 	"errors"
 	"net/http"
 	"strings"
+	"astrostation.server/internal/data"
+	"astrostation.server/internal/validator"
 )
 
 func (app *application) enableCors(next http.Handler) http.Handler {
@@ -20,14 +20,15 @@ func (app *application) requireAuthenticatedUser(next http.HandlerFunc) http.Han
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		user := app.contextGetUser(r)
 
-		//NOTE: user is not logged in
+		//NOTE: user is not ated
 		if user.IsAnonymous() {
-			app.authenticationRequiredResponse(w, r)
+			app.authenticationRequiredResponse(w,r)
 			return
 		}
 		next.ServeHTTP(w, r)
 	})
 }
+
 
 func (app *application) authenticate(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
