@@ -29,8 +29,6 @@ function App() {
   const { breakStarted } = useBreakStarted();
   const setDefault = useSetDefault();
 
-  console.log(breakStarted);
-
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add("dark");
