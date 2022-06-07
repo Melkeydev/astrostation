@@ -3,7 +3,11 @@ import { useEffect } from "react";
 import { Backgrounds } from "@Components/Backgrounds/utils";
 import { HomePage } from "@Pages/Homepage";
 import { SideNav } from "@Components/Nav/SideNav";
-import { useDarkToggleStore, useFirstTimeUserStore } from "@Store";
+import {
+  useDarkToggleStore,
+  useFirstTimeUserStore,
+  useBreakStarted,
+} from "@Store";
 import { Toaster } from "react-hot-toast";
 import { version } from "@Root/package.json";
 import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
@@ -22,8 +26,10 @@ enum backgrounds {
 function App() {
   const isDark = useDarkToggleStore((state) => state.isDark);
   const { isFirstTimeUser } = useFirstTimeUserStore();
-
+  const { breakStarted } = useBreakStarted();
   const setDefault = useSetDefault();
+
+  console.log(breakStarted);
 
   useEffect(() => {
     if (isDark) {
@@ -49,19 +55,23 @@ function App() {
   }, []);
 
   return (
-  <>
-    {isFirstTimeUser && <Walkthrough />}
-    <Router>
-      <Backgrounds backgrounds={backgrounds} />
-      <div className="fixed inset-0 overflow-auto">
-        <Toaster />
-        <SideNav />
-        <Routes>
-          <Route path="/" element={<HomePage backgrounds={backgrounds} />} />
-        </Routes>
-      </div>
-    </Router>
-  </>
+    <>
+      {isFirstTimeUser && <Walkthrough />}
+      <Router>
+        <Backgrounds backgrounds={backgrounds} />
+        <div
+          className={`fixed inset-0 overflow-auto ${
+            breakStarted && "bg-blue-500 bg-opacity-40"
+          }`}
+        >
+          <Toaster />
+          <SideNav />
+          <Routes>
+            <Route path="/" element={<HomePage backgrounds={backgrounds} />} />
+          </Routes>
+        </div>
+      </Router>
+    </>
   );
 }
 
