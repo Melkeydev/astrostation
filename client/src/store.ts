@@ -32,7 +32,9 @@ import {
   IToggleQuote,
   IPosQuote,
   IToggleWidgetReset,
-  IFirstTimeUserState,
+  IToggleTwitch,
+  IPosTwitch,
+  IFirstTimeUserState
 } from "./interfaces";
 
 /**
@@ -632,6 +634,40 @@ export const useToggleWidgetReset = create<IToggleWidgetReset>(
     }),
     {
       name: "state_widget_reset",
+    }
+  )
+);
+
+/**
+ * Quote Section Store
+ * ---
+ * Handle the visibility of motivational/programming quotes
+ */
+
+ export const useToggleTwitch = create<IToggleTwitch>(
+  persist(
+    (set, _) => ({
+      isTwitchToggled: false,
+      setIsTwitchToggled: (isTwitchToggled) => set({ isTwitchToggled }),
+      isTwitchShown: false,
+      setIsTwitchShown: (isTwitchShown) => set({ isTwitchShown }),
+    }),
+    {
+      name: "state_twitch",
+    }
+  )
+);
+
+export const usePosTwitch = create<IPosTwitch>(
+  persist(
+    (set, _) => ({
+      twitchPosX: 804,
+      twitchPosY: 436,
+      setTwitchPos: (X, Y) => set({ twitchPosX: X, twitchPosY: Y }),
+      setTwitchPosDefault: () => set(() => ({ twitchPosX: 804, twitchPosY: 436 })),
+    }),
+    {
+      name: "set_twitch_position",
     }
   )
 );
