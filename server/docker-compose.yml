@@ -1,0 +1,18 @@
+version: "3.1"
+
+services:
+  db:
+    container_name: "astrostation_db"
+    image: postgres:12.4-alpine
+    volumes:
+      - "./sql/init_user.sql:/docker-entrypoint-initdb.d/init_1_user.sql"
+      - "./sql/init_test_info.sql:/docker-entrypoint-initdb.d/init_test_info.sql"
+      - "./sql/init_tokens.sql:/docker-entrypoint-initdb.d/init_2_tokens.sql"
+      - "./database/postgres:/var/lib/postgresql/data"
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: "astrostation_db"
+      POSTGRES_USER: "astro_admin"
+      POSTGRES_PASSWORD: "password123"
+    restart: unless-stopped

@@ -13,6 +13,7 @@ export default defineConfig({
       "@Store": path.resolve(__dirname, "src/store"),
       "@Utils": path.resolve(__dirname, "src/utils"),
       "@Pages": path.resolve(__dirname, "src/pages"),
+      "@Actions": path.resolve(__dirname, "src/actions"),
     },
   },
   assetsInclude: ["./assets/images/*.wav"],

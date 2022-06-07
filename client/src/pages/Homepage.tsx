@@ -1,4 +1,7 @@
-import { useState } from 'react';
+import { useState } from "react";
+import { logoutUser } from "@Actions/user";
+import { successToast } from "@Utils/toast";
+import toast from "react-hot-toast";
 import {
   useToggleMusic,
   useToggleTimer,
@@ -11,7 +14,8 @@ import {
   usePosMusic,
   usePosSpotify,
   usePosTimer,
-  usePosQuote
+  usePosQuote,
+  useLoggedIn,
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -24,9 +28,11 @@ import { CustomizationButton } from "@App/components/Common/Buttons/Customizatio
 import { GoGear } from "react-icons/go";
 import { SettingsModal } from "@App/components/Settings/Modal";
 import { MdWidgets } from "react-icons/md";
+import { BsPersonCircle, BsFillPersonPlusFill } from "react-icons/bs";
+import { LoginModal } from "@Components/User/LoginModal";
+import { RegisterModal } from "@Components/User/RegisterModal";
 import { WidgetControlModal } from "@App/components/WidgetControl/WidgetControlModal";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
-
 import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
@@ -46,57 +52,104 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { spotifyPosX, spotifyPosY, setSpotifyPos } = usePosSpotify();
   const { quotePosX, quotePosY, setQuotePos } = usePosQuote();
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
-
   const isDesktop = useMediaQuery("(min-width: 641px)");
-
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
-  const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen ] = useState(false);
-  const [isBackgroundModalOpen, setIsBackgroundModalOpen ] = useState(false);
+  const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen] =
+    useState(false);
+  const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
+  const [isLoginModal, setLoginModal] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useLoggedIn();
+  const [isRegisterModal, setRegisterModal] = useState(false);
 
+  const logoutUserCall = async () => {
+    const response = await logoutUser();
+
+    // @ts-ignore
+    if (response) {
+      successToast("logout successful", false);
+      setIsLoggedIn(false);
+    } else {
+      toast.error("server experienced an error");
+    }
+  };
 
   return (
     <div className="h-screen space-y-1">
-      <div className={"flex justify-end " + (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")}>
-        <div className="settingsButton">
+      <div
+        className={
+          "flex justify-end " +
+          (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")
+        }
+      >
+        {isLoggedIn ? (
+          <button
+            type="button"
+            className="flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
+            onClick={logoutUserCall}
+          >
+            Logout
+            <GoGear className="-mr-1 ml-2" />
+          </button>
+        ) : (
           <CustomizationButton
-            title="Settings" 
-            icon={<GoGear className="-mr-1 ml-2" />}
+            title="Login"
+            icon={<BsPersonCircle className="-mr-1 ml-2" />}
             modal={
-              <SettingsModal
-                isVisible={isSettingsModalOpen}
-                onClose={() => setSettingsModalOpen(false)} 
+              <LoginModal
+                isVisible={isLoginModal}
+                onClose={() => setLoginModal(false)}
               />
             }
-            changeModal={setSettingsModalOpen}
+            changeModal={setLoginModal}
           />
-        </div>
-        <div className="configureWidgetsButton">
+        )}
+        {!isLoggedIn && (
           <CustomizationButton
-            title="Configure Widgets" 
-            icon={<MdWidgets className="-mr-1 ml-2" />}
+            title="Register"
+            icon={<BsFillPersonPlusFill className="-mr-1 ml-2" />}
             modal={
-              <WidgetControlModal
-                isVisible={isConfigureWidgetModalOpen}
-                onClose={() => setIsConfigureWidgetModalOpen(false)} 
+              <RegisterModal
+                isVisible={isRegisterModal}
+                onClose={() => setRegisterModal(false)}
               />
             }
-            changeModal={setIsConfigureWidgetModalOpen}
+            changeModal={setRegisterModal}
           />
-        </div>
-        <div className="chooseBackgroundButton">
-          <CustomizationButton
-            title="Choose Background"
-            icon={<IoMdArrowDropdownCircle className="-mr-1 ml-2" />}
-            modal={
-              <BackgroundNav
-                backgrounds={backgrounds}
-                isVisible={isBackgroundModalOpen}
-                onClose={() => setIsBackgroundModalOpen(false)}
-              />
-            }
-            changeModal={setIsBackgroundModalOpen}
-          />
-        </div>
+        )}
+        <CustomizationButton
+          title="Settings"
+          icon={<GoGear className="-mr-1 ml-2" />}
+          modal={
+            <SettingsModal
+              isVisible={isSettingsModalOpen}
+              onClose={() => setSettingsModalOpen(false)}
+            />
+          }
+          changeModal={setSettingsModalOpen}
+        />
+        <CustomizationButton
+          title="Configure Widgets"
+          icon={<MdWidgets className="-mr-1 ml-2" />}
+          modal={
+            <WidgetControlModal
+              isVisible={isConfigureWidgetModalOpen}
+              onClose={() => setIsConfigureWidgetModalOpen(false)}
+            />
+          }
+          changeModal={setIsConfigureWidgetModalOpen}
+        />
+        <CustomizationButton
+          title="Choose Background"
+          icon={<IoMdArrowDropdownCircle className="-mr-1 ml-2" />}
+          modal={
+            <BackgroundNav
+              backgrounds={backgrounds}
+              isVisible={isBackgroundModalOpen}
+              onClose={() => setIsBackgroundModalOpen(false)}
+            />
+          }
+          changeModal={setIsBackgroundModalOpen}
+        />
       </div>
       <CryptoDonationButton />
       {!isDesktop ? (
