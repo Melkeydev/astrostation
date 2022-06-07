@@ -12,7 +12,7 @@ export const TaskTracker = () => {
 
   return (
     <div className="bg-white/[.96] rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/[.96] dark:border-gray-700">
-      <div className="flex justify-end handle p-2 w-full">
+      <div className="flex justify-end handle p-2 w-full cursor-move">
         <IoCloseSharp
           className="text-red-500 cursor-pointer hover:bg-red-200"
           onClick={() => setIsTasksToggled(false)}
