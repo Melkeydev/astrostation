@@ -47,9 +47,9 @@ import {
 export const useGrid = create<IGrid>(
   persist(
     (set, _) => ({
-      grid: [50, 50],
+      grid: null,
       setGrid: (gridVal) => set({ grid: gridVal }),
-      setGridDefault: () => set(() => ({ grid: [50, 50] })),
+      setGridDefault: () => set(() => ({ grid: null })),
     }),
     { name: "set_grid" }
   )

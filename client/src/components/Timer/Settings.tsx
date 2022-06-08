@@ -285,9 +285,9 @@ export const TimerSettings = ({ onClose }) => {
                 onChange={(value) => {
                   onGridChange(value as number);
                 }}
-                step={25}
+                step={50}
                 min={0}
-                max={100}
+                max={150}
               />
             </div>
           </div>
