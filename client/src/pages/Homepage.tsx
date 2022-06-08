@@ -8,10 +8,12 @@ import {
   useToggleStickyNote,
   useStickyNote,
   useToggleQuote,
+  useToggleTwitch,
   usePosMusic,
   usePosSpotify,
   usePosTimer,
   usePosQuote,
+  usePosTwitch
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -30,15 +32,16 @@ import { IoMdArrowDropdownCircle } from "react-icons/io";
 import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
+import { TwitchStream } from "@Components/Twitch/TwitchStream";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
   const { isTimerToggled, isTimerShown } = useToggleTimer();
   const { isTasksToggled, isTasksShown } = useToggleTasks();
   const { isSpotifyToggled, isSpotifyShown } = useSpotifyMusic();
-  const { isQuoteToggled, isQuoteShown } = useToggleQuote();
   const { isStickyNoteShown } = useToggleStickyNote();
-  const { stickyNotes, setStickyNotesPos } = useStickyNote();
+  const { isQuoteToggled, isQuoteShown } = useToggleQuote();
+  const { isTwitchToggled, isTwitchShown } = useToggleTwitch();
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -46,6 +49,8 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { spotifyPosX, spotifyPosY, setSpotifyPos } = usePosSpotify();
   const { quotePosX, quotePosY, setQuotePos } = usePosQuote();
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
+  const { stickyNotes, setStickyNotesPos } = useStickyNote();
+  const { twitchPosX, twitchPosY, setTwitchPos } = usePosTwitch();
 
   const isDesktop = useMediaQuery("(min-width: 641px)");
 
@@ -189,6 +194,15 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             handle={true}
           >
             <Quotes />
+          </DWrapper>
+          <DWrapper
+            toggleHook={isTwitchToggled && isTwitchShown}
+            defaultX={twitchPosX}
+            defaultY={twitchPosY}
+            setPosition={setTwitchPos}
+            isSticky={false}
+          >
+            <TwitchStream />
           </DWrapper>
         </>
       )}
