@@ -7,6 +7,7 @@ import {
   useLongBreakTimer,
   usePomodoroTimer,
   usePosQuote,
+  useGrid,
 } from "@Store";
 
 function useSetDefault() {
@@ -15,6 +16,7 @@ function useSetDefault() {
   const { setSpotifyPosDefault } = usePosSpotify();
   const { setTimerPosDefault } = usePosTimer();
   const { setQuotePosDefault } = usePosQuote();
+  const { setGridDefault } = useGrid();
   const { defaultShortBreakLength } = useShortBreakTimer();
   const { defaultLongBreakLength } = useLongBreakTimer();
   const { defaultPomodoroLength } = usePomodoroTimer();
@@ -33,6 +35,7 @@ function useSetDefault() {
       defaultShortBreakLength();
       defaultLongBreakLength();
       defaultPomodoroLength();
+      setGridDefault();
     }
 
     if (clearPosition) {
