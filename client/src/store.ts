@@ -51,6 +51,16 @@ export const useAudioVolume = create<IAudioVolume>(
   )
 );
 
+export const usePlayerAudioVolume = create<IAudioVolume>(
+  persist(
+    (set, _) => ({
+      audioVolume: 75,
+      setAudioVolume: (volume) => set({ audioVolume: volume }),
+    }),
+    { name: "set_player_audio_volume" }
+  )
+);
+
 /**
  * Alarm Option Store
  * ---
