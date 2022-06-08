@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   useToggleMusic,
   useToggleTimer,
@@ -55,21 +55,26 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const isDesktop = useMediaQuery("(min-width: 641px)");
 
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
-  const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen ] = useState(false);
-  const [isBackgroundModalOpen, setIsBackgroundModalOpen ] = useState(false);
-
+  const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen] =
+    useState(false);
+  const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
 
   return (
     <div className="h-screen space-y-1">
-      <div className={"flex justify-end " + (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")}>
+      <div
+        className={
+          "flex justify-end " +
+          (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")
+        }
+      >
         <div className="settingsButton">
           <CustomizationButton
-            title="Settings" 
+            title="Settings"
             icon={<GoGear className="-mr-1 ml-2" />}
             modal={
               <SettingsModal
                 isVisible={isSettingsModalOpen}
-                onClose={() => setSettingsModalOpen(false)} 
+                onClose={() => setSettingsModalOpen(false)}
               />
             }
             changeModal={setSettingsModalOpen}
@@ -77,12 +82,12 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         </div>
         <div className="configureWidgetsButton">
           <CustomizationButton
-            title="Configure Widgets" 
+            title="Configure Widgets"
             icon={<MdWidgets className="-mr-1 ml-2" />}
             modal={
               <WidgetControlModal
                 isVisible={isConfigureWidgetModalOpen}
-                onClose={() => setIsConfigureWidgetModalOpen(false)} 
+                onClose={() => setIsConfigureWidgetModalOpen(false)}
               />
             }
             changeModal={setIsConfigureWidgetModalOpen}
@@ -134,6 +139,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
                 setPosition={setStickyNotesPos}
                 isSticky={true}
                 stickyID={stickyNote.id}
+                handle={true}
               >
                 <Sticky id={stickyNote.id} text={stickyNote.text} />
               </DWrapper>
@@ -145,6 +151,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={timerPosY}
             setPosition={setTimerPos}
             isSticky={false}
+            handle={false}
           >
             <Timer />
           </DWrapper>
@@ -154,6 +161,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={taskPosY}
             setPosition={setTaskPos}
             isSticky={false}
+            handle={true}
           >
             <TaskTracker />
           </DWrapper>
@@ -163,6 +171,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={musicPosY}
             setPosition={setMusicPos}
             isSticky={false}
+            handle={false}
           >
             <Player />
           </DWrapper>
@@ -172,6 +181,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={spotifyPosY}
             setPosition={setSpotifyPos}
             isSticky={false}
+            handle={true}
           >
             <Spotify />
           </DWrapper>
@@ -181,6 +191,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={quotePosY}
             setPosition={setQuotePos}
             isSticky={false}
+            handle={true}
           >
             <Quotes />
           </DWrapper>
