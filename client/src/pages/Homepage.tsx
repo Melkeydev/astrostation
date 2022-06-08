@@ -13,7 +13,8 @@ import {
   usePosSpotify,
   usePosTimer,
   usePosQuote,
-  usePosTwitch
+  usePosTwitch,
+  useGrid,
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -28,7 +29,6 @@ import { SettingsModal } from "@App/components/Settings/Modal";
 import { MdWidgets } from "react-icons/md";
 import { WidgetControlModal } from "@App/components/WidgetControl/WidgetControlModal";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
-
 import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
@@ -51,13 +51,12 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
   const { twitchPosX, twitchPosY, setTwitchPos } = usePosTwitch();
-
   const isDesktop = useMediaQuery("(min-width: 641px)");
-
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen] =
     useState(false);
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
+  const { grid } = useGrid();
 
   return (
     <div className="h-screen space-y-1">
@@ -140,6 +139,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
                 isSticky={true}
                 stickyID={stickyNote.id}
                 handle={true}
+                gridValues={grid}
               >
                 <Sticky id={stickyNote.id} text={stickyNote.text} />
               </DWrapper>
@@ -152,6 +152,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             setPosition={setTimerPos}
             isSticky={false}
             handle={false}
+            gridValues={grid}
           >
             <Timer />
           </DWrapper>
@@ -162,6 +163,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             setPosition={setTaskPos}
             isSticky={false}
             handle={true}
+            gridValues={grid}
           >
             <TaskTracker />
           </DWrapper>
@@ -172,6 +174,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             setPosition={setMusicPos}
             isSticky={false}
             handle={false}
+            gridValues={grid}
           >
             <Player />
           </DWrapper>
@@ -192,6 +195,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             setPosition={setQuotePos}
             isSticky={false}
             handle={true}
+            gridValues={grid}
           >
             <Quotes />
           </DWrapper>
@@ -201,6 +205,8 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={twitchPosY}
             setPosition={setTwitchPos}
             isSticky={false}
+            handle={false}
+            gridValues={grid}
           >
             <TwitchStream />
           </DWrapper>
