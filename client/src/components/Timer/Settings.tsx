@@ -35,6 +35,13 @@ export const TimerSettings = ({ onClose }) => {
   const { grid, setGrid } = useGrid();
   const [currentGrid, setCurrentGrid] = useState(grid);
 
+  function onDefaultChange() {
+    if (currentGrid === null) {
+      return 0;
+    }
+    return currentGrid[0];
+  }
+
   const setDefault = useSetDefault();
 
   function onVolumeChange(value: number) {
@@ -57,7 +64,6 @@ export const TimerSettings = ({ onClose }) => {
     setAlarm(currentAlarm);
     setGrid(currentGrid);
     onClose();
-
     successToast("Settings saved", isDark);
   }
 
@@ -75,7 +81,7 @@ export const TimerSettings = ({ onClose }) => {
       setAlarm(
         "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
       );
-      setGrid(50);
+      setGrid([50, 50]);
     }
   }
 
@@ -274,7 +280,8 @@ export const TimerSettings = ({ onClose }) => {
             </div>
             <div className="px-2 pb-2 items-center">
               <Slider
-                defaultValue={currentGrid}
+                //@ts-ignore
+                defaultValue={onDefaultChange}
                 onChange={(value) => {
                   onGridChange(value as number);
                 }}

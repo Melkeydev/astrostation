@@ -8,6 +8,7 @@ import {
   usePomodoroTimer,
   usePosQuote,
   useGrid,
+  usePosTwitch,
 } from "@Store";
 
 function useSetDefault() {
@@ -16,6 +17,7 @@ function useSetDefault() {
   const { setSpotifyPosDefault } = usePosSpotify();
   const { setTimerPosDefault } = usePosTimer();
   const { setQuotePosDefault } = usePosQuote();
+  const { setTwitchPosDefault } = usePosTwitch();
   const { setGridDefault } = useGrid();
   const { defaultShortBreakLength } = useShortBreakTimer();
   const { defaultLongBreakLength } = useLongBreakTimer();
@@ -45,6 +47,7 @@ function useSetDefault() {
       setSpotifyPosDefault();
       setTimerPosDefault();
       setQuotePosDefault();
+      setTwitchPosDefault();
       window.location.reload();
     }
   };
