@@ -8,6 +8,7 @@ import {
   useHasStarted,
   useAudioVolume,
   useAlarmOption,
+  useGrid,
 } from "@Store";
 import { IoCloseSharp } from "react-icons/io5";
 import { BsMusicPlayerFill, BsBellFill } from "react-icons/bs";
@@ -27,16 +28,32 @@ export const TimerSettings = ({ onClose }) => {
   const [pomoCount, setPomoCount] = useState(pomodoroLength);
   const [shortBreak, setShortBreakState] = useState(shortBreakLength);
   const [longBreak, setLongBreakState] = useState(longBreakLength);
-
   const { audioVolume, setAudioVolume } = useAudioVolume();
   const [currentVolume, setCurrentVolume] = useState(audioVolume);
   const { alarm, setAlarm } = useAlarmOption();
   const [currentAlarm, setCurrentAlarm] = useState(alarm);
+  const { grid, setGrid } = useGrid();
+  const [currentGrid, setCurrentGrid] = useState(grid);
+
+  function onDefaultChange() {
+    if (currentGrid === null) {
+      return 0;
+    }
+    return currentGrid[0];
+  }
 
   const setDefault = useSetDefault();
 
   function onVolumeChange(value: number) {
     setCurrentVolume(value);
+  }
+
+  function onGridChange(value: number) {
+    if (value == 0) {
+      setCurrentGrid(null);
+      return;
+    }
+    setCurrentGrid([value, value]);
   }
 
   function onSubmit() {
@@ -45,8 +62,8 @@ export const TimerSettings = ({ onClose }) => {
     setPomodoroLength(pomoCount);
     setAudioVolume(currentVolume);
     setAlarm(currentAlarm);
+    setGrid(currentGrid);
     onClose();
-
     successToast("Settings saved", isDark);
   }
 
@@ -64,6 +81,7 @@ export const TimerSettings = ({ onClose }) => {
       setAlarm(
         "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
       );
+      setGrid([50, 50]);
     }
   }
 
@@ -254,6 +272,23 @@ export const TimerSettings = ({ onClose }) => {
               >
                 <CgPiano />
               </div>
+            </div>
+          </div>
+          <div className="pt-4 pl-4 pr-4">
+            <div className="text-center p-2 rounded">
+              Grid Size (increasing Step Size)
+            </div>
+            <div className="px-2 pb-2 items-center">
+              <Slider
+                //@ts-ignore
+                defaultValue={onDefaultChange}
+                onChange={(value) => {
+                  onGridChange(value as number);
+                }}
+                step={50}
+                min={0}
+                max={150}
+              />
             </div>
           </div>
         </div>

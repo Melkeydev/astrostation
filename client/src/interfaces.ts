@@ -226,3 +226,9 @@ export interface IFirstTimeUserState {
   isFirstTimeUser: boolean;
   toggleIsFirstTimeUser: () => void;
 }
+
+export interface IGrid {
+  grid: number[];
+  setGrid: (grid: number[]) => void;
+  setGridDefault: () => void;
+}

@@ -13,6 +13,7 @@ export const DWrapper = ({
   isSticky,
   stickyID,
   handle,
+  gridValues,
 }: {
   children: any;
   toggleHook: boolean;
@@ -22,6 +23,7 @@ export const DWrapper = ({
   isSticky: boolean;
   stickyID?: number;
   handle: boolean;
+  gridValues?: number[];
 }) => {
   const { setStickyNotesPos } = useStickyNote();
   const [z, setZ] = useState(0);
@@ -74,6 +76,7 @@ export const DWrapper = ({
           defaultPosition={{ x: defaultX, y: defaultY }}
           onDrag={() => trackPosition()}
           onStop={(_, data) => changePosition(data)}
+          grid={gridValues}
         >
           {isSticky ? (
             <div
@@ -112,6 +115,7 @@ export const DWrapper = ({
           defaultPosition={{ x: defaultX, y: defaultY }}
           onDrag={() => trackPosition()}
           onStop={(_, data) => changePosition(data)}
+          grid={gridValues}
         >
           {isSticky ? (
             <div
