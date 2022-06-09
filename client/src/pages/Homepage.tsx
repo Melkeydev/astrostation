@@ -185,6 +185,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             setPosition={setSpotifyPos}
             isSticky={false}
             handle={true}
+            gridValues={grid}
           >
             <Spotify />
           </DWrapper>
