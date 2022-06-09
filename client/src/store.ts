@@ -34,8 +34,26 @@ import {
   IToggleWidgetReset,
   IToggleTwitch,
   IPosTwitch,
-  IFirstTimeUserState
+  IFirstTimeUserState,
+  IGrid,
 } from "./interfaces";
+
+/**
+ * Grid Store
+ * ---
+ * Handler for Grid Value
+ */
+
+export const useGrid = create<IGrid>(
+  persist(
+    (set, _) => ({
+      grid: null,
+      setGrid: (gridVal) => set({ grid: gridVal }),
+      setGridDefault: () => set(() => ({ grid: null })),
+    }),
+    { name: "set_grid" }
+  )
+);
 
 /**
  * Audio Volume Store
@@ -654,7 +672,7 @@ export const useToggleWidgetReset = create<IToggleWidgetReset>(
  * Handle the visibility of motivational/programming quotes
  */
 
- export const useToggleTwitch = create<IToggleTwitch>(
+export const useToggleTwitch = create<IToggleTwitch>(
   persist(
     (set, _) => ({
       isTwitchToggled: false,
@@ -674,7 +692,8 @@ export const usePosTwitch = create<IPosTwitch>(
       twitchPosX: 804,
       twitchPosY: 436,
       setTwitchPos: (X, Y) => set({ twitchPosX: X, twitchPosY: Y }),
-      setTwitchPosDefault: () => set(() => ({ twitchPosX: 804, twitchPosY: 436 })),
+      setTwitchPosDefault: () =>
+        set(() => ({ twitchPosX: 804, twitchPosY: 436 })),
     }),
     {
       name: "set_twitch_position",
