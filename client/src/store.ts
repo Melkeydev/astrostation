@@ -135,7 +135,7 @@ export const usePosTimerSettings = create<IPosTimerSettings>(
       setTimerSettingsPos: (X, Y) =>
         set({ timerSettingsPosX: X, timerSettingsPosY: Y }),
       setTimerSettingsPosDefault: () =>
-        set(() => ({ timerSettingsPosX: 750, timerSettingsPosY: -200 })),
+        set(() => ({ timerSettingsPosX: 400, timerSettingsPosY: 0 })),
     }),
     {
       name: "set_timer_settings_position",
@@ -467,7 +467,7 @@ export const usePosTask = create<IPosTask>(
       taskPosX: 804,
       taskPosY: 302,
       setTaskPos: (X, Y) => set({ taskPosX: X, taskPosY: Y }),
-      setTaskPosDefault: () => set(() => ({ taskPosX: 804, taskPosY: 302 })),
+      setTaskPosDefault: () => set(() => ({ taskPosX: 804, taskPosY: 306 })),
     }),
     {
       name: "set_task_position",
@@ -639,7 +639,7 @@ export const usePosQuote = create<IPosQuote>(
       quotePosX: 804,
       quotePosY: 436,
       setQuotePos: (X, Y) => set({ quotePosX: X, quotePosY: Y }),
-      setQuotePosDefault: () => set(() => ({ quotePosX: 804, quotePosY: 436 })),
+      setQuotePosDefault: () => set(() => ({ quotePosX: 804, quotePosY: 464 })),
     }),
     {
       name: "set_quote_position",
@@ -692,8 +692,7 @@ export const usePosTwitch = create<IPosTwitch>(
       twitchPosX: 804,
       twitchPosY: 436,
       setTwitchPos: (X, Y) => set({ twitchPosX: X, twitchPosY: Y }),
-      setTwitchPosDefault: () =>
-        set(() => ({ twitchPosX: 804, twitchPosY: 436 })),
+      setTwitchPosDefault: () => set(() => ({ twitchPosX: 1208, twitchPosY: 0 })),
     }),
     {
       name: "set_twitch_position",
