@@ -140,10 +140,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
                 stickyID={stickyNote.id}
                 handle={true}
                 gridValues={grid}
- Conversation 0
- Commits 64
- Checks 0
- Files changed 20
               >
                 <Sticky id={stickyNote.id} text={stickyNote.text} />
               </DWrapper>
