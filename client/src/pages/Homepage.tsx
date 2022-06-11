@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState } from "react";
 import {
   useToggleMusic,
   useToggleTimer,
@@ -8,10 +8,13 @@ import {
   useToggleStickyNote,
   useStickyNote,
   useToggleQuote,
+  useToggleTwitch,
   usePosMusic,
   usePosSpotify,
   usePosTimer,
-  usePosQuote
+  usePosQuote,
+  usePosTwitch,
+  useGrid,
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -26,19 +29,19 @@ import { SettingsModal } from "@App/components/Settings/Modal";
 import { MdWidgets } from "react-icons/md";
 import { WidgetControlModal } from "@App/components/WidgetControl/WidgetControlModal";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
-
 import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
+import { TwitchStream } from "@Components/Twitch/TwitchStream";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
   const { isTimerToggled, isTimerShown } = useToggleTimer();
   const { isTasksToggled, isTasksShown } = useToggleTasks();
   const { isSpotifyToggled, isSpotifyShown } = useSpotifyMusic();
-  const { isQuoteToggled, isQuoteShown } = useToggleQuote();
   const { isStickyNoteShown } = useToggleStickyNote();
-  const { stickyNotes, setStickyNotesPos } = useStickyNote();
+  const { isQuoteToggled, isQuoteShown } = useToggleQuote();
+  const { isTwitchToggled, isTwitchShown } = useToggleTwitch();
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -46,25 +49,31 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { spotifyPosX, spotifyPosY, setSpotifyPos } = usePosSpotify();
   const { quotePosX, quotePosY, setQuotePos } = usePosQuote();
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
-
+  const { stickyNotes, setStickyNotesPos } = useStickyNote();
+  const { twitchPosX, twitchPosY, setTwitchPos } = usePosTwitch();
   const isDesktop = useMediaQuery("(min-width: 641px)");
-
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
-  const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen ] = useState(false);
-  const [isBackgroundModalOpen, setIsBackgroundModalOpen ] = useState(false);
-
+  const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen] =
+    useState(false);
+  const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
+  const { grid } = useGrid();
 
   return (
     <div className="h-screen space-y-1">
-      <div className={"flex justify-end " + (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")}>
+      <div
+        className={
+          "flex justify-end " +
+          (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")
+        }
+      >
         <div className="settingsButton">
           <CustomizationButton
-            title="Settings" 
+            title="Settings"
             icon={<GoGear className="-mr-1 ml-2" />}
             modal={
               <SettingsModal
                 isVisible={isSettingsModalOpen}
-                onClose={() => setSettingsModalOpen(false)} 
+                onClose={() => setSettingsModalOpen(false)}
               />
             }
             changeModal={setSettingsModalOpen}
@@ -72,12 +81,12 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         </div>
         <div className="configureWidgetsButton">
           <CustomizationButton
-            title="Configure Widgets" 
+            title="Configure Widgets"
             icon={<MdWidgets className="-mr-1 ml-2" />}
             modal={
               <WidgetControlModal
                 isVisible={isConfigureWidgetModalOpen}
-                onClose={() => setIsConfigureWidgetModalOpen(false)} 
+                onClose={() => setIsConfigureWidgetModalOpen(false)}
               />
             }
             changeModal={setIsConfigureWidgetModalOpen}
@@ -129,6 +138,12 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
                 setPosition={setStickyNotesPos}
                 isSticky={true}
                 stickyID={stickyNote.id}
+                handle={true}
+                gridValues={grid}
+ Conversation 0
+ Commits 64
+ Checks 0
+ Files changed 20
               >
                 <Sticky id={stickyNote.id} text={stickyNote.text} />
               </DWrapper>
@@ -140,6 +155,8 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={timerPosY}
             setPosition={setTimerPos}
             isSticky={false}
+            handle={false}
+            gridValues={grid}
           >
             <Timer />
           </DWrapper>
@@ -149,6 +166,8 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={taskPosY}
             setPosition={setTaskPos}
             isSticky={false}
+            handle={true}
+            gridValues={grid}
           >
             <TaskTracker />
           </DWrapper>
@@ -158,6 +177,8 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={musicPosY}
             setPosition={setMusicPos}
             isSticky={false}
+            handle={false}
+            gridValues={grid}
           >
             <Player />
           </DWrapper>
@@ -167,6 +188,8 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={spotifyPosY}
             setPosition={setSpotifyPos}
             isSticky={false}
+            handle={true}
+            gridValues={grid}
           >
             <Spotify />
           </DWrapper>
@@ -176,8 +199,21 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={quotePosY}
             setPosition={setQuotePos}
             isSticky={false}
+            handle={true}
+            gridValues={grid}
           >
             <Quotes />
+          </DWrapper>
+          <DWrapper
+            toggleHook={isTwitchToggled && isTwitchShown}
+            defaultX={twitchPosX}
+            defaultY={twitchPosY}
+            setPosition={setTwitchPos}
+            isSticky={false}
+            handle={false}
+            gridValues={grid}
+          >
+            <TwitchStream />
           </DWrapper>
         </>
       )}

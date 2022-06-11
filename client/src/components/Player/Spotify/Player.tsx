@@ -22,10 +22,16 @@ export const Spotify = () => {
     setText("");
   }
 
+  function handleKeyDown(e) {
+    if (e.key === "Enter") {
+      changePlaylist();
+    }
+  }
+
   return (
     <div className="py-2 mb-2 w-72 sm:w-96 max-w-sm text-gray-800 shadow-md rounded-lg dark:text-gray-300 bg-white/[.96] dark:bg-gray-800/[.96] dark:border-gray-700 justify-between">
       <Tooltip title="Make sure to refresh after logging in" placement="top">
-        <div className="flex justify-between items-center p-1">
+        <div className="flex justify-between items-center p-1 handle cursor-move">
           <p>Spotify</p>
           <IoCloseSharp
             className="text-red-500 cursor-pointer hover:bg-red-200"
@@ -51,6 +57,7 @@ export const Spotify = () => {
           onChange={(e) => {
             setText(e.target.value);
           }}
+          onKeyDown={handleKeyDown}
         />
         <AiOutlineReload
           className="w-5 cursor-pointer hover:text-slate-500"
