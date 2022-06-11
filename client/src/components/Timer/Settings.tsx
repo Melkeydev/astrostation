@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import Slider from "rc-slider";
 import {
   useDarkToggleStore,
