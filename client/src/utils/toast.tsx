@@ -72,7 +72,7 @@ export const successToast = (
       },
     });
   } else {
-    toast.success("Settings saved", {
+    toast.success(toastText, {
       icon: icon,
       style: {
         borderRadius: "10px",

@@ -32,8 +32,28 @@ import {
   IToggleQuote,
   IPosQuote,
   IToggleWidgetReset,
+  IToggleTwitch,
+  IPosTwitch,
   IFirstTimeUserState,
+  IGrid,
 } from "./interfaces";
+
+/**
+ * Grid Store
+ * ---
+ * Handler for Grid Value
+ */
+
+export const useGrid = create<IGrid>(
+  persist(
+    (set, _) => ({
+      grid: null,
+      setGrid: (gridVal) => set({ grid: gridVal }),
+      setGridDefault: () => set(() => ({ grid: null })),
+    }),
+    { name: "set_grid" }
+  )
+);
 
 /**
  * Audio Volume Store
@@ -48,6 +68,16 @@ export const useAudioVolume = create<IAudioVolume>(
       setAudioVolume: (volume) => set({ audioVolume: volume }),
     }),
     { name: "set_audio_volume" }
+  )
+);
+
+export const usePlayerAudioVolume = create<IAudioVolume>(
+  persist(
+    (set, _) => ({
+      audioVolume: 75,
+      setAudioVolume: (volume) => set({ audioVolume: volume }),
+    }),
+    { name: "set_player_audio_volume" }
   )
 );
 
@@ -105,7 +135,7 @@ export const usePosTimerSettings = create<IPosTimerSettings>(
       setTimerSettingsPos: (X, Y) =>
         set({ timerSettingsPosX: X, timerSettingsPosY: Y }),
       setTimerSettingsPosDefault: () =>
-        set(() => ({ timerSettingsPosX: 750, timerSettingsPosY: -200 })),
+        set(() => ({ timerSettingsPosX: 400, timerSettingsPosY: 0 })),
     }),
     {
       name: "set_timer_settings_position",
@@ -437,7 +467,7 @@ export const usePosTask = create<IPosTask>(
       taskPosX: 804,
       taskPosY: 302,
       setTaskPos: (X, Y) => set({ taskPosX: X, taskPosY: Y }),
-      setTaskPosDefault: () => set(() => ({ taskPosX: 804, taskPosY: 302 })),
+      setTaskPosDefault: () => set(() => ({ taskPosX: 804, taskPosY: 306 })),
     }),
     {
       name: "set_task_position",
@@ -609,7 +639,7 @@ export const usePosQuote = create<IPosQuote>(
       quotePosX: 804,
       quotePosY: 436,
       setQuotePos: (X, Y) => set({ quotePosX: X, quotePosY: Y }),
-      setQuotePosDefault: () => set(() => ({ quotePosX: 804, quotePosY: 436 })),
+      setQuotePosDefault: () => set(() => ({ quotePosX: 804, quotePosY: 464 })),
     }),
     {
       name: "set_quote_position",
@@ -632,6 +662,40 @@ export const useToggleWidgetReset = create<IToggleWidgetReset>(
     }),
     {
       name: "state_widget_reset",
+    }
+  )
+);
+
+/**
+ * Quote Section Store
+ * ---
+ * Handle the visibility of motivational/programming quotes
+ */
+
+export const useToggleTwitch = create<IToggleTwitch>(
+  persist(
+    (set, _) => ({
+      isTwitchToggled: false,
+      setIsTwitchToggled: (isTwitchToggled) => set({ isTwitchToggled }),
+      isTwitchShown: false,
+      setIsTwitchShown: (isTwitchShown) => set({ isTwitchShown }),
+    }),
+    {
+      name: "state_twitch",
+    }
+  )
+);
+
+export const usePosTwitch = create<IPosTwitch>(
+  persist(
+    (set, _) => ({
+      twitchPosX: 804,
+      twitchPosY: 436,
+      setTwitchPos: (X, Y) => set({ twitchPosX: X, twitchPosY: Y }),
+      setTwitchPosDefault: () => set(() => ({ twitchPosX: 1208, twitchPosY: 0 })),
+    }),
+    {
+      name: "set_twitch_position",
     }
   )
 );

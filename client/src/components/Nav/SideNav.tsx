@@ -9,7 +9,11 @@ import {
   MdOutlineNoteAdd,
 } from "react-icons/md";
 import { VscDebugRestartFrame } from "react-icons/vsc";
-import { BsArrowsFullscreen, BsFillChatLeftQuoteFill } from "react-icons/bs";
+import {
+  BsArrowsFullscreen,
+  BsFillChatLeftQuoteFill,
+  BsTwitch,
+} from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa";
 import {
   useToggleMusic,
@@ -22,10 +26,12 @@ import {
   useStickyNote,
   useToggleStickyNote,
   useToggleWidgetReset,
+  useToggleTwitch,
 } from "@Store";
 import { useState, useEffect } from "react";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
+import { Tooltip } from "@mui/material";
 
 import {
   toggledToastNotification,
@@ -34,7 +40,6 @@ import {
 } from "@Utils/toast";
 
 import { fullscreenChanged, toggleFullScreen } from "@Utils/fullscreen";
-
 
 export const SideNav = () => {
   const { isDark, toggleDarkMode } = useDarkToggleStore();
@@ -45,6 +50,7 @@ export const SideNav = () => {
   const { isTasksToggled, setIsTasksToggled } = useToggleTasks();
   const { isSpotifyToggled, setIsSpotifyToggled } = useSpotifyMusic();
   const { isQuoteToggled, setIsQuoteToggled } = useToggleQuote();
+  const { isTwitchToggled, setIsTwitchToggled } = useToggleTwitch();
 
   const { isTimerShown } = useToggleTimer();
   const { isStickyNoteShown } = useToggleStickyNote();
@@ -55,7 +61,7 @@ export const SideNav = () => {
   const { isFullscreenShown } = useFullScreenToggleStore();
   const { isQuoteShown } = useToggleQuote();
   const { isWidgetResetShown } = useToggleWidgetReset();
-
+  const { isTwitchShown, setIsTwitchShown } = useToggleTwitch();
 
   const { addStickyNote } = useStickyNote();
   const isDesktop = useMediaQuery("(min-width: 641px)");
@@ -119,111 +125,170 @@ export const SideNav = () => {
                 active ? "" : "hidden"
               } w-full sm:flex sm:flex-grow sm:w-auto sm:flex-col`}
             >
-              <NavItem
-                onClick={() =>
-                  toggledToastNotification(
-                    isMusicToggled,
-                    setIsMusicToggled,
-                    "Music Toggled",
-                    750,
-                    "🎵"
-                  )
-                }
-                toggled={isMusicToggled}
-                shown={isMusicShown}
-              >
-                <IoMusicalNotesOutline className="h-6 w-6" />
-              </NavItem>
-              <NavItem
-                onClick={() =>
-                  toggledToastNotification(
-                    isSpotifyToggled,
-                    setIsSpotifyToggled,
-                    "Spotify Toggled",
-                    750,
-                    "🎧"
-                  )
-                }
-                toggled={isSpotifyToggled}
-                shown={isSpotifyShown}
-              >
-                <FaSpotify className="h-6 w-6" />
-              </NavItem>
-              <NavItem
-                onClick={() =>
-                  toggledToastNotification(
-                    isTasksToggled,
-                    setIsTasksToggled,
-                    "Task Toggled",
-                    750,
-                    "📓"
-                  )
-                }
-                toggled={isTasksToggled}
-                shown={isTasksShown}
-              >
-                <CgNotes className="h-6 w-6" />
-              </NavItem>
-              <NavItem
-                onClick={() =>
-                  toggledToastNotification(
-                    isTimerToggled,
-                    setIsTimerToggled,
-                    "Timer Toggled",
-                    750,
-                    "⏳"
-                  )
-                }
-                toggled={isTimerToggled}
-                shown={isTimerShown}
-              >
-                <MdOutlineTimer className="h-6 w-6" />
-              </NavItem>
+              <Tooltip title="Lofi Music" placement="right">
+                <div>
+                  <NavItem
+                    onClick={() =>
+                      toggledToastNotification(
+                        isMusicToggled,
+                        setIsMusicToggled,
+                        "Music Toggled",
+                        750,
+                        "🎵"
+                      )
+                    }
+                    toggled={isMusicToggled}
+                    shown={isMusicShown}
+                  >
+                    <IoMusicalNotesOutline className="h-6 w-6" />
+                  </NavItem>
+                </div>
+              </Tooltip>
+              <Tooltip title="Spotify" placement="right">
+                <div>
+                  <NavItem
+                    onClick={() =>
+                      toggledToastNotification(
+                        isSpotifyToggled,
+                        setIsSpotifyToggled,
+                        "Spotify Toggled",
+                        750,
+                        "🎧"
+                      )
+                    }
+                    toggled={isSpotifyToggled}
+                    shown={isSpotifyShown}
+                  >
+                    <FaSpotify className="h-6 w-6" />
+                  </NavItem>
+                </div>
+              </Tooltip>
+              <Tooltip title="Task Tracker" placement="right">
+                <div>
+                  <NavItem
+                    onClick={() =>
+                      toggledToastNotification(
+                        isTasksToggled,
+                        setIsTasksToggled,
+                        "Task Toggled",
+                        750,
+                        "📓"
+                      )
+                    }
+                    toggled={isTasksToggled}
+                    shown={isTasksShown}
+                  >
+                    <CgNotes className="h-6 w-6" />
+                  </NavItem>
+                </div>
+              </Tooltip>
+              <Tooltip title="Pomodoro Timer" placement="right">
+                <div>
+                  <NavItem
+                    onClick={() =>
+                      toggledToastNotification(
+                        isTimerToggled,
+                        setIsTimerToggled,
+                        "Timer Toggled",
+                        750,
+                        "⏳"
+                      )
+                    }
+                    toggled={isTimerToggled}
+                    shown={isTimerShown}
+                  >
+                    <MdOutlineTimer className="h-6 w-6" />
+                  </NavItem>
+                </div>
+              </Tooltip>
               {isDesktop && (
-                <NavItem onClick={addNewStickyNote} shown={isStickyNoteShown}>
-                  <MdOutlineNoteAdd className="h-6 w-6" />
-                </NavItem>
+                <Tooltip title="Sticky Note" placement="right">
+                  <div>
+                    <NavItem
+                      onClick={addNewStickyNote}
+                      shown={isStickyNoteShown}
+                    >
+                      <MdOutlineNoteAdd className="h-6 w-6" />
+                    </NavItem>
+                  </div>
+                </Tooltip>
               )}
-              <NavItem
-                onClick={toggleDefaultPositions}
-                shown={isWidgetResetShown}
-              >
-                <VscDebugRestartFrame className="h-6 w-6" />
-              </NavItem>
-              <NavItem
-                onClick={() => toastThemeNotification(isDark, toggleDarkMode)}
-                shown={isDarkModeShown}
-              >
-                {isDark ? (
-                  <MdWbSunny className="h-6 w-6" />
-                ) : (
-                  <MdDarkMode className="h-6 w-6" />
-                )}
-              </NavItem>
-              <NavItem
-                onClick={() =>
-                  toggledToastNotification(
-                    isQuoteToggled,
-                    setIsQuoteToggled,
-                    "Quotes Toggled",
-                    750,
-                    "💬"
-                  )
-                }
-                toggled={isQuoteToggled}
-                shown={isQuoteShown}
-              >
-                <BsFillChatLeftQuoteFill className="h-6 w-6" />
-              </NavItem>
-
+              <Tooltip title="Reset Positions" placement="right">
+                <div>
+                  <NavItem
+                    onClick={toggleDefaultPositions}
+                    shown={isWidgetResetShown}
+                  >
+                    <VscDebugRestartFrame className="h-6 w-6" />
+                  </NavItem>
+                </div>
+              </Tooltip>
+              <Tooltip title="Theme" placement="right">
+                <div>
+                  <NavItem
+                    onClick={() =>
+                      toastThemeNotification(isDark, toggleDarkMode)
+                    }
+                    shown={isDarkModeShown}
+                  >
+                    {isDark ? (
+                      <MdWbSunny className="h-6 w-6" />
+                    ) : (
+                      <MdDarkMode className="h-6 w-6" />
+                    )}
+                  </NavItem>
+                </div>
+              </Tooltip>
+              <Tooltip title="Quotes" placement="right">
+                <div>
+                  <NavItem
+                    onClick={() =>
+                      toggledToastNotification(
+                        isQuoteToggled,
+                        setIsQuoteToggled,
+                        "Quotes Toggled",
+                        750,
+                        "💬"
+                      )
+                    }
+                    toggled={isQuoteToggled}
+                    shown={isQuoteShown}
+                  >
+                    <BsFillChatLeftQuoteFill className="h-6 w-6" />
+                  </NavItem>
+                </div>
+              </Tooltip>
+              <Tooltip title="Twitch Stream" placement="right">
+                <div>
+                  <NavItem
+                    onClick={() =>
+                      toggledToastNotification(
+                        isTwitchToggled,
+                        setIsTwitchToggled,
+                        "Twitch Toggled",
+                        750,
+                        "📺"
+                      )
+                    }
+                    toggled={isTwitchToggled}
+                    shown={isTwitchShown}
+                  >
+                    <BsTwitch className="h-6 w-6" />
+                  </NavItem>
+                </div>
+              </Tooltip>
               {isDesktop && (
-                <NavItem
-                  onClick={toggleFullScreen}
-                  toggled={isFullscreen}
-                  shown={isFullscreenShown}
-                >
-                  <BsArrowsFullscreen className="h-6 w-6" />
-                </NavItem>
+                <Tooltip title="Fullscreen" placement="right">
+                  <div>
+                    <NavItem
+                      onClick={toggleFullScreen}
+                      toggled={isFullscreen}
+                      shown={isFullscreenShown}
+                    >
+                      <BsArrowsFullscreen className="h-6 w-6" />
+                    </NavItem>
+                  </div>
+                </Tooltip>
               )}
             </div>
           </ul>

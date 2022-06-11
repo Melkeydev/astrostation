@@ -4,7 +4,7 @@ import { IoMusicalNotesOutline, IoCloseSharp } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
 import { MdOutlineTimer, MdWbSunny, MdOutlineNoteAdd } from "react-icons/md";
 import { VscDebugRestartFrame } from "react-icons/vsc";
-import { BsArrowsFullscreen, BsFillChatLeftQuoteFill } from "react-icons/bs";
+import { BsArrowsFullscreen, BsFillChatLeftQuoteFill, BsTwitch } from "react-icons/bs";
 
 import {
   useToggleMusic,
@@ -16,6 +16,7 @@ import {
   useToggleStickyNote,
   useFullScreenToggleStore,
   useToggleWidgetReset,
+  useToggleTwitch
 } from "@Store";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { toggledToastNotification } from "@Utils/toast";
@@ -31,6 +32,7 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
     useFullScreenToggleStore();
   const { isQuoteShown, setIsQuoteShown } = useToggleQuote();
   const { isWidgetResetShown, setIsWidgetResetShown } = useToggleWidgetReset();
+  const { isTwitchShown, setIsTwitchShown } = useToggleTwitch();
 
   const isDesktop = useMediaQuery("(min-width: 641px)");
 
@@ -62,7 +64,7 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
         </div>
         <div>
           <div className="text-center text-lg">Widget Control</div>
-          <div className="grid grid-cols-[30%,30%,30%] grid-rows-[100px,100px,100px] justify-center gap-1 text-center p-4">
+          <div className="grid grid-cols-[30%,30%,30%] grid-rows-[100px,100px,100px,100px] justify-center gap-1 text-center p-4">
             <div
               onClick={() =>
                 toggledToastNotification(
@@ -237,6 +239,25 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
             >
               Quotes
               <BsFillChatLeftQuoteFill className="h-6 w-full" />
+            </div>
+            <div
+              onClick={() =>
+                toggledToastNotification(
+                  isTwitchShown,
+                  setIsTwitchShown,
+                  "Twitch Widget Added",
+                  750,
+                  "📺"
+                )
+              }
+              className={
+                "grid content-center justify-center gap-2 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 cursor-pointer rounded " +
+                (isTwitchShown &&
+                  "md:bg-gray-200 md:text-gray-800 dark:bg-violet-500")
+              }
+            >
+              Twitch
+              <BsTwitch className="h-6 w-full" />
             </div>
           </div>
         </div>

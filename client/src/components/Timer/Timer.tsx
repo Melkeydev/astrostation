@@ -15,6 +15,7 @@ import {
 } from "@Store";
 import toast from "react-hot-toast";
 import { secondsToTime, formatDisplayTime } from "@Utils/utils";
+import { successToast } from "@Utils/toast";
 
 export const Timer = () => {
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();
@@ -162,6 +163,7 @@ export const Timer = () => {
       return;
     }
     setBreakLength(breakLength);
+    successToast(`Break Length Set at ${breakLength / 60} minutes`, false);
   }
 
   return (
@@ -182,7 +184,9 @@ export const Timer = () => {
           <div className="flex">
             <div className="flex-1 flex-col flex justify-center items-center">
               <Button
-                className="text-gray-800 hover:text-white dark:text-white"
+                className={`text-gray-800 hover:text-white dark:text-white ${
+                  breakLength === shortBreakLength && "border-2 border-blue-900"
+                }`}
                 variant="cold"
                 onClick={() => selectBreak(shortBreakLength)}
                 disabled={hasStarted}
@@ -193,7 +197,10 @@ export const Timer = () => {
 
             <div className="flex-1 flex flex-col justify-center items-center">
               <Button
-                className="text-gray-800 hover:text-white dark:text-white"
+                className={`text-gray-800 hover:text-white dark:text-white ${
+                  breakLength === longBreakLength && "border-2 border-blue-900"
+                }`}
+                // This should either be cold or coldPrimary
                 variant="cold"
                 onClick={() => selectBreak(longBreakLength)}
                 disabled={hasStarted}
