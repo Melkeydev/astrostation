@@ -7,6 +7,15 @@ export const TwitchStream = () => {
     const { isTwitchToggled, isTwitchShown, setIsTwitchToggled } = useToggleTwitch();
     const [inputText, setInputText] = useState("");
     const [twitchStreamer, setTwitchStreamer] = useState("melkeydev");
+    const [parentHostName, setParentHostName] = useState("astrostation.me");
+
+    // doing this for convenience (we don't have a real staging env)
+    // don't ever mix prod and dev code, can cause major security flaws (not here, but you know)
+    useEffect(() => {
+      if (window.location.hostname === "localhost") {
+        setParentHostName("localhost");
+      }
+    }, []);
 
     const handleKeyDown = (e) => {
         if (e.key === 'Enter') {
@@ -32,7 +41,7 @@ export const TwitchStream = () => {
         <div className="justify-center">
             {isTwitchShown && isTwitchToggled && (
                 <iframe
-                    src={"https://player.twitch.tv/?channel=" + twitchStreamer + "&parent=localhost"}
+                    src={"https://player.twitch.tv/?channel=" + twitchStreamer + "&parent=" + parentHostName}
                     allowFullScreen
                     width="100%"
                     height="250px"
