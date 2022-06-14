@@ -117,6 +117,16 @@ export const Timer = () => {
     setTimerSeconds(time[1]);
   }, [timer]);
 
+  // Show timer in page title when timer is running
+  useEffect(() => {
+    if (hasStarted) {
+      // @ts-ignore
+      document.title = `Astrostation ⏱${formatDisplayTime(timerMinutes)}:${formatDisplayTime(timerSeconds)}`;
+    } else {
+      document.title = "Astrostation";
+    }
+  }, [hasStarted, timerMinutes, timerSeconds]);
+
   function toggleCountDown() {
     if (hasStarted) {
       // started mode
