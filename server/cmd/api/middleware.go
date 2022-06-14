@@ -2,7 +2,9 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
+
 	"strings"
 	"astrostation.server/internal/data"
 	"astrostation.server/internal/validator"
@@ -10,17 +12,23 @@ import (
 
 func (app *application) enableCors(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Access-Control-Allow-Origin", "*")
-		w.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization")
+		// NOTE: I need to find out how this works in a prod environment w/Nginx or a Proxy
+		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization,Set-Cookie")
+		w.Header().Set("Access-Control-Allow-Credentials", "true")
+		w.Header().Set("Access-Control-Expose-Headers", "Set-Cookie")
 		next.ServeHTTP(w, r)
 	})
 }
 
+// TODO: this needs to be changed to handle cookies
 func (app *application) requireAuthenticatedUser(next http.HandlerFunc) http.HandlerFunc {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		user := app.contextGetUser(r)
+		cookie, _ := r.Cookie("token")
+		fmt.Println("This is the cookie from authenticationUser", cookie)
 
-		//NOTE: user is not ated
+		//NOTE: user is not authed 
 		if user.IsAnonymous() {
 			app.authenticationRequiredResponse(w,r)
 			return
@@ -29,9 +37,15 @@ func (app *application) requireAuthenticatedUser(next http.HandlerFunc) http.Han
 	})
 }
 
-
+// TODO: this needs to pull the token from the cookie
 func (app *application) authenticate(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// r = http.Request
+		cookie, err := r.Cookie("token")
+		if err != nil {
+			fmt.Println(err)
+		}
+		fmt.Println("This is the cookie from authentication", cookie)
 		// Add the "Vary: Authorization" header to the response. This indicates to any
 		// caches that the response may vary based on the value of the Authorization
 		// header in the request.
@@ -57,6 +71,10 @@ func (app *application) authenticate(next http.Handler) http.Handler {
 		// Extract the actual authentication token from the header parts.
 		token := headerParts[1]
 		// Validate the token to make sure it is in a sensible format.
+
+		//token := cookie.Value
+		
+
 		v := validator.New()
 		// If the token isn't valid, use the invalidAuthenticationTokenResponse()
 		// helper to send a response, rather than the failedValidationResponse() helper

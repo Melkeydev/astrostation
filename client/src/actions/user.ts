@@ -41,7 +41,9 @@ export const loginUser = async ({
   const body = JSON.stringify({ email, password });
 
   try {
-    const response = await axiosApiInstance.post(`/login`, body);
+    const response = await axiosApiInstance.post(`/login`, body, {
+      withCredentials: true,
+    });
     const { data } = response;
 
     if (data.error) {

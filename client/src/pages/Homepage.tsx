@@ -1,3 +1,5 @@
+import { testCall } from "@Actions/test";
+
 import { useState } from "react";
 import { logoutUser } from "@Actions/user";
 import { successToast } from "@Utils/toast";
@@ -73,6 +75,15 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
     }
   };
 
+  const testSubmitCall = async () => {
+    const testResponse = await testCall();
+    if (testResponse) {
+      successToast("test call successful", false);
+    } else {
+      toast.error("test call unsuccessful");
+    }
+  };
+
   return (
     <div className="h-screen space-y-1">
       <div
@@ -103,6 +114,13 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             changeModal={setLoginModal}
           />
         )}
+        <button
+          type="button"
+          className="settingsButton flex items-center rounded-md shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 focus:outline-none dark:bg-gray-800 dark:text-gray-200"
+          onClick={testSubmitCall}
+        >
+          This is the test call
+        </button>
         {!isLoggedIn && (
           <CustomizationButton
             title="Register"

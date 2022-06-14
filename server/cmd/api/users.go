@@ -2,6 +2,7 @@ package main
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 	"strings"
 	"time"
@@ -69,7 +70,7 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	err = app.writeJSON(w, http.StatusCreated, envelope{"token":token, "refreshToken": refreshToken}, nil)
+	err = app.writeJSON(w, http.StatusCreated, envelope{"token": token, "refreshToken": refreshToken}, nil)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 	}
@@ -151,6 +152,23 @@ func (app *application) logInUserHandler(w http.ResponseWriter, r *http.Request)
 		app.serverErrorResponse(w, r, err)
 		return
 	}
+
+	// NOTE: This right now sends back the token and refresh token in a payload that is then stored within
+	// local storage
+
+	// TODO: Is move this to a Cookie
+	expiration := time.Now().Add(24 * time.Hour)
+	cookie := http.Cookie{
+		Name: "token", 
+		Value: token.Plaintext,
+		Expires: expiration,
+		HttpOnly: true,
+		SameSite: http.SameSiteNoneMode,
+		Secure:false}
+	fmt.Println("Cookie after logging in", cookie)
+	http.SetCookie(w, &cookie)
+
+	w.WriteHeader(200)
 
 	err = app.writeJSON(w, http.StatusCreated, envelope{"token": token, "refreshToken": refreshToken}, nil)
 	if err != nil {
