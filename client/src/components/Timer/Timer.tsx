@@ -120,12 +120,13 @@ export const Timer = () => {
   // Show timer in page title when timer is running
   useEffect(() => {
     if (hasStarted) {
+      const icon = sessionType === "Session" ? "⏱" : "☕️";
       // @ts-ignore
-      document.title = `Astrostation ⏱${formatDisplayTime(timerMinutes)}:${formatDisplayTime(timerSeconds)}`;
+      document.title = `Astrostation ${icon}${formatDisplayTime(timerMinutes)}:${formatDisplayTime(timerSeconds)}`;
     } else {
       document.title = "Astrostation";
     }
-  }, [hasStarted, timerMinutes, timerSeconds]);
+  }, [hasStarted, timerMinutes, timerSeconds, sessionType]);
 
   function toggleCountDown() {
     if (hasStarted) {
