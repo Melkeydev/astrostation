@@ -81,7 +81,7 @@ export const TimerSettings = ({ onClose }) => {
       setAlarm(
         "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
       );
-      setGrid([50, 50]);
+      setGrid(null);
     }
   }
 
