@@ -9,6 +9,7 @@ import {
   useAudioVolume,
   useAlarmOption,
   useGrid,
+  useLockWidgetsStore,
 } from "@Store";
 import { IoCloseSharp } from "react-icons/io5";
 import { BsMusicPlayerFill, BsBellFill } from "react-icons/bs";
@@ -34,6 +35,9 @@ export const TimerSettings = ({ onClose }) => {
   const [currentAlarm, setCurrentAlarm] = useState(alarm);
   const { grid, setGrid } = useGrid();
   const [currentGrid, setCurrentGrid] = useState(grid);
+  const { areWidgetsLocked, setAreWidgetsLocked } = useLockWidgetsStore();
+  const [currentWidgetLockState, setCurrentWidgetLockState] =
+    useState(areWidgetsLocked);
 
   function onDefaultChange() {
     if (currentGrid === null) {
@@ -63,6 +67,7 @@ export const TimerSettings = ({ onClose }) => {
     setAudioVolume(currentVolume);
     setAlarm(currentAlarm);
     setGrid(currentGrid);
+    setAreWidgetsLocked(currentWidgetLockState);
     onClose();
     successToast("Settings saved", isDark);
   }
@@ -72,16 +77,19 @@ export const TimerSettings = ({ onClose }) => {
 
     var answer = window.confirm("Are you sure you want to reset to defaults?");
     if (answer) {
+      // set master states
       setDefault(false, true, false);
 
+      // set local states
       setPomoCount(1500);
       setShortBreakState(300);
       setLongBreakState(900);
-      setAudioVolume(0.7);
-      setAlarm(
+      setCurrentVolume(0.7);
+      setCurrentAlarm(
         "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
       );
-      setGrid(null);
+      setCurrentGrid(null);
+      setCurrentWidgetLockState(false);
     }
   }
 
@@ -123,7 +131,7 @@ export const TimerSettings = ({ onClose }) => {
       </div>
       <div className="grid">
         <div className="text-center text-lg">Settings</div>
-        <div className="border-b-2 border-gray-100 p-4">
+        <div className="border-gray-100 p-4">
           <div className="text-center p-2 rounded">
             Time <span className="italic">(minutes)</span>
           </div>
@@ -208,7 +216,8 @@ export const TimerSettings = ({ onClose }) => {
             />
           </div>
         </div>
-        <div className="border-b-2 border-gray-100 p-4">
+        <hr className="border-t-3 border-[#5c5c5c]" />
+        <div className="border-gray-100 p-4">
           <div className="text-center p-2 rounded">Alarm Volume</div>
           <div className="px-2 pb-2 items-center">
             <Slider
@@ -222,7 +231,8 @@ export const TimerSettings = ({ onClose }) => {
             />
           </div>
         </div>
-        <div className="border-b-2 border-gray-100 p-4">
+        <hr className="border-t-3 border-[#5c5c5c]" />
+        <div className="border-gray-100 p-4">
           <div className="text-center p-2 rounded">Alarm Sound</div>
           <div className="flex justify-between items-center text-center gap-2 pb-2">
             <div className="w-1/4">
@@ -232,7 +242,7 @@ export const TimerSettings = ({ onClose }) => {
                   currentAlarm == "/assets/music/arcade.wav" &&
                   "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/arcade.wav")}
+                onClick={() => changeAlarm("/assets/music/arcade.wav")}
               >
                 <BsMusicPlayerFill />
               </div>
@@ -244,7 +254,7 @@ export const TimerSettings = ({ onClose }) => {
                   currentAlarm == "/assets/music/bells.wav" &&
                   "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/bells.wav")}
+                onClick={() => changeAlarm("/assets/music/bells.wav")}
               >
                 <BsBellFill />
               </div>
@@ -256,7 +266,7 @@ export const TimerSettings = ({ onClose }) => {
                   currentAlarm == "/assets/music/flute.wav" &&
                   "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/flute.wav")}
+                onClick={() => changeAlarm("/assets/music/flute.wav")}
               >
                 <GiPanFlute />
               </div>
@@ -268,30 +278,48 @@ export const TimerSettings = ({ onClose }) => {
                   currentAlarm == "/assets/music/piano.wav" &&
                   "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/piano.wav")}
+                onClick={() => changeAlarm("/assets/music/piano.wav")}
               >
                 <CgPiano />
               </div>
             </div>
           </div>
-          <div className="pt-4 pl-4 pr-4">
-            <div className="text-center p-2 rounded">
-              Grid Size (increasing Step Size)
-            </div>
-            <div className="px-2 pb-2 items-center">
-              <Slider
-                //@ts-ignore
-                defaultValue={onDefaultChange}
-                onChange={(value) => {
-                  onGridChange(value as number);
-                }}
-                step={50}
-                min={0}
-                max={150}
-              />
-            </div>
+        </div>
+        <hr className="border-t-3 border-[#5c5c5c]" />
+        <div className="border-gray-100 p-4">
+          <div className="text-center p-2 rounded">
+            Grid Size (increasing Step Size)
+          </div>
+          <div className="px-2 pb-2 items-center">
+            <Slider
+              //@ts-ignore
+              defaultValue={onDefaultChange}
+              onChange={(value) => {
+                onGridChange(value as number);
+              }}
+              step={50}
+              min={0}
+              max={150}
+            />
           </div>
         </div>
+        <hr className="border-t-3 border-[#5c5c5c]" />
+        <div className="border-gray-100 p-4">
+          <div className="text-center pb-2 rounded">Lock Widgets In-place</div>
+          <div className="flex justify-center">
+            <Button
+              className={
+                "w-[70%] text-gray-800 font-normal hover:text-white dark:text-white float-right " +
+                (currentWidgetLockState && " bg-red-500 hover:bg-red-700")
+              }
+              variant="primary"
+              onClick={() => setCurrentWidgetLockState(!currentWidgetLockState)}
+            >
+              {currentWidgetLockState ? "Unlock" : "Lock"} Widgets
+            </Button>
+          </div>
+        </div>
+        <hr className="border-t-3 border-[#5c5c5c]" />
         <div className="flex justify-between p-2">
           <Button
             className="text-gray-800 font-normal hover:text-white dark:text-white"

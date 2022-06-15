@@ -36,6 +36,7 @@ import {
   IPosTwitch,
   IFirstTimeUserState,
   IGrid,
+  ILockWidgets,
 } from "./interfaces";
 
 /**
@@ -714,5 +715,21 @@ export const useFirstTimeUserStore = create<IFirstTimeUserState>(
         set((oldState) => ({ isFirstTimeUser: !oldState.isFirstTimeUser })),
     }),
     { name: "first_time_user" }
+  )
+);
+
+/**
+ * Lock Widgets Store
+ * ---
+ * Handles storing key for determining if widgets are allowed to be moved
+ */
+
+ export const useLockWidgetsStore = create<ILockWidgets>(
+  persist(
+    (set, _) => ({
+      areWidgetsLocked: false,
+      setAreWidgetsLocked: (areWidgetsLocked) => set({ areWidgetsLocked }),
+    }),
+    { name: "state_widgets_lock" }
   )
 );
