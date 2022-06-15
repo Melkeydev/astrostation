@@ -2,7 +2,7 @@ import axios from "axios";
 import { refreshAccessToken } from "./user";
 
 export const axiosApiInstance = axios.create({
-  baseURL: "http://localhost:4000/v1/",
+  baseURL: "http://lvh.me:4000/v1/",
   timeout: 10000,
   headers: {
     "content-type": "application/json",

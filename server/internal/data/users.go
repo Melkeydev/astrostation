@@ -199,6 +199,7 @@ func (u UsersModel) Update(user *User) error {
 	return nil
 }
 
+// tokenPlaintext is stored in LocalStore OR cookie
 func (m UsersModel) GetForToken(tokenScope, tokenPlaintext string) (*User, error) {
 	// Calculate the SHA-256 hash of the plaintext token provided by the client.
 	// Remember that this returns a byte *array* with length 32, not a slice.

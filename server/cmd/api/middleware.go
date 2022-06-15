@@ -13,7 +13,7 @@ import (
 func (app *application) enableCors(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// NOTE: I need to find out how this works in a prod environment w/Nginx or a Proxy
-		w.Header().Set("Access-Control-Allow-Origin", "http://localhost:3000")
+		w.Header().Set("Access-Control-Allow-Origin", "http://lvh.me:3000")
 		w.Header().Set("Access-Control-Allow-Headers", "Content-Type,Authorization,Set-Cookie")
 		w.Header().Set("Access-Control-Allow-Credentials", "true")
 		w.Header().Set("Access-Control-Expose-Headers", "Set-Cookie")

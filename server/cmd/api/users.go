@@ -163,8 +163,11 @@ func (app *application) logInUserHandler(w http.ResponseWriter, r *http.Request)
 		Value: token.Plaintext,
 		Expires: expiration,
 		HttpOnly: true,
-		SameSite: http.SameSiteNoneMode,
-		Secure:false}
+		// TODO: this needs to be turned on for Prod
+		//SameSite: http.SameSiteNoneMode,
+		// TODO: this needs to be secure for prod
+		Secure:false,
+	}
 	fmt.Println("Cookie after logging in", cookie)
 	http.SetCookie(w, &cookie)
 
