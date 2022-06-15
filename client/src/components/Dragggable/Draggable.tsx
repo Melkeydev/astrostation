@@ -1,7 +1,7 @@
 import "./Draggable.scss";
 import { useState, useEffect, useRef } from "react";
 import Draggable from "react-draggable";
-import { useStickyNote } from "@Store";
+import { useStickyNote, useLockWidgetsStore } from "@Store";
 let int = 0;
 
 export const DWrapper = ({
@@ -26,6 +26,7 @@ export const DWrapper = ({
   gridValues?: number[];
 }) => {
   const { setStickyNotesPos } = useStickyNote();
+  const { areWidgetsLocked } = useLockWidgetsStore();
   const [z, setZ] = useState(0);
   const ref = useRef();
 
@@ -78,6 +79,7 @@ export const DWrapper = ({
           onStop={(_, data) => changePosition(data)}
           //@ts-ignore
           grid={gridValues}
+          disabled={areWidgetsLocked}
         >
           {isSticky ? (
             <div
@@ -118,6 +120,7 @@ export const DWrapper = ({
           onStop={(_, data) => changePosition(data)}
           //@ts-ignore
           grid={gridValues}
+          disabled={areWidgetsLocked}
         >
           {isSticky ? (
             <div

@@ -232,3 +232,8 @@ export interface IGrid {
   setGrid: (grid: number[]) => void;
   setGridDefault: () => void;
 }
+
+export interface ILockWidgets {
+  areWidgetsLocked: boolean;
+  setAreWidgetsLocked: (areWidgetsLocked: boolean) => void;
+}
