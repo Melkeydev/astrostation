@@ -77,6 +77,7 @@ export const DWrapper = ({
           defaultPosition={{ x: defaultX, y: defaultY }}
           onDrag={() => trackPosition()}
           onStop={(_, data) => changePosition(data)}
+          //@ts-ignore
           grid={gridValues}
           disabled={areWidgetsLocked}
         >
@@ -117,6 +118,7 @@ export const DWrapper = ({
           defaultPosition={{ x: defaultX, y: defaultY }}
           onDrag={() => trackPosition()}
           onStop={(_, data) => changePosition(data)}
+          //@ts-ignore
           grid={gridValues}
           disabled={areWidgetsLocked}
         >
