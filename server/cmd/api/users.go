@@ -2,11 +2,8 @@ package main
 
 import (
 	"errors"
-	"fmt"
 	"net/http"
-	"strings"
 	"time"
-
 	"astrostation.server/internal/data"
 	"astrostation.server/internal/validator"
 )
@@ -58,19 +55,14 @@ func (app *application) registerUserHandler(w http.ResponseWriter, r *http.Reque
 		return
 	}
 
-	refreshToken, err := app.models.Tokens.New(user.ID, 24*time.Hour, data.ScopeRefresh)
+	token, err := app.models.Tokens.New(user.ID, 24*time.Hour, data.ScopeAuthentication)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 		return
 	}
+	app.setCookieResponse(w, token)
 
-	token, err := app.models.Tokens.New(user.ID, 10*time.Minute, data.ScopeAuthentication)
-	if err != nil {
-		app.serverErrorResponse(w, r, err)
-		return
-	}
-
-	err = app.writeJSON(w, http.StatusCreated, envelope{"token": token, "refreshToken": refreshToken}, nil)
+	err = app.writeJSON(w, http.StatusCreated, envelope{"success": true}, nil)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 	}
@@ -126,101 +118,33 @@ func (app *application) logInUserHandler(w http.ResponseWriter, r *http.Request)
 		return
 	}
 
-	//NOTE: maybe delete old tokens?
 	err = app.models.Tokens.DeleteTokenForUser(user.ID, data.ScopeAuthentication)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 	}
 
-	// This is where we will now send back a token
-	token, err := app.models.Tokens.New(user.ID, 10*time.Minute, data.ScopeAuthentication)
+	token, err := app.models.Tokens.New(user.ID, 24*time.Hour, data.ScopeAuthentication)
 	if err != nil {
-		// If there is any error from our DB communication
 		app.serverErrorResponse(w, r, err)
 		return
 	}
+	app.setCookieResponse(w, token)
 
-	err = app.models.Tokens.DeleteTokenForUser(user.ID, data.ScopeRefresh)
-	if err != nil {
-		app.serverErrorResponse(w, r, err)
-	}
-
-	// This is where we will now send back a token
-	refreshToken, err := app.models.Tokens.New(user.ID, 24*time.Hour, data.ScopeRefresh)
-	if err != nil {
-		// If there is any error from our DB communication
-		app.serverErrorResponse(w, r, err)
-		return
-	}
-
-	// NOTE: This right now sends back the token and refresh token in a payload that is then stored within
-	// local storage
-
-	// TODO: Is move this to a Cookie
-	expiration := time.Now().Add(24 * time.Hour)
-	cookie := http.Cookie{
-		Name: "token", 
-		Value: token.Plaintext,
-		Expires: expiration,
-		HttpOnly: true,
-		// TODO: this needs to be turned on for Prod
-		//SameSite: http.SameSiteNoneMode,
-		// TODO: this needs to be secure for prod
-		Secure:false,
-	}
-	fmt.Println("Cookie after logging in", cookie)
-	http.SetCookie(w, &cookie)
-
-	w.WriteHeader(200)
-
-	err = app.writeJSON(w, http.StatusCreated, envelope{"token": token, "refreshToken": refreshToken}, nil)
+	// TODO: Change StatusCreated
+	err = app.writeJSON(w, http.StatusCreated, envelope{"success": true}, nil)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 	}
 }
 
 func (app *application) logoutHandler(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("Vary", "Authorization")
-	authorizationHeader := r.Header.Get("Authorization")
-	if authorizationHeader == "" {
-		app.contextSetUser(r, data.AnonymousUser)
-		return
-	}
+	user := app.contextGetUser(r)
 
-	headerParts := strings.Split(authorizationHeader, " ")
-	if len(headerParts) != 2 || headerParts[0] != "Bearer" {
-		app.invalidAuthenticationTokenResponse(w, r)
-		return
-	}
-
-	token := headerParts[1]
-	v := validator.New()
-
-	if data.ValidateTokenPlaintext(v, token); !v.Valid() {
-		app.invalidAuthenticationTokenResponse(w, r)
-		return
-	}
-
-	user, err := app.models.Users.GetForToken(data.ScopeAuthentication, token)
-	if err != nil {
-		switch {
-		case errors.Is(err, data.ErrRecordNotFound):
-			app.invalidAuthenticationTokenResponse(w, r)
-		default:
-			app.serverErrorResponse(w, r, err)
-		}
-		return
-	}
-
-	err = app.models.Tokens.DeleteTokenForUser(user.ID, data.ScopeAuthentication)
+	err := app.models.Tokens.DeleteTokenForUser(user.ID, data.ScopeAuthentication)
 	if err != nil {
 		app.serverErrorResponse(w, r, err)
 	}
-
-	err = app.models.Tokens.DeleteTokenForUser(user.ID, data.ScopeRefresh)
-	if err != nil {
-		app.serverErrorResponse(w, r, err)
-	}
+	app.setExpiredCookieResponse(w)
 
 	err = app.writeJSON(w, http.StatusCreated, envelope{"success": true}, nil)
 	if err != nil {

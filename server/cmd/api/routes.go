@@ -23,7 +23,6 @@ func (app *application) routes() http.Handler {
 	router.HandlerFunc(http.MethodPost, "/v1/register", app.registerUserHandler)
 	router.HandlerFunc(http.MethodPost, "/v1/login", app.logInUserHandler)
 	router.HandlerFunc(http.MethodPost, "/v1/checktokenexpire", app.checkTokenExpireHandler)
-	router.HandlerFunc(http.MethodPost, "/v1/refreshtoken", app.refreshTokenHandler)
 	router.HandlerFunc(http.MethodPost, "/v1/logout", app.logoutHandler)
 
 	return app.enableCors(app.authenticate(router))

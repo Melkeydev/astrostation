@@ -1,5 +1,4 @@
 import { axiosApiInstance } from "./axios";
-import { useLoggedIn } from "@Store";
 
 //register user
 export const registerUser = async ({
@@ -19,11 +18,8 @@ export const registerUser = async ({
 
     if (data.error) {
       return data.error;
-    } else {
-      localStorage.setItem("token", data.token.token);
-      localStorage.setItem("refreshToken", data.refreshToken.token);
-      return true;
     }
+    return true;
   } catch (error) {
     if (error.response.data) return error.response.data;
     return false;
@@ -48,11 +44,8 @@ export const loginUser = async ({
 
     if (data.error) {
       return data.error;
-    } else {
-      localStorage.setItem("token", data.token.token);
-      localStorage.setItem("refreshToken", data.refreshToken.token);
-      return true;
     }
+    return true;
   } catch (error) {
     if (error.response.data) return error.response.data;
     return false;
@@ -61,56 +54,52 @@ export const loginUser = async ({
 
 export const logoutUser = async () => {
   try {
-    const response = await axiosApiInstance.post(`/logout`, {});
+    const response = await axiosApiInstance.post(
+      `/logout`,
+      {},
+      {
+        withCredentials: true,
+      }
+    );
     const { data } = response;
 
     if (data.error) {
       return data.error;
-    } else {
-      localStorage.removeItem("token");
-      localStorage.removeItem("refreshToken");
-      return true;
     }
+    return true;
   } catch (error) {
     if (error.response.data) return error.response.data;
     return false;
   }
 };
 
-//Check localStorage for existing Token & Check if current token expired
+// Check localStorage for existing Token & Check if current token expired
+// If the token has expired we are going to force our user to re-login
+// KISS
 export const checkToken = async () => {
   try {
+    // If this returns true, we know the token is still good
     const response = await axiosApiInstance.post(`/checktokenexpire`, {});
     const { data } = response;
     return data;
   } catch {
-    const refresh_token = localStorage.getItem("refreshToken");
-    if (!refresh_token) {
-      localStorage.removeItem("token");
-      useLoggedIn.getState().setIsLoggedIn(false);
-      return false;
-    }
-    const body = JSON.stringify({ token: refresh_token });
-    const response = await axiosApiInstance.post(`/refreshtoken`, body);
-    const { data } = response;
-    localStorage.setItem("token", data.token.token);
-    return true;
-  }
-};
-
-export const refreshAccessToken = async () => {
-  const refresh_token = localStorage.getItem("refreshToken");
-  if (!refresh_token) {
-    localStorage.removeItem("token");
-    useLoggedIn.getState().setIsLoggedIn(false);
     return false;
   }
-  const body = JSON.stringify({ token: refresh_token });
-  const response = await axiosApiInstance.post(`/refreshtoken`, body);
-  const { data } = response;
-
-  localStorage.setItem("token", data.token.token);
-
-  const token = localStorage.getItem("token");
-  return token;
 };
+
+//export const refreshAccessToken = async () => {
+//const refresh_token = localStorage.getItem("refreshToken");
+//if (!refresh_token) {
+//localStorage.removeItem("token");
+//useLoggedIn.getState().setIsLoggedIn(false);
+//return false;
+//}
+//const body = JSON.stringify({ token: refresh_token });
+//const response = await axiosApiInstance.post(`/refreshtoken`, body);
+//const { data } = response;
+
+//localStorage.setItem("token", data.token.token);
+
+//const token = localStorage.getItem("token");
+//return token;
+//};

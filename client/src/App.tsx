@@ -21,7 +21,7 @@ enum backgrounds {
 
 function App() {
   const [hasCheckedLoginState, setHasCheckedLoginState] = useState(false);
-  const { isLoggedIn, setIsLoggedIn } = useLoggedIn();
+  const { setIsLoggedIn } = useLoggedIn();
 
   const initialTokenCheck = async () => {
     try {

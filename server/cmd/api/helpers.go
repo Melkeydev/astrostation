@@ -1,6 +1,7 @@
 package main
 
 import (
+	"astrostation.server/internal/data"
 	"encoding/json"
 	"errors"
 	"fmt"
@@ -9,10 +10,54 @@ import (
 	"net/http"
 	"strconv"
 	"strings"
+	"time"
 )
 
 // Envelope for handling data past into requests
 type envelope map[string]interface{}
+
+
+func (app *application) setExpiredCookieResponse(w http.ResponseWriter) {
+	cookie := http.Cookie{
+		Name:     "token",
+		Value:    "",
+		Expires:  time.Now().Add(-123),
+		HttpOnly: true,
+		Domain:   "lvh.me",
+		Path:     "/",
+		// TODO: this needs to be turned on for Prod
+		//SameSite: http.SameSiteNoneMode,
+		// TODO: this needs to be secure for prod
+		Secure: false,
+	}
+	http.SetCookie(w, &cookie)
+}
+
+
+func (app *application) setCookieResponse(w http.ResponseWriter, token *data.Token) {
+	cookie := http.Cookie{
+		Name:     "token",
+		Value:    token.Plaintext,
+		Expires:  time.Now().Add(24 * time.Hour),
+		HttpOnly: true,
+		Domain:   "lvh.me",
+		Path:     "/",
+		// TODO: this needs to be turned on for Prod
+		//SameSite: http.SameSiteNoneMode,
+		// TODO: this needs to be secure for prod
+		Secure: false,
+	}
+	http.SetCookie(w, &cookie)
+}
+
+func (app *application) readCookieRequest(r *http.Request) (string, error) {
+	cookie, err := r.Cookie("token")
+	if err != nil {
+		return "", err
+	}
+	token := cookie.Value
+	return token, nil
+}
 
 func (app *application) readIDParam(r *http.Request) (int64, error) {
 	params := httprouter.ParamsFromContext(r.Context())
