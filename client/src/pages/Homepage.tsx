@@ -206,7 +206,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={twitchPosY}
             setPosition={setTwitchPos}
             isSticky={false}
-            handle={false}
+            handle={true}
             gridValues={grid}
           >
             <TwitchStream />
