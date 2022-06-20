@@ -30,8 +30,10 @@ export const TwitchStream = () => {
     }
   };
 
+  // The following resize fix is a thanks to adamdotjs.
+  // https://play.tailwindcss.com/jp2JnWgRoW -> his solution
   return (
-    <div className="relative resize overflow-auto py-2 sm:w-96 w-full  text-gray-800 shadow-md rounded-lg dark:text-gray-300 bg-white/[.96] dark:bg-gray-800/[.96] dark:border-gray-700 justify-between">
+    <div className="resize-x overflow-auto py-2 sm:w-96 w-full text-gray-800 shadow-md rounded-lg dark:text-gray-300 bg-white/[.96] dark:bg-gray-800/[.96] dark:border-gray-700 justify-between">
       <div className="flex justify-between handle items-center p-1">
         <p>Twitch</p>
         <IoCloseSharp
@@ -39,7 +41,7 @@ export const TwitchStream = () => {
           onClick={() => setIsTwitchToggled(false)}
         />
       </div>
-      <div className="justify-center aspect-video">
+      <div className="justify-center aspect-video relative">
         {isTwitchShown && isTwitchToggled && (
           <iframe
             className="left-0 h-full w-full"
