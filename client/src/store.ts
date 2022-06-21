@@ -37,6 +37,8 @@ import {
   IFirstTimeUserState,
   IGrid,
   ILockWidgets,
+  ISideNavItems,
+  ISideNavItem
 } from "./interfaces";
 
 /**
@@ -724,12 +726,28 @@ export const useFirstTimeUserStore = create<IFirstTimeUserState>(
  * Handles storing key for determining if widgets are allowed to be moved
  */
 
- export const useLockWidgetsStore = create<ILockWidgets>(
+export const useLockWidgetsStore = create<ILockWidgets>(
   persist(
     (set, _) => ({
       areWidgetsLocked: false,
       setAreWidgetsLocked: (areWidgetsLocked) => set({ areWidgetsLocked }),
     }),
     { name: "state_widgets_lock" }
+  )
+);
+
+/**
+ * Side Nav Item Store
+ * ---
+ * Handles storing side nav item order
+ */
+
+export const useSideNavItemsStore = create<ISideNavItems>(
+  persist(
+    (set, _) => ({
+      sideNavItemArray: [],
+      setSideNavItemArray: (sideNavItemArray) => set({ sideNavItemArray })
+    }),
+    { name: "state_side_nav_order" }
   )
 );

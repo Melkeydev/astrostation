@@ -237,3 +237,19 @@ export interface ILockWidgets {
   areWidgetsLocked: boolean;
   setAreWidgetsLocked: (areWidgetsLocked: boolean) => void;
 }
+
+export interface ISideNavItem {
+  id: string, 
+  content: JSX.Element, 
+  tooltipTitle: string, 
+  isToggled: boolean,
+  setToggled: (val: boolean) => void,
+  toggleString: string,
+  toggleIcon: string,
+  isShown: boolean
+}
+
+export interface ISideNavItems {
+  sideNavItemArray: ISideNavItem[];
+  setSideNavItemArray: (sideNavItemArray: ISideNavItem[]) => void;
+}
