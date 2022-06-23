@@ -90,19 +90,119 @@ export const SideNav = () => {
           "id": "1",
           "content": <IoMusicalNotesOutline className="h-6 w-6" />,
           "tooltipTitle": "Lofi Music",
-          "isToggled": true,
-          "setToggled": setIsMusicToggled(x),
+          "isToggled": isMusicToggled,
+          "setToggled": setIsMusicToggled,
           "toggleString": "Music Toggled",
           "toggleIcon": "🎵",
-          "isShown": true
+          "isShown": isMusicShown
+        },
+        {
+          "id": "2",
+          "content": <FaSpotify className="h-6 w-6" />,
+          "tooltipTitle": "Spotify",
+          "isToggled": isSpotifyToggled,
+          "setToggled": setIsSpotifyToggled,
+          "toggleString": "Spotify Toggled",
+          "toggleIcon": "🎧",
+          "isShown": isSpotifyShown
+        },
+        {
+          "id": "3",
+          "content": <CgNotes className="h-6 w-6" />,
+          "tooltipTitle": "Task Tracker",
+          "isToggled": isTasksToggled,
+          "setToggled": setIsTasksToggled,
+          "toggleString": "Task Toggled",
+          "toggleIcon": "📓",
+          "isShown": isTasksShown
+        },
+        {
+          "id": "4",
+          "content": <MdOutlineTimer className="h-6 w-6" />,
+          "tooltipTitle": "Pomodoro Timer",
+          "isToggled": isTimerToggled,
+          "setToggled": setIsTimerToggled,
+          "toggleString": "Timer Toggled",
+          "toggleIcon": "⏳",
+          "isShown": isTimerShown
+        },
+        {
+          "id": "5",
+          "content": <MdOutlineNoteAdd className="h-6 w-6" />,
+          "tooltipTitle": "Sticky Note",
+          "isToggled": false,
+          "setToggled": addNewStickyNote,
+          "toggleString": "Sticky Note Toggled",
+          "toggleIcon": "📝",
+          "isShown": isStickyNoteShown
+        },
+        {
+          "id": "6",
+          "content": <VscDebugRestartFrame className="h-6 w-6" />,
+          "tooltipTitle": "Reset Positions",
+          "isToggled": false,
+          "setToggled": toggleDefaultPositions,
+          "toggleString": "Reset Toggled",
+          "toggleIcon": "⏪",
+          "isShown": isWidgetResetShown
+        },
+        // {
+        //   "id": "7",
+        //   "content": theme,
+        //   "tooltipTitle": "Theme",
+        //   "isToggled": isDark,
+        //   "setToggled": toggleDarkMode,
+        //   "toggleString": "Theme Toggled",
+        //   "toggleIcon": "🌙",
+        //   "isShown": isDarkModeShown
+        // },
+        {
+          "id": "8",
+          "content": <BsFillChatLeftQuoteFill className="h-6 w-6" />,
+          "tooltipTitle": "Quotes",
+          "isToggled": isQuoteToggled,
+          "setToggled": setIsQuoteToggled,
+          "toggleString": "Quotes Toggled",
+          "toggleIcon": "💬",
+          "isShown": isQuoteShown
+        },
+        {
+          "id": "9",
+          "content": <BsTwitch className="h-6 w-6" />,
+          "tooltipTitle": "Twitch Stream",
+          "isToggled": isTwitchToggled,
+          "setToggled": setIsTwitchToggled,
+          "toggleString": "Twitch Toggled",
+          "toggleIcon": "📺",
+          "isShown": isTwitchShown
+        },
+        {
+          "id": "10",
+          "content": <BsArrowsFullscreen className="h-6 w-6" />,
+          "tooltipTitle": "Fullscreen",
+          "isToggled": isFullscreen,
+          "setToggled": toggleFullScreen,
+          "toggleString": "Fullscreen Toggled",
+          "toggleIcon": "",
+          "isShown": isFullscreenShown
         }
       ]
     );
-  }, []);
+  }, [isMusicShown, isMusicToggled,  setIsMusicToggled,
+    isSpotifyShown, isSpotifyToggled, setIsSpotifyToggled,
+    isTasksShown, isTasksToggled, setIsTasksToggled,
+    isTimerShown, isTimerToggled, setIsTimerToggled,
+    isStickyNoteShown,
+    isWidgetResetShown,
+    // isDarkModeShown, isDark,
+    isQuoteShown, isQuoteToggled, setIsQuoteToggled,
+    isTwitchShown, isTwitchToggled, setIsTwitchToggled,
+    isFullscreenShown, isFullscreen, toggleFullScreen,
+  ]);
 
-  useEffect(() => {
-    console.log(sideNavItemArray);
-  }, [sideNavItemArray]);
+  // useEffect(() => {
+  //   console.log(sideNavItemArray);
+  // }, [sideNavItemArray]);
 
   function toggleDefaultPositions() {
     var answer = window.confirm(
@@ -139,7 +239,7 @@ export const SideNav = () => {
       return;
     }
 
-    const x = 
+    const x =
       reorder(
         sideNavItemArray,
         result.source.index,
