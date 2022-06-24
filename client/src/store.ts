@@ -38,7 +38,8 @@ import {
   IGrid,
   ILockWidgets,
   ISideNavItems,
-  ISideNavItem
+  ISideNavItem,
+  ISideNavOrderStore,
 } from "./interfaces";
 
 /**
@@ -695,7 +696,8 @@ export const usePosTwitch = create<IPosTwitch>(
       twitchPosX: 804,
       twitchPosY: 436,
       setTwitchPos: (X, Y) => set({ twitchPosX: X, twitchPosY: Y }),
-      setTwitchPosDefault: () => set(() => ({ twitchPosX: 1208, twitchPosY: 0 })),
+      setTwitchPosDefault: () =>
+        set(() => ({ twitchPosX: 1208, twitchPosY: 0 })),
     }),
     {
       name: "set_twitch_position",
@@ -742,11 +744,11 @@ export const useLockWidgetsStore = create<ILockWidgets>(
  * Handles storing side nav item order
  */
 
-export const useSideNavItemsStore = create<any>(
+export const useSideNavOrderStore = create<ISideNavOrderStore>(
   persist(
     (set, _) => ({
-      sideNavItemArray: [...Array(20).keys()],
-      setSideNavItemArray: (sideNavItemArray) => set({ sideNavItemArray }),
+      sideNavOrder: [...Array(20).keys()],
+      setSideNavOrder: (sideNavOrder) => set({ sideNavOrder }),
     }),
     { name: "side_nav_order" }
   )

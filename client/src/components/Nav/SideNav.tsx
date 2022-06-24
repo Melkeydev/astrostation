@@ -27,7 +27,7 @@ import {
   useToggleStickyNote,
   useToggleWidgetReset,
   useToggleTwitch,
-  useSideNavItemsStore
+  useSideNavOrderStore
 } from "@Store";
 import { useState, useEffect } from "react";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
@@ -65,7 +65,7 @@ export const SideNav = () => {
   const { isWidgetResetShown } = useToggleWidgetReset();
   const { isTwitchShown } = useToggleTwitch();
 
-  const { sideNavItemArray, setSideNavItemArray } = useSideNavItemsStore();
+  const { sideNavOrder, setSideNavOrder } = useSideNavOrderStore();
 
   const { addStickyNote } = useStickyNote();
   const isDesktop = useMediaQuery("(min-width: 641px)");
@@ -208,7 +208,7 @@ export const SideNav = () => {
   ]
 
   // a little function to help us with reordering the result
-  const reorder = (list, startIndex, endIndex) => {
+  const reorder = (list: number[], startIndex: number, endIndex: number): number[] => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
@@ -221,9 +221,9 @@ export const SideNav = () => {
       return;
     }
 
-    setSideNavItemArray(
+    setSideNavOrder(
       reorder(
-        sideNavItemArray,
+        sideNavOrder,
         result.source.index,
         result.destination.index
       )
@@ -251,7 +251,7 @@ export const SideNav = () => {
                   {...provided.droppableProps}
                   ref={provided.innerRef}
                 >
-                    {sideNavItemArray && sideNavItemArray.map && sideNavItemArray.map((id, index) => {
+                    {sideNavOrder && sideNavOrder.map && sideNavOrder.map((id, index) => {
                       const item = sideNavItems[id]
                       if (!item) return;
 
