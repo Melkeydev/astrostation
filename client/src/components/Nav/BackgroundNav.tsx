@@ -34,7 +34,7 @@ export const BackgroundNav = ({
     <div className="flex justify-end" ref={menuRef}>
       <div className="w-70 text-left">
         <div
-          className="origin-top-right absolute right-0 w-56 rounded-md shadow-lg bg-white dark:bg-gray-700 ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-10"
+          className="origin-top-right absolute right-0 w-56 rounded-md shadow-lg bg-gray-700 ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-10"
           role="menu"
           ref={menuRef}
         >
@@ -121,6 +121,12 @@ export const BackgroundNav = ({
             setIsBackground={setIsBackground}
             background={backgrounds.DVD}
             title="DVD Player"
+          />
+          <BackgroundDropdownItem
+            isPicked={isBackground == 14}
+            setIsBackground={setIsBackground}
+            background={backgrounds.UNSPLASH}
+            title="Unsplash"
           />
         </div>
       </div>
