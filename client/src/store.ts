@@ -742,12 +742,12 @@ export const useLockWidgetsStore = create<ILockWidgets>(
  * Handles storing side nav item order
  */
 
-export const useSideNavItemsStore = create<ISideNavItems>(
+export const useSideNavItemsStore = create<any>(
   persist(
     (set, _) => ({
-      sideNavItemArray: [],
-      setSideNavItemArray: (sideNavItemArray) => set({ sideNavItemArray })
+      sideNavItemArray: [...Array(20).keys()],
+      setSideNavItemArray: (sideNavItemArray) => set({ sideNavItemArray }),
     }),
-    { name: "state_side_nav_order" }
+    { name: "side_nav_order" }
   )
 );
