@@ -15,6 +15,7 @@
     "ethers": "^5.6.2",
     "rc-slider": "^10.0.0-alpha.4",
     "react": "^17.0.2",
+    "react-beautiful-dnd": "^13.1.0",
     "react-dom": "^17.0.2",
     "react-draggable": "^4.4.4",
     "react-hot-toast": "^2.2.0",
