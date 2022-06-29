@@ -9,6 +9,9 @@ import {
   usePosQuote,
   useGrid,
   usePosTwitch,
+  useAlarmOption,
+  useAudioVolume,
+  useLockWidgetsStore
 } from "@Store";
 
 function useSetDefault() {
@@ -19,6 +22,9 @@ function useSetDefault() {
   const { setQuotePosDefault } = usePosQuote();
   const { setTwitchPosDefault } = usePosTwitch();
   const { setGridDefault } = useGrid();
+  const { setAreWidgetsLocked } = useLockWidgetsStore();
+  const { setAlarm } = useAlarmOption();
+  const { setAudioVolume } = useAudioVolume();
   const { defaultShortBreakLength } = useShortBreakTimer();
   const { defaultLongBreakLength } = useLongBreakTimer();
   const { defaultPomodoroLength } = usePomodoroTimer();
@@ -38,6 +44,11 @@ function useSetDefault() {
       defaultLongBreakLength();
       defaultPomodoroLength();
       setGridDefault();
+      setAlarm(
+        "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav"
+      );
+      setAudioVolume(0.7);
+      setAreWidgetsLocked(false);
     }
 
     if (clearPosition) {

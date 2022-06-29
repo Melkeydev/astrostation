@@ -36,6 +36,10 @@ import {
   IPosTwitch,
   IFirstTimeUserState,
   IGrid,
+  ILockWidgets,
+  ISideNavItems,
+  ISideNavItem,
+  ISideNavOrderStore,
 } from "./interfaces";
 
 /**
@@ -692,7 +696,8 @@ export const usePosTwitch = create<IPosTwitch>(
       twitchPosX: 804,
       twitchPosY: 436,
       setTwitchPos: (X, Y) => set({ twitchPosX: X, twitchPosY: Y }),
-      setTwitchPosDefault: () => set(() => ({ twitchPosX: 1208, twitchPosY: 0 })),
+      setTwitchPosDefault: () =>
+        set(() => ({ twitchPosX: 1208, twitchPosY: 0 })),
     }),
     {
       name: "set_twitch_position",
@@ -714,5 +719,37 @@ export const useFirstTimeUserStore = create<IFirstTimeUserState>(
         set((oldState) => ({ isFirstTimeUser: !oldState.isFirstTimeUser })),
     }),
     { name: "first_time_user" }
+  )
+);
+
+/**
+ * Lock Widgets Store
+ * ---
+ * Handles storing key for determining if widgets are allowed to be moved
+ */
+
+export const useLockWidgetsStore = create<ILockWidgets>(
+  persist(
+    (set, _) => ({
+      areWidgetsLocked: false,
+      setAreWidgetsLocked: (areWidgetsLocked) => set({ areWidgetsLocked }),
+    }),
+    { name: "state_widgets_lock" }
+  )
+);
+
+/**
+ * Side Nav Item Store
+ * ---
+ * Handles storing side nav item order
+ */
+
+export const useSideNavOrderStore = create<ISideNavOrderStore>(
+  persist(
+    (set, _) => ({
+      sideNavOrder: [...Array(20).keys()],
+      setSideNavOrder: (sideNavOrder) => set({ sideNavOrder }),
+    }),
+    { name: "side_nav_order" }
   )
 );
