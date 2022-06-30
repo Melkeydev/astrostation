@@ -239,9 +239,10 @@ export const TimerSettings = ({ onClose }) => {
               Retro
               <div
                 className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                  currentAlarm == "/arcade.wav" && "border border-gray-200"
+                  currentAlarm == "assets/music/arcade.wav" &&
+                  "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/arcade.wav")}
+                onClick={() => changeAlarm("/assets/music/arcade.wav")}
               >
                 <BsMusicPlayerFill />
               </div>
@@ -250,9 +251,10 @@ export const TimerSettings = ({ onClose }) => {
               Bells
               <div
                 className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                  currentAlarm == "/bells.wav" && "border border-gray-200"
+                  currentAlarm == "/assets/music/bells.wav" &&
+                  "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/bells.wav")}
+                onClick={() => changeAlarm("/assets/music/bells.wav")}
               >
                 <BsBellFill />
               </div>
@@ -261,9 +263,10 @@ export const TimerSettings = ({ onClose }) => {
               Flute
               <div
                 className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                  currentAlarm == "/flute.wav" && "border border-gray-200"
+                  currentAlarm == "/assets/music/flute.wav" &&
+                  "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/flute.wav")}
+                onClick={() => changeAlarm("/assets/music/flute.wav")}
               >
                 <GiPanFlute />
               </div>
@@ -272,9 +275,10 @@ export const TimerSettings = ({ onClose }) => {
               Piano
               <div
                 className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                  currentAlarm == "/piano.wav" && "border border-gray-200"
+                  currentAlarm == "/assets/music/piano.wav" &&
+                  "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/piano.wav")}
+                onClick={() => changeAlarm("/assets/music/piano.wav")}
               >
                 <CgPiano />
               </div>
