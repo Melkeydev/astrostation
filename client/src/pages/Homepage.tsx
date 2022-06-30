@@ -138,7 +138,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
                 setPosition={setStickyNotesPos}
                 isSticky={true}
                 stickyID={stickyNote.id}
-                handle={true}
                 gridValues={grid}
               >
                 <Sticky id={stickyNote.id} text={stickyNote.text} />
@@ -151,7 +150,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={timerPosY}
             setPosition={setTimerPos}
             isSticky={false}
-            handle={false}
             gridValues={grid}
           >
             <Timer />
@@ -162,7 +160,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={taskPosY}
             setPosition={setTaskPos}
             isSticky={false}
-            handle={true}
             gridValues={grid}
           >
             <TaskTracker />
@@ -173,7 +170,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={musicPosY}
             setPosition={setMusicPos}
             isSticky={false}
-            handle={false}
             gridValues={grid}
           >
             <Player />
@@ -184,7 +180,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={spotifyPosY}
             setPosition={setSpotifyPos}
             isSticky={false}
-            handle={true}
             gridValues={grid}
           >
             <Spotify />
@@ -195,7 +190,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={quotePosY}
             setPosition={setQuotePos}
             isSticky={false}
-            handle={true}
             gridValues={grid}
           >
             <Quotes />
@@ -206,7 +200,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
             defaultY={twitchPosY}
             setPosition={setTwitchPos}
             isSticky={false}
-            handle={true}
             gridValues={grid}
           >
             <TwitchStream />
