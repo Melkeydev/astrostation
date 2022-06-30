@@ -22,6 +22,7 @@ enum backgrounds {
   FADE,
   GRADIENT,
   AMONGUS,
+  NYANCAT,
 }
 
 // This is not the useMemo hook

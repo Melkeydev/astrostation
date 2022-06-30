@@ -80,6 +80,12 @@ export const BackgroundNav = ({
             background={backgrounds.AMONGUS}
             title="AmongUs"
           />
+          <BackgroundDropdownItem
+            isPicked={isBackground == 7}
+            setIsBackground={setIsBackground}
+            background={backgrounds.NYANCAT}
+            title="NyanCat"
+          />
         </div>
       </div>
     </div>
