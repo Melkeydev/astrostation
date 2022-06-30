@@ -239,7 +239,7 @@ export const TimerSettings = ({ onClose }) => {
               Retro
               <div
                 className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                  currentAlarm == "assets/music/arcade.wav" &&
+                  currentAlarm == "/assets/music/arcade.wav" &&
                   "border border-gray-200"
                 }`}
                 onClick={() => changeAlarm("/assets/music/arcade.wav")}
@@ -251,7 +251,8 @@ export const TimerSettings = ({ onClose }) => {
               Bells
               <div
                 className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                  currentAlarm == "/bells.wav" && "border border-gray-200"
+                  currentAlarm == "/assets/music/bells.wav" &&
+                  "border border-gray-200"
                 }`}
                 onClick={() => changeAlarm("/assets/music/bells.wav")}
               >
@@ -262,7 +263,8 @@ export const TimerSettings = ({ onClose }) => {
               Flute
               <div
                 className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                  currentAlarm == "/flute.wav" && "border border-gray-200"
+                  currentAlarm == "/assets/music/flute.wav" &&
+                  "border border-gray-200"
                 }`}
                 onClick={() => changeAlarm("/assets/music/flute.wav")}
               >
@@ -273,7 +275,8 @@ export const TimerSettings = ({ onClose }) => {
               Piano
               <div
                 className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                  currentAlarm == "/piano.wav" && "border border-gray-200"
+                  currentAlarm == "/assets/music/piano.wav" &&
+                  "border border-gray-200"
                 }`}
                 onClick={() => changeAlarm("/assets/music/piano.wav")}
               >
