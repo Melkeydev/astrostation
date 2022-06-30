@@ -74,6 +74,12 @@ export const BackgroundNav = ({
             background={backgrounds.GRADIENT}
             title="Gradient"
           />
+          <BackgroundDropdownItem
+            isPicked={isBackground == 6}
+            setIsBackground={setIsBackground}
+            background={backgrounds.AMONGUS}
+            title="AmongUs"
+          />
         </div>
       </div>
     </div>
