@@ -1,5 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useEffect, useMemo, memo } from "react";
+import { useEffect, memo } from "react";
 import { Backgrounds } from "@Components/Backgrounds/utils";
 import { HomePage } from "@Pages/Homepage";
 import { SideNav } from "@Components/Nav/SideNav";
@@ -21,7 +21,7 @@ enum backgrounds {
   SNOW,
   FADE,
   GRADIENT,
-  FIREFLY,
+  AMONGUS,
 }
 
 // This is not the useMemo hook
