@@ -122,7 +122,9 @@ export const Timer = () => {
     if (hasStarted) {
       const icon = sessionType === "Session" ? "⏱" : "☕️";
       // @ts-ignore
-      document.title = `Astrostation ${icon}${formatDisplayTime(timerMinutes)}:${formatDisplayTime(timerSeconds)}`;
+      document.title = `Astrostation ${icon}${formatDisplayTime(
+        timerMinutes
+      )}:${formatDisplayTime(timerSeconds)}`;
     } else {
       document.title = "Astrostation";
     }
@@ -164,6 +166,7 @@ export const Timer = () => {
     setShortBreak(shortBreakLength);
     setLongBreak(longBreakLength);
     setSessionType("Session");
+    setBreakStarted(false);
     setTimer(pomodoroLength);
     setTimerQueue(pomodoroLength);
   }
