@@ -21,6 +21,12 @@ enum backgrounds {
   SNOW,
   FADE,
   GRADIENT,
+  SPACEBLACKSMITH,
+  JAPAN,
+  COTTAGE,
+  LOFIGIRL,
+  TRAIN,
+  DVD,
 }
 
 function App() {

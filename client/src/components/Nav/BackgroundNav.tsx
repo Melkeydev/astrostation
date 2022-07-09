@@ -74,6 +74,42 @@ export const BackgroundNav = ({
             background={backgrounds.GRADIENT}
             title="Gradient"
           />
+          <BackgroundDropdownItem
+            isPicked={isBackground == 6}
+            setIsBackground={setIsBackground}
+            background={backgrounds.SPACEBLACKSMITH}
+            title="Space Blacksmith"
+          />
+          <BackgroundDropdownItem
+            isPicked={isBackground == 7}
+            setIsBackground={setIsBackground}
+            background={backgrounds.JAPAN}
+            title="Japan"
+          />
+          <BackgroundDropdownItem
+            isPicked={isBackground == 8}
+            setIsBackground={setIsBackground}
+            background={backgrounds.COTTAGE}
+            title="Cottage"
+          />
+          <BackgroundDropdownItem
+            isPicked={isBackground == 9}
+            setIsBackground={setIsBackground}
+            background={backgrounds.LOFIGIRL}
+            title="Lofi Girl"
+          />
+          <BackgroundDropdownItem
+            isPicked={isBackground == 10}
+            setIsBackground={setIsBackground}
+            background={backgrounds.TRAIN}
+            title="Train"
+          />
+          <BackgroundDropdownItem
+            isPicked={isBackground == 11}
+            setIsBackground={setIsBackground}
+            background={backgrounds.DVD}
+            title="DVD Player"
+          />
         </div>
       </div>
     </div>

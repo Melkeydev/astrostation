@@ -79,18 +79,6 @@ export const SideNav = () => {
     });
   }, []);
 
-  useEffect(() => {
-    document.addEventListener("fullscreenchange", fullscreenChanged);
-    document.addEventListener("keyup", function (e) {
-      if (
-        e.key === "F11" ||
-        (e.key === "Escape" && document.fullscreenElement)
-      ) {
-        toggleFullScreen();
-      }
-    });
-  }, []);
-
   function toggleDefaultPositions() {
     var answer = window.confirm(
       "This will reset tiles to default positon - are you sure?"

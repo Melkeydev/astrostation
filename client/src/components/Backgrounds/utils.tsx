@@ -4,6 +4,12 @@ import { Dots } from "./Dots/Dots";
 import { Snow } from "./Snow/Snow";
 import { Fade } from "./Fade/Fade";
 import { Gradient } from "./Gradient/Gradient";
+import { SpaceBlacksmith } from "./SpaceBlackSmith/SpaceBlacksmith";
+import { Japan } from "./Japan/Japan";
+import { Cottage } from "./Cottage/Cottage";
+import { LofiGirl } from "./LofiGirl/LofiGirl";
+import { Train } from "./Train/Train";
+import { DvdPlayer } from "./Dvd/DvdPlayer";
 import { useSetBackground } from "@Store";
 
 export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
@@ -18,6 +24,12 @@ export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
           [backgrounds.SNOW]: <Snow />,
           [backgrounds.FADE]: <Fade />,
           [backgrounds.GRADIENT]: <Gradient />,
+          [backgrounds.SPACEBLACKSMITH]: <SpaceBlacksmith />,
+          [backgrounds.JAPAN]: <Japan />,
+          [backgrounds.COTTAGE]: <Cottage />,
+          [backgrounds.LOFIGIRL]: <LofiGirl />,
+          [backgrounds.TRAIN]: <Train />,
+          [backgrounds.DVD]: <DvdPlayer />,
         }[isBackground]
       }
     </div>
