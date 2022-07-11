@@ -1,9 +1,10 @@
 import "./DvdPlayer.scss";
+import "../Backgrounds.scss"
 import { DvdContent } from "./DvdContent";
 
 export const DvdPlayer = () => {
   return (
-    <div className="backgroundContainer">
+    <div className="background-container">
       <DvdContent />
     </div>
   );

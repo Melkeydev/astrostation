@@ -1,0 +1,22 @@
+.background-container {
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  z-index: 0;
+}
+
+.background-container > video {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
+
+.background-container > img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+}
