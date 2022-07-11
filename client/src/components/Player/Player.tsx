@@ -104,6 +104,17 @@ export const Player = () => {
               onChange={(value) => {
                 onVolumeChange(value as number);
               }}
+              railStyle={{
+                backgroundColor: "#000",
+              }}
+              handleStyle={{
+                backgroundColor: "#fff",
+                opacity: 1,
+                color: "red",
+              }}
+              trackStyle={{
+                backgroundColor: "#fff",
+              }}
             />
           </div>
           <StationSelector />
