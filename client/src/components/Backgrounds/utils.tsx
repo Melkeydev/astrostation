@@ -1,7 +1,5 @@
-import { ShootingStars } from "./ShootingStars/ShootingStars";
 import { City } from "./City/City";
 import { Dots } from "./Dots/Dots";
-import { Snow } from "./Snow/Snow";
 import { Fade } from "./Fade/Fade";
 import { Gradient } from "./Gradient/Gradient";
 import { SpaceBlacksmith } from "./SpaceBlackSmith/SpaceBlacksmith";
@@ -10,7 +8,11 @@ import { Cottage } from "./Cottage/Cottage";
 import { LofiGirl } from "./LofiGirl/LofiGirl";
 import { Train } from "./Train/Train";
 import { DvdPlayer } from "./Dvd/DvdPlayer";
+import { Stars } from "./Stars";
+import { Snow } from "./Snow";
+import { AmongUs } from "./AmongUs";
 import { useSetBackground } from "@Store";
+import { NyanCat } from "./NyanCat";
 
 export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
   const { isBackground } = useSetBackground();
@@ -18,7 +20,6 @@ export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
     <div className="fixed inset-0 bg-black">
       {
         {
-          [backgrounds.STARS]: <ShootingStars />,
           [backgrounds.CITY]: <City />,
           [backgrounds.DOTS]: <Dots />,
           [backgrounds.SNOW]: <Snow />,
@@ -30,6 +31,9 @@ export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
           [backgrounds.LOFIGIRL]: <LofiGirl />,
           [backgrounds.TRAIN]: <Train />,
           [backgrounds.DVD]: <DvdPlayer />,
+          [backgrounds.STARS]: <Stars />,
+          [backgrounds.AMONGUS]: <AmongUs />,
+          [backgrounds.NYANCAT]: <NyanCat />,
         }[isBackground]
       }
     </div>

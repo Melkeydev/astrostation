@@ -77,35 +77,47 @@ export const BackgroundNav = ({
           <BackgroundDropdownItem
             isPicked={isBackground == 6}
             setIsBackground={setIsBackground}
+            background={backgrounds.AMONGUS}
+            title="AmongUs"
+          />
+          <BackgroundDropdownItem
+            isPicked={isBackground == 7}
+            setIsBackground={setIsBackground}
+            background={backgrounds.NYANCAT}
+            title="NyanCat"
+          />
+          <BackgroundDropdownItem
+            isPicked={isBackground == 8}
+            setIsBackground={setIsBackground}
             background={backgrounds.SPACEBLACKSMITH}
             title="Space Blacksmith"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 7}
+            isPicked={isBackground == 9}
             setIsBackground={setIsBackground}
             background={backgrounds.JAPAN}
             title="Japan"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 8}
+            isPicked={isBackground == 10}
             setIsBackground={setIsBackground}
             background={backgrounds.COTTAGE}
             title="Cottage"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 9}
+            isPicked={isBackground == 11}
             setIsBackground={setIsBackground}
             background={backgrounds.LOFIGIRL}
             title="Lofi Girl"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 10}
+            isPicked={isBackground == 12}
             setIsBackground={setIsBackground}
             background={backgrounds.TRAIN}
             title="Train"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 11}
+            isPicked={isBackground == 13}
             setIsBackground={setIsBackground}
             background={backgrounds.DVD}
             title="DVD Player"
