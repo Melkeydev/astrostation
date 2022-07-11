@@ -1,5 +1,4 @@
-.backgroundContainer {
-    background-size: cover;
+.backgroundContainer-LofiGirl {
     position: absolute;
     top: 0;
     bottom: 0;
@@ -7,5 +6,10 @@
     right: 0;
     display: block;
     z-index: 0;
-    background: none;
+}
+
+.backgroundContainer-LofiGirl > video {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
 }
