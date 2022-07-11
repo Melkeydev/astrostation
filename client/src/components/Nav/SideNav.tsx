@@ -27,7 +27,7 @@ import {
   useToggleStickyNote,
   useToggleWidgetReset,
   useToggleTwitch,
-  useSideNavOrderStore
+  useSideNavOrderStore,
 } from "@Store";
 import { useState, useEffect } from "react";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
@@ -67,7 +67,7 @@ export const SideNav = () => {
 
   const { sideNavOrder, setSideNavOrder } = useSideNavOrderStore();
 
-  const { addStickyNote } = useStickyNote();
+  const { stickyNotes, addStickyNote } = useStickyNote();
   const isDesktop = useMediaQuery("(min-width: 641px)");
   const setDefault = useSetDefault();
 
@@ -102,113 +102,121 @@ export const SideNav = () => {
     setActive((oldDate) => !oldDate);
   }
 
-  let theme = isDark ? ( <MdWbSunny className="h-6 w-6" />) : (<MdDarkMode className="h-6 w-6" />);
+  let theme = isDark ? (
+    <MdWbSunny className="h-6 w-6" />
+  ) : (
+    <MdDarkMode className="h-6 w-6" />
+  );
 
   const sideNavItems = [
     {
-      "id": "1",
-      "content": <IoMusicalNotesOutline className="h-6 w-6" />,
-      "tooltipTitle": "Lofi Music",
-      "isToggled": isMusicToggled,
-      "setToggled": setIsMusicToggled,
-      "toggleString": "Music Toggled",
-      "toggleIcon": "🎵",
-      "isShown": isMusicShown
+      id: "1",
+      content: <IoMusicalNotesOutline className="h-6 w-6" />,
+      tooltipTitle: "Lofi Music",
+      isToggled: isMusicToggled,
+      setToggled: setIsMusicToggled,
+      toggleString: "Music Toggled",
+      toggleIcon: "🎵",
+      isShown: isMusicShown,
     },
     {
-      "id": "2",
-      "content": <FaSpotify className="h-6 w-6" />,
-      "tooltipTitle": "Spotify",
-      "isToggled": isSpotifyToggled,
-      "setToggled": setIsSpotifyToggled,
-      "toggleString": "Spotify Toggled",
-      "toggleIcon": "🎧",
-      "isShown": isSpotifyShown
+      id: "2",
+      content: <FaSpotify className="h-6 w-6" />,
+      tooltipTitle: "Spotify",
+      isToggled: isSpotifyToggled,
+      setToggled: setIsSpotifyToggled,
+      toggleString: "Spotify Toggled",
+      toggleIcon: "🎧",
+      isShown: isSpotifyShown,
     },
     {
-      "id": "3",
-      "content": <CgNotes className="h-6 w-6" />,
-      "tooltipTitle": "Task Tracker",
-      "isToggled": isTasksToggled,
-      "setToggled": setIsTasksToggled,
-      "toggleString": "Task Toggled",
-      "toggleIcon": "📓",
-      "isShown": isTasksShown
+      id: "3",
+      content: <CgNotes className="h-6 w-6" />,
+      tooltipTitle: "Task Tracker",
+      isToggled: isTasksToggled,
+      setToggled: setIsTasksToggled,
+      toggleString: "Task Toggled",
+      toggleIcon: "📓",
+      isShown: isTasksShown,
     },
     {
-      "id": "4",
-      "content": <MdOutlineTimer className="h-6 w-6" />,
-      "tooltipTitle": "Pomodoro Timer",
-      "isToggled": isTimerToggled,
-      "setToggled": setIsTimerToggled,
-      "toggleString": "Timer Toggled",
-      "toggleIcon": "⏳",
-      "isShown": isTimerShown
+      id: "4",
+      content: <MdOutlineTimer className="h-6 w-6" />,
+      tooltipTitle: "Pomodoro Timer",
+      isToggled: isTimerToggled,
+      setToggled: setIsTimerToggled,
+      toggleString: "Timer Toggled",
+      toggleIcon: "⏳",
+      isShown: isTimerShown,
     },
     {
-      "id": "5",
-      "content": <MdOutlineNoteAdd className="h-6 w-6" />,
-      "tooltipTitle": "Sticky Note",
-      "isToggled": false,
-      "setToggled": addNewStickyNote,
-      "toggleString": "Sticky Note Toggled",
-      "toggleIcon": "📝",
-      "isShown": isStickyNoteShown
+      id: "5",
+      content: <MdOutlineNoteAdd className="h-6 w-6" />,
+      tooltipTitle: "Sticky Note",
+      isToggled: stickyNotes.length > 0,
+      setToggled: addNewStickyNote,
+      toggleString: "Sticky Note Toggled",
+      toggleIcon: "📝",
+      isShown: isStickyNoteShown,
     },
     {
-      "id": "6",
-      "content": <VscDebugRestartFrame className="h-6 w-6" />,
-      "tooltipTitle": "Reset Positions",
-      "isToggled": false,
-      "setToggled": toggleDefaultPositions,
-      "toggleString": "Reset Toggled",
-      "toggleIcon": "⏪",
-      "isShown": isWidgetResetShown
+      id: "6",
+      content: <VscDebugRestartFrame className="h-6 w-6" />,
+      tooltipTitle: "Reset Positions",
+      isToggled: false,
+      setToggled: toggleDefaultPositions,
+      toggleString: "Reset Toggled",
+      toggleIcon: "⏪",
+      isShown: isWidgetResetShown,
     },
     {
-      "id": "7",
-      "content": theme,
-      "tooltipTitle": "Theme",
-      "isToggled": isDark,
-      "setToggled": toggleDarkMode,
-      "toggleString": "Theme Toggled",
-      "toggleIcon": "🌙",
-      "isShown": isDarkModeShown
+      id: "7",
+      content: theme,
+      tooltipTitle: "Theme",
+      isToggled: isDark,
+      setToggled: toggleDarkMode,
+      toggleString: "Theme Toggled",
+      toggleIcon: "🌙",
+      isShown: isDarkModeShown,
     },
     {
-      "id": "8",
-      "content": <BsFillChatLeftQuoteFill className="h-6 w-6" />,
-      "tooltipTitle": "Quotes",
-      "isToggled": isQuoteToggled,
-      "setToggled": setIsQuoteToggled,
-      "toggleString": "Quotes Toggled",
-      "toggleIcon": "💬",
-      "isShown": isQuoteShown
+      id: "8",
+      content: <BsFillChatLeftQuoteFill className="h-6 w-6" />,
+      tooltipTitle: "Quotes",
+      isToggled: isQuoteToggled,
+      setToggled: setIsQuoteToggled,
+      toggleString: "Quotes Toggled",
+      toggleIcon: "💬",
+      isShown: isQuoteShown,
     },
     {
-      "id": "9",
-      "content": <BsTwitch className="h-6 w-6" />,
-      "tooltipTitle": "Twitch Stream",
-      "isToggled": isTwitchToggled,
-      "setToggled": setIsTwitchToggled,
-      "toggleString": "Twitch Toggled",
-      "toggleIcon": "📺",
-      "isShown": isTwitchShown
+      id: "9",
+      content: <BsTwitch className="h-6 w-6" />,
+      tooltipTitle: "Twitch Stream",
+      isToggled: isTwitchToggled,
+      setToggled: setIsTwitchToggled,
+      toggleString: "Twitch Toggled",
+      toggleIcon: "📺",
+      isShown: isTwitchShown,
     },
     {
-      "id": "10",
-      "content": <BsArrowsFullscreen className="h-6 w-6" />,
-      "tooltipTitle": "Fullscreen",
-      "isToggled": isFullscreen,
-      "setToggled": toggleFullScreen,
-      "toggleString": "Fullscreen Toggled",
-      "toggleIcon": "",
-      "isShown": isFullscreenShown
-    }
-  ]
+      id: "10",
+      content: <BsArrowsFullscreen className="h-6 w-6" />,
+      tooltipTitle: "Fullscreen",
+      isToggled: isFullscreen,
+      setToggled: toggleFullScreen,
+      toggleString: "Fullscreen Toggled",
+      toggleIcon: "",
+      isShown: isFullscreenShown,
+    },
+  ];
 
   // a little function to help us with reordering the result
-  const reorder = (list: number[], startIndex: number, endIndex: number): number[] => {
+  const reorder = (
+    list: number[],
+    startIndex: number,
+    endIndex: number
+  ): number[] => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
@@ -222,11 +230,7 @@ export const SideNav = () => {
     }
 
     setSideNavOrder(
-      reorder(
-        sideNavOrder,
-        result.source.index,
-        result.destination.index
-      )
+      reorder(sideNavOrder, result.source.index, result.destination.index)
     );
   }
 
@@ -246,51 +250,64 @@ export const SideNav = () => {
           >
             <DragDropContext onDragEnd={onDragEnd}>
               <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                    {sideNavOrder && sideNavOrder.map && sideNavOrder.map((id, index) => {
-                      const item = sideNavItems[id]
-                      if (!item) return;
+                {(provided, snapshot) => (
+                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                    {sideNavOrder &&
+                      sideNavOrder.map &&
+                      sideNavOrder.map((id, index) => {
+                        const item = sideNavItems[id];
+                        if (!item) return;
 
-                      return (
-                        <Draggable key={item.id} draggableId={item.id} index={index}>
-                          {(provided, snapshot) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <Tooltip title={item.tooltipTitle} placement="right">
-                                <div>
-                                  <NavItem
-                                    onClick={() =>
-                                      toggledToastNotification(
-                                        item.isToggled,
-                                        item.setToggled,
-                                        item.toggleString,
-                                        750,
-                                        item.toggleIcon
-                                      )
-                                    }
-                                    toggled={item.isToggled}
-                                    shown={item.isShown}
-                                  >
-                                    {item.content}
-                                  </NavItem>
-                                </div>
-                              </Tooltip>
-                            </div>
-                          )}
-                        </Draggable>
-                    )})}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
+                        return (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
+                          >
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <Tooltip
+                                  title={item.tooltipTitle}
+                                  placement="right"
+                                >
+                                  <div>
+                                    <NavItem
+                                      onClick={() =>
+                                        toggledToastNotification(
+                                          item.isToggled,
+                                          item.setToggled,
+                                          item.toggleString,
+                                          750,
+                                          item.toggleIcon
+                                        )
+                                      }
+                                      toggled={item.isToggled}
+                                      shown={item.isShown}
+                                    >
+                                      {item.content}
+                                      {item.tooltipTitle == "Sticky Note" &&
+                                        stickyNotes.length > 0 && (
+                                          <span className="h-[25px] w-[25px] bg-[#000] rounded-full absolute right-[8px] bottom-[8px] text-white text-center">
+                                            {stickyNotes.length}
+                                          </span>
+                                        )}
+                                    </NavItem>
+                                  </div>
+                                </Tooltip>
+                              </div>
+                            )}
+                          </Draggable>
+                        );
+                      })}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
           </div>
         </ul>
       </aside>
