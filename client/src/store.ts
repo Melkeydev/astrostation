@@ -37,8 +37,6 @@ import {
   IFirstTimeUserState,
   IGrid,
   ILockWidgets,
-  ISideNavItems,
-  ISideNavItem,
   ISideNavOrderStore,
 } from "./interfaces";
 

@@ -11,7 +11,7 @@ import {
   usePosTwitch,
   useAlarmOption,
   useAudioVolume,
-  useLockWidgetsStore
+  useLockWidgetsStore,
 } from "@Store";
 
 function useSetDefault() {
@@ -35,7 +35,15 @@ function useSetDefault() {
     clearPosition: boolean
   ) => {
     if (clearStorage) {
-      localStorage.clear();
+      // This is what needs to be modified to not remove a bunch of stuff
+      localStorage.removeItem("set_timer_settings_position");
+      localStorage.removeItem("set_twitch_position");
+      localStorage.removeItem("set_timer_settings_position");
+      localStorage.removeItem("set_task_position");
+      localStorage.removeItem("set_music_position");
+      localStorage.removeItem("set_spotify_position");
+      localStorage.removeItem("set_timers_position");
+      localStorage.removeItem("set_quote_position");
     }
 
     // Reset all settings
