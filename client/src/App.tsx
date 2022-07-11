@@ -23,6 +23,12 @@ enum backgrounds {
   GRADIENT,
   AMONGUS,
   NYANCAT,
+  SPACEBLACKSMITH,
+  JAPAN,
+  COTTAGE,
+  LOFIGIRL,
+  TRAIN,
+  DVD,
 }
 
 // This is not the useMemo hook
