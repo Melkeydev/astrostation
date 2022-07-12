@@ -63,8 +63,13 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
 
   return (
     <div className="h-screen">
-      { isBackground == 14 && <UnsplashFooter /> }
-      <div className={"flex justify-end " + (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")}>
+      {isBackground == backgrounds.UNSPLASH && <UnsplashFooter />}
+      <div
+        className={
+          "flex justify-end " +
+          (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")
+        }
+      >
         <div className="settingsButton">
           <CustomizationButton
             title="Settings"
