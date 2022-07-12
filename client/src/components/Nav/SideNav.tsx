@@ -67,7 +67,8 @@ export const SideNav = () => {
 
   const { sideNavOrder, setSideNavOrder } = useSideNavOrderStore();
 
-  const { addStickyNote } = useStickyNote();
+  const { stickyNotes, addStickyNote } = useStickyNote();
+  const isDesktop = useMediaQuery("(min-width: 641px)");
   const setDefault = useSetDefault();
 
   useEffect(() => {
@@ -152,7 +153,7 @@ export const SideNav = () => {
       id: "5",
       content: <MdOutlineNoteAdd className="h-6 w-6" />,
       tooltipTitle: "Sticky Note",
-      isToggled: false,
+      isToggled: stickyNotes.length > 0,
       setToggled: addNewStickyNote,
       toggleString: "Sticky Note Toggled",
       toggleIcon: "📝",
@@ -242,40 +243,72 @@ export const SideNav = () => {
               <IoMenu className="h-6 w-6" />
             </NavItem>
           </div>
-          <DragDropContext onDragEnd={onDragEnd}>
-            <Droppable droppableId="droppable">
-              {(provided, snapshot) => (
-                <div {...provided.droppableProps} ref={provided.innerRef}>
-                  {sideNavOrder &&
-                    sideNavOrder.map &&
-                    sideNavOrder.map((id, index) => {
-                      const item = sideNavItems[id];
-                      if (!item) return;
+          <div
+            className={`${
+              active ? "" : "hidden"
+            } w-full sm:flex sm:flex-grow sm:w-auto sm:flex-col`}
+          >
+            <DragDropContext onDragEnd={onDragEnd}>
+              <Droppable droppableId="droppable">
+                {(provided, snapshot) => (
+                  <div {...provided.droppableProps} ref={provided.innerRef}>
+                    {sideNavOrder &&
+                      sideNavOrder.map &&
+                      sideNavOrder.map((id, index) => {
+                        const item = sideNavItems[id];
+                        if (!item) return;
 
-                      return (
-                        <Draggable
-                          key={item.id}
-                          draggableId={item.id}
-                          index={index}
-                          disableInteractiveElementBlocking="true"
-                        >
-                          {(provided, snapshot) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
-                              <DraggableNavItem active={active} item={item} />
-                            </div>
-                          )}
-                        </Draggable>
-                      );
-                    })}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
-          </DragDropContext>
+                        return (
+                          <Draggable
+                            key={item.id}
+                            draggableId={item.id}
+                            index={index}
+                          >
+                            {(provided, snapshot) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+                              >
+                                <Tooltip
+                                  title={item.tooltipTitle}
+                                  placement="right"
+                                >
+                                  <div>
+                                    <NavItem
+                                      onClick={() =>
+                                        toggledToastNotification(
+                                          item.isToggled,
+                                          item.setToggled,
+                                          item.toggleString,
+                                          750,
+                                          item.toggleIcon
+                                        )
+                                      }
+                                      toggled={item.isToggled}
+                                      shown={item.isShown}
+                                    >
+                                      {item.content}
+                                      {item.tooltipTitle == "Sticky Note" &&
+                                        stickyNotes.length > 0 && (
+                                          <span className="h-[25px] w-[25px] bg-[#000] rounded-full absolute right-[8px] bottom-[8px] text-white text-center">
+                                            {stickyNotes.length}
+                                          </span>
+                                        )}
+                                    </NavItem>
+                                  </div>
+                                </Tooltip>
+                              </div>
+                            )}
+                          </Draggable>
+                        );
+                      })}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
+            </DragDropContext>
+          </div>
         </ul>
       </aside>
     </div>
