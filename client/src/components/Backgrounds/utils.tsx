@@ -11,6 +11,7 @@ import { DvdPlayer } from "./Dvd/DvdPlayer";
 import { Stars } from "./Stars";
 import { Snow } from "./Snow";
 import { AmongUs } from "./AmongUs";
+import { Unsplash } from "./Unsplash/Unsplash";
 import { useSetBackground } from "@Store";
 import { NyanCat } from "./NyanCat";
 
@@ -34,6 +35,7 @@ export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
           [backgrounds.STARS]: <Stars />,
           [backgrounds.AMONGUS]: <AmongUs />,
           [backgrounds.NYANCAT]: <NyanCat />,
+          [backgrounds.UNSPLASH]: <Unsplash />,
         }[isBackground]
       }
     </div>

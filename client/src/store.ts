@@ -720,6 +720,16 @@ export const useFirstTimeUserStore = create<IFirstTimeUserState>(
   )
 );
 
+export const useUnsplashStore = create<any>(
+  persist(
+    (set, _) => ({
+      dailyUnsplash: {},
+      setDailyUnsplash: (unsplashObject) =>
+        set({ dailyUnsplash: unsplashObject }),
+    }),
+    { name: "unsplash_store" }
+  )
+);
 /**
  * Lock Widgets Store
  * ---
