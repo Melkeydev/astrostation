@@ -29,6 +29,7 @@ enum backgrounds {
   LOFIGIRL,
   TRAIN,
   DVD,
+  UNSPLASH,
 }
 
 // This is not the useMemo hook

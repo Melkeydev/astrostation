@@ -15,6 +15,7 @@ import {
   usePosQuote,
   usePosTwitch,
   useGrid,
+  useSetBackground,
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -33,6 +34,7 @@ import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
+import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
@@ -55,17 +57,14 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen] =
     useState(false);
+  const { isBackground } = useSetBackground();
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
   const { grid } = useGrid();
 
   return (
-    <div className="h-screen space-y-1">
-      <div
-        className={
-          "flex justify-end " +
-          (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")
-        }
-      >
+    <div className="h-screen">
+      { isBackground == 14 && <UnsplashFooter /> }
+      <div className={"flex justify-end " + (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")}>
         <div className="settingsButton">
           <CustomizationButton
             title="Settings"
