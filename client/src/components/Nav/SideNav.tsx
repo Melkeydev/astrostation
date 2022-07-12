@@ -34,7 +34,11 @@ import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 import { Tooltip } from "@mui/material";
 
-import { toggledToastNotification, defaultToast } from "@Utils/toast";
+import {
+  toggledToastNotification,
+  defaultToast,
+  toastThemeNotification,
+} from "@Utils/toast";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { fullscreenChanged, toggleFullScreen } from "@Utils/fullscreen";
 import { DraggableNavItem } from "./DraggableNavItem";
@@ -63,8 +67,7 @@ export const SideNav = () => {
 
   const { sideNavOrder, setSideNavOrder } = useSideNavOrderStore();
 
-  const { stickyNotes, addStickyNote } = useStickyNote();
-  const isDesktop = useMediaQuery("(min-width: 641px)");
+  const { addStickyNote } = useStickyNote();
   const setDefault = useSetDefault();
 
   useEffect(() => {
@@ -149,7 +152,7 @@ export const SideNav = () => {
       id: "5",
       content: <MdOutlineNoteAdd className="h-6 w-6" />,
       tooltipTitle: "Sticky Note",
-      isToggled: stickyNotes.length > 0,
+      isToggled: false,
       setToggled: addNewStickyNote,
       toggleString: "Sticky Note Toggled",
       toggleIcon: "📝",
@@ -239,72 +242,40 @@ export const SideNav = () => {
               <IoMenu className="h-6 w-6" />
             </NavItem>
           </div>
-          <div
-            className={`${
-              active ? "" : "hidden"
-            } w-full sm:flex sm:flex-grow sm:w-auto sm:flex-col`}
-          >
-            <DragDropContext onDragEnd={onDragEnd}>
-              <Droppable droppableId="droppable">
-                {(provided, snapshot) => (
-                  <div {...provided.droppableProps} ref={provided.innerRef}>
-                    {sideNavOrder &&
-                      sideNavOrder.map &&
-                      sideNavOrder.map((id, index) => {
-                        const item = sideNavItems[id];
-                        if (!item) return;
+          <DragDropContext onDragEnd={onDragEnd}>
+            <Droppable droppableId="droppable">
+              {(provided, snapshot) => (
+                <div {...provided.droppableProps} ref={provided.innerRef}>
+                  {sideNavOrder &&
+                    sideNavOrder.map &&
+                    sideNavOrder.map((id, index) => {
+                      const item = sideNavItems[id];
+                      if (!item) return;
 
-                        return (
-                          <Draggable
-                            key={item.id}
-                            draggableId={item.id}
-                            index={index}
-                          >
-                            {(provided, snapshot) => (
-                              <div
-                                ref={provided.innerRef}
-                                {...provided.draggableProps}
-                                {...provided.dragHandleProps}
-                              >
-                                <Tooltip
-                                  title={item.tooltipTitle}
-                                  placement="right"
-                                >
-                                  <div>
-                                    <NavItem
-                                      onClick={() =>
-                                        toggledToastNotification(
-                                          item.isToggled,
-                                          item.setToggled,
-                                          item.toggleString,
-                                          750,
-                                          item.toggleIcon
-                                        )
-                                      }
-                                      toggled={item.isToggled}
-                                      shown={item.isShown}
-                                    >
-                                      {item.content}
-                                      {item.tooltipTitle == "Sticky Note" &&
-                                        stickyNotes.length > 0 && (
-                                          <span className="h-[25px] w-[25px] bg-[#000] rounded-full absolute right-[8px] bottom-[8px] text-white text-center">
-                                            {stickyNotes.length}
-                                          </span>
-                                        )}
-                                    </NavItem>
-                                  </div>
-                                </Tooltip>
-                              </div>
-                            )}
-                          </Draggable>
-                        );
-                      })}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-            </DragDropContext>
-          </div>
+                      return (
+                        <Draggable
+                          key={item.id}
+                          draggableId={item.id}
+                          index={index}
+                          disableInteractiveElementBlocking="true"
+                        >
+                          {(provided, snapshot) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
+                            >
+                              <DraggableNavItem active={active} item={item} />
+                            </div>
+                          )}
+                        </Draggable>
+                      );
+                    })}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          </DragDropContext>
         </ul>
       </aside>
     </div>

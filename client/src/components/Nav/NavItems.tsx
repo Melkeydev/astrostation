@@ -1,12 +1,11 @@
 import { FC } from "react";
 
-export const NavItem: FC<{ onClick?: () => void; toggled?: boolean; shown? : boolean }> = ({
-  children,
-  onClick,
-  toggled,
-  shown
-}) => {
-  if(shown) {
+export const NavItem: FC<{
+  onClick?: () => void;
+  toggled?: boolean;
+  shown?: boolean;
+}> = ({ children, onClick, toggled, shown }) => {
+  if (shown) {
     return (
       <li>
         <button
@@ -21,6 +20,6 @@ export const NavItem: FC<{ onClick?: () => void; toggled?: boolean; shown? : boo
       </li>
     );
   } else {
-    return <></>
+    return <></>;
   }
 };
