@@ -41,7 +41,7 @@ export const TwitchStream = () => {
           onClick={() => setIsTwitchToggled(false)}
         />
       </div>
-      <div className="cancelDrag justify-center aspect-video relative">
+      <div className="justify-center aspect-video relative">
         {isTwitchShown && isTwitchToggled && (
           <iframe
             className="left-0 h-full w-full"
@@ -59,7 +59,7 @@ export const TwitchStream = () => {
       </div>
       <div className="flex items-center space-x-1 p-1">
         <input
-          className="cancelDrag w-full p-1 border border-gray-300 dark:bg-gray-700/[.96] dark:border-gray-500"
+          className="w-full p-1 border border-gray-300 dark:bg-gray-700/[.96] dark:border-gray-500"
           type="text"
           value={inputText}
           placeholder="Search stream..."

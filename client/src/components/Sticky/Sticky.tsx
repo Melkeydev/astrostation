@@ -14,7 +14,7 @@ export const Sticky = ({ id, text }) => {
           onClick={() => removeNote(id)}
         />
       </div>
-      <div className="cancelDrag min-w-[150px] min-h-[150px] max-w-[215px] break-words rounded pl-4 pb-4 pr-4 m-auto">
+      <div className="min-w-[150px] min-h-[150px] max-w-[215px] break-words rounded pl-4 pb-4 pr-4 m-auto">
         <TextareaAutosize
           rows={4}
           cols={18}

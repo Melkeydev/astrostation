@@ -47,7 +47,7 @@ export const Task = ({ task }) => {
           }`}
           onDoubleClick={() => preventFalseInProgress()}
         >
-          <div className="cancelDrag flex items-center justify-between">
+          <div className="flex items-center justify-between">
             <div className="flex items-center space-x-2">
               <div>
                 {!task.completed ? (
