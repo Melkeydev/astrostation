@@ -21,7 +21,7 @@ export const Quotes = () => {
           onClick={() => setIsQuoteToggled(false)}
         />
       </div>
-      <div className="max-w-sm text-center">
+      <div className="cancelDrag max-w-sm text-center">
         <div className="text-gray-800 dark:text-white relative items-center justify-center text-xl font-radio-canada pb-2 pr-2 pl-2">
           {quoteData[quoteNumber].q}
           <br />-{quoteData[quoteNumber].a}

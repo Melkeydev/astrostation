@@ -52,12 +52,10 @@ export const TwitchStream = () => {
               parentHostName
             }
             allowFullScreen
-            //width="100%"
-            //height="250px"
           ></iframe>
         )}
       </div>
-      <div className="flex items-center space-x-1 p-1">
+      <div className="cancelDrag flex items-center space-x-1 p-1">
         <input
           className="w-full p-1 border border-gray-300 dark:bg-gray-700/[.96] dark:border-gray-500"
           type="text"
