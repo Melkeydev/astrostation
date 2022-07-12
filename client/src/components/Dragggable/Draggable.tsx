@@ -12,6 +12,7 @@ export const DWrapper = ({
   setPosition,
   isSticky,
   stickyID,
+  handle,
   gridValues,
 }: {
   children: any;
@@ -21,6 +22,7 @@ export const DWrapper = ({
   setPosition: any;
   isSticky: boolean;
   stickyID?: number;
+  handle: boolean;
   gridValues?: number[];
 }) => {
   const { setStickyNotesPos } = useStickyNote();
@@ -68,47 +70,90 @@ export const DWrapper = ({
 
   return (
     <>
-      <Draggable
-        bounds="parent"
-        cancel=".cancelDrag"
-        defaultPosition={{ x: defaultX, y: defaultY }}
-        onDrag={() => trackPosition()}
-        onStop={(_, data) => changePosition(data)}
-        //@ts-ignore
-        grid={gridValues}
-        disabled={areWidgetsLocked}
-      >
-        {isSticky ? (
-          <div
-            style={{ zIndex: z, position: "absolute" }}
-            onClick={() => setZ(++int)}
-          >
+      {handle ? (
+        <Draggable
+          handle=".handle"
+          bounds="parent"
+          defaultPosition={{ x: defaultX, y: defaultY }}
+          onDrag={() => trackPosition()}
+          onStop={(_, data) => changePosition(data)}
+          //@ts-ignore
+          grid={gridValues}
+          disabled={areWidgetsLocked}
+        >
+          {isSticky ? (
             <div
-              ref={ref}
-              className={`inline-block ${
-                toggleHook ? "visible" : "hidden pointer-events-none"
-              }`}
+              style={{ zIndex: z, position: "absolute" }}
+              onClick={() => setZ(++int)}
             >
-              {children}
+              <div
+                ref={ref}
+                className={`inline-block ${
+                  toggleHook ? "visible" : "hidden pointer-events-none"
+                }`}
+              >
+                {children}
+              </div>
             </div>
-          </div>
-        ) : (
-          <div
-            style={{ zIndex: z, position: "absolute" }}
-            className="dcard box dwidth"
-            onClick={() => setZ(++int)}
-          >
+          ) : (
             <div
-              ref={ref}
-              className={`inline-block ${
-                toggleHook ? "visible" : "hidden pointer-events-none"
-              }`}
+              style={{ zIndex: z, position: "absolute" }}
+              className="dcard box dwidth"
+              onClick={() => setZ(++int)}
             >
-              {children}
+              <div
+                ref={ref}
+                className={`inline-block ${
+                  toggleHook ? "visible" : "hidden pointer-events-none"
+                }`}
+              >
+                {children}
+              </div>
             </div>
-          </div>
-        )}
-      </Draggable>
+          )}
+        </Draggable>
+      ) : (
+        <Draggable
+          bounds="parent"
+          defaultPosition={{ x: defaultX, y: defaultY }}
+          onDrag={() => trackPosition()}
+          onStop={(_, data) => changePosition(data)}
+          //@ts-ignore
+          grid={gridValues}
+          disabled={areWidgetsLocked}
+        >
+          {isSticky ? (
+            <div
+              style={{ zIndex: z, position: "absolute" }}
+              onClick={() => setZ(++int)}
+            >
+              <div
+                ref={ref}
+                className={`inline-block ${
+                  toggleHook ? "visible" : "hidden pointer-events-none"
+                }`}
+              >
+                {children}
+              </div>
+            </div>
+          ) : (
+            <div
+              style={{ zIndex: z, position: "absolute" }}
+              className="dcard box dwidth"
+              onClick={() => setZ(++int)}
+            >
+              <div
+                ref={ref}
+                className={`inline-block ${
+                  toggleHook ? "visible" : "hidden pointer-events-none"
+                }`}
+              >
+                {children}
+              </div>
+            </div>
+          )}
+        </Draggable>
+      )}
     </>
   );
 };
