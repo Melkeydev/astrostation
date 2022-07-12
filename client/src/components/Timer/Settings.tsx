@@ -20,6 +20,11 @@ import { ToggleOption } from "./ToggleOption";
 import { successToast } from "@App/utils/toast";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 
+import piano from "/assets/music/piano.wav";
+import flute from "/assets/music/flute.wav";
+import arcade from "/assets/music/arcade.wav";
+import bells from "/assets/music/bells.wav";
+
 export const TimerSettings = ({ onClose }) => {
   const { isDark } = useDarkToggleStore();
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();
@@ -239,10 +244,9 @@ export const TimerSettings = ({ onClose }) => {
               Retro
               <div
                 className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                  currentAlarm == "assets/music/arcade.wav" &&
-                  "border border-gray-200"
+                  currentAlarm == arcade && "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/assets/music/arcade.wav")}
+                onClick={() => changeAlarm(arcade)}
               >
                 <BsMusicPlayerFill />
               </div>
@@ -251,10 +255,9 @@ export const TimerSettings = ({ onClose }) => {
               Bells
               <div
                 className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                  currentAlarm == "/assets/music/bells.wav" &&
-                  "border border-gray-200"
+                  currentAlarm == bells && "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/assets/music/bells.wav")}
+                onClick={() => changeAlarm(bells)}
               >
                 <BsBellFill />
               </div>
@@ -263,10 +266,9 @@ export const TimerSettings = ({ onClose }) => {
               Flute
               <div
                 className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                  currentAlarm == "/assets/music/flute.wav" &&
-                  "border border-gray-200"
+                  currentAlarm == flute && "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/assets/music/flute.wav")}
+                onClick={() => changeAlarm(flute)}
               >
                 <GiPanFlute />
               </div>
@@ -275,10 +277,9 @@ export const TimerSettings = ({ onClose }) => {
               Piano
               <div
                 className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
-                  currentAlarm == "/assets/music/piano.wav" &&
-                  "border border-gray-200"
+                  currentAlarm == piano && "border border-gray-200"
                 }`}
-                onClick={() => changeAlarm("/assets/music/piano.wav")}
+                onClick={() => changeAlarm(piano)}
               >
                 <CgPiano />
               </div>
