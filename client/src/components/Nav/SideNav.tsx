@@ -34,11 +34,7 @@ import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 import { Tooltip } from "@mui/material";
 
-import {
-  toggledToastNotification,
-  defaultToast,
-  toastThemeNotification,
-} from "@Utils/toast";
+import { toggledToastNotification, defaultToast } from "@Utils/toast";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { fullscreenChanged, toggleFullScreen } from "@Utils/fullscreen";
 import { DraggableNavItem } from "./DraggableNavItem";
