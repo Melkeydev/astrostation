@@ -1,8 +1,6 @@
 import { City } from "./City/City";
-import { Dots } from "./Dots/Dots";
 import { Fade } from "./Fade/Fade";
 import { Gradient } from "./Gradient/Gradient";
-import { SpaceBlacksmith } from "./SpaceBlackSmith/SpaceBlacksmith";
 import { Japan } from "./Japan/Japan";
 import { Cottage } from "./Cottage/Cottage";
 import { LofiGirl } from "./LofiGirl/LofiGirl";
@@ -22,11 +20,9 @@ export const Backgrounds = ({ backgrounds }: { backgrounds: any }) => {
       {
         {
           [backgrounds.CITY]: <City />,
-          [backgrounds.DOTS]: <Dots />,
           [backgrounds.SNOW]: <Snow />,
           [backgrounds.FADE]: <Fade />,
           [backgrounds.GRADIENT]: <Gradient />,
-          [backgrounds.SPACEBLACKSMITH]: <SpaceBlacksmith />,
           [backgrounds.JAPAN]: <Japan />,
           [backgrounds.COTTAGE]: <Cottage />,
           [backgrounds.LOFIGIRL]: <LofiGirl />,

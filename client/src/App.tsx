@@ -14,16 +14,14 @@ import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
 
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 
-enum backgrounds {
+export enum backgrounds {
   STARS,
   CITY,
-  DOTS,
   SNOW,
   FADE,
   GRADIENT,
   AMONGUS,
   NYANCAT,
-  SPACEBLACKSMITH,
   JAPAN,
   COTTAGE,
   LOFIGIRL,
