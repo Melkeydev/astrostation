@@ -1,7 +1,7 @@
 import { useRef, useEffect } from "react";
 import { useSetBackground } from "@Store";
-
 import { BackgroundDropdownItem } from "./BackgroundDropdownItem";
+//import { backgrounds as  } from "../../App";
 
 export const BackgroundNav = ({
   backgrounds,
@@ -39,91 +39,79 @@ export const BackgroundNav = ({
           ref={menuRef}
         >
           <BackgroundDropdownItem
-            isPicked={isBackground == 0}
+            isPicked={isBackground == backgrounds.STARS}
             setIsBackground={setIsBackground}
             background={backgrounds.STARS}
             title="Stars"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 1}
+            isPicked={isBackground == backgrounds.CITY}
             setIsBackground={setIsBackground}
             background={backgrounds.CITY}
             title="City"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 2}
-            setIsBackground={setIsBackground}
-            background={backgrounds.DOTS}
-            title="Dots"
-          />
-          <BackgroundDropdownItem
-            isPicked={isBackground == 3}
+            isPicked={isBackground == backgrounds.SNOW}
             setIsBackground={setIsBackground}
             background={backgrounds.SNOW}
             title="Snow"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 4}
+            isPicked={isBackground == backgrounds.FADE}
             setIsBackground={setIsBackground}
             background={backgrounds.FADE}
             title="Fade"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 5}
+            isPicked={isBackground == backgrounds.GRADIENT}
             setIsBackground={setIsBackground}
             background={backgrounds.GRADIENT}
             title="Gradient"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 6}
+            isPicked={isBackground == backgrounds.AMONGUS}
             setIsBackground={setIsBackground}
             background={backgrounds.AMONGUS}
             title="AmongUs"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 7}
+            isPicked={isBackground == backgrounds.NYANCAT}
             setIsBackground={setIsBackground}
             background={backgrounds.NYANCAT}
             title="NyanCat"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 8}
-            setIsBackground={setIsBackground}
-            background={backgrounds.SPACEBLACKSMITH}
-            title="Space Blacksmith"
-          />
-          <BackgroundDropdownItem
-            isPicked={isBackground == 9}
+            isPicked={isBackground == backgrounds.JAPAN}
             setIsBackground={setIsBackground}
             background={backgrounds.JAPAN}
             title="Japan"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 10}
+            isPicked={isBackground == backgrounds.COTTAGE}
             setIsBackground={setIsBackground}
             background={backgrounds.COTTAGE}
             title="Cottage"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 11}
+            isPicked={isBackground == backgrounds.LOFIGIRL}
             setIsBackground={setIsBackground}
             background={backgrounds.LOFIGIRL}
             title="Lofi Girl"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 12}
+            isPicked={isBackground == backgrounds.TRAIN}
             setIsBackground={setIsBackground}
             background={backgrounds.TRAIN}
             title="Train"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 13}
+            isPicked={isBackground == backgrounds.DVD}
             setIsBackground={setIsBackground}
             background={backgrounds.DVD}
             title="DVD Player"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == 14}
+            isPicked={isBackground == backgrounds.UNSPLASH}
             setIsBackground={setIsBackground}
             background={backgrounds.UNSPLASH}
             title="Unsplash"
