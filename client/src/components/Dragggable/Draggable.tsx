@@ -12,8 +12,8 @@ export const DWrapper = ({
   setPosition,
   isSticky,
   stickyID,
-  handle,
   gridValues,
+  handle,
 }: {
   children: any;
   toggleHook: boolean;
@@ -22,8 +22,8 @@ export const DWrapper = ({
   setPosition: any;
   isSticky: boolean;
   stickyID?: number;
-  handle: boolean;
   gridValues?: number[];
+  handle?: string;
 }) => {
   const { setStickyNotesPos } = useStickyNote();
   const { areWidgetsLocked } = useLockWidgetsStore();
@@ -70,90 +70,49 @@ export const DWrapper = ({
 
   return (
     <>
-      {handle ? (
-        <Draggable
-          handle=".handle"
-          bounds="parent"
-          defaultPosition={{ x: defaultX, y: defaultY }}
-          onDrag={() => trackPosition()}
-          onStop={(_, data) => changePosition(data)}
-          //@ts-ignore
-          grid={gridValues}
-          disabled={areWidgetsLocked}
-        >
-          {isSticky ? (
+      {/*@ts-ignore*/}
+      <Draggable
+        bounds="parent"
+        cancel=".cancelDrag"
+        defaultPosition={{ x: defaultX, y: defaultY }}
+        onDrag={() => trackPosition()}
+        onStop={(_, data) => changePosition(data)}
+        //@ts-ignore
+        grid={gridValues}
+        disabled={areWidgetsLocked}
+        handle={handle}
+      >
+        {isSticky ? (
+          <div
+            style={{ zIndex: z, position: "absolute" }}
+            onClick={() => setZ(++int)}
+          >
             <div
-              style={{ zIndex: z, position: "absolute" }}
-              onClick={() => setZ(++int)}
+              ref={ref}
+              className={`inline-block ${
+                toggleHook ? "visible" : "hidden pointer-events-none"
+              }`}
             >
-              <div
-                ref={ref}
-                className={`inline-block ${
-                  toggleHook ? "visible" : "hidden pointer-events-none"
-                }`}
-              >
-                {children}
-              </div>
+              {children}
             </div>
-          ) : (
+          </div>
+        ) : (
+          <div
+            style={{ zIndex: z, position: "absolute" }}
+            className="dcard box dwidth"
+            onClick={() => setZ(++int)}
+          >
             <div
-              style={{ zIndex: z, position: "absolute" }}
-              className="dcard box dwidth"
-              onClick={() => setZ(++int)}
+              ref={ref}
+              className={`inline-block ${
+                toggleHook ? "visible" : "hidden pointer-events-none"
+              }`}
             >
-              <div
-                ref={ref}
-                className={`inline-block ${
-                  toggleHook ? "visible" : "hidden pointer-events-none"
-                }`}
-              >
-                {children}
-              </div>
+              {children}
             </div>
-          )}
-        </Draggable>
-      ) : (
-        <Draggable
-          bounds="parent"
-          defaultPosition={{ x: defaultX, y: defaultY }}
-          onDrag={() => trackPosition()}
-          onStop={(_, data) => changePosition(data)}
-          //@ts-ignore
-          grid={gridValues}
-          disabled={areWidgetsLocked}
-        >
-          {isSticky ? (
-            <div
-              style={{ zIndex: z, position: "absolute" }}
-              onClick={() => setZ(++int)}
-            >
-              <div
-                ref={ref}
-                className={`inline-block ${
-                  toggleHook ? "visible" : "hidden pointer-events-none"
-                }`}
-              >
-                {children}
-              </div>
-            </div>
-          ) : (
-            <div
-              style={{ zIndex: z, position: "absolute" }}
-              className="dcard box dwidth"
-              onClick={() => setZ(++int)}
-            >
-              <div
-                ref={ref}
-                className={`inline-block ${
-                  toggleHook ? "visible" : "hidden pointer-events-none"
-                }`}
-              >
-                {children}
-              </div>
-            </div>
-          )}
-        </Draggable>
-      )}
+          </div>
+        )}
+      </Draggable>
     </>
   );
 };
