@@ -8,6 +8,10 @@ on:
   pull_request:
     branches: [main]
 
+defaults:
+  run:
+    working-directory: client
+
 jobs:
   build:
     runs-on: ubuntu-latest
