@@ -77,7 +77,10 @@ function App() {
           <Toaster />
           <SideNav />
           <Routes>
-            <Route path="/" element={<HomePage backgrounds={backgrounds} />} />
+            <Route
+              path="/astrostation"
+              element={<HomePage backgrounds={backgrounds} />}
+            />
           </Routes>
         </div>
       </Router>
