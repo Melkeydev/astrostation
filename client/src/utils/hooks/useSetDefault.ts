@@ -35,7 +35,6 @@ function useSetDefault() {
     clearPosition: boolean
   ) => {
     if (clearStorage) {
-      // This is what needs to be modified to not remove a bunch of stuff
       localStorage.removeItem("set_timer_settings_position");
       localStorage.removeItem("set_twitch_position");
       localStorage.removeItem("set_timer_settings_position");
@@ -44,6 +43,7 @@ function useSetDefault() {
       localStorage.removeItem("set_spotify_position");
       localStorage.removeItem("set_timers_position");
       localStorage.removeItem("set_quote_position");
+      localStorage.removeItem("unsplash_store");
     }
 
     // Reset all settings
