@@ -401,9 +401,9 @@ const songs = [
     link: "https://www.youtube.com/watch?v=0uw1Adx0psw",
   },
   {
-    id: "5qap5aO4i9A",
+    id: "jfKfPfyJRdk",
     artist: "Lofi Girl",
-    link: "https://www.youtube.com/watch?v=5qap5aO4i9A",
+    link: "https://www.youtube.com/watch?v=jfKfPfyJRdk",
   },
   {
     id: "aLqc8TdoLJ0",
