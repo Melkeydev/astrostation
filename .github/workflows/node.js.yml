@@ -10,7 +10,7 @@ on:
 
 defaults:
   run:
-    working-directory: client
+    working-directory: ./client/
 
 jobs:
   build:
@@ -28,10 +28,9 @@ jobs:
         with:
           node-version: ${{ matrix.node-version }}
           cache: "npm"
-
+          cache-dependency-path: "./client/package-lock.json"
       - name: 🚚 Upgrade NPM
         run: npm install -g npm
-
       - run: npm ci
       - run: npm run build --if-present
       - name: Deploy
