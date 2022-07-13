@@ -14,7 +14,7 @@ import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
 
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 
-export enum backgrounds {
+enum backgrounds {
   STARS,
   CITY,
   SNOW,
@@ -50,6 +50,7 @@ function App() {
   }, [isDark]);
 
   useEffect(() => {
+    console.log("how many times does this fire");
     if (
       typeof localStorage.APP_VERSION === "undefined" ||
       localStorage.APP_VERSION === null
