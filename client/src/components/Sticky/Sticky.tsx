@@ -8,7 +8,7 @@ export const Sticky = ({ id, text }) => {
 
   return (
     <div className="bg-[#feff9c] cursor-move">
-      <div className="flex justify-end w-full p-2 handle">
+      <div className="flex justify-end w-full p-2">
         <IoCloseSharp
           className="text-red-500 cursor-pointer hover:bg-red-200"
           onClick={() => removeNote(id)}
