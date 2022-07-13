@@ -142,7 +142,6 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
                 setPosition={setStickyNotesPos}
                 isSticky={true}
                 stickyID={stickyNote.id}
-                handle={true}
                 gridValues={grid}
               >
                 <Sticky id={stickyNote.id} text={stickyNote.text} />
