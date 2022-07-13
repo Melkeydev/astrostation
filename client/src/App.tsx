@@ -49,21 +49,21 @@ function App() {
     }
   }, [isDark]);
 
-  useEffect(() => {
-    console.log("how many times does this fire");
-    if (
-      typeof localStorage.APP_VERSION === "undefined" ||
-      localStorage.APP_VERSION === null
-    ) {
-      // We want to clear the state of anyone without this to be safe
-      setDefault(true, true, true);
-      localStorage.setItem("APP_VERSION", version);
-    }
+  //useEffect(() => {
+  //console.log("how many times does this fire");
+  //if (
+  //typeof localStorage.APP_VERSION === "undefined" ||
+  //localStorage.APP_VERSION === null
+  //) {
+  //// We want to clear the state of anyone without this to be safe
+  //setDefault(true, true, true);
+  //localStorage.setItem("APP_VERSION", version);
+  //}
 
-    if (localStorage.APP_VERSION != version) {
-      setDefault(true, true, true);
-    }
-  }, []);
+  //if (localStorage.APP_VERSION != version) {
+  //setDefault(true, true, true);
+  //}
+  //}, []);
 
   return (
     <>
