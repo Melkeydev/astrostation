@@ -74,7 +74,7 @@ export const DWrapper = ({
       <Draggable
         bounds="parent"
         cancel=".cancelDrag"
-        defaultPosition={{ x: defaultX, y: defaultY }}
+        position={{ x: defaultX, y: defaultY }}
         onDrag={() => trackPosition()}
         onStop={(_, data) => changePosition(data)}
         //@ts-ignore

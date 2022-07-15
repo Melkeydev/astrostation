@@ -83,14 +83,8 @@ export const SideNav = () => {
   }, []);
 
   function toggleDefaultPositions() {
-    var answer = window.confirm(
-      "This will reset tiles to default positon - are you sure?"
-    );
-    if (answer) {
-      setDefault(false, false, true);
-      defaultToast("Positions reset");
-      window.location.reload();
-    }
+    setDefault(false, false, true);
+    defaultToast("Positions reset");
   }
 
   function addNewStickyNote() {

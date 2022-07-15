@@ -67,7 +67,6 @@ function useSetDefault() {
       setTimerPosDefault();
       setQuotePosDefault();
       setTwitchPosDefault();
-      window.location.reload();
     }
   };
 }
