@@ -1,5 +1,5 @@
 import { NavItem } from "./NavItems";
-import { IoMusicalNotesOutline, IoTennisball } from "react-icons/io5";
+import { IoMusicalNotesOutline } from "react-icons/io5";
 import { IoMenu } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
 import {
@@ -30,15 +30,9 @@ import {
   useSideNavOrderStore,
 } from "@Store";
 import { useState, useEffect } from "react";
-import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
-import { Tooltip } from "@mui/material";
 
-import {
-  toggledToastNotification,
-  defaultToast,
-  toastThemeNotification,
-} from "@Utils/toast";
+import { defaultToast } from "@Utils/toast";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { fullscreenChanged, toggleFullScreen } from "@Utils/fullscreen";
 import { DraggableNavItem } from "./DraggableNavItem";
@@ -67,7 +61,7 @@ export const SideNav = () => {
 
   const { sideNavOrder, setSideNavOrder } = useSideNavOrderStore();
 
-  const { addStickyNote } = useStickyNote();
+  const { stickyNotes, addStickyNote } = useStickyNote();
   const setDefault = useSetDefault();
 
   useEffect(() => {
@@ -83,7 +77,7 @@ export const SideNav = () => {
   }, []);
 
   function toggleDefaultPositions() {
-    setDefault(false, false, true);
+    setDefault();
     defaultToast("Positions reset");
   }
 
@@ -146,7 +140,7 @@ export const SideNav = () => {
       id: "5",
       content: <MdOutlineNoteAdd className="h-6 w-6" />,
       tooltipTitle: "Sticky Note",
-      isToggled: false,
+      isToggled: stickyNotes.length > 0,
       setToggled: addNewStickyNote,
       toggleString: "Sticky Note Toggled",
       toggleIcon: "📝",

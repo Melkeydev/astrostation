@@ -51,7 +51,6 @@ function App() {
 
   useEffect(() => {
     if (!localStorage.APP_VERSION || localStorage.APP_VERSION != version) {
-      // We want to clear the state of anyone without this to be safe
       setDefault();
       localStorage.setItem("APP_VERSION", version);
     }
