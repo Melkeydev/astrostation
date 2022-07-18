@@ -4,7 +4,6 @@ import TextareaAutosize from "react-textarea-autosize";
 
 export const Sticky = ({ id, text }) => {
   const { removeNote, editNote } = useStickyNote();
-  //<div className="handle w-full">Test</div>
 
   return (
     <div className="bg-[#feff9c] cursor-move">
