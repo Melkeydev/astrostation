@@ -1,5 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useEffect, memo } from "react";
+import { useEffect } from "react";
 import { Backgrounds } from "@Components/Backgrounds/utils";
 import { HomePage } from "@Pages/Homepage";
 import { SideNav } from "@Components/Nav/SideNav";
@@ -11,7 +10,6 @@ import {
 import { Toaster } from "react-hot-toast";
 import { version } from "@Root/package.json";
 import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
-
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 
 enum backgrounds {
@@ -20,7 +18,6 @@ enum backgrounds {
   SNOW,
   FADE,
   GRADIENT,
-  AMONGUS,
   NYANCAT,
   JAPAN,
   COTTAGE,
@@ -29,11 +26,6 @@ enum backgrounds {
   DVD,
   UNSPLASH,
 }
-
-// This is not the useMemo hook
-// We have memoized the component
-// React.memo needs to be outside of the component
-const BackgroundsMemo = memo(Backgrounds);
 
 function App() {
   const isDark = useDarkToggleStore((state) => state.isDark);
@@ -59,20 +51,16 @@ function App() {
   return (
     <>
       {isFirstTimeUser && <Walkthrough />}
-      <Router>
-        <BackgroundsMemo backgrounds={backgrounds} />
-        <div
-          className={`fixed inset-0 overflow-auto ${
-            breakStarted && "bg-blue-500 bg-opacity-40"
-          }`}
-        >
-          <Toaster />
-          <SideNav />
-          <Routes>
-            <Route path="/" element={<HomePage backgrounds={backgrounds} />} />
-          </Routes>
-        </div>
-      </Router>
+      <Backgrounds backgrounds={backgrounds} />
+      <div
+        className={`fixed inset-0 overflow-auto ${
+          breakStarted && "bg-blue-500 bg-opacity-40"
+        }`}
+      >
+        <Toaster />
+        <SideNav />
+        <HomePage backgrounds={backgrounds} />
+      </div>
     </>
   );
 }
