@@ -68,12 +68,6 @@ export const BackgroundNav = ({
             title="Gradient"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.AMONGUS}
-            setIsBackground={setIsBackground}
-            background={backgrounds.AMONGUS}
-            title="AmongUs"
-          />
-          <BackgroundDropdownItem
             isPicked={isBackground == backgrounds.NYANCAT}
             setIsBackground={setIsBackground}
             background={backgrounds.NYANCAT}
