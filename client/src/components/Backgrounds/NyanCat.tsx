@@ -1,7 +1,8 @@
 import Particles from "react-tsparticles";
-import { loadFull } from "tsparticles";
+import { memo } from "react";
 
 const options = {
+  retina_detect: false,
   autoPlay: true,
   background: {
     color: {
@@ -28,9 +29,9 @@ const options = {
     enable: true,
     zIndex: 1,
   },
-  detectRetina: true,
+  detectRetina: false,
   duration: 0,
-  fpsLimit: 120,
+  fpsLimit: 30,
   interactivity: {
     detectsOn: "window",
     events: {
@@ -459,22 +460,18 @@ const options = {
   zLayers: 100,
 };
 
-export const NyanCat = () => {
-  const particlesInit = async (main) => {
-    // you can initialize the tsParticles instance (main) here, adding custom shapes or presets
-    // this loads the tsparticles package bundle, it's the easiest method for getting everything ready
-    // starting from v2 you can add only the features you need reducing the bundle size
-    await loadFull(main);
-  };
-
-  const particlesLoaded = (container) => {};
+const NyanCat = ({ particlesInit }: { particlesInit: any }) => {
+  const particlesLoaded = () => {};
   return (
     <Particles
       id="tsparticles"
       init={particlesInit}
       //@ts-ignore
       loaded={particlesLoaded}
+      //@ts-ignore
       options={options}
     />
   );
 };
+
+export default memo(NyanCat);
