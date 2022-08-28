@@ -5,6 +5,9 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Settings } from "./Settings";
 import { useTask, useTimer, useBreakStarted } from "@Store";
 
+// TODO: Remove alerted
+// TODO: Add a blurb/instructions to let users know how to toggle
+
 export const Task = ({ task }) => {
   const [openSettings, setOpenSettings] = useState(false);
   const { completeTask, toggleInProgressState, alertTask, setPomodoroCounter } =
@@ -20,7 +23,7 @@ export const Task = ({ task }) => {
   }
 
   useEffect(() => {
-    if (timerQueue === 0 && !task.alerted) {
+    if (timerQueue === 0 && !task.alerted && task.inProgress) {
       setPomodoroCounter(task.id);
     }
   }, [timerQueue, breakStarted]);
@@ -36,7 +39,9 @@ export const Task = ({ task }) => {
       {!openSettings ? (
         <div
           className={`w-full py-2 px-2 cursor-pointer border-l-4 bg-stone-300 dark:bg-gray-700 ${
-            task.inProgress && !task.completed && "border-yellow-500"
+            task.inProgress &&
+            !task.completed &&
+            "border-cyan-700 bg-cyan-500 dark:bg-cyan-500 dark:text-stone-600"
           } ${
             task.completed &&
             "border-green-500 bg-green-300 dark:bg-green-300 line-through dark:text-stone-600"
@@ -69,6 +74,7 @@ export const Task = ({ task }) => {
               <div className="whitespace-normal">{task.description}</div>
             </div>
             <div className="flex items-center">
+              {/*This the guy*/}
               <div className="flex justify-end">
                 {task.pomodoroCounter}/{task.pomodoro}
               </div>

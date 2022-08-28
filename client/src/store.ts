@@ -112,18 +112,6 @@ export const useTimer = create<ITimer>((set) => ({
 }));
 
 /**
- * Pomo Counter Store
- * ---
- * Handler for Pomo Counts
- */
-
-export const useSetPomodoroCounter = create<IPomodoroCounter>((set) => ({
-  pomodoroCounts: 0,
-  setPomodoroCounter: () =>
-    set((state) => ({ pomodoroCounts: state.pomodoroCounts + 1 })),
-}));
-
-/**
  * Settings Store
  * ---
  * Handler for Settings
@@ -288,6 +276,10 @@ export const useStickyNote = create<IStickyNoteState>(
  * Handle the tasks created in the tasks section
  */
 
+// NOTE: count is actually the passed down marker the amount of pomodoro you wish to take
+// NOTE: pomodoroCounter is the amount of pomodoro that had occured to completion
+// NOTE: InProgress is already a method for us to select a task or not
+// NOTE: SetPomodoro sets the initial count
 export const useTask = create<ITaskState>(
   persist(
     (set, _) => ({
