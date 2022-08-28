@@ -38,22 +38,10 @@ export const BackgroundNav = ({
           ref={menuRef}
         >
           <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.STARS}
-            setIsBackground={setIsBackground}
-            background={backgrounds.STARS}
-            title="Stars"
-          />
-          <BackgroundDropdownItem
             isPicked={isBackground == backgrounds.CITY}
             setIsBackground={setIsBackground}
             background={backgrounds.CITY}
             title="City"
-          />
-          <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.SNOW}
-            setIsBackground={setIsBackground}
-            background={backgrounds.SNOW}
-            title="Snow"
           />
           <BackgroundDropdownItem
             isPicked={isBackground == backgrounds.FADE}
@@ -66,12 +54,6 @@ export const BackgroundNav = ({
             setIsBackground={setIsBackground}
             background={backgrounds.GRADIENT}
             title="Gradient"
-          />
-          <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.NYANCAT}
-            setIsBackground={setIsBackground}
-            background={backgrounds.NYANCAT}
-            title="NyanCat"
           />
           <BackgroundDropdownItem
             isPicked={isBackground == backgrounds.JAPAN}
