@@ -13,12 +13,9 @@ import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 
 enum backgrounds {
-  STARS,
   CITY,
-  SNOW,
   FADE,
   GRADIENT,
-  NYANCAT,
   JAPAN,
   COTTAGE,
   LOFIGIRL,
