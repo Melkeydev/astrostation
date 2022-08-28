@@ -276,14 +276,29 @@ export const useStickyNote = create<IStickyNoteState>(
  * Handle the tasks created in the tasks section
  */
 
-// NOTE: count is actually the passed down marker the amount of pomodoro you wish to take
-// NOTE: pomodoroCounter is the amount of pomodoro that had occured to completion
-// NOTE: InProgress is already a method for us to select a task or not
-// NOTE: SetPomodoro sets the initial count
 export const useTask = create<ITaskState>(
   persist(
     (set, _) => ({
-      tasks: [],
+      tasks: [
+        {
+          id: Date.now(),
+          description: "Task in progress",
+          inProgress: true,
+          completed: false,
+          pomodoro: 1,
+          pomodoroCounter: 0,
+          alerted: false,
+        } as ITask,
+        {
+          id: Date.now() + 1,
+          description: "Task not in progress",
+          inProgress: false,
+          completed: false,
+          pomodoro: 1,
+          pomodoroCounter: 0,
+          alerted: false,
+        } as ITask,
+      ],
       addTask: (description: string, count: number, isBreak: boolean) => {
         set((state) => ({
           tasks: [

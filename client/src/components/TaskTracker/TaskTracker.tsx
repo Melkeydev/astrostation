@@ -18,7 +18,7 @@ export const TaskTracker = () => {
           onClick={() => setIsTasksToggled(false)}
         />
       </div>
-      <div className="space-y-2 pb-3 pr-3 pl-3 mb-2 w-72 sm:w-96 dark:text-gray-300 ">
+      <div className="joyRideTaskTracker space-y-2 pb-3 pr-3 pl-3 mb-2 w-72 sm:w-96 dark:text-gray-300 ">
         <Header
           title="Task Tracker"
           onAdd={() => setShowAddTask(!showAddTask)}

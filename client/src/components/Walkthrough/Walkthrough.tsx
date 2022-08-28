@@ -19,6 +19,21 @@ export const Walkthrough = () => {
         "In the settings, you can configure certain Astrostation widgets to your liking.",
     },
     {
+      target: ".joyRideTaskTracker",
+      content:
+        "This is where you can keep track of all the tasks within your pomodoro sessions",
+    },
+    {
+      target: ".joyRideInProgressTask",
+      content:
+        "This is a task that is currently in progess. The pomodoro counter will keep track how many pomodoro sessions you set to complete it",
+    },
+    {
+      target: ".joyRideTask",
+      content:
+        "This is a task that is not in progess. The pomodoro sessions will not be tracked for these tasks",
+    },
+    {
       target: ".configureWidgetsButton",
       content:
         "This is your widget configuration screen — add the widgets you want, remove the ones you don't.",

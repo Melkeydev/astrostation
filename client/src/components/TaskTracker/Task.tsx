@@ -41,7 +41,7 @@ export const Task = ({ task }) => {
           className={`w-full py-2 px-2 cursor-pointer border-l-4 bg-stone-300 dark:bg-gray-700 ${
             task.inProgress &&
             !task.completed &&
-            "border-cyan-700 bg-cyan-500 dark:bg-cyan-500 dark:text-stone-600"
+            "joyRideInProgressTask border-cyan-700 bg-cyan-500 dark:bg-cyan-500 dark:text-stone-600"
           } ${
             task.completed &&
             "border-green-500 bg-green-300 dark:bg-green-300 line-through dark:text-stone-600"
@@ -49,6 +49,11 @@ export const Task = ({ task }) => {
             !task.completed &&
             task.alerted &&
             "border-red-500 bg-red-300 dark:bg-red-300 dark:text-stone-600"
+          } ${
+            !task.completed &&
+            !task.alerted &&
+            !task.inProgress &&
+            "joyRideTask"
           }`}
           onDoubleClick={() => preventFalseInProgress()}
         >
