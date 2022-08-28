@@ -27,8 +27,8 @@ jobs:
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node-version }}
-          cache: "npm"
-          cache-dependency-path: "./client/package-lock.json"
+          #cache: "npm"
+          #cache-dependency-path: "./client/package-lock.json"
       - name: 🚚 Upgrade NPM
         run: npm install -g npm
       - run: npm ci
