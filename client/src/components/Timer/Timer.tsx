@@ -7,7 +7,6 @@ import {
   useLongBreakTimer,
   usePomodoroTimer,
   useHasStarted,
-  useSetPomodoroCounter,
   useTimer,
   useBreakStarted,
   useAudioVolume,
@@ -31,7 +30,6 @@ export const Timer = () => {
   const [timerIntervalId, setTimerIntervalId] = useState(null);
   const [sessionType, setSessionType] = useState("Session");
   const { setIsTimerToggled } = useToggleTimer();
-  const { setPomodoroCounter } = useSetPomodoroCounter();
   const { alarm } = useAlarmOption();
 
   const audioRef = useRef();
@@ -43,7 +41,6 @@ export const Timer = () => {
 
   useEffect(() => {
     if (timer === 0) {
-      setPomodoroCounter();
       setTimerQueue(0);
       // @ts-ignore
       audioRef.current.volume = audioVolume;

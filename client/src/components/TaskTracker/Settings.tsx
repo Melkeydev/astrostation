@@ -14,6 +14,7 @@ export const Settings = ({ setOpenSettings, Task }) => {
     if (Task.pomodoroCounter == Task.pomodoro) {
       alertTask(Task.id, false);
     }
+    
     setPomodoro(Task.id, changePomo);
     renameTask(Task.id, text);
     setOpenSettings(false);
