@@ -112,18 +112,6 @@ export const useTimer = create<ITimer>((set) => ({
 }));
 
 /**
- * Pomo Counter Store
- * ---
- * Handler for Pomo Counts
- */
-
-export const useSetPomodoroCounter = create<IPomodoroCounter>((set) => ({
-  pomodoroCounts: 0,
-  setPomodoroCounter: () =>
-    set((state) => ({ pomodoroCounts: state.pomodoroCounts + 1 })),
-}));
-
-/**
  * Settings Store
  * ---
  * Handler for Settings
@@ -291,7 +279,26 @@ export const useStickyNote = create<IStickyNoteState>(
 export const useTask = create<ITaskState>(
   persist(
     (set, _) => ({
-      tasks: [],
+      tasks: [
+        {
+          id: Date.now(),
+          description: "Task in progress",
+          inProgress: true,
+          completed: false,
+          pomodoro: 1,
+          pomodoroCounter: 0,
+          alerted: false,
+        } as ITask,
+        {
+          id: Date.now() + 1,
+          description: "Task not in progress",
+          inProgress: false,
+          completed: false,
+          pomodoro: 1,
+          pomodoroCounter: 0,
+          alerted: false,
+        } as ITask,
+      ],
       addTask: (description: string, count: number, isBreak: boolean) => {
         set((state) => ({
           tasks: [
