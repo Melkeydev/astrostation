@@ -83,7 +83,7 @@ export const TimerSettings = ({ onClose }) => {
     var answer = window.confirm("Are you sure you want to reset to defaults?");
     if (answer) {
       // set master states
-      setDefault(false, true, false);
+      setDefault();
 
       // set local states
       setPomoCount(1500);
