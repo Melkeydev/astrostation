@@ -31,7 +31,7 @@ export const Walkthrough = () => {
     {
       target: ".joyRideTask",
       content:
-        "This is a task that is not in progess. The pomodoro sessions will not be tracked for these tasks",
+        "This is a task that is not in progress. The pomodoro sessions will not be tracked for these tasks",
     },
     {
       target: ".configureWidgetsButton",

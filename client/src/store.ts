@@ -4,7 +4,6 @@ import {
   IAudioVolume,
   IAlarmOption,
   ITimer,
-  IPomodoroCounter,
   IPosTimerSettings,
   IHasStarted,
   IBreakStarted,
