@@ -1,10 +1,12 @@
-import { useState } from "react";
-import { IoCloseSharp } from "react-icons/io5";
-import { AiOutlineReload } from "react-icons/ai";
 import { useSpotifyMusic } from "@Store";
-import { Tooltip } from "@mui/material";
+import { useState } from "react";
+import { AiOutlineReload } from "react-icons/ai";
+import { IoCloseSharp } from "react-icons/io5";
+import { WithTooltip } from "../../Tooltip";
+
 export const Spotify = () => {
   const { setIsSpotifyToggled } = useSpotifyMusic();
+
   const [text, setText] = useState("");
   const [playlist, setPlaylist] = useState(
     "https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn"
@@ -30,7 +32,7 @@ export const Spotify = () => {
 
   return (
     <div className="py-2 mb-2 w-72 sm:w-96 max-w-sm text-gray-800 shadow-md rounded-lg dark:text-gray-300 bg-white/[.96] dark:bg-gray-800/[.96] dark:border-gray-700 justify-between">
-      <Tooltip title="Make sure to refresh after logging in" placement="top">
+      <WithTooltip text="Make sure to refresh after logging in">
         <div className="flex justify-between items-center p-1 handle cursor-move">
           <p>Spotify</p>
           <IoCloseSharp
@@ -38,7 +40,8 @@ export const Spotify = () => {
             onClick={() => setIsSpotifyToggled(false)}
           />
         </div>
-      </Tooltip>
+      </WithTooltip>
+
       <div className="cancelDrag justify-center">
         <iframe
           src={`${playlist}?utm_source=generator&theme=0`}
