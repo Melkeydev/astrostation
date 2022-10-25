@@ -18,6 +18,7 @@ export const WithTooltip = ({
   const { x, y, reference, floating, strategy } = useFloating({
     placement: position,
     middleware: [shift(), flip(), offset(10)],
+    strategy: "fixed",
   });
 
   return (
