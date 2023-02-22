@@ -33,7 +33,7 @@ export const BackgroundNav = ({
     <div className="flex justify-end" ref={menuRef}>
       <div className="w-70 text-left">
         <div
-          className="origin-top-right absolute right-0 w-56 rounded-md shadow-lg bg-gray-700 ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 focus:outline-none z-10"
+          className="absolute right-0 z-10 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           ref={menuRef}
         >

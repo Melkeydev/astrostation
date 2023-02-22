@@ -6,14 +6,14 @@ export const Sticky = ({ id, text }) => {
   const { removeNote, editNote } = useStickyNote();
 
   return (
-    <div className="bg-[#feff9c] cursor-move">
-      <div className="flex justify-end w-full p-2">
+    <div className="cursor-move bg-[#feff9c]">
+      <div className="flex w-full justify-end p-2">
         <IoCloseSharp
-          className="text-red-500 cursor-pointer hover:bg-red-200"
+          className="cursor-pointer text-red-500 hover:bg-red-200"
           onClick={() => removeNote(id)}
         />
       </div>
-      <div className="cancelDrag min-w-[150px] min-h-[150px] max-w-[215px] break-words rounded pl-4 pb-4 pr-4 m-auto">
+      <div className="cancelDrag m-auto min-h-[150px] min-w-[150px] max-w-[215px] break-words rounded pl-4 pb-4 pr-4">
         <TextareaAutosize
           rows={4}
           cols={18}

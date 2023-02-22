@@ -18,13 +18,13 @@ export const ToggleOption = ({
   return (
     <div>
       {title}
-      <div className="bg-gray-200 text-center items-center dark:bg-gray-700 dark:text-gray-200">
+      <div className="items-center bg-gray-200 text-center dark:bg-gray-700 dark:text-gray-200">
         <div className="flex justify-between p-2">
           <button id={decrement} onClick={onClick}>
             &lt;
           </button>
           <input
-            className="text-center dark:bg-gray-700 w-9/12"
+            className="w-9/12 text-center dark:bg-gray-700"
             defaultValue={propertyLength}
             onChange={onChange}
             readOnly={hasStarted}

@@ -38,13 +38,13 @@ export const Task = ({ task }) => {
     <>
       {!openSettings ? (
         <div
-          className={`w-full py-2 px-2 cursor-pointer border-l-4 bg-stone-300 dark:bg-gray-700 ${
+          className={`w-full cursor-pointer border-l-4 bg-stone-300 py-2 px-2 dark:bg-gray-700 ${
             task.inProgress &&
             !task.completed &&
             "joyRideInProgressTask border-cyan-700 bg-cyan-500 dark:bg-cyan-500 dark:text-stone-600"
           } ${
             task.completed &&
-            "border-green-500 bg-green-300 dark:bg-green-300 line-through dark:text-stone-600"
+            "border-green-500 bg-green-300 line-through dark:bg-green-300 dark:text-stone-600"
           } ${
             !task.completed &&
             task.alerted &&
@@ -62,14 +62,14 @@ export const Task = ({ task }) => {
               <div>
                 {!task.completed ? (
                   <FaCheck
-                    className={`cursor-pointer ml-2 dark:text-stone-600 ${
+                    className={`ml-2 cursor-pointer dark:text-stone-600 ${
                       task.completed ? "text-green-500" : "text-slate-500"
                     }`}
                     onClick={() => completeTask(task.id)}
                   />
                 ) : (
                   <RiArrowGoBackFill
-                    className={`cursor-pointer ml-2 ${
+                    className={`ml-2 cursor-pointer ${
                       task.completed ? "text-green-500" : "text-slate-500"
                     }`}
                     onClick={() => completeTask(task.id)}
@@ -84,7 +84,7 @@ export const Task = ({ task }) => {
                 {task.pomodoroCounter}/{task.pomodoro}
               </div>
               <BsThreeDotsVertical
-                className="cursor-pointer ml-2"
+                className="ml-2 cursor-pointer"
                 onClick={() => setOpenSettings(!openSettings)}
               />
             </div>

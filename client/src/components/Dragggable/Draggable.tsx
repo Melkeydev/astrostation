@@ -90,7 +90,7 @@ export const DWrapper = ({
             <div
               ref={ref}
               className={`inline-block ${
-                toggleHook ? "visible" : "hidden pointer-events-none"
+                toggleHook ? "visible" : "pointer-events-none hidden"
               }`}
             >
               {children}
@@ -105,7 +105,7 @@ export const DWrapper = ({
             <div
               ref={ref}
               className={`inline-block ${
-                toggleHook ? "visible" : "hidden pointer-events-none"
+                toggleHook ? "visible" : "pointer-events-none hidden"
               }`}
             >
               {children}

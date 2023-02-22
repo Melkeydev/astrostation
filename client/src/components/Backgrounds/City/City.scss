@@ -3,15 +3,15 @@
 }
 
 .cityContainer {
- background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg");
- background-size: cover;
- position: absolute;
- top: 0;
- bottom: 0;
- left: 0;
- right: 0;
- display: block;
- z-index: 0;
+  background: url("https://s3-us-west-2.amazonaws.com/s.cdpn.io/221808/sky.jpg");
+  background-size: cover;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: block;
+  z-index: 0;
 }
 
 @function random_range($min, $max) {
@@ -41,7 +41,6 @@
     $random-x-end-yoyo: $random-x + calc($random-offset / 2);
     $random-yoyo-time: calc(random_range(30000, 80000) / 100000);
     $random-yoyo-y: $random-yoyo-time;
-
 
     $random-scale: random(10000) * 0.0001;
     $fall-duration: random_range(10, 30) * 1s;

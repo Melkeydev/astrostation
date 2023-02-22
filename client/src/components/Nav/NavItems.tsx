@@ -11,8 +11,8 @@ export const NavItem: FC<{
         <button
           className={`${
             toggled &&
-            "relative bg-gray-200 text-black dark:text-black border-black border-b-2 dark:bg-violet-500"
-          } sm:h-16 sm:px-6  flex justify-center items-center w-full text-gray-300 md:hover:bg-gray-200 md:hover:text-gray-800 h-14 px-4 md:dark:hover:bg-violet-500`}
+            "relative border-b-2 border-black bg-gray-200 text-black dark:bg-violet-500 dark:text-black"
+          } flex h-14  w-full items-center justify-center px-4 text-gray-300 sm:h-16 sm:px-6 md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500`}
           onClick={onClick}
         >
           {children}

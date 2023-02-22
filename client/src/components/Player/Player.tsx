@@ -68,8 +68,8 @@ export const Player = () => {
 
   return (
     <>
-      <div className="py-4 px-3 mb-2 w-72 sm:w-96 bg-white/[.96] text-gray-800 rounded-lg border border-gray-200 shadow-md dark:text-gray-300 dark:bg-gray-800/[.96] dark:border-gray-700 ">
-        <div className="flex items-center space-x-6 justify-between">
+      <div className="mb-2 w-72 rounded-lg border border-gray-200 bg-white/[.96] py-4 px-3 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96 ">
+        <div className="flex items-center justify-between space-x-6">
           <div>{song?.artist}</div>
           <div className="flex space-x-2">
             <IconContext.Provider value={{ size: "1.1rem" }}>
@@ -77,7 +77,7 @@ export const Player = () => {
             </IconContext.Provider>
             <IconContext.Provider value={{ size: "1.1rem" }}>
               <IoCloseSharp
-                className="text-red-500 cursor-pointer hover:bg-red-200"
+                className="cursor-pointer text-red-500 hover:bg-red-200"
                 onClick={() => setIsMusicToggled(false)}
               />
             </IconContext.Provider>

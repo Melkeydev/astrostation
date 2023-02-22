@@ -127,20 +127,20 @@ export const TimerSettings = ({ onClose }) => {
   }
 
   return (
-    <div className="p-2 px-1 w-72 sm:w-96 max-w-sm bg-white text-gray-800 rounded-lg shadow-md dark:text-gray-300 dark:bg-gray-800 dark:border-gray-700">
+    <div className="w-72 max-w-sm rounded-lg bg-white p-2 px-1 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 sm:w-96">
       <div className="flex justify-end">
         <IoCloseSharp
-          className="text-red-500 cursor-pointer hover:bg-red-200"
+          className="cursor-pointer text-red-500 hover:bg-red-200"
           onClick={onClose}
         />
       </div>
       <div className="grid">
         <div className="text-center text-lg">Settings</div>
         <div className="border-gray-100 p-4">
-          <div className="text-center p-2 rounded">
+          <div className="rounded p-2 text-center">
             Time <span className="italic">(minutes)</span>
           </div>
-          <div className="flex justify-between items-center text-center gap-6">
+          <div className="flex items-center justify-between gap-6 text-center">
             <ToggleOption
               title="Pomodoro"
               decrement="session-decrement"
@@ -223,8 +223,8 @@ export const TimerSettings = ({ onClose }) => {
         </div>
         <hr className="border-t-3 border-[#5c5c5c]" />
         <div className="border-gray-100 p-4">
-          <div className="text-center p-2 rounded">Alarm Volume</div>
-          <div className="px-2 pb-2 items-center">
+          <div className="rounded p-2 text-center">Alarm Volume</div>
+          <div className="items-center px-2 pb-2">
             <Slider
               defaultValue={audioVolume}
               onChange={(value) => {
@@ -238,12 +238,12 @@ export const TimerSettings = ({ onClose }) => {
         </div>
         <hr className="border-t-3 border-[#5c5c5c]" />
         <div className="border-gray-100 p-4">
-          <div className="text-center p-2 rounded">Alarm Sound</div>
-          <div className="flex justify-between items-center text-center gap-2 pb-2">
+          <div className="rounded p-2 text-center">Alarm Sound</div>
+          <div className="flex items-center justify-between gap-2 pb-2 text-center">
             <div className="w-1/4">
               Retro
               <div
-                className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
+                className={`flex cursor-pointer items-center justify-center bg-gray-200 p-2 text-center dark:bg-gray-700 dark:text-gray-200 ${
                   currentAlarm == arcade && "border border-gray-200"
                 }`}
                 onClick={() => changeAlarm(arcade)}
@@ -254,7 +254,7 @@ export const TimerSettings = ({ onClose }) => {
             <div className="w-1/4">
               Bells
               <div
-                className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
+                className={`flex cursor-pointer items-center justify-center bg-gray-200 p-2 text-center dark:bg-gray-700 dark:text-gray-200 ${
                   currentAlarm == bells && "border border-gray-200"
                 }`}
                 onClick={() => changeAlarm(bells)}
@@ -265,7 +265,7 @@ export const TimerSettings = ({ onClose }) => {
             <div className="w-1/4">
               Flute
               <div
-                className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
+                className={`flex cursor-pointer items-center justify-center bg-gray-200 p-2 text-center dark:bg-gray-700 dark:text-gray-200 ${
                   currentAlarm == flute && "border border-gray-200"
                 }`}
                 onClick={() => changeAlarm(flute)}
@@ -276,7 +276,7 @@ export const TimerSettings = ({ onClose }) => {
             <div className="w-1/4">
               Piano
               <div
-                className={`cursor-pointer flex justify-center bg-gray-200 p-2 text-center items-center dark:bg-gray-700 dark:text-gray-200 ${
+                className={`flex cursor-pointer items-center justify-center bg-gray-200 p-2 text-center dark:bg-gray-700 dark:text-gray-200 ${
                   currentAlarm == piano && "border border-gray-200"
                 }`}
                 onClick={() => changeAlarm(piano)}
@@ -288,10 +288,10 @@ export const TimerSettings = ({ onClose }) => {
         </div>
         <hr className="border-t-3 border-[#5c5c5c]" />
         <div className="border-gray-100 p-4">
-          <div className="text-center p-2 rounded">
+          <div className="rounded p-2 text-center">
             Grid Size (increasing Step Size)
           </div>
-          <div className="px-2 pb-2 items-center">
+          <div className="items-center px-2 pb-2">
             <Slider
               //@ts-ignore
               defaultValue={onDefaultChange}
@@ -306,11 +306,11 @@ export const TimerSettings = ({ onClose }) => {
         </div>
         <hr className="border-t-3 border-[#5c5c5c]" />
         <div className="border-gray-100 p-4">
-          <div className="text-center pb-2 rounded">Lock Widgets In-place</div>
+          <div className="rounded pb-2 text-center">Lock Widgets In-place</div>
           <div className="flex justify-center">
             <Button
               className={
-                "w-[70%] text-gray-800 font-normal hover:text-white dark:text-white float-right " +
+                "float-right w-[70%] font-normal text-gray-800 hover:text-white dark:text-white " +
                 (currentWidgetLockState && " bg-red-500 hover:bg-red-700")
               }
               variant="primary"
@@ -323,14 +323,14 @@ export const TimerSettings = ({ onClose }) => {
         <hr className="border-t-3 border-[#5c5c5c]" />
         <div className="flex justify-between p-2">
           <Button
-            className="text-gray-800 font-normal hover:text-white dark:text-white"
+            className="font-normal text-gray-800 hover:text-white dark:text-white"
             variant="cold"
             onClick={handleDefaults}
           >
             Default
           </Button>
           <Button
-            className="text-gray-800 font-normal hover:text-white dark:text-white"
+            className="font-normal text-gray-800 hover:text-white dark:text-white"
             variant="cold"
             onClick={onSubmit}
           >

@@ -222,7 +222,7 @@ export const SideNav = () => {
   }
 
   return (
-    <div className="sideNav flex absolute">
+    <div className="sideNav absolute flex">
       <aside className="flex flex-col">
         <ul>
           <div className="sm:hidden">

@@ -112,7 +112,7 @@ export const CryptoModal = ({ isVisible = false, onClose }) => {
         <div className="flex justify-end">
           <div className="modal-header dark:bg-gray-800 dark:text-gray-300">
             <IoCloseSharp
-              className="text-red-500 cursor-pointer hover:bg-red-200"
+              className="cursor-pointer text-red-500 hover:bg-red-200"
               onClick={onClose}
             />
           </div>
@@ -120,21 +120,21 @@ export const CryptoModal = ({ isVisible = false, onClose }) => {
         <div className="">
           <div className="w-full ">
             <form className="" onSubmit={handleSubmit}>
-              <div className="w-full sm:w-auto shadow-lg mx-auto rounded-xl bg-white dark:bg-gray-800 dark:text-gray-300">
+              <div className="mx-auto w-full rounded-xl bg-white shadow-lg dark:bg-gray-800 dark:text-gray-300 sm:w-auto">
                 <main className="pl-4 pr-4 pb-4">
-                  <h1 className="text-xl font-semibold text-gray-700 text-center dark:text-gray-300">
+                  <h1 className="text-center text-xl font-semibold text-gray-700 dark:text-gray-300">
                     Connect MetaMask Wallet and Donate
                   </h1>
                   <div>
-                    <div className="flex items-center h-10">
-                      <div className="flex items-center px-4 py-2 bg-violet-700 text-white font-medium focus:outline-none dark:bg-violet-800 dark:text-gray-200">
+                    <div className="flex h-10 items-center">
+                      <div className="flex items-center bg-violet-700 px-4 py-2 font-medium text-white focus:outline-none dark:bg-violet-800 dark:text-gray-200">
                         <FaEthereum className="h-6 w-6" />
                         ETH
                       </div>
                       <input
                         name="ether"
                         type="text"
-                        className="w-full h-10 m-1 py-2 px-3 text-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-500 block focus:ring focus:outline-none"
+                        className="m-1 block h-10 w-full border border-gray-300 py-2 px-3 text-lg focus:outline-none focus:ring dark:border-gray-500 dark:bg-gray-700"
                         placeholder="0.00197 ETH"
                       />
                     </div>
@@ -145,7 +145,7 @@ export const CryptoModal = ({ isVisible = false, onClose }) => {
                     <Button
                       variant="crypto"
                       type="button"
-                      className="focus:ring focus:outline-none w-full"
+                      className="w-full focus:outline-none focus:ring"
                       onClick={() => connectMetaMaskConnected()}
                     >
                       Connect MetaMask wallet
@@ -154,7 +154,7 @@ export const CryptoModal = ({ isVisible = false, onClose }) => {
                     <Button
                       variant="crypto"
                       type="submit"
-                      className="focus:ring focus:outline-none w-full"
+                      className="w-full focus:outline-none focus:ring"
                     >
                       Donate Now
                     </Button>

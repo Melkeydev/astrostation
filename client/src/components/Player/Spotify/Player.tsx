@@ -31,12 +31,12 @@ export const Spotify = () => {
   }
 
   return (
-    <div className="py-2 mb-2 w-72 sm:w-96 max-w-sm text-gray-800 shadow-md rounded-lg dark:text-gray-300 bg-white/[.96] dark:bg-gray-800/[.96] dark:border-gray-700 justify-between">
+    <div className="mb-2 w-72 max-w-sm justify-between rounded-lg bg-white/[.96] py-2 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96">
       <WithTooltip text="Make sure to refresh after logging in">
-        <div className="flex justify-between items-center p-1 handle cursor-move">
+        <div className="handle flex cursor-move items-center justify-between p-1">
           <p>Spotify</p>
           <IoCloseSharp
-            className="text-red-500 cursor-pointer hover:bg-red-200"
+            className="cursor-pointer text-red-500 hover:bg-red-200"
             onClick={() => setIsSpotifyToggled(false)}
           />
         </div>
@@ -53,7 +53,7 @@ export const Spotify = () => {
       </div>
       <div className="flex items-center space-x-1 p-1">
         <input
-          className="cancelDrag w-full p-1 border border-gray-300 dark:bg-gray-700/[.96] dark:border-gray-500"
+          className="cancelDrag w-full border border-gray-300 p-1 dark:border-gray-500 dark:bg-gray-700/[.96]"
           type="text"
           value={text}
           placeholder="Ctrl-V Spotify URL here"

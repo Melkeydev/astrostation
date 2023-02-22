@@ -13,8 +13,8 @@ export const TaskTracker = () => {
   const [isTaskInfoModalOpen, setIsTaskInfoModalOpen] = useState(false);
 
   return (
-    <div className="bg-white/[.96] rounded-lg border border-gray-200 shadow-md dark:bg-gray-800/[.96] dark:border-gray-700">
-      <div className="flex justify-between handle p-2 w-full cursor-move">
+    <div className="rounded-lg border border-gray-200 bg-white/[.96] shadow-md dark:border-gray-700 dark:bg-gray-800/[.96]">
+      <div className="handle flex w-full cursor-move justify-between p-2">
         <TaskInfoModal
           isVisible={isTaskInfoModalOpen}
           onClose={() => setIsTaskInfoModalOpen(false)}
@@ -24,11 +24,11 @@ export const TaskTracker = () => {
           onClick={() => setIsTaskInfoModalOpen(true)}
         />
         <IoCloseSharp
-          className="text-red-500 cursor-pointer hover:bg-red-200"
+          className="cursor-pointer text-red-500 hover:bg-red-200"
           onClick={() => setIsTasksToggled(false)}
         />
       </div>
-      <div className="joyRideTaskTracker space-y-2 pb-3 pr-3 pl-3 mb-2 w-72 sm:w-96 dark:text-gray-300 ">
+      <div className="joyRideTaskTracker mb-2 w-72 space-y-2 pb-3 pr-3 pl-3 dark:text-gray-300 sm:w-96 ">
         <Header
           title="Task Tracker"
           onAdd={() => setShowAddTask(!showAddTask)}

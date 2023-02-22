@@ -46,7 +46,7 @@ export const AddTask = () => {
       <div className="my-5">
         <label className="block">Task</label>
         <input
-          className="cancelDrag w-full h-10 m-1 py-2 px-3 text-lg border border-gray-300 dark:bg-gray-700 dark:border-gray-500"
+          className="cancelDrag m-1 h-10 w-full border border-gray-300 py-2 px-3 text-lg dark:border-gray-500 dark:bg-gray-700"
           type="text"
           placeholder="Add Task"
           value={charCount}
@@ -62,7 +62,7 @@ export const AddTask = () => {
       <div className="my-5 flex items-center justify-center">
         <label className="flex-1">Set Pomodoro Counts</label>
         <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-200">
-          <div className="flex p-2 space-x-5">
+          <div className="flex space-x-5 p-2">
             <button
               type="button"
               id="pomodoro-decrement"

@@ -1,5 +1,5 @@
 import "../Backgrounds.scss";
-import lofiGirlVideo from "/assets/videos/lofi_girl.mp4"
+import lofiGirlVideo from "/assets/videos/lofi_girl.mp4";
 
 export const LofiGirl = () => {
   return (
