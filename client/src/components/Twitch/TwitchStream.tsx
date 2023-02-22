@@ -33,15 +33,15 @@ export const TwitchStream = () => {
   // The following resize fix is a thanks to adamdotjs.
   // https://play.tailwindcss.com/jp2JnWgRoW -> his solution
   return (
-    <div className="resize-x overflow-auto py-2 sm:w-96 w-full text-gray-800 shadow-md rounded-lg dark:text-gray-300 bg-white/[.96] dark:bg-gray-800/[.96] dark:border-gray-700 justify-between">
-      <div className="flex justify-between handle items-center p-1">
+    <div className="w-full resize-x justify-between overflow-auto rounded-lg bg-white/[.96] py-2 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96">
+      <div className="handle flex items-center justify-between p-1">
         <p>Twitch</p>
         <IoCloseSharp
-          className="text-red-500 cursor-pointer hover:bg-red-200"
+          className="cursor-pointer text-red-500 hover:bg-red-200"
           onClick={() => setIsTwitchToggled(false)}
         />
       </div>
-      <div className="justify-center aspect-video relative">
+      <div className="relative aspect-video justify-center">
         {isTwitchShown && isTwitchToggled && (
           <iframe
             className="left-0 h-full w-full"
@@ -57,7 +57,7 @@ export const TwitchStream = () => {
       </div>
       <div className="cancelDrag flex items-center space-x-1 p-1">
         <input
-          className="w-full p-1 border border-gray-300 dark:bg-gray-700/[.96] dark:border-gray-500"
+          className="w-full border border-gray-300 p-1 dark:border-gray-500 dark:bg-gray-700/[.96]"
           type="text"
           value={inputText}
           placeholder="Search stream..."

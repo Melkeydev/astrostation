@@ -32,7 +32,7 @@ export const WithTooltip = ({
       <div
         ref={floating}
         className={clsx(
-          "py-0.5 px-2 rounded-md bg-slate-100 dark:bg-gray-700 text-black dark:text-white text-sm",
+          "rounded-md bg-slate-100 py-0.5 px-2 text-sm text-black dark:bg-gray-700 dark:text-white",
           isOpen && "animate-intro-fade-scale",
           isOpen === false && "animate-outro-fade-scale",
           isOpen === undefined && "opacity-0"

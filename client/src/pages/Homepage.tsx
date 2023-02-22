@@ -67,7 +67,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
       <div
         className={
           "flex justify-end " +
-          (isDesktop ? " space-x-6" : " justify-items-end grid gap-y-[5%]")
+          (isDesktop ? " space-x-6" : " grid justify-items-end gap-y-[5%]")
         }
       >
         <div className="settingsButton">
@@ -113,7 +113,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
       </div>
       <CryptoDonationButton />
       {!isDesktop ? (
-        <div className="flex flex-col items-center ml-8">
+        <div className="ml-8 flex flex-col items-center">
           <div className={`${isMusicToggled ? "block" : "hidden"}`}>
             <Player />
           </div>

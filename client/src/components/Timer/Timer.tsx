@@ -52,10 +52,10 @@ export const Timer = () => {
         setBreakStarted(true);
         toast(
           (t) => (
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <div>Break Mode</div>
               <IoCloseSharp
-                className="text-red-500 cursor-pointer hover:bg-red-200"
+                className="cursor-pointer text-red-500 hover:bg-red-200"
                 onClick={() => toast.dismiss(t.id)}
               />
             </div>
@@ -79,10 +79,10 @@ export const Timer = () => {
         toast.dismiss();
         toast(
           (t) => (
-            <div className="flex justify-between items-center">
+            <div className="flex items-center justify-between">
               <div>Work Mode</div>
               <IoCloseSharp
-                className="text-red-500 cursor-pointer hover:bg-red-200"
+                className="cursor-pointer text-red-500 hover:bg-red-200"
                 onClick={() => toast.dismiss(t.id)}
               />
             </div>
@@ -180,20 +180,20 @@ export const Timer = () => {
   return (
     <div
       className={`${
-        breakStarted && "shadow-lg bg-slate-200/[.96]"
-      } shadow-lg py-2 px-1 mb-2 max-w-sm w-72 sm:w-96 bg-white/[.96] text-gray-800 rounded-lg border border-gray-200 dark:text-gray-300 dark:bg-gray-800/[.96] dark:border-gray-700`}
+        breakStarted && "bg-slate-200/[.96] shadow-lg"
+      } mb-2 w-72 max-w-sm rounded-lg border border-gray-200 bg-white/[.96] py-2 px-1 text-gray-800 shadow-lg dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96`}
     >
       <div className="text-center">
-        <div className="text-center p-2 rounded">
+        <div className="rounded p-2 text-center">
           <div className="flex justify-end">
             <IoCloseSharp
-              className="text-red-500 cursor-pointer hover:bg-red-200"
+              className="cursor-pointer text-red-500 hover:bg-red-200"
               onClick={() => setIsTimerToggled(false)}
             />
           </div>
           {/* Controls */}
           <div className="flex">
-            <div className="flex-1 flex-col flex justify-center items-center">
+            <div className="flex flex-1 flex-col items-center justify-center">
               <Button
                 className={`text-gray-800 hover:text-white dark:text-white ${
                   breakLength === shortBreakLength && "border-2 border-blue-900"
@@ -206,7 +206,7 @@ export const Timer = () => {
               </Button>
             </div>
 
-            <div className="flex-1 flex flex-col justify-center items-center">
+            <div className="flex flex-1 flex-col items-center justify-center">
               <Button
                 className={`text-gray-800 hover:text-white dark:text-white ${
                   breakLength === longBreakLength && "border-2 border-blue-900"
@@ -223,7 +223,7 @@ export const Timer = () => {
           {/* Timer */}
           <div>
             <p id="tabular-nums">{sessionType}</p>
-            <div className="text-7xl sm:text-9xl font-bold tabular-nums">
+            <div className="text-7xl font-bold tabular-nums sm:text-9xl">
               {/*// @ts-ignore */}
               {formatDisplayTime(timerMinutes)}:{/*// @ts-ignore */}
               {formatDisplayTime(timerSeconds)}
@@ -232,14 +232,14 @@ export const Timer = () => {
 
           <div className="timer-control tabular-nums">
             <Button
-              className="text-gray-800 font-normal hover:text-white dark:text-white tabular-nums"
+              className="font-normal tabular-nums text-gray-800 hover:text-white dark:text-white"
               onClick={() => toggleCountDown()}
               variant="cold"
             >
               <p className="tabular-nums">{hasStarted ? "Stop" : "Start"}</p>
             </Button>
             <Button
-              className="text-gray-800 font-normal hover:text-white dark:text-white ml-4 tabular-nums"
+              className="ml-4 font-normal tabular-nums text-gray-800 hover:text-white dark:text-white"
               variant="cold"
               onClick={handleResetTimer}
             >

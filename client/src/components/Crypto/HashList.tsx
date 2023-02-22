@@ -6,7 +6,7 @@ export default function TxList({ txs }) {
       {txs.map((item) => (
         <div
           key={item}
-          className="flex bg-teal-100 border-t-4 border-teal-500 rounded-b text-teal-900 px-4 py-3 shadow-md mt-5"
+          className="mt-5 flex rounded-b border-t-4 border-teal-500 bg-teal-100 px-4 py-3 text-teal-900 shadow-md"
         >
           <div className="flex break-all">
             <label className="font-bold">{item.hash}</label>

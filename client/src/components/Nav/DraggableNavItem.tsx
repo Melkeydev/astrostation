@@ -14,7 +14,7 @@ export const DraggableNavItem = ({
     <div
       className={`${
         active ? "" : "hidden"
-      } w-full sm:flex sm:flex-grow sm:w-auto sm:flex-col`}
+      } w-full sm:flex sm:w-auto sm:flex-grow sm:flex-col`}
     >
       <NavItem
         onClick={() =>
@@ -31,7 +31,7 @@ export const DraggableNavItem = ({
       >
         {item.content}
         {item.tooltipTitle == "Sticky Note" && stickyNotes.length > 0 && (
-          <span className="h-[25px] w-[25px] bg-[#000] rounded-full absolute right-[8px] bottom-[8px] text-white text-center">
+          <span className="absolute right-[8px] bottom-[8px] h-[25px] w-[25px] rounded-full bg-[#000] text-center text-white">
             {stickyNotes.length}
           </span>
         )}

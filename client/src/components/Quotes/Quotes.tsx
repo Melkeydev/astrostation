@@ -14,20 +14,20 @@ export const Quotes = () => {
   }, []);
 
   return (
-    <div className="sm:w-96 bg-white/[.96] rounded-lg border border-gray-200 dark:text-gray-300 dark:bg-gray-800/[.96] dark:border-gray-700">
-      <div className="flex justify-end w-full p-2 handle cursor-move">
+    <div className="rounded-lg border border-gray-200 bg-white/[.96] dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96">
+      <div className="handle flex w-full cursor-move justify-end p-2">
         <IoCloseSharp
-          className="text-red-500 cursor-pointer hover:bg-red-200"
+          className="cursor-pointer text-red-500 hover:bg-red-200"
           onClick={() => setIsQuoteToggled(false)}
         />
       </div>
       <div className="cancelDrag max-w-sm text-center">
-        <div className="text-gray-800 dark:text-white relative items-center justify-center text-xl font-radio-canada pb-2 pr-2 pl-2">
+        <div className="relative items-center justify-center pb-2 pr-2 pl-2 font-radio-canada text-xl text-gray-800 dark:text-white">
           {quoteData[quoteNumber].q}
           <br />-{quoteData[quoteNumber].a}
         </div>
       </div>
-      <div className="flex justify-end pb-2 pr-2 pl-2 w-full text-base">
+      <div className="flex w-full justify-end pb-2 pr-2 pl-2 text-base">
         <AiOutlineReload
           onClick={() =>
             setQuoteNumber(Math.floor(Math.random() * quoteData.length))
