@@ -1,0 +1,6 @@
+.dwidth {
+  width: 18rem;
+  @media (min-width: 640px) {
+    width: 24rem;
+  }
+}
