@@ -71,14 +71,14 @@ export const Settings = ({ setOpenSettings, Task }) => {
       <div className="flex justify-between">
         <Button
           className="font-normal text-gray-800 hover:text-white dark:text-white"
-          variant="cold"
+          variant="danger"
           onClick={() => setOpenSettings(false)}
         >
           Cancel
         </Button>
         <Button
           className="font-normal text-gray-800 hover:text-white dark:text-white"
-          variant="cold"
+          variant="primary"
           onClick={(e) => onSubmit(e)}
         >
           Okay
