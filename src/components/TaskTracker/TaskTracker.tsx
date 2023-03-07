@@ -15,7 +15,7 @@ export const TaskTracker = () => {
   return (
     <div className="rounded-lg border border-gray-200 bg-white/[.96] shadow-md dark:border-gray-700 dark:bg-gray-800/[.96]">
       <div className="handle flex w-full cursor-move justify-between p-2">
-        <TaskInfoModal
+       <TaskInfoModal 
           isVisible={isTaskInfoModalOpen}
           onClose={() => setIsTaskInfoModalOpen(false)}
         />
@@ -28,7 +28,7 @@ export const TaskTracker = () => {
           onClick={() => setIsTasksToggled(false)}
         />
       </div>
-      <div className="joyRideTaskTracker mb-2 w-72 space-y-2 pb-3 pr-3 pl-3 dark:text-gray-300 sm:w-96 ">
+      <div className="joyRideTaskTracker mb-2 w-72 pb-3 pr-3 pl-3 dark:text-gray-300 sm:w-96 ">
         <Header
           title="Task Tracker"
           onAdd={() => setShowAddTask(!showAddTask)}

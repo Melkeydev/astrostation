@@ -30,12 +30,13 @@ export const TaskInfoModal = ({ isVisible = false, onClose }) => {
         </div>
         <div className="border-gray-100 pb-2">
           <div className="rounded pb-2 text-center font-bold">
-            Your tasks tracker
+            Your Task Tracker
           </div>
           <hr className="border-t-3 w-1/4 border-[#5c5c5c]" />
           <div className="items-center p-2 px-2">
-            Double click a task you want to track with the pomodoro counters
-            (will turn blue)
+            Double click a task you want to track 
+            <br></br>
+            (The task will turn blue)
           </div>
         </div>
       </div>
