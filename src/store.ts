@@ -301,7 +301,6 @@ export const useTask = create<ITaskState>(
       addTask: (description: string, count: number, isBreak: boolean) => {
         set((state) => ({
           tasks: [
-            ...state.tasks,
             {
               id: Date.now() + state.tasks.length,
               description,
@@ -311,6 +310,7 @@ export const useTask = create<ITaskState>(
               pomodoroCounter: isBreak ? -1 : 0,
               alerted: false,
             } as ITask,
+            ...state.tasks,
           ],
         }));
       },
