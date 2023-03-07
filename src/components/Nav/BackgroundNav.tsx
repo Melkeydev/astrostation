@@ -33,7 +33,7 @@ export const BackgroundNav = ({
     <div className="flex justify-end" ref={menuRef}>
       <div className="w-70 text-left">
         <div
-          className="absolute right-0 z-10 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
+          className=" mt-2 ml-2 absolute right-2 z-10 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none"
           role="menu"
           ref={menuRef}
         >
@@ -42,6 +42,7 @@ export const BackgroundNav = ({
             setIsBackground={setIsBackground}
             background={backgrounds.CITY}
             title="City"
+            className="rounded-t-md"
           />
           <BackgroundDropdownItem
             isPicked={isBackground == backgrounds.FADE}
@@ -90,6 +91,7 @@ export const BackgroundNav = ({
             setIsBackground={setIsBackground}
             background={backgrounds.UNSPLASH}
             title="Unsplash"
+            className="rounded-b-md"
           />
         </div>
       </div>
