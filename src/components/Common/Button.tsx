@@ -1,4 +1,4 @@
-import { cls } from "@Utils/utils";
+import clsx from 'clsx'
 
 const classes: { [key: string]: any } = {
   base: "focus:outline-none transition ease-in-out duration-300",
@@ -44,13 +44,13 @@ export const Button = ({
   return (
     <button
       disabled={disabled}
-      className={cls(`
-                ${classes.base}
-                ${classes.size[size]}
-                ${classes.variant[variant]}
-                ${disabled && classes.disabled}
-                ${className}
-            `)}
+      className={clsx(
+                classes.base,
+                classes.size[size],
+                classes.variant[variant],
+                disabled && classes.disabled,
+                className
+      )}
       onClick={onClick}
       type={type}
     >

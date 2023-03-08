@@ -19,6 +19,7 @@ import { Button } from "@Components/Common/Button";
 import { ToggleOption } from "./ToggleOption";
 import { successToast } from "@App/utils/toast";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
+import clsx from 'clsx';
 
 import piano from "/assets/music/piano.wav";
 import flute from "/assets/music/flute.wav";
@@ -243,9 +244,10 @@ export const TimerSettings = ({ onClose }) => {
             <div className="w-1/4">
               Retro
               <div
-                className={`flex cursor-pointer items-center justify-center bg-gray-200 p-2 text-center dark:bg-gray-700 dark:text-gray-200 ${
+                className={clsx(
+                  "flex cursor-pointer items-center justify-center bg-gray-200 p-2 text-center dark:bg-gray-700 dark:text-gray-200",
                   currentAlarm == arcade && "border border-gray-200"
-                }`}
+                )}
                 onClick={() => changeAlarm(arcade)}
               >
                 <BsMusicPlayerFill />
@@ -254,9 +256,10 @@ export const TimerSettings = ({ onClose }) => {
             <div className="w-1/4">
               Bells
               <div
-                className={`flex cursor-pointer items-center justify-center bg-gray-200 p-2 text-center dark:bg-gray-700 dark:text-gray-200 ${
+                className={clsx(
+                  "flex cursor-pointer items-center justify-center bg-gray-200 p-2 text-center dark:bg-gray-700 dark:text-gray-200",
                   currentAlarm == bells && "border border-gray-200"
-                }`}
+                )}
                 onClick={() => changeAlarm(bells)}
               >
                 <BsBellFill />
@@ -265,9 +268,10 @@ export const TimerSettings = ({ onClose }) => {
             <div className="w-1/4">
               Flute
               <div
-                className={`flex cursor-pointer items-center justify-center bg-gray-200 p-2 text-center dark:bg-gray-700 dark:text-gray-200 ${
+                className={clsx(
+                  "flex cursor-pointer items-center justify-center bg-gray-200 p-2 text-center dark:bg-gray-700 dark:text-gray-200",
                   currentAlarm == flute && "border border-gray-200"
-                }`}
+                )}
                 onClick={() => changeAlarm(flute)}
               >
                 <GiPanFlute />
@@ -276,9 +280,10 @@ export const TimerSettings = ({ onClose }) => {
             <div className="w-1/4">
               Piano
               <div
-                className={`flex cursor-pointer items-center justify-center bg-gray-200 p-2 text-center dark:bg-gray-700 dark:text-gray-200 ${
+                className={clsx(
+                  "flex cursor-pointer items-center justify-center bg-gray-200 p-2 text-center dark:bg-gray-700 dark:text-gray-200",
                   currentAlarm == piano && "border border-gray-200"
-                }`}
+                )}
                 onClick={() => changeAlarm(piano)}
               >
                 <CgPiano />
@@ -309,10 +314,10 @@ export const TimerSettings = ({ onClose }) => {
           <div className="rounded pb-2 text-center">Lock Widgets In-place</div>
           <div className="flex justify-center">
             <Button
-              className={
-                "float-right w-[70%] font-normal text-gray-800 hover:text-white dark:text-white " +
-                (currentWidgetLockState && " bg-red-500 hover:bg-red-700")
-              }
+              className={clsx(
+                "float-right w-[70%] font-normal text-gray-800 hover:text-white dark:text-white ",
+                currentWidgetLockState && " bg-red-500 hover:bg-red-700"
+              )}
               variant="primary"
               onClick={() => setCurrentWidgetLockState(!currentWidgetLockState)}
             >

@@ -15,6 +15,7 @@ import {
 import toast from "react-hot-toast";
 import { secondsToTime, formatDisplayTime } from "@Utils/utils";
 import { successToast } from "@Utils/toast";
+import clsx from 'clsx';
 
 export const Timer = () => {
   const { shortBreakLength, setShortBreak } = useShortBreakTimer();
@@ -120,8 +121,8 @@ export const Timer = () => {
       const icon = sessionType === "Session" ? "⏱" : "☕️";
       // @ts-ignore
       document.title = `Astrostation ${icon}${formatDisplayTime(
-        timerMinutes
-      )}:${formatDisplayTime(timerSeconds)}`;
+        parseInt(timerMinutes)
+      )}:${formatDisplayTime(parseInt(timerSeconds))}`;
     } else {
       document.title = "Astrostation";
     }
@@ -179,9 +180,10 @@ export const Timer = () => {
 
   return (
     <div
-      className={`${
-        breakStarted && "bg-slate-200/[.96] shadow-lg"
-      } mb-2 w-72 max-w-sm rounded-lg border border-gray-200 bg-white/[.96] py-2 px-1 text-gray-800 shadow-lg dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96`}
+      className={clsx(
+        breakStarted && "bg-slate-200/[.96] shadow-lg",
+        "dwidth mb-2 max-w-sm rounded-lg border border-gray-200 bg-white/[.96] py-2 px-1 text-gray-800 shadow-lg dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96`"
+        )}
     >
       <div className="text-center">
         <div className="rounded p-2 text-center">
@@ -195,9 +197,10 @@ export const Timer = () => {
           <div className="flex">
             <div className="flex flex-1 flex-col items-center justify-center">
               <Button
-                className={`text-gray-800 hover:text-white dark:text-white ${
+                className={clsx(
+                  "text-gray-800 hover:text-white dark:text-white",
                   breakLength === shortBreakLength && "border-2 border-blue-900"
-                }`}
+                )}
                 variant="cold"
                 onClick={() => selectBreak(shortBreakLength)}
                 disabled={hasStarted}
@@ -208,9 +211,10 @@ export const Timer = () => {
 
             <div className="flex flex-1 flex-col items-center justify-center">
               <Button
-                className={`text-gray-800 hover:text-white dark:text-white ${
+                className={clsx(
+                  "text-gray-800 hover:text-white dark:text-white",
                   breakLength === longBreakLength && "border-2 border-blue-900"
-                }`}
+                )}
                 // This should either be cold or coldPrimary
                 variant="cold"
                 onClick={() => selectBreak(longBreakLength)}

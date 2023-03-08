@@ -11,6 +11,7 @@ import { Toaster } from "react-hot-toast";
 import { version } from "@Root/package.json";
 import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
+import clsx from 'clsx'
 
 enum backgrounds {
   CITY,
@@ -50,9 +51,10 @@ function App() {
       {isFirstTimeUser && <Walkthrough />}
       <Backgrounds backgrounds={backgrounds} />
       <div
-        className={`fixed inset-0 overflow-auto ${
+        className={clsx(
+          "fixed inset-0 overflow-auto",
           breakStarted && "bg-blue-500 bg-opacity-40"
-        }`}
+        )}
       >
         <Toaster />
         <SideNav />

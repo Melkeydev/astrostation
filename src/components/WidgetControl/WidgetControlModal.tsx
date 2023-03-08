@@ -9,6 +9,7 @@ import {
   BsFillChatLeftQuoteFill,
   BsTwitch,
 } from "react-icons/bs";
+import clsx from 'clsx'
 
 import {
   useToggleMusic,
@@ -79,11 +80,11 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
                   "🎧"
                 )
               }
-              className={
-                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 " +
-                (isSpotifyShown &&
-                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800")
-              }
+              className={clsx(
+                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500",
+                isSpotifyShown &&
+                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800"
+            )}
             >
               Spotify
               <FaSpotify className="h-6 w-full" />
@@ -98,11 +99,11 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
                   "🎧"
                 )
               }
-              className={
-                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 " +
-                (isMusicShown &&
-                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800")
-              }
+              className={clsx(
+                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500",
+                isMusicShown &&
+                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800"
+            )}
             >
               Chill Music
               <IoMusicalNotesOutline className="h-6 w-full" />
@@ -117,11 +118,11 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
                   "📓"
                 )
               }
-              className={
-                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 " +
-                (isTasksShown &&
-                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800")
-              }
+              className={clsx(
+                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500", 
+                isTasksShown &&
+                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800"
+            )}
             >
               Task Tracker
               <CgNotes className="h-6 w-full" />
@@ -136,11 +137,11 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
                   "⏳"
                 )
               }
-              className={
-                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 " +
-                (isTimerShown &&
-                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800")
-              }
+              className={clsx(
+                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500",
+                isTimerShown &&
+                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800"
+            )}
             >
               Pomodoro Timer
               <MdOutlineTimer className="h-6 w-full" />
@@ -155,11 +156,11 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
                   "🌙/☀️"
                 )
               }
-              className={
-                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 " +
-                (isDarkModeShown &&
-                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800")
-              }
+              className={clsx(
+                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500",
+                isDarkModeShown &&
+                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800"
+                )}
             >
               Theme
               <MdWbSunny className="h-6 w-full" />
@@ -175,11 +176,11 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
                     "📝"
                   )
                 }
-                className={
-                  "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 " +
-                  (isStickyNoteShown &&
-                    "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800")
-                }
+                className={clsx(
+                  "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500",
+                  isStickyNoteShown &&
+                    "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800"
+              )}
               >
                 Sticky Notes
                 <MdOutlineNoteAdd className="h-6 w-full" />
@@ -195,11 +196,11 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
                   "⏮️"
                 )
               }
-              className={
-                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 " +
-                (isWidgetResetShown &&
-                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800")
-              }
+              className={clsx(
+                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500",
+                isWidgetResetShown &&
+                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800"
+              )}
             >
               Reset
               <VscDebugRestartFrame className="h-6 w-full" />
@@ -215,11 +216,11 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
                     "📺"
                   )
                 }
-                className={
-                  "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 " +
-                  (isFullscreenShown &&
-                    "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800")
-                }
+                className={clsx(
+                  "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500",
+                  isFullscreenShown &&
+                    "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800"
+              )}
               >
                 Fullscreen
                 <BsArrowsFullscreen className="h-6 w-full" />
@@ -235,11 +236,11 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
                   "💬"
                 )
               }
-              className={
-                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 " +
-                (isQuoteShown &&
-                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800")
-              }
+              className={clsx(
+                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500",
+                isQuoteShown &&
+                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800"
+              )}
             >
               Quotes
               <BsFillChatLeftQuoteFill className="h-6 w-full" />
@@ -254,11 +255,11 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
                   "📺"
                 )
               }
-              className={
-                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500 " +
-                (isTwitchShown &&
-                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800")
-              }
+              className={clsx(
+                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500",
+                isTwitchShown &&
+                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800"
+              )}
             >
               Twitch
               <BsTwitch className="h-6 w-full" />
