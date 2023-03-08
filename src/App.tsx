@@ -16,7 +16,7 @@ import clsx from 'clsx'
 enum backgrounds {
   CITY,
   FADE,
-  GRADIENT,
+  GRADIENT ,
   JAPAN,
   COTTAGE,
   LOFIGIRL,
