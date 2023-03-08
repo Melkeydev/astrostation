@@ -1,4 +1,4 @@
-import clsx from 'clsx'
+import clsx from "clsx";
 
 const classes: { [key: string]: any } = {
   base: "focus:outline-none transition ease-in-out duration-300",
@@ -45,11 +45,11 @@ export const Button = ({
     <button
       disabled={disabled}
       className={clsx(
-                classes.base,
-                classes.size[size],
-                classes.variant[variant],
-                disabled && classes.disabled,
-                className
+        classes.base,
+        classes.size[size],
+        classes.variant[variant],
+        disabled && classes.disabled,
+        className
       )}
       onClick={onClick}
       type={type}

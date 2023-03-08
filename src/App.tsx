@@ -11,12 +11,12 @@ import { Toaster } from "react-hot-toast";
 import { version } from "@Root/package.json";
 import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
-import clsx from 'clsx'
+import clsx from "clsx";
 
 enum backgrounds {
   CITY,
   FADE,
-  GRADIENT ,
+  GRADIENT,
   JAPAN,
   COTTAGE,
   LOFIGIRL,
