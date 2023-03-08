@@ -2,6 +2,8 @@ import "./Draggable.scss";
 import { useState, useEffect, useRef } from "react";
 import Draggable from "react-draggable";
 import { useStickyNote, useLockWidgetsStore } from "@Store";
+import clsx from 'clsx'
+
 let int = 0;
 
 export const DWrapper = ({
@@ -89,9 +91,10 @@ export const DWrapper = ({
           >
             <div
               ref={ref}
-              className={`inline-block ${
+              className={clsx(
+                "inline-block",
                 toggleHook ? "visible" : "pointer-events-none hidden"
-              }`}
+              )}
             >
               {children}
             </div>
@@ -104,9 +107,10 @@ export const DWrapper = ({
           >
             <div
               ref={ref}
-              className={`inline-block ${
+              className={clsx(
+                "inline-block",
                 toggleHook ? "visible" : "pointer-events-none hidden"
-              }`}
+                )}
             >
               {children}
             </div>

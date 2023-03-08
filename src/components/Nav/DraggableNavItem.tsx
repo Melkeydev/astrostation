@@ -1,6 +1,7 @@
 import { NavItem } from "./NavItems";
 import { useStickyNote } from "@Store";
 import { toggledToastNotification } from "../../utils/toast";
+import clsx from 'clsx'
 
 export const DraggableNavItem = ({
   active,
@@ -12,9 +13,10 @@ export const DraggableNavItem = ({
   const { stickyNotes } = useStickyNote();
   return (
     <div
-      className={`${
-        active ? "" : "hidden"
-      } w-full sm:flex sm:w-auto sm:flex-grow sm:flex-col`}
+      className={clsx(
+        active ? "" : "hidden",
+        "w-full sm:flex sm:w-auto sm:flex-grow sm:flex-col"
+      )}
     >
       <NavItem
         onClick={() =>
