@@ -10,8 +10,10 @@
   "dependencies": {
     "@emotion/react": "^11.9.0",
     "@emotion/styled": "^11.8.1",
+    "@floating-ui/core": "^1.2.2",
     "@floating-ui/react-dom": "^1.0.0",
     "clsx": "^1.2.1",
+    "csstype": "^3.1.1",
     "dotenv": "^16.0.0",
     "ethers": "^5.6.2",
     "rc-slider": "^10.0.0-alpha.4",
