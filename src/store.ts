@@ -402,9 +402,9 @@ export const useTask = create<ITaskState>(
 
 const songs = [
   {
-    id: "0uw1Adx0psw",
-    artist: "The Lofi Wifi Station",
-    link: "https://www.youtube.com/watch?v=0uw1Adx0psw",
+    id: "e3L1PIY1pN8",
+    artist: "The Coffee Shop Radio",
+    link: "https://www.youtube.com/watch?v=e3L1PIY1pN8",
   },
   {
     id: "jfKfPfyJRdk",
@@ -412,9 +412,9 @@ const songs = [
     link: "https://www.youtube.com/watch?v=jfKfPfyJRdk",
   },
   {
-    id: "aLqc8TdoLJ0",
-    artist: "Ivy Station",
-    link: "https://www.youtube.com/watch?v=aLqc8TdoLJ0",
+    id: "hi1cYzaLEig",
+    artist: "Hip Hop Station",
+    link: "https://www.youtube.com/watch?v=hi1cYzaLEig",
   },
   {
     id: "6uddGul0oAc",
