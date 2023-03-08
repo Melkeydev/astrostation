@@ -1,7 +1,7 @@
 import { NavItem } from "./NavItems";
 import { useStickyNote } from "@Store";
 import { toggledToastNotification } from "../../utils/toast";
-import clsx from 'clsx'
+import clsx from "clsx";
 
 export const DraggableNavItem = ({
   active,

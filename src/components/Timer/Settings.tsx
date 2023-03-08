@@ -19,7 +19,7 @@ import { Button } from "@Components/Common/Button";
 import { ToggleOption } from "./ToggleOption";
 import { successToast } from "@App/utils/toast";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
-import clsx from 'clsx';
+import clsx from "clsx";
 
 import piano from "/assets/music/piano.wav";
 import flute from "/assets/music/flute.wav";

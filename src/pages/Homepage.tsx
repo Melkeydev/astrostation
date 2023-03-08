@@ -35,7 +35,7 @@ import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
-import clsx from 'clsx';
+import clsx from "clsx";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
@@ -67,10 +67,9 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
       {isBackground == backgrounds.UNSPLASH && <UnsplashFooter />}
       <div
         className={clsx(
-          "flex justify-end", 
+          "flex justify-end",
           isDesktop ? "space-x-6" : "grid justify-items-end gap-y-[5%]"
-        )
-        }
+        )}
       >
         <div className="settingsButton">
           <CustomizationButton
