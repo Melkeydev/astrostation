@@ -236,7 +236,7 @@ export const Timer = () => {
               onClick={() => toggleCountDown()}
               variant="cold"
             >
-              <p className="tabular-nums">{hasStarted ? "Stop" : "Start"}</p>
+              <p className="tabular-nums">{hasStarted ? "Pause" : "Start"}</p>
             </Button>
             <Button
               className="ml-4 font-normal tabular-nums text-gray-800 hover:text-white dark:text-white"
