@@ -3,17 +3,20 @@ export const BackgroundDropdownItem = ({
   setIsBackground,
   background,
   title,
+  className,
 }: {
   isPicked: boolean;
   setIsBackground: any;
   background: any;
   title: string;
+  className?: string;
 }) => {
   return (
     <div
       className={
-        "cursor-pointer py-1 hover:rounded-md hover:bg-gray-100 dark:hover:bg-gray-900 " +
-        (isPicked && " rounded-md bg-gray-100 dark:bg-gray-900")
+        className +
+        " cursor-pointer py-1 bg-gray-300 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900 " +
+        (isPicked && "bg-gray-100 dark:bg-gray-900")
       }
       onClick={() => setIsBackground(background)}
     >
