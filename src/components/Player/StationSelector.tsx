@@ -34,10 +34,10 @@ export const StationSelector = () => {
               className="form-check-input float-left mt-1 mr-2 h-4 w-4 appearance-none rounded-full border border-gray-300 bg-white bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-blue-600 checked:bg-blue-600 focus:outline-none"
               type="radio"
               name="flexRadioDefault"
-              id="0uw1Adx0psw"
+              id="e3L1PIY1pN8"
               onClick={(e) => setSongId(e)}
             />
-            Lofi Hip Hop Station
+            Lofi Coffee Station
           </label>
         </div>
       </div>
@@ -48,10 +48,10 @@ export const StationSelector = () => {
               className="form-check-input float-left mt-1 mr-2 h-4 w-4 appearance-none rounded-full border border-gray-300 bg-white bg-contain bg-center bg-no-repeat align-top transition duration-200 checked:border-blue-600 checked:bg-blue-600 focus:outline-none"
               type="radio"
               name="flexRadioDefault"
-              id="aLqc8TdoLJ0"
+              id="hi1cYzaLEig"
               onClick={(e) => setSongId(e)}
             />
-            Rap Lofi Station
+            Lofi Hip Hop Station
           </label>
         </div>
         <div className="form-check flex-1">
