@@ -1,4 +1,4 @@
-import { useSpotifyMusic } from "@Store";
+import { useDarkToggleStore, useSpotifyMusic } from "@Store";
 import { useState } from "react";
 import { AiOutlineReload } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
@@ -6,6 +6,7 @@ import { WithTooltip } from "../../Tooltip";
 
 export const Spotify = () => {
   const { setIsSpotifyToggled } = useSpotifyMusic();
+  const { isDark } = useDarkToggleStore();
 
   const [text, setText] = useState("");
   const [playlist, setPlaylist] = useState(
@@ -44,7 +45,7 @@ export const Spotify = () => {
 
       <div className="cancelDrag justify-center">
         <iframe
-          src={`${playlist}?utm_source=generator&theme=0`}
+          src={`${playlist}?utm_source=generator&theme=${isDark ? 0 : 1}`}
           height="380"
           width="100%"
           frameBorder="0"
