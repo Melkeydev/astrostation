@@ -34,7 +34,7 @@ export const Spotify = () => {
     <div className="mb-2 w-72 max-w-sm justify-between rounded-lg bg-white/[.96] py-4 px-4 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96">
       <WithTooltip text="Make sure to refresh after logging in">
         <div className="handle flex cursor-move items-center justify-between p-1">
-          <p class="py-2 font-bold">Spotify</p>
+          <p className="py-2 font-bold">Spotify</p>
           <IoCloseSharp
             className="cursor-pointer rounded bg-gray-800 dark:bg-gray-300 dark:text-gray-800 text-gray-100 hover:bg-gray-900"
             onClick={() => setIsSpotifyToggled(false)}
