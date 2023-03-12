@@ -69,8 +69,6 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
   const { grid } = useGrid();
 
-  console.log('hacker news', isHackerNewsShown, isHackerNewsToggled)
-
   return (
     <div ref={ref} className="pb-8 md:h-screen md:pb-0">
       {backgroundId == Background.UNSPLASH && <UnsplashFooter />}

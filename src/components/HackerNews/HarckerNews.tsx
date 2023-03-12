@@ -1,36 +1,114 @@
 import * as React from "react";
-import { IoCloseSharp } from "react-icons/io5";
-import { AiOutlineReload } from "react-icons/ai";
 import { useToggleHackerNews } from "@Store";
-
+import { useQuery, QueryClient, useQueries } from '@tanstack/react-query'
+import axios from 'axios';
+import { Card, LoaderCard } from "../Common/Card";
 
 export const HackerNews = () => {
-  // let [quoteNumber, setQuoteNumber] = useState(0);
+
   const { setIsHackerNewsToggled } = useToggleHackerNews();
+  const queryClient = new QueryClient();
+  const [stories, setStories] = React.useState()
 
-  // useEffect(() => {
-  //   setQuoteNumber(Math.floor(Math.random() * quoteData.length));
-  // }, []);
+  const { isLoading, error, data, isFetching } = useQuery({
+    queryKey: ["storyList"],
+    queryFn: () =>
+      axios
+        .get('https://hacker-news.firebaseio.com/v0/topstories.json')
+        .then((res) => {
+          return res.data.slice(0, 10)
 
+
+
+
+        })
+  })
+
+
+  const storyIds = data ?? []
+
+  const storyList = useQueries({
+    queries: storyIds.map((storyId, index) => {
+      return {
+        queryKey: ['story', index],
+        queryFn: () =>
+          axios
+            .get(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)
+            .then((res) => {
+              return res.data
+            }),
+        enabled: !!data
+      }
+    })
+  })
+
+  console.log('storyList', storyList)
+
+  // const fetchStoryDetails = (data) => {
+
+  //   const userQueries =
+  //     useQueries({
+  //       queries: data.map((storyId) => {
+  //         return {
+  //           queryKey: ['story', storyId],
+  //           queryFn: () =>
+  //             axios
+  //               .get(`https://hacker-news.firebaseio.com/v0/items/${storyId}`)
+  //               .then((res) => {
+  //                 return res.data.slice(0, 10)
+  //               })
+
+  //         }
+  //       })
+  //     })
+  // }
+
+  // React.useEffect(() => {
+  // console.log('data changed, load article info')
+
+  // if (data?.length > 0) {
+  // fetchStoryDetails(data)
+  // }
+
+  // data.forEach(storyId => {
+  //   axios.get('https://hacker-news.firebaseio.com/v0/item/8863')
+  // });
+
+  // }, [data])
+
+
+  // trigger a refresh of the news stories
+  const refetchStories = async () => {
+    await queryClient.invalidateQueries({
+      queryKey: ['storyList'],
+      refetchType: 'active'
+    })
+  }
+  // use the LoaderCard for a clean loader while the feed loads/reloads
+  if (isLoading) {
+    return (<LoaderCard title="Hacker News" reloadFunction={() => { console.log('refresh hacker news') }} toggleFunction={setIsHackerNewsToggled} />)
+
+  }
+
+  // let's handle errors with a little class and show the error to the user
+  if (error instanceof Error) {
+    return (
+      <Card title="Hacker News" toggleFunction={setIsHackerNewsToggled} reloadFunction={refetchStories}>
+        `An error has occured: ${error.message}`
+      </Card>
+    )
+  }
+
+  // "this they guy" - Melkey
   return (
-    <div className="rounded-lg border border-gray-200 bg-white/[.96] dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96">
-      <div className="handle flex w-full cursor-move justify-end p-2">
-        <IoCloseSharp
-          className="cursor-pointer text-red-500 hover:bg-red-200"
-          onClick={() => setIsHackerNewsToggled(false)}
-        />
-      </div>
-      <div className="cancelDrag max-w-sm text-center">
-        <div className="relative items-center justify-center pb-2 pr-2 pl-2 font-radio-canada text-xl text-gray-800 dark:text-white">
-          Hacker News Feed
-        </div>
-      </div>
-      <div className="flex w-full justify-end pb-2 pr-2 pl-2 text-base">
-        <AiOutlineReload
-          onClick={() =>
-            console.log('reload hacker news')}
-        />
-      </div>
-    </div>
-  );
+    <Card title="Hacker News" toggleFunction={setIsHackerNewsToggled} reloadFunction={refetchStories}>
+      <p>Some content</p>
+      {storyList?.map((story) => {
+        return (
+          <p key={story?.data?.id}>{story?.data?.title}</p>
+        )
+      })}
+    </Card>
+  )
+
 };
