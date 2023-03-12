@@ -1,18 +1,22 @@
 import * as React from 'react'
 import { IoCloseSharp, IoReloadSharp } from 'react-icons/io5'
 import { AiOutlineReload } from 'react-icons/ai'
+import clsx from 'clsx';
 
 interface CardProps {
   title: string;
   toggleFunction: Function;
   reloadFunction: React.MouseEventHandler<SVGElement>;
-  children: React.ReactNode
+  children: React.ReactNode;
+  width?: string;
 }
 
 
-export const Card = ({ title, toggleFunction, reloadFunction, children }: CardProps) => {
+export const Card = ({ title, toggleFunction, reloadFunction, children, width }: CardProps) => {
   return (
-    <div className="rounded-lg border border-gray-200 bg-white/[.96] dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96">
+    <div className={clsx(
+      "rounded-lg border border-gray-200 bg-white/[.96] dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 py-4 px-3"
+      , width ?? "sm:w-96")}>
       <div className="handle flex cursor-move items-center justify-between p-1">
         <p className="py-2 font-bold">{title}</p>
         <IoCloseSharp
@@ -21,7 +25,7 @@ export const Card = ({ title, toggleFunction, reloadFunction, children }: CardPr
         />
       </div>
 
-      <div className="handle flex flex-col w-full cursor-move p-2">
+      <div className="cancelDrag handle flex flex-col w-full cursor-move p-2">
 
         {children}
       </div>
@@ -37,10 +41,11 @@ interface LoaderCardProps {
   title: string;
   toggleFunction: Function;
   reloadFunction: React.MouseEventHandler<SVGElement>;
+  refreshing?: boolean;
 }
 
 
-export const LoaderCard = ({ title, toggleFunction, reloadFunction }: LoaderCardProps) => {
+export const LoaderCard = ({ title, toggleFunction, reloadFunction, refreshing = false }: LoaderCardProps) => {
   return (
     <div className="rounded-lg border border-gray-200 bg-white/[.96] dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96">
       <div className="handle flex cursor-move items-center justify-between p-1">
@@ -56,7 +61,7 @@ export const LoaderCard = ({ title, toggleFunction, reloadFunction }: LoaderCard
         <IoReloadSharp className="w-12 h-auto animate-spin" />
       </div>
       <div className="flex w-full justify-end pb-2 pr-2 pl-2 text-base">
-        <AiOutlineReload
+        <AiOutlineReload className={clsx(refreshing && "animate-spin")}
           onClick={reloadFunction} />
       </div>
     </div>

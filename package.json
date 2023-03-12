@@ -38,6 +38,7 @@
     "tsparticles-engine": "^2.1.0",
     "uuid": "^8.3.2",
     "uuidv4": "^6.2.13",
+    "zod": "^3.21.4",
     "zustand": "^3.7.0"
   },
   "devDependencies": {
