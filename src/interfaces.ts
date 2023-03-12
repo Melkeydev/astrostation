@@ -216,6 +216,20 @@ export interface IPosQuote {
   setQuotePosDefault: () => void;
 }
 
+export interface IToggleHackerNews {
+  isHackerNewsToggled: boolean;
+  setIsHackerNewsToggled: (isHackerNewsToggled: boolean) => void;
+  isHackerNewsShown: boolean;
+  setIsHackerNewsShown: (isHackerNewsShown: boolean) => void;
+}
+
+export interface IPosHackerNews {
+  hackernewsPosX: number;
+  hackernewsPosY: number;
+  setHackerNewsPos: (X: number, Y: number) => void;
+  setHackerNewsPosDefault: () => void;
+}
+
 export interface IToggleWidgetReset {
   isWidgetResetShown: boolean;
   setIsWidgetResetShown: (isWidgetResetShown: boolean) => void;

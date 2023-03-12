@@ -16,6 +16,8 @@ import {
   usePosTwitch,
   useGrid,
   useSetBackground,
+  useToggleHackerNews,
+  usePosHackerNews
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -35,10 +37,11 @@ import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
-import clsx from "clsx";
 import React from "react";
 import { Background } from "@App/App";
 import BottomButtons from "@Components/Nav/BottomButtons";
+import { HackerNews } from '../components/HackerNews/HarckerNews'
+import clsx from "clsx";
 
 export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
@@ -48,6 +51,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const { isStickyNoteShown } = useToggleStickyNote();
   const { isQuoteToggled, isQuoteShown } = useToggleQuote();
   const { isTwitchToggled, isTwitchShown } = useToggleTwitch();
+  const { isHackerNewsToggled, isHackerNewsShown } = useToggleHackerNews();
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -58,11 +62,14 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
   const { twitchPosX, twitchPosY, setTwitchPos } = usePosTwitch();
   const isDesktop = useMediaQuery("(min-width: 768px)");
+  const { hackernewsPosX, hackernewsPosY, setHackerNewsPos } = usePosHackerNews();
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen] = useState(false);
   const { backgroundId } = useSetBackground();
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
   const { grid } = useGrid();
+
+  console.log('hacker news', isHackerNewsShown, isHackerNewsToggled)
 
   return (
     <div ref={ref} className="pb-8 md:h-screen md:pb-0">
@@ -116,6 +123,9 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
           </div>
           <div className={clsx(isQuoteToggled ? "block" : "hidden")}>
             <Quotes />
+          </div>
+          <div className={clsx(isHackerNewsToggled ? "block" : "hidden")}>
+            <HackerNews />
           </div>
         </div>
       ) : (
@@ -196,6 +206,17 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
           >
             <TwitchStream />
           </DWrapper>
+          <DWrapper
+            toggleHook={isHackerNewsToggled && isHackerNewsShown}
+            defaultX={hackernewsPosX}
+            defaultY={hackernewsPosY}
+            setPosition={setHackerNewsPos}
+            isSticky={false}
+            gridValues={grid}
+          >
+            <HackerNews />
+          </DWrapper>
+
         </>
       )}
     </div>

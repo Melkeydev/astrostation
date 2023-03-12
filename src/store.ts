@@ -40,6 +40,8 @@ import {
   ISideNavOrderStore,
   ISeoContent,
   IBackgroundColor,
+  IToggleHackerNews,
+  IPosHackerNews
 } from "./interfaces";
 import { InfoSection } from "./pages/InfoSection";
 
@@ -245,10 +247,10 @@ export const useStickyNote = create<IStickyNoteState>(
         set(state => ({
           stickyNotes: state.stickyNotes.map(note =>
             note.id === id
-              ? {
-                  ...note,
-                  [newProp]: newValue,
-                }
+              ? ({
+                ...note,
+                text: newText,
+              } as IStickyNote)
               : note
           ),
         }));
@@ -396,9 +398,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                  ...task,
-                  menuToggled: flag,
-                } as ITask)
+                ...task,
+                alerted: flag,
+              } as ITask)
               : task
           ),
         }));
@@ -667,6 +669,42 @@ export const usePosQuote = create<IPosQuote>(
     }
   )
 );
+
+/**
+ * Hacker News Section Store
+ * ---
+ * Handle the visibility of Hacker News feed
+ */
+
+export const useToggleHackerNews = create<IToggleHackerNews>(
+  persist(
+    (set,) => ({
+      isHackerNewsToggled: false,
+      setIsHackerNewsToggled: (isHackerNewsToggled) => set({ isHackerNewsToggled }),
+      isHackerNewsShown: false,
+      setIsHackerNewsShown: (isHackerNewsShown) => set({ isHackerNewsShown })
+    }),
+    {
+      name: "state_hackernews_section"
+    }
+  )
+)
+
+export const usePosHackerNews = create<IPosHackerNews>(
+  persist(
+    (set, _) => ({
+      hackernewsPosX: 804,
+      hackernewsPosY: 436,
+      setHackerNewsPos: (X, Y) => set({ hackernewsPosX: X, hackernewsPosY: Y }),
+      setHackerNewsPosDefault: () =>
+        set(() => ({ hackernewsPosX: 804, hackernewsPosY: 436 })),
+    }),
+    {
+      name: "set_hackernews_position",
+    }
+  )
+);
+
 
 /**
  * Reset Widgets Section Store

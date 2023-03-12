@@ -1,6 +1,5 @@
 import { NavItem } from "./NavItems";
-import { IoMusicalNotesOutline } from "react-icons/io5";
-import { IoMenu } from "react-icons/io5";
+import { IoLogoHackernews, IoMusicalNotesOutline, IoMenu } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
 import { MdOutlineTimer, MdWbSunny, MdDarkMode, MdOutlineNoteAdd } from "react-icons/md";
 import { VscDebugRestartFrame } from "react-icons/vsc";
@@ -19,6 +18,7 @@ import {
   useToggleWidgetReset,
   useToggleTwitch,
   useSideNavOrderStore,
+  useToggleHackerNews
 } from "@Store";
 import { useState, useEffect } from "react";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
@@ -38,6 +38,7 @@ export const SideNav = () => {
   const { isSpotifyToggled, setIsSpotifyToggled } = useSpotifyMusic();
   const { isQuoteToggled, setIsQuoteToggled } = useToggleQuote();
   const { isTwitchToggled, setIsTwitchToggled } = useToggleTwitch();
+  const { isHackerNewsToggled, setIsHackerNewsToggled } = useToggleHackerNews()
 
   const { isTimerShown } = useToggleTimer();
   const { isStickyNoteShown } = useToggleStickyNote();
@@ -49,6 +50,7 @@ export const SideNav = () => {
   const { isQuoteShown } = useToggleQuote();
   const { isWidgetResetShown } = useToggleWidgetReset();
   const { isTwitchShown } = useToggleTwitch();
+  const { isHackerNewsShown } = useToggleHackerNews()
 
   const { sideNavOrder, setSideNavOrder } = useSideNavOrderStore();
 
@@ -57,7 +59,7 @@ export const SideNav = () => {
 
   useEffect(() => {
     document.addEventListener("fullscreenchange", fullscreenChanged);
-    document.addEventListener("keyup", function (e) {
+    document.addEventListener("keyup", function(e) {
       if (e.key === "F11" || (e.key === "Escape" && document.fullscreenElement)) {
         toggleFullScreen();
       }
@@ -172,6 +174,18 @@ export const SideNav = () => {
     },
     {
       id: "10",
+      content: <IoLogoHackernews className="h-6 w-6" />,
+      tooltipTitle: "Hacker News",
+      isToggled: isHackerNewsToggled,
+      setToggled: setIsHackerNewsToggled,
+      toggleString: "Hacker News Toogled",
+      toggleIcon: "📺",
+      isShown: isHackerNewsShown,
+    },
+
+
+    {
+      id: "11",
       content: <BsArrowsFullscreen className="h-6 w-6" />,
       tooltipTitle: "Fullscreen",
       isToggled: isFullscreen,
