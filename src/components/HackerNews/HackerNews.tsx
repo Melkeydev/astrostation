@@ -53,52 +53,42 @@ export const HackerNews = () => {
 
   const selectedStoryType = storyTypes.find((storyType) => storyType.key === feed)
 
-  const { isLoading, error, data, refetch: storyListRefetch } = useQuery({
+  const { isLoading, error, data, refetch } = useQuery({
     queryKey: ["storyList"],
-    queryFn: () =>
-      axios
-        .get(`https://hacker-news.firebaseio.com/v0/${selectedStoryType.apiSrc}.json`)
-        .then((res) => {
-          return StoryIdSchema.parse(res.data.slice(0, 10))
-        })
-  })
+    queryFn: async () => {
 
-  // if the stories have not yet loaded, use a blank array to avoid errors
-  // once stories load, array is populated and the below useQueries runs
-  const storyIds = data ?? []
+      // let's grab the ids for the selected story type
+      const res = await axios.get(`https://hacker-news.firebaseio.com/v0/${selectedStoryType.apiSrc}.json`)
+        .then()
 
-  const storyList = useQueries({
-    queries: storyIds.map((storyId, index) => {
-      return {
-        queryKey: ['story', index],
-        queryFn: () =>
-          axios
-            .get(`https://hacker-news.firebaseio.com/v0/item/${storyId}.json`)
-            .then((res) => {
-              return res.data
-            }),
-        enabled: !!data
-      }
-    })
+      // parse for validation / TS and grab first 10
+      const ids = StoryIdSchema.parse(res.data).slice(0, 10);
+
+      // now grab the details for each story    
+      const data = await Promise.all(ids.map(async (id) => axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)));
+
+      // return data;
+      return data
+    }
   })
 
   // trigger a refresh of the news stories
   const refetchStories = async () => {
-    storyListRefetch()
+    refetch()
   }
 
   const updateNewsFeed = async (feed: string) => {
     setFeed(feed)
-    storyListRefetch()
+    // without a timeout, story doesn't update fast enough and the refetch uses the old story type
+    setTimeout(() => {
+      refetch()
+    }, 1);
   }
 
-  // check if individual stories are still loading
-  const loadingStoryList = storyList.some(story => story.isLoading)
 
   // use the LoaderCard for a clean loader while the feed loads/reloads
-  if (isLoading || loadingStoryList) {
+  if (isLoading) {
     return (<LoaderCard title="Hacker News" reloadFunction={refetchStories} toggleFunction={setIsHackerNewsToggled} refreshing={true} />)
-
   }
 
   // let's handle errors with a little class and show the error to the user
@@ -114,7 +104,7 @@ export const HackerNews = () => {
   return (
     <Card title={`Hacker News - ${selectedStoryType.title}`} toggleFunction={setIsHackerNewsToggled} reloadFunction={refetchStories} width="sm:w-[48rem]">
       <ul>
-        {storyList.map((story) => {
+        {data.map((story) => {
           return (
             <li key={story.data.id} className="py-1">
               <a className="font-semibold" href={story.data.id}>{story.data.title}</a>
