@@ -40,7 +40,7 @@ import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
 import React from "react";
 import { Background } from "@App/App";
 import BottomButtons from "@Components/Nav/BottomButtons";
-import { HackerNews } from '../components/HackerNews/HarckerNews'
+import { HackerNews } from '../components/HackerNews/HackerNews'
 import clsx from "clsx";
 
 export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {

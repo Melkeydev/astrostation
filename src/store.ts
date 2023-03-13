@@ -41,7 +41,9 @@ import {
   ISeoContent,
   IBackgroundColor,
   IToggleHackerNews,
-  IPosHackerNews
+  IPosHackerNews,
+  IHackerNewsFeed,
+  optionsHackerNews
 } from "./interfaces";
 import { InfoSection } from "./pages/InfoSection";
 
@@ -705,6 +707,18 @@ export const usePosHackerNews = create<IPosHackerNews>(
   )
 );
 
+export const useHackerNewsFeed = create<IHackerNewsFeed>(
+  persist(
+    (set, _) => ({
+      feed: 'string',
+      setFeed: (feed) => set({ feed: feed }),
+      setDefaultFeed: () => set(() => ({ feed: 'TOP' }))
+    }),
+    {
+      name: "state_hackernews_feed"
+    }
+  )
+);
 
 /**
  * Reset Widgets Section Store

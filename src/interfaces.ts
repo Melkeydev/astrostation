@@ -292,5 +292,15 @@ export interface ISeoContent {
 }
 
 export interface ISeoToggle {
-    onButtonClick: () => void;
+  onButtonClick: () => void;
 }
+
+export enum optionsHackerNews { TOP, NEW, BEST, ASK, SHOWS, JOBS };
+
+export interface IHackerNewsFeed {
+  // feed: optionsHackerNews;
+  feed: string;
+  setFeed: (feed: string) => void;
+  setDefaultFeed: () => void;
+}
+
