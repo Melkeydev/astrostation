@@ -222,8 +222,8 @@ export const SideNav = () => {
   }
 
   return (
-    <div className="sideNav absolute flex">
-      <aside className="flex flex-col">
+    <div className="sideNav absolute flex p-2">
+      <aside className="flex flex-col rounded-md overflow-hidden">
         <ul>
           <div className="sm:hidden">
             <NavItem onClick={toggleNavBar} shown={true}>
