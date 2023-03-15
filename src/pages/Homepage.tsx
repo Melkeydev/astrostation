@@ -35,6 +35,7 @@ import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
+import clsx from "clsx";
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
@@ -64,12 +65,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   return (
     <div className="h-screen">
       {isBackground == backgrounds.UNSPLASH && <UnsplashFooter />}
-      <div
-        className={
-          "flex justify-end " +
-          (isDesktop ? " space-x-6" : " grid justify-items-end gap-y-[5%]")
-        }
-      >
+      <div className={"flex justify-end flex-wrap py-2 px-2 gap-2 ml-auto w-5/6"}>
         <div className="settingsButton">
           <CustomizationButton
             title="Settings"
@@ -114,19 +110,19 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
       <CryptoDonationButton />
       {!isDesktop ? (
         <div className="ml-8 flex flex-col items-center">
-          <div className={`${isMusicToggled ? "block" : "hidden"}`}>
+          <div className={clsx(isMusicToggled ? "block" : "hidden")}>
             <Player />
           </div>
-          <div className={`${isSpotifyToggled ? "block" : "hidden"}`}>
+          <div className={clsx(isSpotifyToggled ? "block" : "hidden")}>
             <Spotify />
           </div>
-          <div className={`${isTimerToggled ? "block" : "hidden"}`}>
+          <div className={clsx(isTimerToggled ? "block" : "hidden")}>
             <Timer />
           </div>
-          <div className={`${isTasksToggled ? "block" : "hidden"}`}>
+          <div className={clsx(isTasksToggled ? "block" : "hidden")}>
             <TaskTracker />
           </div>
-          <div className={`${isQuoteToggled ? "block" : "hidden"}`}>
+          <div className={clsx(isQuoteToggled ? "block" : "hidden")}>
             <Quotes />
           </div>
         </div>

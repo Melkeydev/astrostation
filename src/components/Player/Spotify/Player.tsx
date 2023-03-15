@@ -1,4 +1,4 @@
-import { useSpotifyMusic } from "@Store";
+import { useDarkToggleStore, useSpotifyMusic } from "@Store";
 import { useState } from "react";
 import { AiOutlineReload } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
@@ -6,6 +6,7 @@ import { WithTooltip } from "../../Tooltip";
 
 export const Spotify = () => {
   const { setIsSpotifyToggled } = useSpotifyMusic();
+  const { isDark } = useDarkToggleStore();
 
   const [text, setText] = useState("");
   const [playlist, setPlaylist] = useState(
@@ -34,7 +35,7 @@ export const Spotify = () => {
     <div className="mb-2 w-72 max-w-sm justify-between rounded-lg bg-white/[.96] py-4 px-4 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96">
       <WithTooltip text="Make sure to refresh after logging in">
         <div className="handle flex cursor-move items-center justify-between p-1">
-          <p class="py-2 font-bold">Spotify</p>
+          <p className="py-2 font-bold">Spotify</p>
           <IoCloseSharp
             className="cursor-pointer rounded bg-gray-800 dark:bg-gray-300 dark:text-gray-800 text-gray-100 hover:bg-gray-900"
             onClick={() => setIsSpotifyToggled(false)}
@@ -44,7 +45,7 @@ export const Spotify = () => {
 
       <div className="cancelDrag justify-center">
         <iframe
-          src={`${playlist}?utm_source=generator&theme=0`}
+          src={`${playlist}?utm_source=generator&theme=${isDark ? 0 : 1}`}
           height="380"
           width="100%"
           frameBorder="0"
