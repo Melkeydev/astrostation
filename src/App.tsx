@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Backgrounds } from "@Components/Backgrounds/utils";
-import { HomePage } from "@Pages/Homepage";
-import { InfoSectionHomePage } from "@Pages/InfoSectionHomePage"
+import { Astrostation } from "@Root/src/components/HomePage/Astrostation";
+import { InfoSection } from "@Root/src/components/HomePage/InfoSectionHomePage"
 import { SideNav } from "@Components/Nav/SideNav";
 import {
   useDarkToggleStore,
@@ -59,8 +59,8 @@ function App() {
       >
         <Toaster />
         <SideNav />
-        <HomePage backgrounds={backgrounds} />
-        <InfoSectionHomePage.tsx />
+        <Astrostation backgrounds={backgrounds} />
+        <InfoSection />
       </div>
     </>
   );
