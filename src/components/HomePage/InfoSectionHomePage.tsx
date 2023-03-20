@@ -126,6 +126,39 @@ export const InfoSection = ({}: {}) => {
           </p>
           <p className="pt-5 text-lg"> Check out the Github repository <span className="font-bold text-purple-500"><a href="https://github.com/melkeyoss/astrostation" target="_blank">here!</a></span></p>
         </div>
+        <footer
+  className="bg-gray-900/[0.7] text-center lg:text-left">
+  
+  <div>
+    <ul className="pt-4 pb-2 text-center text-purple-500/[0.75] ">
+      <li>
+        <a
+          className="text-purple-500/[0.75] "
+          href="https://www.upcounsel.com/privacy-policy-template"
+          >Privacy Policy</a
+        >
+        <a
+          className="text-purple-500/[0.75] "
+          href="https://opensource.org/license/mit/"
+          >{" - "}License</a
+        >
+        <a
+          className="text-purple-500/[0.75] "
+          href="https://github.com/melkeyoss/astrostation"
+          >{" - "}Github</a
+        >
+      </li>
+     </ul>
+
+  </div>
+  <div className="pb-4 text-center text-neutral-500 ">
+    © 2023 Copyright:{" "}
+    <a
+      className="text-neutral-500"
+      href="https://twitter.com/melkeydev"
+      >Astrostation</a>
+  </div>
+</footer>
       </div>
     );
   };
