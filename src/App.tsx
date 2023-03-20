@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { Backgrounds } from "@Components/Backgrounds/utils";
 import { HomePage } from "@Pages/Homepage";
+import { InfoSectionHomePage } from "@Pages/InfoSectionHomePage"
 import { SideNav } from "@Components/Nav/SideNav";
 import {
   useDarkToggleStore,
@@ -59,6 +60,7 @@ function App() {
         <Toaster />
         <SideNav />
         <HomePage backgrounds={backgrounds} />
+        <InfoSectionHomePage.tsx />
       </div>
     </>
   );
