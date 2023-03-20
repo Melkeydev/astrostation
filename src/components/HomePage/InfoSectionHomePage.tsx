@@ -1,7 +1,7 @@
 export const InfoSection = ({}: {}) => {
     return (
       <div className="bg-gray-800/[0.90] text-slate-200">
-        <div className="ml-20 mt-20 mr-10 pb-20">
+        <div className="ml-20 mt-20 mr-20 pb-20">
           <h1 className="pt-20 text-4xl font-bold"> What is <span className="text-purple-500">Astrostation?</span></h1>
           <p className="pt-5 text-lg">
           Astrostation is a versatile, free-to-use desktop and mobile app designed to enhance time management and productivity. 
