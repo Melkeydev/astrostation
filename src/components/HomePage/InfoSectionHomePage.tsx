@@ -135,18 +135,15 @@ export const InfoSection = ({}: {}) => {
         <a
           className="text-purple-500/[0.75] "
           href="https://www.upcounsel.com/privacy-policy-template"
-          >Privacy Policy</a
-        >
+          >Privacy Policy</a>
         <a
           className="text-purple-500/[0.75] "
           href="https://opensource.org/license/mit/"
-          >{" - "}License</a
-        >
+          >{" - "}License</a>
         <a
           className="text-purple-500/[0.75] "
           href="https://github.com/melkeyoss/astrostation"
-          >{" - "}Github</a
-        >
+          >{" - "}Github</a>
       </li>
      </ul>
 
