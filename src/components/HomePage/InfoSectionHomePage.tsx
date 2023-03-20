@@ -1,10 +1,10 @@
 export const InfoSection = ({}: {}) => {
     return (
-      <div className="bg-gray-800/[0.90] text-white">
+      <div className="bg-gray-800/[0.90] text-slate-200">
         <div className="ml-20 mt-20 mr-10 pb-20">
-          <h1 className="pt-20 text-4xl font-bold"> What is Astrostation? </h1>
+          <h1 className="pt-20 text-4xl font-bold"> What is <span className="text-pink-500">Astrostation?</span></h1>
           <p className="pt-5 text-lg">
-            Astrostation is a free-to-use desktop/mobile app designed to help with time
+          <span className="text-pink-500 font-bold">Astrostation</span> is a free-to-use desktop/mobile app designed to help with time
             management and productivity. The main feature is a Pomodoro timer, a
             time management method created by{" "}
             <span className="font-bold italic"><a
@@ -13,10 +13,10 @@ export const InfoSection = ({}: {}) => {
             >
               Francesco Cirillo,{" "}
             </a></span>
-            however, Astrostation's uniqueness lies in its capacity to allow you
+            however, <span className="text-pink-500 font-bold">Astrostation</span>'s uniqueness lies in its capacity to allow you
             to build your own personal aesthetic into the app, using our numerous
             widgets and customizable settings. Ideal for studying or working on
-            projects, Astrostation is the go-to focus app tailored to meet your
+            projects, <span className="text-pink-500 font-bold">Astrostation</span> is the go-to focus app tailored to meet your
             needs.
           </p>
   
@@ -25,7 +25,7 @@ export const InfoSection = ({}: {}) => {
             Benefits of an Online Pomodoro Timer?{" "}
           </h2>
           <p className="pt-5 text-lg">
-            An online Pomodoro timer like Astrostation can help you manage your
+            An online Pomodoro timer like <span className="text-pink-500 font-bold">Astrostation</span> can help you manage your
             time more effectively by breaking your work into focused sessions.
             This technique typically involves working for 25-minute intervals,
             followed by short breaks.
@@ -84,7 +84,7 @@ export const InfoSection = ({}: {}) => {
               anyone looking to increase their productivity and stay on track.
             </li>
           </ul>
-          <h2 className="pt-5 text-3xl font-bold">The Aesthetic Widgets of Astrostation</h2>
+          <h2 className="pt-5 text-3xl font-bold">The Aesthetic Widgets of <span className="text-pink-500 font-bold">Astrostation</span></h2>
   
           <ul className="list-disc pt-5 pl-10 text-lg">
             <li>Choose between various aesthetically pleasing backgrounds!</li>
@@ -104,7 +104,7 @@ export const InfoSection = ({}: {}) => {
             Other ways to stay focused while studying{" "}
           </h2>
           <p className="pt-5 text-lg">
-            In addition to using a Pomodoro timer like Astrostation, there are
+            In addition to using a Pomodoro timer like <span className="text-pink-500 font-bold">Astrostation</span>, there are
             other strategies you can try out to stay focused while studying!
           </p>
   
@@ -124,7 +124,7 @@ export const InfoSection = ({}: {}) => {
   
           <h2 className="pt-5 text-3xl font-bold"> Contribute to the app </h2>
           <p className="pt-5 text-lg">
-            Did you know Astrostation is now open source? That means our source
+            Did you know <span className="text-pink-500 font-bold">Astrostation</span> is now open source? That means our source
             code is public and any developer can develop and suggest new features.
           </p>
           <p className="pt-5 text-lg"> Check out the Github repository <span className="font-bold"><a href="https://github.com/melkeyoss/astrostation" target="_blank">here!</a></span></p>
