@@ -34,10 +34,10 @@ import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
-import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
+import { UnsplashFooter } from "../Nav/UnsplashFooter";
 import clsx from "clsx";
 
-export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
+export const Astrostation = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
   const { isTimerToggled, isTimerShown } = useToggleTimer();
   const { isTasksToggled, isTasksShown } = useToggleTasks();
