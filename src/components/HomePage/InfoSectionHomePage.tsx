@@ -2,22 +2,34 @@ export const InfoSection = ({}: {}) => {
     return (
       <div className="bg-gray-800/[0.90] text-slate-200">
         <div className="ml-20 mt-20 mr-10 pb-20">
-          <h1 className="pt-20 text-4xl font-bold"> What is <span className="text-pink-500">Astrostation?</span></h1>
+          <h1 className="pt-20 text-4xl font-bold"> What is <span className="text-purple-500">Astrostation?</span></h1>
           <p className="pt-5 text-lg">
-          <span className="text-pink-500 font-bold">Astrostation</span> is a free-to-use desktop/mobile app designed to help with time
-            management and productivity. The main feature is a Pomodoro timer, a
-            time management method created by{" "}
+          Astrostation is a versatile, free-to-use desktop and mobile app designed to enhance time management and productivity. 
+          It is centered on the highly effective Pomodoro technique, a popular concentration improvement strategy developed by {" "}
             <span className="font-bold italic"><a
               href="https://francescocirillo.com/products/the-pomodoro-technique"
               target="_blank"
             >
-              Francesco Cirillo,{" "}
+              Francesco Cirillo.{" "}
             </a></span>
-            however, <span className="text-pink-500 font-bold">Astrostation</span>'s uniqueness lies in its capacity to allow you
-            to build your own personal aesthetic into the app, using our numerous
-            widgets and customizable settings. Ideal for studying or working on
-            projects, <span className="text-pink-500 font-bold">Astrostation</span> is the go-to focus app tailored to meet your
-            needs.
+          What sets  Astrostation  apart is its ability to let users personalize the app's aesthetic with a wide array of widgets and customizable settings. 
+          Perfect for studying or tackling projects, Astrostation is the ultimate focus app, crafted to cater to your individual needs.
+          </p>
+
+          <h2 className="pt-5 text-3xl font-bold"> How to use our Pomodoro Timer </h2>
+          <ul className="list-decimal pt-5 pl-10 text-lg">
+            <li>Click "Add Task" in your "Task Tracker" widget</li>
+            <li>Type in the task you need to complete</li>
+            <li>
+              Set the "Pomodoro Count" for how long you would like to focus on it
+              at a time (1 pomodoro = 25 minutes)
+            </li>
+            <li>Press "Save" then click "Start" on the timer widget</li>
+          </ul>
+          <p className="pt-5 text-lg">
+            Work uninterrupted until the timer goes off, then take a short break
+            before starting the next session! Repeat this cycle until your task is
+            complete.
           </p>
   
           <h2 className="pt-5 text-3xl font-bold">
@@ -25,7 +37,7 @@ export const InfoSection = ({}: {}) => {
             Benefits of an Online Pomodoro Timer?{" "}
           </h2>
           <p className="pt-5 text-lg">
-            An online Pomodoro timer like <span className="text-pink-500 font-bold">Astrostation</span> can help you manage your
+            An online Pomodoro timer like Astrostation can help you manage your
             time more effectively by breaking your work into focused sessions.
             This technique typically involves working for 25-minute intervals,
             followed by short breaks.
@@ -47,21 +59,6 @@ export const InfoSection = ({}: {}) => {
             <li>Move away from procrastination</li>
           </ul>
   
-          <h2 className="pt-5 text-3xl font-bold"> How to use our Pomodoro Timer </h2>
-          <ul className="list-decimal pt-5 pl-10 text-lg">
-            <li>Click "Add Task" in your "Task Tracker" widget</li>
-            <li>Type in the task you need to complete</li>
-            <li>
-              Set the "Pomodoro Count" for how long you would like to focus on it
-              at a time (1 pomodoro = 25 minutes)
-            </li>
-            <li>Press "Save" then click "Start" on the timer widget</li>
-          </ul>
-          <p className="pt-5 text-lg">
-            Work uninterrupted until the timer goes off, then take a short break
-            before starting the next session! Repeat this cycle until your task is
-            complete.
-          </p>
   
           <h2 className="pt-5 text-3xl font-bold">
             Extremely Customizable
@@ -84,7 +81,7 @@ export const InfoSection = ({}: {}) => {
               anyone looking to increase their productivity and stay on track.
             </li>
           </ul>
-          <h2 className="pt-5 text-3xl font-bold">The Aesthetic Widgets of <span className="text-pink-500 font-bold">Astrostation</span></h2>
+          <h2 className="pt-5 text-3xl font-bold">The ✨ Aesthetic ✨ Widgets of <span className="text-purple-500">Astrostation</span></h2>
   
           <ul className="list-disc pt-5 pl-10 text-lg">
             <li>Choose between various aesthetically pleasing backgrounds!</li>
@@ -104,7 +101,7 @@ export const InfoSection = ({}: {}) => {
             Other ways to stay focused while studying{" "}
           </h2>
           <p className="pt-5 text-lg">
-            In addition to using a Pomodoro timer like <span className="text-pink-500 font-bold">Astrostation</span>, there are
+            In addition to using a Pomodoro timer like Astrostation, there are
             other strategies you can try out to stay focused while studying!
           </p>
   
@@ -124,10 +121,10 @@ export const InfoSection = ({}: {}) => {
   
           <h2 className="pt-5 text-3xl font-bold"> Contribute to the app </h2>
           <p className="pt-5 text-lg">
-            Did you know <span className="text-pink-500 font-bold">Astrostation</span> is now open source? That means our source
-            code is public and any developer can develop and suggest new features.
+            Did you know Astrostation is now open source? That means our source
+            code is public and any developer can submit new features.
           </p>
-          <p className="pt-5 text-lg"> Check out the Github repository <span className="font-bold"><a href="https://github.com/melkeyoss/astrostation" target="_blank">here!</a></span></p>
+          <p className="pt-5 text-lg"> Check out the Github repository <span className="font-bold text-purple-500"><a href="https://github.com/melkeyoss/astrostation" target="_blank">here!</a></span></p>
         </div>
       </div>
     );
