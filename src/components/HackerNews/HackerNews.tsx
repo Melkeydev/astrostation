@@ -92,7 +92,7 @@ export const HackerNews = () => {
 
   // use the LoaderCard for a clean loader while the feed loads/reloads
   if (isLoading) {
-    return (<LoaderCard title="Hacker News" reloadFunction={refetchStories} toggleFunction={setIsHackerNewsToggled} refreshing={true} />)
+    return (<LoaderCard title="Hacker News" reloadFunction={refetchStories} toggleFunction={setIsHackerNewsToggled} refreshing={true} width={768} height={490} />)
   }
 
   // let's handle errors with a little class and show the error to the user

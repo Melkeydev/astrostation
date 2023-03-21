@@ -41,13 +41,17 @@ interface LoaderCardProps {
   title: string;
   toggleFunction: Function;
   reloadFunction: React.MouseEventHandler<SVGElement>;
+  width?: number;
+  height?: number;
   refreshing?: boolean;
 }
 
 
-export const LoaderCard = ({ title, toggleFunction, reloadFunction, refreshing = false }: LoaderCardProps) => {
+export const LoaderCard = ({ title, toggleFunction, reloadFunction, width = 200, height = 200, refreshing = false }: LoaderCardProps) => {
   return (
-    <div className="rounded-lg border border-gray-200 bg-white/[.96] dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96">
+    <div className="rounded-lg border border-gray-200 bg-white/[.96] dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96 py-4 px-3"
+      style={{ width: `${width}px`, height: `${height}px` }}
+    >
       <div className="handle flex cursor-move items-center justify-between p-1">
         <p className="py-2 font-bold">{title}</p>
         <IoCloseSharp

@@ -1,4 +1,12 @@
-import { usePosTask, usePosMusic, usePosSpotify, usePosTimer, usePosQuote, usePosTwitch } from "@Store";
+import {
+  usePosTask,
+  usePosMusic,
+  usePosSpotify,
+  usePosTimer,
+  usePosQuote,
+  usePosTwitch,
+  usePosHackerNews,
+} from "@Store";
 
 function useSetDefault() {
   const { setTaskPosDefault } = usePosTask();
@@ -7,6 +15,7 @@ function useSetDefault() {
   const { setTimerPosDefault } = usePosTimer();
   const { setQuotePosDefault } = usePosQuote();
   const { setTwitchPosDefault } = usePosTwitch();
+  const { setHackerNewsPosDefault } = usePosHackerNews();
 
   return () => {
     // Reset all widget positions
@@ -16,6 +25,7 @@ function useSetDefault() {
     setTimerPosDefault();
     setQuotePosDefault();
     setTwitchPosDefault();
+    setHackerNewsPosDefault();
   };
 }
 

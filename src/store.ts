@@ -492,9 +492,9 @@ export const usePosTask = create<IPosTask>(
   persist(
     (set, _) => ({
       taskPosX: 804,
-      taskPosY: 302,
+      taskPosY: 464,
       setTaskPos: (X, Y) => set({ taskPosX: X, taskPosY: Y }),
-      setTaskPosDefault: () => set(() => ({ taskPosX: 804, taskPosY: 306 })),
+      setTaskPosDefault: () => set(() => ({ taskPosX: 804, taskPosY: 464 })),
     }),
     {
       name: "set_task_position",
@@ -662,9 +662,9 @@ export const usePosQuote = create<IPosQuote>(
   persist(
     (set, _) => ({
       quotePosX: 804,
-      quotePosY: 436,
+      quotePosY: 302,
       setQuotePos: (X, Y) => set({ quotePosX: X, quotePosY: Y }),
-      setQuotePosDefault: () => set(() => ({ quotePosX: 804, quotePosY: 464 })),
+      setQuotePosDefault: () => set(() => ({ quotePosX: 804, quotePosY: 302 })),
     }),
     {
       name: "set_quote_position",
@@ -695,11 +695,11 @@ export const useToggleHackerNews = create<IToggleHackerNews>(
 export const usePosHackerNews = create<IPosHackerNews>(
   persist(
     (set, _) => ({
-      hackernewsPosX: 804,
-      hackernewsPosY: 436,
+      hackernewsPosX: 1208,
+      hackernewsPosY: 330,
       setHackerNewsPos: (X, Y) => set({ hackernewsPosX: X, hackernewsPosY: Y }),
       setHackerNewsPosDefault: () =>
-        set(() => ({ hackernewsPosX: 804, hackernewsPosY: 436 })),
+        set(() => ({ hackernewsPosX: 1208, hackernewsPosY: 330 })),
     }),
     {
       name: "set_hackernews_position",
@@ -761,8 +761,8 @@ export const useToggleTwitch = create<IToggleTwitch>(
 export const usePosTwitch = create<IPosTwitch>(
   persist(
     (set, _) => ({
-      twitchPosX: 804,
-      twitchPosY: 436,
+      twitchPosX: 1208,
+      twitchPosY: 0,
       setTwitchPos: (X, Y) => set({ twitchPosX: X, twitchPosY: Y }),
       setTwitchPosDefault: () => set(() => ({ twitchPosX: 1208, twitchPosY: 0 })),
     }),
