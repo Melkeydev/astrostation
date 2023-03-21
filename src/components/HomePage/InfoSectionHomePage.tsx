@@ -132,9 +132,10 @@ export const InfoSection = ({isSeoVisible}: {isSeoVisible}) => {
             code is public and any developer can submit new features.
           </p>
           <p className="pt-5 text-lg"> Check out the Github repository <span className="font-bold text-purple-500"><a href="https://github.com/melkeyoss/astrostation" target="_blank">here!</a></span></p>
+          </div>
+          <footer
+  className="bg-gray-900/[0.7] text-center lg:text-left">
 
-          
-<footer className="bg-gray-900/[0.7] text-center lg:text-left">
   <div>
     <ul className="pt-4 pb-2 text-center text-purple-500/[0.75] ">
       <li>
@@ -145,14 +146,13 @@ export const InfoSection = ({isSeoVisible}: {isSeoVisible}) => {
         <a
           className="text-purple-500/[0.75] "
           href="https://opensource.org/license/mit/"
-          >{" - "}License</a>
+          >{" - "}License</a >
         <a
           className="text-purple-500/[0.75] "
           href="https://github.com/melkeyoss/astrostation"
           >{" - "}Github</a>
       </li>
      </ul>
-
   </div>
   <div className="pb-4 text-center text-neutral-500 ">
     © 2023 Copyright:{" "}
@@ -162,9 +162,10 @@ export const InfoSection = ({isSeoVisible}: {isSeoVisible}) => {
       >Astrostation</a>
   </div>
 </footer>
-      </div>
-    </div>
+</div>
+  
+
       )};
-      </div>
+</div>
   );
   };
