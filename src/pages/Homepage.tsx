@@ -36,6 +36,7 @@ import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
 import clsx from "clsx";
+import BottomButtons from "../components/Nav/BottomButtons"
 
 export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
@@ -108,6 +109,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         </div>
       </div>
       <CryptoDonationButton />
+      <BottomButtons />
       {!isDesktop ? (
         <div className="ml-8 flex flex-col items-center">
           <div className={clsx(isMusicToggled ? "block" : "hidden")}>
