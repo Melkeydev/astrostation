@@ -258,3 +258,12 @@ export interface ISideNavOrderStore {
   sideNavOrder: number[];
   setSideNavOrder: (sideNavOrder: number[]) => void;
 }
+
+export interface ISeoContent {
+  isSeoVisible: boolean;
+  setSeoVisibility: (isSeoVisible: boolean) => void;
+}
+
+export interface ISeoToggle {
+    onButtonClick: () => void;
+}

@@ -16,6 +16,7 @@ import {
   usePosTwitch,
   useGrid,
   useSetBackground,
+  useSeoVisibilityStore
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -35,9 +36,12 @@ import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
 import { UnsplashFooter } from "../Nav/UnsplashFooter";
+import { SeoToggle } from "../SeoToggle/SeoToggle";
+
+
 import clsx from "clsx";
 
-export const Astrostation = ({ backgrounds }: { backgrounds: any }) => {
+export const Astrostation = ({ backgrounds, onButtonClick }: { backgrounds: any, onButtonClick }) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
   const { isTimerToggled, isTimerShown } = useToggleTimer();
   const { isTasksToggled, isTasksShown } = useToggleTasks();
@@ -45,6 +49,7 @@ export const Astrostation = ({ backgrounds }: { backgrounds: any }) => {
   const { isStickyNoteShown } = useToggleStickyNote();
   const { isQuoteToggled, isQuoteShown } = useToggleQuote();
   const { isTwitchToggled, isTwitchShown } = useToggleTwitch();
+  const { isSeoVisible, setSeoVisibility } = useSeoVisibilityStore();
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -108,6 +113,9 @@ export const Astrostation = ({ backgrounds }: { backgrounds: any }) => {
         </div>
       </div>
       <CryptoDonationButton />
+      <SeoToggle onClick={onButtonClick}/>
+      <div>
+    </div>
       {!isDesktop ? (
         <div className="ml-8 flex flex-col items-center">
           <div className={clsx(isMusicToggled ? "block" : "hidden")}>
