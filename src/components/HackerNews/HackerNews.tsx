@@ -9,6 +9,9 @@ import clsx from "clsx";
 const StoryIdSchema = z.number().array()
 
 export const HackerNews = () => {
+
+  // name == button name, title == window title, key == id, apiSrc == used in queries
+  // this can probably get cleaned up
   const storyTypes = [
     {
       name: 'Top',
@@ -51,10 +54,12 @@ export const HackerNews = () => {
   const { setIsHackerNewsToggled } = useToggleHackerNews();
   const { feed, setFeed } = useHackerNewsFeed();
 
+  console.log('feed', feed)
+
   const selectedStoryType = storyTypes.find((storyType) => storyType.key === feed)
 
   const { isLoading, error, data, refetch } = useQuery({
-    queryKey: ["storyList"],
+    queryKey: [`storyList-${feed}`],
     queryFn: async () => {
 
       // let's grab the ids for the selected story type
@@ -67,8 +72,7 @@ export const HackerNews = () => {
       // now grab the details for each story    
       const data = await Promise.all(ids.map(async (id) => axios.get(`https://hacker-news.firebaseio.com/v0/item/${id}.json`)));
 
-      // return data;
-      return data
+      return data;
     }
   })
 

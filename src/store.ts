@@ -710,7 +710,7 @@ export const usePosHackerNews = create<IPosHackerNews>(
 export const useHackerNewsFeed = create<IHackerNewsFeed>(
   persist(
     (set, _) => ({
-      feed: 'string',
+      feed: 'TOP',
       setFeed: (feed) => set({ feed: feed }),
       setDefaultFeed: () => set(() => ({ feed: 'TOP' }))
     }),
