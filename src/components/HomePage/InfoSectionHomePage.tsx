@@ -1,5 +1,12 @@
-export const InfoSection = ({}: {}) => {
+import { IoCloseSharp } from "react-icons/io5"
+import { useSeoVisibilityStore } from "@Store"
+
+export const InfoSection = ({isSeoVisible}: {isSeoVisible}) => {
+  const { setSeoVisibility } = useSeoVisibilityStore();
+
     return (
+      <div>
+      {isSeoVisible && (
       <div className="bg-gray-800/[0.90] text-slate-200">
         <div className="ml-20 mt-20 mr-20 pb-20">
           <h1 className="pt-20 text-4xl font-bold"> What is <span className="text-purple-500">Astrostation?</span></h1>
@@ -125,10 +132,9 @@ export const InfoSection = ({}: {}) => {
             code is public and any developer can submit new features.
           </p>
           <p className="pt-5 text-lg"> Check out the Github repository <span className="font-bold text-purple-500"><a href="https://github.com/melkeyoss/astrostation" target="_blank">here!</a></span></p>
-        </div>
-        <footer
-  className="bg-gray-900/[0.7] text-center lg:text-left">
-  
+
+          
+<footer className="bg-gray-900/[0.7] text-center lg:text-left">
   <div>
     <ul className="pt-4 pb-2 text-center text-purple-500/[0.75] ">
       <li>
@@ -157,5 +163,8 @@ export const InfoSection = ({}: {}) => {
   </div>
 </footer>
       </div>
-    );
+    </div>
+      )};
+      </div>
+  );
   };

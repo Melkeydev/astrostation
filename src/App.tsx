@@ -7,12 +7,14 @@ import {
   useDarkToggleStore,
   useFirstTimeUserStore,
   useBreakStarted,
+  useSeoVisibilityStore,
 } from "@Store";
 import { Toaster } from "react-hot-toast";
 import { version } from "@Root/package.json";
 import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 import clsx from "clsx";
+import createScrollSnap from 'scroll-snap'
 
 enum backgrounds {
   CITY,
@@ -31,13 +33,15 @@ function App() {
   const { isFirstTimeUser } = useFirstTimeUserStore();
   const { breakStarted } = useBreakStarted();
   const setDefault = useSetDefault();
+  const { isSeoVisible, setSeoVisibility } = useSeoVisibilityStore();
+  const scrollSnapElement = document.getElementById('container')
 
   useEffect(() => {
     if (isDark) {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
-    }
+    } 
   }, [isDark]);
 
   useEffect(() => {
@@ -59,8 +63,8 @@ function App() {
       >
         <Toaster />
         <SideNav />
-        <Astrostation backgrounds={backgrounds} />
-        <InfoSection />
+        <Astrostation onButtonClick={() => setSeoVisibility(!isSeoVisible)} backgrounds={backgrounds} />
+        <InfoSection isSeoVisible={isSeoVisible} />
       </div>
     </>
   );
