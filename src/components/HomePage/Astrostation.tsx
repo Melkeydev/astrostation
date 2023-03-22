@@ -16,7 +16,6 @@ import {
   usePosTwitch,
   useGrid,
   useSetBackground,
-  useSeoVisibilityStore
 } from "@Store";
 import { Player } from "@Components/Player/Player";
 import { Timer } from "@Components/Timer/Timer";
@@ -36,7 +35,6 @@ import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
 import { UnsplashFooter } from "../Nav/UnsplashFooter";
-import { SeoToggle } from "../SeoToggle/SeoToggle";
 
 
 import clsx from "clsx";
