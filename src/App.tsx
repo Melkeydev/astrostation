@@ -14,6 +14,8 @@ import { version } from "@Root/package.json";
 import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 import clsx from "clsx";
+import { useRef } from "react";
+
 
 enum backgrounds {
   CITY,
@@ -33,6 +35,17 @@ function App() {
   const { breakStarted } = useBreakStarted();
   const setDefault = useSetDefault();
   const { isSeoVisible, setSeoVisibility } = useSeoVisibilityStore();
+  const astroStationRef = useRef<HTMLDivElement>(null);
+
+  const handleButtonClick = () => {
+    if (astroStationRef.current) {
+      astroStationRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+    setTimeout(() => {
+      setSeoVisibility(!isSeoVisible);
+    }, 700);
+
+  };
 
   useEffect(() => {
     if (isDark) {
@@ -49,6 +62,7 @@ function App() {
     }
   }, []);
 
+
   return (
     <>
       {isFirstTimeUser && <Walkthrough />}
@@ -61,8 +75,9 @@ function App() {
       >
         <Toaster />
         <SideNav />
-        <Astrostation backgrounds={backgrounds} />
-        <InfoSection onButtonClick={() => setSeoVisibility(!isSeoVisible)} isSeoVisible={isSeoVisible}/>
+        <Astrostation ref={astroStationRef} backgrounds={backgrounds} />
+        <InfoSection onButtonClick={handleButtonClick} isSeoVisible={isSeoVisible} />
+
       </div>
     </>
   );
