@@ -14,7 +14,6 @@ import { version } from "@Root/package.json";
 import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 import clsx from "clsx";
-import createScrollSnap from 'scroll-snap'
 
 enum backgrounds {
   CITY,
