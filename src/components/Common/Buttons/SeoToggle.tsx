@@ -1,7 +1,7 @@
 import { FaInfo } from "react-icons/fa";
 import React, { useState } from 'react';
 
-export const SeoToggle = ({ onClick }: {onClick}) => {
+export const SeoToggle = ({ onClick }: { onClick }) => {
   const [isBgTransparent, setIsBgTransparent] = useState(false);
 
   const handleClick = () => {

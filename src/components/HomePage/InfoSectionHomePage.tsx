@@ -1,6 +1,6 @@
 import { IoCloseSharp } from "react-icons/io5"
 import { useSeoVisibilityStore } from "@Store"
-import { SeoToggle } from "../SeoToggle/SeoToggle";
+import { SeoToggle } from "../Common/Buttons/SeoToggle";
 
 export const InfoSection = ({ onButtonClick, isSeoVisible}: { onButtonClick, isSeoVisible }) => {
 
@@ -137,9 +137,9 @@ export const InfoSection = ({ onButtonClick, isSeoVisible}: { onButtonClick, isS
               <SeoToggle onClick={onButtonClick}/>
               </div>
               </div>
-              <footer className="bg-gray-900/[0.7] text-center lg:text-lef bottom-0">
+              <footer className="bg-gray-900/[0.7] text-sm text-center lg:text-lef bottom-0">
         
-                  <ul className="pt-4 pb-2 text-center text-purple-500/[0.75] ">
+                  <ul className="pt-2 text-center text-purple-500/[0.75] ">
                     <li>
                       <a
                         className="text-purple-500/[0.75] "
@@ -155,7 +155,7 @@ export const InfoSection = ({ onButtonClick, isSeoVisible}: { onButtonClick, isS
                         >{" - "}Github</a>
                     </li>
                   </ul>
-                <div className="pb-4 text-center text-neutral-500 ">
+                <div className="pb-2 text-center text-neutral-500 ">
                   © 2023 Copyright:{" "}
                   <a
                     className="text-neutral-500"
