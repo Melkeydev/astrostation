@@ -41,7 +41,7 @@ import { SeoToggle } from "../SeoToggle/SeoToggle";
 
 import clsx from "clsx";
 
-export const Astrostation = ({ backgrounds, onButtonClick }: { backgrounds: any, onButtonClick }) => {
+export const Astrostation = ({ backgrounds }: { backgrounds: any }) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
   const { isTimerToggled, isTimerShown } = useToggleTimer();
   const { isTasksToggled, isTasksShown } = useToggleTasks();
@@ -49,7 +49,7 @@ export const Astrostation = ({ backgrounds, onButtonClick }: { backgrounds: any,
   const { isStickyNoteShown } = useToggleStickyNote();
   const { isQuoteToggled, isQuoteShown } = useToggleQuote();
   const { isTwitchToggled, isTwitchShown } = useToggleTwitch();
-  const { isSeoVisible, setSeoVisibility } = useSeoVisibilityStore();
+
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -113,7 +113,6 @@ export const Astrostation = ({ backgrounds, onButtonClick }: { backgrounds: any,
         </div>
       </div>
       <CryptoDonationButton />
-      <SeoToggle onClick={onButtonClick}/>
       <div>
     </div>
       {!isDesktop ? (

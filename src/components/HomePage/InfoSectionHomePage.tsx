@@ -1,15 +1,15 @@
 import { IoCloseSharp } from "react-icons/io5"
 import { useSeoVisibilityStore } from "@Store"
+import { SeoToggle } from "../SeoToggle/SeoToggle";
 
-export const InfoSection = ({isSeoVisible}: {isSeoVisible}) => {
-  const { setSeoVisibility } = useSeoVisibilityStore();
+export const InfoSection = ({ onButtonClick, isSeoVisible}: { onButtonClick, isSeoVisible }) => {
 
     return (
       <div>
         {isSeoVisible && 
         (
           <div className="bg-gray-800/[0.90] text-slate-200 absolute">
-            <div className="ml-20 mr-20 pb-20">
+            <div className="ml-20 mr-20">
               <h1 className="pt-20 text-4xl font-bold"> What is <span className="text-purple-500">Astrostation?</span></h1>
               <p className="pt-5 text-lg">
               Astrostation is a versatile, free-to-use desktop and mobile app designed to enhance time management and productivity. 
@@ -114,7 +114,7 @@ export const InfoSection = ({isSeoVisible}: {isSeoVisible}) => {
               </p>
       
               <ul className="list-disc pt-5 pl-10 text-lg">
-                <li>Prepare yourself your favorite tea to enjoy while studying</li>
+                <li>Prepare yourself your favorite snack to enjoy while studying</li>
                 <li>
                   Break your work into smaller, manageable tasks, and prioritize them
                   based on importance
@@ -133,6 +133,9 @@ export const InfoSection = ({isSeoVisible}: {isSeoVisible}) => {
                 code is public and any developer can submit new features.
               </p>
               <p className="pt-5 text-lg"> Check out the Github repository <span className="font-bold text-purple-500"><a href="https://github.com/melkeyoss/astrostation" target="_blank">here!</a></span></p>
+              <div className="flex justify-center">
+              <SeoToggle onClick={onButtonClick}/>
+              </div>
               </div>
               <footer className="bg-gray-900/[0.7] text-center lg:text-lef bottom-0">
         
@@ -159,7 +162,7 @@ export const InfoSection = ({isSeoVisible}: {isSeoVisible}) => {
                     href="https://twitter.com/melkeydev"
                     >Astrostation</a>
                 </div>
-          
+              
               </footer>
       
             </div>
