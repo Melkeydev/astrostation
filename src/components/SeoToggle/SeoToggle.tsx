@@ -10,7 +10,7 @@ export const SeoToggle = ({ onClick }: {onClick}) => {
   };
 
   return(
-<div className="pt-5 pb-2" >
+<div className="pt-10 pb-5" >
         <button
           onClick={handleClick}
           type="button"
