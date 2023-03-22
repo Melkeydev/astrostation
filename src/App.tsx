@@ -61,8 +61,8 @@ function App() {
       >
         <Toaster />
         <SideNav />
-        <Astrostation onButtonClick={() => setSeoVisibility(!isSeoVisible)} backgrounds={backgrounds} />
-        <InfoSection isSeoVisible={isSeoVisible} />
+        <Astrostation backgrounds={backgrounds} />
+        <InfoSection onButtonClick={() => setSeoVisibility(!isSeoVisible)} isSeoVisible={isSeoVisible}/>
       </div>
     </>
   );
