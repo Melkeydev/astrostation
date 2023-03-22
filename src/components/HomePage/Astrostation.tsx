@@ -35,11 +35,11 @@ import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
 import { UnsplashFooter } from "../Nav/UnsplashFooter";
-
-
 import clsx from "clsx";
+import React from 'react';
 
-export const Astrostation = ({ backgrounds }: { backgrounds: any }) => {
+export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any }>((props, ref) => {
+  const { backgrounds } = props;
   const { isMusicToggled, isMusicShown } = useToggleMusic();
   const { isTimerToggled, isTimerShown } = useToggleTimer();
   const { isTasksToggled, isTasksShown } = useToggleTasks();
@@ -66,7 +66,7 @@ export const Astrostation = ({ backgrounds }: { backgrounds: any }) => {
   const { grid } = useGrid();
 
   return (
-    <div className="h-screen">
+    <div ref={ref} className="h-screen">
       {isBackground == backgrounds.UNSPLASH && <UnsplashFooter />}
       <div className={"flex justify-end flex-wrap py-2 px-2 gap-2 ml-auto w-5/6"}>
         <div className="settingsButton">
@@ -213,4 +213,4 @@ export const Astrostation = ({ backgrounds }: { backgrounds: any }) => {
       )}
     </div>
   );
-};
+});

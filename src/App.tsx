@@ -75,7 +75,7 @@ function App() {
       >
         <Toaster />
         <SideNav />
-        <Astrostation ref={astroStationRef} backgrounds={backgrounds} />
+        <Astrostation ref={astroStationRef} backgrounds={backgrounds}/>
         <InfoSection onButtonClick={handleButtonClick} isSeoVisible={isSeoVisible} />
 
       </div>
