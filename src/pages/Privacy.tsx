@@ -4,7 +4,7 @@ export const PrivacyPage = () => {
         <div className="flex flex-col justify-center items-center">
         <h1 className="text-4xl font-bold">License</h1>
         <p className="text-lg text-center">
-        This privacy page is under construction.
+        The privacy page is under construction.
         </p>
         </div>
         </div>
