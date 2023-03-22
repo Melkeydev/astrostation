@@ -33,8 +33,7 @@ function App() {
   const { isFirstTimeUser } = useFirstTimeUserStore();
   const { breakStarted } = useBreakStarted();
   const setDefault = useSetDefault();
-  const { isSeoVisible, setSeoVisibility } = useSeoVisibilityStore();
-  const scrollSnapElement = document.getElementById('container')
+  const { isSeoVisible, setSeoVisibility, isOverflowHidden } = useSeoVisibilityStore();
 
   useEffect(() => {
     if (isDark) {
@@ -55,9 +54,9 @@ function App() {
     <>
       {isFirstTimeUser && <Walkthrough />}
       <Backgrounds backgrounds={backgrounds} />
-      <div
+      <div id="entire-app"
         className={clsx(
-          "fixed inset-0 overflow-auto",
+          `fixed inset-0 ${isSeoVisible ? `overflow-auto` : `overflow-hidden`}`,
           breakStarted && "bg-blue-500 bg-opacity-40"
         )}
       >

@@ -134,7 +134,8 @@ export const InfoSection = ({isSeoVisible}: {isSeoVisible}) => {
               </p>
               <p className="pt-5 text-lg"> Check out the Github repository <span className="font-bold text-purple-500"><a href="https://github.com/melkeyoss/astrostation" target="_blank">here!</a></span></p>
               </div>
-              <footer className="bg-gray-900/[0.7] text-center lg:text-left">
+              <footer className="bg-gray-900/[0.7] text-center lg:text-lef bottom-0">
+        
                   <ul className="pt-4 pb-2 text-center text-purple-500/[0.75] ">
                     <li>
                       <a
@@ -158,6 +159,7 @@ export const InfoSection = ({isSeoVisible}: {isSeoVisible}) => {
                     href="https://twitter.com/melkeydev"
                     >Astrostation</a>
                 </div>
+          
               </footer>
       
             </div>
