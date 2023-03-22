@@ -1,5 +1,3 @@
-import { IoCloseSharp } from "react-icons/io5"
-import { useSeoVisibilityStore } from "@Store"
 import { SeoToggle } from "../components/Common/Buttons/SeoToggle";
 
 export const InfoSection = ({ onButtonClick, isSeoVisible}: { onButtonClick, isSeoVisible }) => {
@@ -148,7 +146,7 @@ export const InfoSection = ({ onButtonClick, isSeoVisible}: { onButtonClick, isS
                       <a
                         className="text-purple-500/[0.75] "
                         href="https://opensource.org/license/mit/"
-                        >{" - "}License</a >
+                        >{" - "}License</a>
                       <a
                         className="text-purple-500/[0.75] "
                         href="https://github.com/melkeyoss/astrostation"
