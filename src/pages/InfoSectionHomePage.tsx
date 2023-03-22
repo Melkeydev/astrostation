@@ -1,6 +1,6 @@
 import { IoCloseSharp } from "react-icons/io5"
 import { useSeoVisibilityStore } from "@Store"
-import { SeoToggle } from "../Common/Buttons/SeoToggle";
+import { SeoToggle } from "../components/Common/Buttons/SeoToggle";
 
 export const InfoSection = ({ onButtonClick, isSeoVisible}: { onButtonClick, isSeoVisible }) => {
 

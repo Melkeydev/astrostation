@@ -39,7 +39,7 @@ import {
   ISideNavOrderStore,
   ISeoContent,
 } from "./interfaces";
-import { InfoSection } from "./components/Homepage/InfoSectionHomePage";
+import { InfoSection } from "./pages/InfoSectionHomePage";
 
 /**
  * Grid Store
