@@ -68,7 +68,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
   return (
     <div ref={ref} className="h-screen">
       {isBackground == backgrounds.UNSPLASH && <UnsplashFooter />}
-      <div className={"flex justify-end flex-wrap py-2 px-2 gap-2 ml-auto w-5/6"}>
+      <div className={"bodyPart flex justify-end flex-wrap py-2 px-2 gap-2 ml-auto w-5/6"}>
         <div className="settingsButton">
           <CustomizationButton
             title="Settings"
