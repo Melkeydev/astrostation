@@ -32,7 +32,7 @@ function App() {
   const { isFirstTimeUser } = useFirstTimeUserStore();
   const { breakStarted } = useBreakStarted();
   const setDefault = useSetDefault();
-  const { isSeoVisible, setSeoVisibility, isOverflowHidden } = useSeoVisibilityStore();
+  const { isSeoVisible, setSeoVisibility } = useSeoVisibilityStore();
 
   useEffect(() => {
     if (isDark) {
