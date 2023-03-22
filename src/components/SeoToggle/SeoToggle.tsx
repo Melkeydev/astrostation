@@ -2,7 +2,7 @@ import { FaInfo } from "react-icons/fa";
 
 export const SeoToggle = ({ onClick }: {onClick}) => {
   return(
-<div className="fixed bottom-0 left-60">
+<div className="fixed bottom-0 z-10 left-60">
         <button
           onClick={onClick}
           type="button"
