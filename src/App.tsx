@@ -69,7 +69,7 @@ function App() {
       <Backgrounds backgrounds={backgrounds} />
       <div id="entire-app"
         className={clsx(
-          `fixed inset-0 ${isSeoVisible ? `overflow-auto` : `overflow-hidden`}`,
+          `fixed inset-0 scrollbar-hide ${isSeoVisible ? `overflow-auto` : `overflow-hidden`}`,
           breakStarted && "bg-blue-500 bg-opacity-40"
         )}
       >
