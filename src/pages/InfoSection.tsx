@@ -10,16 +10,17 @@ export const InfoSection = ({ onButtonClick, isSeoVisible}: { onButtonClick, isS
             <div className="ml-20 mr-20">
               <h1 className="pt-20 text-4xl font-bold"> What is <span className="text-purple-500">Astrostation?</span></h1>
               <p className="pt-5 text-lg">
-              Astrostation is a versatile, free-to-use desktop and mobile app designed to enhance time management and productivity. 
-              It is centered on the highly effective Pomodoro technique, a popular concentration improvement strategy developed by {" "}
+              Astrostation is a versatile desktop and mobile app designed to enhance time management and productivity. 
+              It is centered around a popular concentration improvement strategy, developed by {" "}
                 <span className="font-bold italic"><a
                   href="https://francescocirillo.com/products/the-pomodoro-technique"
                   target="_blank"
                 >
-                  Francesco Cirillo.{" "}
+                  Francesco Cirillo,{" "}
                 </a></span>
-              What sets  Astrostation  apart is its ability to let users personalize the app's aesthetic with a wide array of widgets and customizable settings. 
-              Perfect for studying or tackling projects, Astrostation is the ultimate focus app, crafted to cater to your individual needs.
+              known as the "Pomodoro Technique." </p>
+              <p className="pt-5 text-lg"> What makes Astrostation unique is your ability to personalize it with a wide array of aesthetic widgets and customizable settings!
+                A staple for studying or tackling projects!
               </p>
 
               <h2 className="pt-5 text-3xl font-bold"> How to use our Pomodoro Timer </h2>

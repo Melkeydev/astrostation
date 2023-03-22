@@ -114,7 +114,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
       <div>
     </div>
       {!isDesktop ? (
-        <div className="ml-8 flex flex-col items-center">
+        <div className="ml-8 flex flex-col items-center pt-10 pb-40">
           <div className={clsx(isMusicToggled ? "block" : "hidden")}>
             <Player />
           </div>
