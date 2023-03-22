@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Backgrounds } from "@Components/Backgrounds/utils";
-import { Astrostation } from "@Root/src/components/HomePage/Astrostation";
-import { InfoSection } from "@Root/src/components/HomePage/InfoSectionHomePage"
+import { Astrostation } from "@Root/src/components/Homepage/Astrostation";
+import { InfoSection } from "@Root/src/components/Homepage/InfoSectionHomePage"
 import { SideNav } from "@Components/Nav/SideNav";
 import {
   useDarkToggleStore,
