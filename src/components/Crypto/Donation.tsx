@@ -1,6 +1,7 @@
 import { CryptoModal } from "./Modal";
 import { FaEthereum } from "react-icons/fa";
 import { useState } from "react";
+import { Button } from "../Common/Button";
 
 export const CryptoDonationButton = () => {
   const [isCryptoModalOpen, setIsCryptoModalOpen] = useState(false);
@@ -14,14 +15,15 @@ export const CryptoDonationButton = () => {
         />
       </div>
       <div className="fixed bottom-0">
-        <button
+        <Button
           type="button"
-          className="donateButton flex items-center rounded-md bg-violet-700 ml-2 mb-2 px-4 py-2 font-medium text-white shadow-sm focus:outline-none dark:bg-violet-700 dark:text-violet-200"
+          className="donateButton flex items-center rounded-mdml-2 mb-2 px-4 py-2 font-medium  shadow-sm focus:outline-none"
           onClick={() => setIsCryptoModalOpen(true)}
+          variant="bottomButton"
         >
           Donate
           <FaEthereum />
-        </button>
+        </Button>
       </div>
     </>
   );
