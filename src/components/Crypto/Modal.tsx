@@ -143,7 +143,7 @@ export const CryptoModal = ({ isVisible = false, onClose }) => {
                 <footer className="p-4">
                   {!metaMaskConnected ? (
                     <Button
-                      variant="crypto"
+                      variant="bottomButton"
                       type="button"
                       className="w-full focus:outline-none focus:ring"
                       onClick={() => connectMetaMaskConnected()}
@@ -152,7 +152,7 @@ export const CryptoModal = ({ isVisible = false, onClose }) => {
                     </Button>
                   ) : (
                     <Button
-                      variant="crypto"
+                      variant="bottomButton"
                       type="submit"
                       className="w-full focus:outline-none focus:ring"
                     >
