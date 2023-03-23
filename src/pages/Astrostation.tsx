@@ -66,7 +66,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
   const { grid } = useGrid();
 
   return (
-    <div ref={ref} className="h-screen">
+    <div ref={ref} className="md:h-screen pb-8 md:pb-0">
       {isBackground == backgrounds.UNSPLASH && <UnsplashFooter />}
       <div className={"bodyPart flex justify-end flex-wrap py-2 px-2 gap-2 ml-auto w-5/6"}>
         <div className="settingsButton">
