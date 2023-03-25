@@ -1,3 +1,4 @@
+import { ITask } from "../../interfaces";
 import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { RiArrowGoBackFill } from "react-icons/ri";
@@ -11,10 +12,23 @@ import clsx from "clsx";
 
 export const Task = ({ task }) => {
   const [openSettings, setOpenSettings] = useState(false);
-  const { completeTask, toggleInProgressState, alertTask, setPomodoroCounter } =
+  const { completeTask, toggleInProgressState, alertTask, setPomodoroCounter, toggleMenu} =
     useTask();
   const { breakStarted } = useBreakStarted();
   const { timerQueue } = useTimer();
+
+  const openContextMenu = (event) => {
+    event.preventDefault();
+    toggleMenu(task.id, !task.menuToggled);
+  }
+
+
+  /* from enum import Enum, auto
+   * class State(Enum):
+   *    On = object() // this create a memory address 
+  */
+
+
 
   function preventFalseInProgress() {
     if (task.completed) {
@@ -57,6 +71,7 @@ export const Task = ({ task }) => {
               !task.inProgress &&
               "joyRideTask"
           )}
+          onContextMenu={openContextMenu}
           onDoubleClick={() => preventFalseInProgress()}
         >
           <div className="cancelDrag flex items-center justify-between">
@@ -80,23 +95,34 @@ export const Task = ({ task }) => {
                   />
                 )}
               </div>
-              <div className="whitespace-normal">{task.description}</div>
-            </div>
-            <div className="flex items-center">
-              {/*This the guy*/}
-              <div className="flex justify-end">
-                {task.pomodoroCounter}/{task.pomodoro}
+              
+              <div className="flex items-center">
+                {/*This the guy */}
+                <div className="flex justify-end">
+                  {task.pomodoroCounter}/{task.pomodoro}
+                </div>
+                <BsThreeDotsVertical
+                  className="ml-2 cursor-pointer"
+                  onClick={() => setOpenSettings(!openSettings)}
+                />
               </div>
-              <BsThreeDotsVertical
-                className="ml-2 cursor-pointer"
-                onClick={() => setOpenSettings(!openSettings)}
-              />
             </div>
           </div>
-        </div>
+
       ) : (
         <Settings setOpenSettings={setOpenSettings} Task={task} />
       )}
+      <div className="absolute">
+        {task.menuToggled && (
+          <div className="bg-slate-500">
+            <ul>
+              <li>Mark Completed</li>
+              <li>Delete</li>
+              <li>Do Something</li>
+            </ul>
+          </div>
+        )}
+      </div>
     </>
   );
 };
