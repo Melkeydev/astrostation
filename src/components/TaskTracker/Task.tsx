@@ -9,7 +9,7 @@ import clsx from "clsx";
 // TODO: Remove alerted
 // TODO: Add a blurb/instructions to let users know how to toggle
 
-export const Task = ({ task }) => {
+export const Task = ({ task, tasks }) => {
   const [openSettings, setOpenSettings] = useState(false);
   const { removeTask, completeTask, toggleInProgressState, alertTask, setPomodoroCounter, toggleMenu } =
     useTask();
@@ -19,6 +19,11 @@ export const Task = ({ task }) => {
   const openContextMenu = (event) => {
     event.preventDefault();
     toggleMenu(task.id, !task.menuToggled);
+
+    tasks.forEach(task_ => {
+      if (task_.menuToggled)
+        task_.menuToggled = false;
+    });
   }
 
   const closeOnBoundsExit = (_) => {
@@ -63,20 +68,20 @@ export const Task = ({ task }) => {
           className={clsx(
             "my-2 w-full cursor-pointer border-l-4 bg-stone-300 py-2 px-2 dark:bg-gray-700",
             task.inProgress &&
-              !task.completed &&
-              "joyRideInProgressTask border-cyan-700 bg-cyan-500 dark:bg-cyan-500 dark:text-stone-600",
+            !task.completed &&
+            "joyRideInProgressTask border-cyan-700 bg-cyan-500 dark:bg-cyan-500 dark:text-stone-600",
 
             task.completed &&
-              "border-green-500 bg-green-300 line-through dark:bg-green-300 dark:text-stone-600",
+            "border-green-500 bg-green-300 line-through dark:bg-green-300 dark:text-stone-600",
 
             !task.completed &&
-              task.alerted &&
-              "border-red-500 bg-red-300 dark:bg-red-300 dark:text-stone-600",
+            task.alerted &&
+            "border-red-500 bg-red-300 dark:bg-red-300 dark:text-stone-600",
 
             !task.completed &&
-              !task.alerted &&
-              !task.inProgress &&
-              "joyRideTask"
+            !task.alerted &&
+            !task.inProgress &&
+            "joyRideTask"
           )}
           onContextMenu={openContextMenu}
           onDoubleClick={() => preventFalseInProgress()}
