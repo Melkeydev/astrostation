@@ -1,4 +1,3 @@
-import { ITask } from "../../interfaces";
 import { useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { RiArrowGoBackFill } from "react-icons/ri";
@@ -12,7 +11,7 @@ import clsx from "clsx";
 
 export const Task = ({ task }) => {
   const [openSettings, setOpenSettings] = useState(false);
-  const { completeTask, toggleInProgressState, alertTask, setPomodoroCounter, toggleMenu} =
+  const { removeTask, completeTask, toggleInProgressState, alertTask, setPomodoroCounter, toggleMenu } =
     useTask();
   const { breakStarted } = useBreakStarted();
   const { timerQueue } = useTimer();
@@ -22,13 +21,21 @@ export const Task = ({ task }) => {
     toggleMenu(task.id, !task.menuToggled);
   }
 
+  const closeOnBoundsExit = (_) => {
+    /* when the mouse leaves the bounds of the task 
+     * only when the task context-menu is open we can close the contextmenu
+     * when the mouse leaves the bounds of the tasks div 
+     */
+    if (task.menuToggled) {
+      toggleMenu(task.id, !task.menuToggled);
+    }
+  }
 
-  /* from enum import Enum, auto
-   * class State(Enum):
-   *    On = object() // this create a memory address 
-  */
-
-
+  // FIXME: partially copied code from Settings.tsx
+  const handleDelete = () => {
+    alert("Are you sure you want to delete this task?");
+    removeTask(task.id);
+  };
 
   function preventFalseInProgress() {
     if (task.completed) {
@@ -48,6 +55,16 @@ export const Task = ({ task }) => {
       alertTask(task.id, true);
     }
   }, [task.pomodoroCounter]);
+
+  /* close context menu when we click out of bounds of a context menu
+   * this _may_ not be optimal, or the right way since we done utilize ref
+   */
+  const closeContextMenuOOB = (_) => {
+    if (task.menuToggled) {
+      toggleMenu(task.id, false);
+    }
+  }
+  document.addEventListener("mousedown", closeContextMenuOOB);
 
   return (
     <>
@@ -95,30 +112,45 @@ export const Task = ({ task }) => {
                   />
                 )}
               </div>
-              
-              <div className="flex items-center">
-                {/*This the guy */}
-                <div className="flex justify-end">
-                  {task.pomodoroCounter}/{task.pomodoro}
-                </div>
-                <BsThreeDotsVertical
-                  className="ml-2 cursor-pointer"
-                  onClick={() => setOpenSettings(!openSettings)}
-                />
+              <div className="whitespace-normal">{task.description}</div>
+            </div>
+
+            <div className="flex items-center">
+              {/*This the guy */}
+              <div className="flex justify-end">
+                {task.pomodoroCounter}/{task.pomodoro}
               </div>
+              <BsThreeDotsVertical
+                className="ml-2 cursor-pointer"
+                onClick={() => setOpenSettings(!openSettings)}
+              />
             </div>
           </div>
+        </div>
 
       ) : (
         <Settings setOpenSettings={setOpenSettings} Task={task} />
       )}
-      <div className="absolute">
+      <div
+        className="absolute">
         {task.menuToggled && (
-          <div className="bg-slate-500">
-            <ul>
-              <li>Mark Completed</li>
-              <li>Delete</li>
-              <li>Do Something</li>
+          <div
+            className="bg-neutral-800 rounded-md" onMouseLeave={closeOnBoundsExit}>
+            <ul className="w-full">
+              <li
+                onClick={() => { completeTask(task.id) }}
+                className="px-5 py-2 hover:bg-neutral-600 rounded-md">
+                <div>
+                  Toggle Completed
+                </div>
+              </li>
+              <li
+                onClick={() => { handleDelete() }}
+                className="px-5 py-2 hover:bg-neutral-600 rounded-md">
+                <div>
+                  Deleted
+                </div>
+              </li>
             </ul>
           </div>
         )}
@@ -126,3 +158,4 @@ export const Task = ({ task }) => {
     </>
   );
 };
+
