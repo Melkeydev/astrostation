@@ -56,16 +56,6 @@ export const Task = ({ task }) => {
     }
   }, [task.pomodoroCounter]);
 
-  /* close context menu when we click out of bounds of a context menu
-   * this _may_ not be optimal, or the right way since we done utilize ref
-   */
-  const closeContextMenuOOB = (_) => {
-    if (task.menuToggled) {
-      toggleMenu(task.id, false);
-    }
-  }
-  document.addEventListener("mousedown", closeContextMenuOOB);
-
   return (
     <>
       {!openSettings ? (
