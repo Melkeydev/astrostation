@@ -128,17 +128,24 @@ export const Task = ({ task }) => {
             className="bg-neutral-800 rounded-md" onMouseLeave={closeOnBoundsExit}>
             <ul className="w-full">
               <li
+                onClick={() => { toggleInProgressState(task.id) }}
+                className="px-5 py-2 hover:bg-neutral-600 rounded-md">
+                <div>
+                  Select Task
+                </div>
+              </li>
+              <li
                 onClick={() => { completeTask(task.id) }}
                 className="px-5 py-2 hover:bg-neutral-600 rounded-md">
                 <div>
-                  Toggle Completed
+                  Complete Task
                 </div>
               </li>
               <li
                 onClick={() => { handleDelete() }}
                 className="px-5 py-2 hover:bg-neutral-600 rounded-md">
                 <div>
-                  Deleted
+                  Delete Task
                 </div>
               </li>
             </ul>

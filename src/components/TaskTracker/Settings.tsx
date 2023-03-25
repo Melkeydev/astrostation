@@ -38,8 +38,11 @@ export const Settings = ({ setOpenSettings, Task }) => {
   return (
     <div className="mb-6 mt-2 space-y-2 w-full rounded-lg border border-gray-200 bg-white py-2 px-1 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 ">
       <div className="flex">
+
+        {/* We need to cancel drag here, if the user is selecting some text
+          * otherwise we can drag the task manager around in the rename field */}
         <input
-          className="m-1 h-10 w-full border border-gray-300 py-2 px-3 text-lg dark:border-gray-500 dark:bg-gray-700"
+          className="cancelDrag m-1 h-10 w-full border border-gray-300 py-2 px-3 text-lg dark:border-gray-500 dark:bg-gray-700"
           type="text"
           placeholder={Task.description}
           value={text}
@@ -62,12 +65,12 @@ export const Settings = ({ setOpenSettings, Task }) => {
           </div>
         </div>
       </div>
-      <div className="flex items-center justify-between border-b-2 border-gray-100 px-2 pb-2">
+      {/* <div className="flex items-center justify-between border-b-2 border-gray-100 px-2 pb-2">
         <div>Delete Task</div>
         <div className="mr-3 cursor-pointer hover:text-red-500">
           <AiFillDelete className="h-6 w-6" onClick={() => handleDelete()} />
         </div>
-      </div>
+      </div> */}
       <div className="flex justify-between">
         <Button
           className="font-normal text-gray-800 hover:text-white dark:text-white"
