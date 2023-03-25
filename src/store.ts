@@ -309,6 +309,7 @@ export const useTask = create<ITaskState>(
               pomodoro: count,
               pomodoroCounter: isBreak ? -1 : 0,
               alerted: false,
+              menuToggled: false,
             } as ITask,
             ...state.tasks,
           ],
@@ -384,6 +385,18 @@ export const useTask = create<ITaskState>(
               ? ({
                   ...task,
                   alerted: flag,
+                } as ITask)
+              : task
+          ),
+        }));
+      },
+      toggleMenu: (id, flag) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({
+                  ...task,
+                  menuToggled: flag,
                 } as ITask)
               : task
           ),

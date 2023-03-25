@@ -86,6 +86,7 @@ export interface ITask {
   pomodoro: number;
   pomodoroCounter: number;
   alerted: boolean;
+  menuToggled: boolean;
 }
 
 export interface ITaskState {
@@ -99,6 +100,7 @@ export interface ITaskState {
   setPomodoroCounter: (id: number) => void;
   alertTask: (id: number, flag: boolean) => void;
   setPomodoro: (id: number, newVal: number) => void;
+  toggleMenu: (id: number, flag: boolean) => void;
 }
 
 export interface ISongTask {
