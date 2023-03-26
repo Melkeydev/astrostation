@@ -126,8 +126,10 @@ export interface ISongState {
 }
 
 export interface IBackground {
-  isBackground: number;
-  setIsBackground: (isBackground: number) => void;
+  backgroundColor: string;
+  backgroundId: number;
+  setBackgroundId: (backgroundId: number) => void;
+  setBackgroundColor: (color: string) => void;
 }
 
 export interface IToggleTasks {
@@ -276,5 +278,5 @@ export interface ISeoContent {
 }
 
 export interface ISeoToggle {
-  onButtonClick: () => void;
+    onButtonClick: () => void;
 }
