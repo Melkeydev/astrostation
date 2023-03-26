@@ -5,6 +5,7 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 import { Settings } from "./Settings";
 import { useTask, useTimer, useBreakStarted } from "@Store";
 import clsx from "clsx";
+import { ITask } from "@Root/src/interfaces";
 
 // TODO: Remove alerted
 // TODO: Add a blurb/instructions to let users know how to toggle
@@ -20,9 +21,11 @@ export const Task = ({ task, tasks }) => {
     event.preventDefault();
     toggleMenu(task.id, !task.menuToggled);
 
-    tasks.forEach(task_ => {
+    /* This is linear search, however it did not seem to 
+       have any perf impact for 100-200 tasks at a time */ 
+    tasks.forEach((task_: ITask) => {
       if (task_.menuToggled)
-        task_.menuToggled = false;
+        toggleMenu(task_.id, false);
     });
   }
 
@@ -136,7 +139,7 @@ export const Task = ({ task, tasks }) => {
                 onClick={() => { toggleInProgressState(task.id) }}
                 className="px-5 py-2 hover:bg-neutral-600 rounded-md">
                 <div>
-                  Select Task
+                  Track Task
                 </div>
               </li>
               <li
