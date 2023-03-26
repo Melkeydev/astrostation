@@ -37,7 +37,9 @@ import {
   IGrid,
   ILockWidgets,
   ISideNavOrderStore,
+  ISeoContent,
 } from "./interfaces";
+import { InfoSection } from "./pages/InfoSection";
 
 /**
  * Grid Store
@@ -765,5 +767,20 @@ export const useSideNavOrderStore = create<ISideNavOrderStore>(
       setSideNavOrder: (sideNavOrder) => set({ sideNavOrder }),
     }),
     { name: "side_nav_order" }
+  )
+);
+
+/**
+ * Toggle SEO Content
+ * ---
+ * Handles storing SEO content visibility 
+ */
+export const useSeoVisibilityStore = create<ISeoContent>(
+  persist(
+    (set, _) => ({
+      isSeoVisible: true,
+      setSeoVisibility: (isSeoVisible) => set({ isSeoVisible}),
+    }),
+    { name: "state_seo_visibility" }
   )
 );

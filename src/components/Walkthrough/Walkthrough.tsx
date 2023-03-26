@@ -43,9 +43,18 @@ export const Walkthrough = () => {
       content: "Not feeling this background? Switch it up!",
     },
     {
+      target: ".seoToggle",
+      content: "After reading more about Astrostation, you can hide this section for full immersion.",
+
+    },
+    {
       target: ".donateButton",
       content:
         "Astrostation is 100% free to use. If you are feeling generous, you can donate Ethereum.",
+    },
+    {
+      target: ".sideNav",
+      content: "Enjoy your time with Astrostation! 🚀"
     },
   ];
 

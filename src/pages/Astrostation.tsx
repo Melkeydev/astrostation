@@ -36,8 +36,10 @@ import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
 import clsx from "clsx";
+import React from 'react';
 
-export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
+export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any }>((props, ref) => {
+  const { backgrounds } = props;
   const { isMusicToggled, isMusicShown } = useToggleMusic();
   const { isTimerToggled, isTimerShown } = useToggleTimer();
   const { isTasksToggled, isTasksShown } = useToggleTasks();
@@ -45,6 +47,7 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { isStickyNoteShown } = useToggleStickyNote();
   const { isQuoteToggled, isQuoteShown } = useToggleQuote();
   const { isTwitchToggled, isTwitchShown } = useToggleTwitch();
+
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -63,9 +66,9 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
   const { grid } = useGrid();
 
   return (
-    <div className="h-screen">
+    <div ref={ref} className="md:h-screen pb-8 md:pb-0">
       {isBackground == backgrounds.UNSPLASH && <UnsplashFooter />}
-      <div className={"flex justify-end flex-wrap py-2 px-2 gap-2 ml-auto w-5/6"}>
+      <div className={"bodyPart flex justify-end flex-wrap py-2 px-2 gap-2 ml-auto w-5/6"}>
         <div className="settingsButton">
           <CustomizationButton
             title="Settings"
@@ -108,8 +111,10 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
         </div>
       </div>
       <CryptoDonationButton />
+      <div>
+    </div>
       {!isDesktop ? (
-        <div className="ml-8 flex flex-col items-center">
+        <div className="ml-8 flex flex-col items-center pt-10 pb-40">
           <div className={clsx(isMusicToggled ? "block" : "hidden")}>
             <Player />
           </div>
@@ -208,4 +213,4 @@ export const HomePage = ({ backgrounds }: { backgrounds: any }) => {
       )}
     </div>
   );
-};
+});

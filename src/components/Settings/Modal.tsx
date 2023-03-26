@@ -20,7 +20,7 @@ export const SettingsModal = ({ isVisible = false, onClose }) => {
   return !isVisible ? null : (
     <div className="modal" onClick={onClose}>
       <div className="" onClick={(e) => e.stopPropagation()}>
-        <TimerSettings onClose={onClose} />
+        <TimerSettings onClose={onClose}/>
       </div>
     </div>
   );
