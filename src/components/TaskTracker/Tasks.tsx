@@ -2,7 +2,6 @@ import { Task } from "./Task";
 import { Button } from "@Components/Common/Button";
 import { useTask } from "@Store";
 import { ITask } from "@App/interfaces";
-import { useState, } from 'react';
 
 export const Tasks = ({ tasks }) => {
   const { removeAllTasks } = useTask();
@@ -12,14 +11,7 @@ export const Tasks = ({ tasks }) => {
     if (answer) {
       removeAllTasks();
     }
-
-  };
-  const [menuVisible, setMenuVisible] = useState(false);
-
-  const handleDocumentClick = () => {
-    setMenuVisible(false);
-    document.removeEventListener('click', handleDocumentClick);
-  };
+  }
 
   return (
     <>
