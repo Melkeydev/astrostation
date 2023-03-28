@@ -32,7 +32,7 @@ const onClickOff = callback => {
 
 export const Task = ({ task, tasks }) => {
   const [openSettings, setOpenSettings] = useState(false);
-  const { removeTask, completeTask, toggleInProgressState, alertTask, setPomodoroCounter, toggleMenu } =
+  const { removeTask, setCompleted, toggleInProgressState, alertTask, setPomodoroCounter, toggleMenu } =
     useTask();
   const { breakStarted } = useBreakStarted();
   const { timerQueue } = useTimer();
@@ -67,7 +67,7 @@ export const Task = ({ task, tasks }) => {
     toggleInProgressState(task.id);
     toggleMenu(task.id, false);
     if (task.completed)
-      completeTask(task.id, false);
+      setCompleted(task.id, false);
   }
 
   useEffect(() => {
@@ -116,7 +116,7 @@ export const Task = ({ task, tasks }) => {
                       "ml-2 cursor-pointer dark:text-stone-600",
                       task.completed ? "text-green-500" : "text-slate-500"
                     )}
-                    onClick={() => completeTask(task.id, !task.completed)}
+                    onClick={() => setCompleted(task.id, !task.completed)}
                   />
                 ) : (
                   <RiArrowGoBackFill
@@ -124,7 +124,7 @@ export const Task = ({ task, tasks }) => {
                       "ml-2 cursor-pointer",
                       task.completed ? "text-green-500" : "text-slate-500"
                     )}
-                    onClick={() => completeTask(task.id, !task.completed)}
+                    onClick={() => setCompleted(task.id, !task.completed)}
                   />
                 )}
               </div>
@@ -162,7 +162,7 @@ export const Task = ({ task, tasks }) => {
                 </div>
               </li>
               <li
-                onClick={() => { completeTask(task.id, !task.completed); toggleMenu(task.id, false) }}
+                onClick={() => { setCompleted(task.id, !task.completed); toggleMenu(task.id, false) }}
                 className="cursor-pointer px-5 py-2 hover:bg-neutral-600 rounded-md">
                 <div className="select-none">
                   Complete Task
