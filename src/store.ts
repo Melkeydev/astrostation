@@ -238,27 +238,18 @@ export const useStickyNote = create<IStickyNoteState>(
           ],
         }));
       },
-      editNote: (id, newText) => {
+      /**
+       * TODO: make new dynamic type for any types
+       * of edit on Note
+       */
+      editNote: (id, newProp, newValue) => {
         set((state) => ({
           stickyNotes: state.stickyNotes.map((note) =>
             note.id === id
-              ? ({
+              ? {
                   ...note,
-                  text: newText,
-                } as IStickyNote)
-              : note
-          ),
-        }));
-      },
-      editNoteColor: (id, newColor) => {
-        console.log("editNoteColor: ", newColor);
-        set((state) => ({
-          stickyNotes: state.stickyNotes.map((note) =>
-            note.id === id
-              ? ({
-                  ...note,
-                  color: newColor,
-                } as IStickyNote)
+                  [newProp]: newValue,
+                }
               : note
           ),
         }));

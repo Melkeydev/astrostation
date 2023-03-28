@@ -5,7 +5,7 @@ import { ColorOptions } from "@Root/src/interfaces";
 import TextareaAutosize from "react-textarea-autosize";
 
 export const Sticky = ({ id, text, color }) => {
-  const { removeNote, editNote, editNoteColor } = useStickyNote();
+  const { removeNote, editNote } = useStickyNote();
   const [showColorSelector, setShowColorSelector] = useState(false);
 
   // Toggles the state of the color selector open/closed
@@ -16,7 +16,7 @@ export const Sticky = ({ id, text, color }) => {
 
   // Sets the selected color and closes the color selector
   const selectColor = (selectedColor) => {
-    editNoteColor(id, selectedColor);
+    editNote(id, "color", selectedColor);
     setShowColorSelector(!showColorSelector);
   };
 
@@ -59,7 +59,7 @@ export const Sticky = ({ id, text, color }) => {
           placeholder="Add a note"
           value={text}
           onChange={(e) => {
-            editNote(id, e.target.value);
+            editNote(id, "text", e.target.value);
           }}
           style={{
             border: "none",
