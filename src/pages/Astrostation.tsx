@@ -36,6 +36,7 @@ import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
 import clsx from "clsx";
+import BottomButtons from "../components/Nav/BottomButtons"
 import React from "react";
 
 export const Astrostation = React.forwardRef<
@@ -117,7 +118,7 @@ export const Astrostation = React.forwardRef<
         </div>
       </div>
       <CryptoDonationButton />
-      <div></div>
+      <BottomButtons />
       {!isDesktop ? (
         <div className="ml-8 flex flex-col items-center pt-10 pb-40">
           <div className={clsx(isMusicToggled ? "block" : "hidden")}>
