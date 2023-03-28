@@ -147,22 +147,22 @@ export const Task = ({ task, tasks }) => {
             <ul className="w-full">
               <li
                 onClick={() => { toggleInProgressState(task.id) }}
-                className="px-5 py-2 hover:bg-neutral-600 rounded-md">
-                <div>
+                className="cursor-pointer px-5 py-2 hover:bg-neutral-600 rounded-md">
+                <div className="select-none ">
                   Track Task
                 </div>
               </li>
               <li
                 onClick={() => { completeTask(task.id) }}
-                className="px-5 py-2 hover:bg-neutral-600 rounded-md">
-                <div>
+                className="cursor-pointer px-5 py-2 hover:bg-neutral-600 rounded-md">
+                <div className="select-none">
                   Complete Task
                 </div>
               </li>
               <li
                 onClick={() => { handleDelete() }}
-                className="px-5 py-2 hover:bg-neutral-600 rounded-md">
-                <div>
+                className="cursor-pointer px-5 py-2 hover:bg-neutral-600 rounded-md">
+                <div className="select-none">
                   Delete Task
                 </div>
               </li>
