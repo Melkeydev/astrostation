@@ -1,15 +1,15 @@
 import { ISpotifyPlaylist } from "@Root/src/interfaces";
-import { useDarkToggleStore, useSpotifyMusic, useSpotifyPlaylist } from "@Store";
+import { useDarkToggleStore, useShowSpotifyPlaylists, useSpotifyMusic, useSpotifyPlaylist } from "@Store";
 import { useState } from "react";
-import { AiOutlineReload } from "react-icons/ai";
-import { IoCloseSharp } from "react-icons/io5";
+import { AiOutlineDelete, AiOutlineReload } from "react-icons/ai";
+import { IoChevronUp, IoCloseSharp } from "react-icons/io5";
 import { WithTooltip } from "../../Tooltip";
 
 export const Spotify = () => {
   const { setIsSpotifyToggled } = useSpotifyMusic();
   const { setSpotifyPlaylists, spotifyPlaylists } = useSpotifyPlaylist();
+  const { setShowSpotifyPlaylists, showSpotifyPlaylists } = useShowSpotifyPlaylists();
   const { isDark } = useDarkToggleStore();
-
   const [text, setText] = useState("");
   const [playlist, setPlaylist] = useState<ISpotifyPlaylist>({
     name: "lofi beats",
@@ -29,13 +29,9 @@ export const Spotify = () => {
     setText("");
   }
 
-  function clearPlaylists() {
-    const defaultPlaylist = {
-      name: "lofi beats",
-      url: "https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn",
-    };
-    setSpotifyPlaylists([defaultPlaylist]);
-    setPlaylist(defaultPlaylist);
+  function handleDelete(index: number) {
+    const newPlaylists = spotifyPlaylists.filter((_, i) => i !== index);
+    setSpotifyPlaylists(newPlaylists);
   }
 
   function handleKeyDown(e) {
@@ -56,44 +52,51 @@ export const Spotify = () => {
         </div>
       </WithTooltip>
 
-      <div className="flex">
-        <div className="spotify-plus-url">
-          <div className="cancelDrag justify-center">
-            <iframe
-              src={`${playlist.url}?utm_source=generator&theme=${isDark ? 0 : 1}`}
-              height="380"
-              width="100%"
-              frameBorder="0"
-              allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-            ></iframe>
+      <div className="cancelDrag justify-center">
+        <iframe
+          src={`${playlist.url}?utm_source=generator&theme=${isDark ? 0 : 1}`}
+          height="380"
+          width="100%"
+          frameBorder="0"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+        ></iframe>
+      </div>
+      <div className="mt-2 flex items-center space-x-1 p-1">
+        <input
+          className="cancelDrag w-full rounded-lg border border-gray-300 p-1 placeholder-gray-600 dark:border-gray-500 dark:bg-gray-700/[.96] dark:placeholder-gray-300"
+          type="text"
+          value={text}
+          placeholder="Paste Spotify URL here"
+          onChange={e => {
+            setText(e.target.value);
+          }}
+          onKeyDown={handleKeyDown}
+        />
+        <AiOutlineReload
+          className="w-5 cursor-pointer hover:text-slate-500"
+          onClick={() => setPlaylist({ name: "", url: text })}
+        />
+      </div>
+      <div className="flex flex-col gap-1">
+        <IoChevronUp
+          className={`${showSpotifyPlaylists ? "rotate-180" : ""}`}
+          onClick={() => setShowSpotifyPlaylists(!showSpotifyPlaylists)}
+        />
+        {showSpotifyPlaylists && (
+          <div className="flex flex-col">
+            {spotifyPlaylists.map((playlist, index) => (
+              <div className="flex items-center justify-between">
+                <button onClick={() => setPlaylist(playlist)} key={index}>
+                  {playlist.name}
+                </button>
+                <AiOutlineDelete
+                  className="w-5 cursor-pointer hover:text-red-900"
+                  onClick={() => handleDelete(index)}
+                />
+              </div>
+            ))}
           </div>
-          <div className="mt-2 flex items-center space-x-1 p-1">
-            <input
-              className="cancelDrag w-full rounded-lg border border-gray-300 p-1 placeholder-gray-600 dark:border-gray-500 dark:bg-gray-700/[.96] dark:placeholder-gray-300"
-              type="text"
-              // value={playlist}
-              placeholder="Paste Spotify URL here"
-              onChange={e => {
-                setText(e.target.value);
-              }}
-              onKeyDown={handleKeyDown}
-            />
-            <AiOutlineReload
-              className="w-5 cursor-pointer hover:text-slate-500"
-              onClick={() => setPlaylist({ name: "", url: text })}
-            />
-          </div>
-        </div>
-        <div className="flex flex-col">
-          <button className="font-bold bg-[#91000065] rounded-lg" onClick={clearPlaylists}>
-            Clear
-          </button>
-          {spotifyPlaylists.map((playlist, index) => (
-            <button onClick={() => setPlaylist(playlist)} key={index}>
-              {playlist.name}
-            </button>
-          ))}
-        </div>
+        )}
       </div>
     </div>
   );

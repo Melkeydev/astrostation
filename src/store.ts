@@ -4,7 +4,7 @@ import {
   ColorOptions, IAlarmOption, IAudioVolume, IBackground, IBreakStarted, IDarkModeState, IFirstTimeUserState, IFullscreenState, IGrid, IHasStarted, ILockWidgets, ILongBreakTime,
   IPomodoroTime, IPosMusic, IPosQuote, IPosSpotify, IPosTask, IPosTimer, IPosTimerSettings, IPosTwitch, ISeoContent, IShortBreakTime, ISideNavOrderStore, ISongState, ISongTask, ISpotifyPlaylists, IStickyNote,
   IStickyNoteState, ITask,
-  ITaskState, ITimer, IToggleMusic, IToggleQuote, IToggleSpotify, IToggleStickyNote, IToggleTasks, IToggleTimer, IToggleTwitch, IToggleWidgetReset
+  ITaskState, ITimer, IToggleMusic, IToggleQuote, IToggleSpotify, IToggleSpotifyPlaylists as IShowSpotifyPlaylists, IToggleStickyNote, IToggleTasks, IToggleTimer, IToggleTwitch, IToggleWidgetReset
 } from "./interfaces";
 import { InfoSection } from "./pages/InfoSection";
 
@@ -534,6 +534,18 @@ export const useSpotifyPlaylist = create<ISpotifyPlaylists>(
     }),
     {
       name: "spotify_playlists",
+    }
+  )
+);
+
+export const useShowSpotifyPlaylists = create<IShowSpotifyPlaylists>(
+  persist(
+    (set, _) => ({
+      showSpotifyPlaylists: false,
+      setShowSpotifyPlaylists: (show) => set({ showSpotifyPlaylists: show }),
+    }),
+    {
+      name: "show_spotify_playlists",
     }
   )
 );

@@ -182,6 +182,11 @@ export interface ISpotifyPlaylists {
   setSpotifyPlaylists: (spotifyPlaylists: ISpotifyPlaylist[]) => void;
 }
 
+export interface IToggleSpotifyPlaylists {
+  showSpotifyPlaylists: boolean;
+  setShowSpotifyPlaylists: (showSpotifyPlaylists: boolean) => void;
+}
+
 export interface IToggleTimer {
   isTimerToggled: boolean;
   setIsTimerToggled: (isTimerToggled: boolean) => void;
