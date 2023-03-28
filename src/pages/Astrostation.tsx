@@ -36,9 +36,12 @@ import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
 import clsx from "clsx";
-import React from 'react';
+import React from "react";
 
-export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any }>((props, ref) => {
+export const Astrostation = React.forwardRef<
+  HTMLDivElement,
+  { backgrounds: any }
+>((props, ref) => {
   const { backgrounds } = props;
   const { isMusicToggled, isMusicShown } = useToggleMusic();
   const { isTimerToggled, isTimerShown } = useToggleTimer();
@@ -47,7 +50,6 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
   const { isStickyNoteShown } = useToggleStickyNote();
   const { isQuoteToggled, isQuoteShown } = useToggleQuote();
   const { isTwitchToggled, isTwitchShown } = useToggleTwitch();
-
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -66,9 +68,13 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
   const { grid } = useGrid();
 
   return (
-    <div ref={ref} className="md:h-screen pb-8 md:pb-0">
+    <div ref={ref} className="pb-8 md:h-screen md:pb-0">
       {isBackground == backgrounds.UNSPLASH && <UnsplashFooter />}
-      <div className={"bodyPart flex justify-end flex-wrap py-2 px-2 gap-2 ml-auto w-5/6"}>
+      <div
+        className={
+          "bodyPart ml-auto flex w-5/6 flex-wrap justify-end gap-2 py-2 px-2"
+        }
+      >
         <div className="settingsButton">
           <CustomizationButton
             title="Settings"
@@ -111,8 +117,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
         </div>
       </div>
       <CryptoDonationButton />
-      <div>
-    </div>
+      <div></div>
       {!isDesktop ? (
         <div className="ml-8 flex flex-col items-center pt-10 pb-40">
           <div className={clsx(isMusicToggled ? "block" : "hidden")}>
@@ -145,7 +150,11 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
                 stickyID={stickyNote.id}
                 gridValues={grid}
               >
-                <Sticky id={stickyNote.id} text={stickyNote.text} />
+                <Sticky
+                  id={stickyNote.id}
+                  text={stickyNote.text}
+                  color={stickyNote.color}
+                />
               </DWrapper>
             );
           })}

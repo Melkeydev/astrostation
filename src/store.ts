@@ -13,6 +13,7 @@ import {
   IStickyNote,
   IStickyNoteState,
   IToggleStickyNote,
+  ColorOptions,
   ITask,
   ITaskState,
   ISongTask,
@@ -230,20 +231,25 @@ export const useStickyNote = create<IStickyNoteState>(
             {
               id: Date.now() + state.stickyNotes.length,
               text: text,
+              color: ColorOptions.Yellow,
               stickyNotesPosX: 165,
               stickyNotesPosY: 0,
             } as IStickyNote,
           ],
         }));
       },
-      editNote: (id, newText) => {
+      /**
+       * TODO: make new dynamic type for any types
+       * of edit on Note
+       */
+      editNote: (id, newProp, newValue) => {
         set((state) => ({
           stickyNotes: state.stickyNotes.map((note) =>
             note.id === id
-              ? ({
+              ? {
                   ...note,
-                  text: newText,
-                } as IStickyNote)
+                  [newProp]: newValue,
+                }
               : note
           ),
         }));
