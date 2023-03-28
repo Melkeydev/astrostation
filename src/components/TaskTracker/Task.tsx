@@ -23,6 +23,7 @@ const onClickOff = callback => {
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
     function handleClick(e) {
+      // @ts-ignore
       if (innerRef.current && callbackRef.current && !innerRef.current.contains(e.target)) callbackRef.current(e);
     }
   }, []);
