@@ -11,7 +11,7 @@ export const AddTask = () => {
   const { breakStarted } = useBreakStarted();
 
   const setFormattedContent = useCallback(
-    (text) => {
+    text => {
       setCharCount(text.slice(0, limit));
     },
     [limit, setCharCount]
@@ -42,7 +42,7 @@ export const AddTask = () => {
   }
 
   return (
-    <form className="mb-8 mt-2" onSubmit={(e) => onSubmit(e)}>
+    <form className="mb-8 mt-2" onSubmit={e => onSubmit(e)}>
       <div className="my-5">
         <label className="block">Task</label>
         <input
@@ -50,7 +50,7 @@ export const AddTask = () => {
           type="text"
           placeholder="Add Task"
           value={charCount}
-          onChange={(e) => {
+          onChange={e => {
             setText(e.target.value);
             setFormattedContent(e.target.value);
           }}
@@ -63,19 +63,11 @@ export const AddTask = () => {
         <label className="flex-1">Set Pomodoro Counts</label>
         <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-200">
           <div className="flex space-x-5 p-2">
-            <button
-              type="button"
-              id="pomodoro-decrement"
-              onClick={(e) => handlePomodoroChange(e)}
-            >
+            <button type="button" id="pomodoro-decrement" onClick={e => handlePomodoroChange(e)}>
               &lt;
             </button>
             <div>{pomoCounter}</div>
-            <button
-              type="button"
-              id="pomodoro-increment"
-              onClick={(e) => handlePomodoroChange(e)}
-            >
+            <button type="button" id="pomodoro-increment" onClick={e => handlePomodoroChange(e)}>
               &gt;
             </button>
           </div>

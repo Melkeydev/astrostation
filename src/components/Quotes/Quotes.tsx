@@ -28,11 +28,7 @@ export const Quotes = () => {
         </div>
       </div>
       <div className="flex w-full justify-end pb-2 pr-2 pl-2 text-base">
-        <AiOutlineReload
-          onClick={() =>
-            setQuoteNumber(Math.floor(Math.random() * quoteData.length))
-          }
-        />
+        <AiOutlineReload onClick={() => setQuoteNumber(Math.floor(Math.random() * quoteData.length))} />
       </div>
     </div>
   );

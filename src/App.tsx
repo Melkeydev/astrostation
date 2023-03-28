@@ -1,21 +1,15 @@
 import { useEffect } from "react";
 import { Backgrounds } from "@Components/Backgrounds/utils";
 import { Astrostation } from "@Root/src/pages/Astrostation";
-import { InfoSection } from "@Root/src/pages/InfoSection"
+import { InfoSection } from "@Root/src/pages/InfoSection";
 import { SideNav } from "@Components/Nav/SideNav";
-import {
-  useDarkToggleStore,
-  useFirstTimeUserStore,
-  useBreakStarted,
-  useSeoVisibilityStore,
-} from "@Store";
+import { useDarkToggleStore, useFirstTimeUserStore, useBreakStarted, useSeoVisibilityStore } from "@Store";
 import { Toaster } from "react-hot-toast";
 import { version } from "@Root/package.json";
 import { Walkthrough } from "@Components/Walkthrough/Walkthrough";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
 import clsx from "clsx";
 import { useRef } from "react";
-
 
 enum backgrounds {
   CITY,
@@ -30,7 +24,7 @@ enum backgrounds {
 }
 
 function App() {
-  const isDark = useDarkToggleStore((state) => state.isDark);
+  const isDark = useDarkToggleStore(state => state.isDark);
   const { isFirstTimeUser } = useFirstTimeUserStore();
   const { breakStarted } = useBreakStarted();
   const setDefault = useSetDefault();
@@ -44,7 +38,6 @@ function App() {
     setTimeout(() => {
       setSeoVisibility(!isSeoVisible);
     }, 700);
-
   };
 
   useEffect(() => {
@@ -52,7 +45,7 @@ function App() {
       document.documentElement.classList.add("dark");
     } else {
       document.documentElement.classList.remove("dark");
-    } 
+    }
   }, [isDark]);
 
   useEffect(() => {
@@ -62,22 +55,21 @@ function App() {
     }
   }, []);
 
-
   return (
     <>
       {isFirstTimeUser && <Walkthrough />}
       <Backgrounds backgrounds={backgrounds} />
-      <div id="entire-app"
+      <div
+        id="entire-app"
         className={clsx(
-          `fixed inset-0 scrollbar-hide ${isSeoVisible ? `overflow-auto` : `overflow-hidden`}`,
+          `scrollbar-hide fixed inset-0 ${isSeoVisible ? `overflow-auto` : `overflow-hidden`}`,
           breakStarted && "bg-blue-500 bg-opacity-40"
         )}
       >
         <Toaster />
         <SideNav />
-        <Astrostation ref={astroStationRef} backgrounds={backgrounds}/>
+        <Astrostation ref={astroStationRef} backgrounds={backgrounds} />
         <InfoSection onButtonClick={handleButtonClick} isSeoVisible={isSeoVisible} />
-
       </div>
     </>
   );

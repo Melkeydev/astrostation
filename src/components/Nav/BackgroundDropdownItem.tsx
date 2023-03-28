@@ -16,14 +16,12 @@ export const BackgroundDropdownItem = ({
   return (
     <div
       className={clsx(
-        "cursor-pointer py-1 bg-gray-300 dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-900",
+        "cursor-pointer bg-gray-300 py-1 hover:bg-gray-100 dark:bg-gray-800 dark:hover:bg-gray-900",
         isPicked && "bg-gray-100 dark:bg-gray-900"
       )}
       onClick={() => setIsBackground(background)}
     >
-      <div className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200">
-        {title}
-      </div>
+      <div className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200">{title}</div>
     </div>
   );
 };

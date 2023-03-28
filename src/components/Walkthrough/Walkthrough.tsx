@@ -15,13 +15,11 @@ export const Walkthrough = () => {
     },
     {
       target: ".settingsButton",
-      content:
-        "In the settings, you can configure certain Astrostation widgets to your liking.",
+      content: "In the settings, you can configure certain Astrostation widgets to your liking.",
     },
     {
       target: ".joyRideTaskTracker",
-      content:
-        "This is where you can keep track of all the tasks within your pomodoro sessions",
+      content: "This is where you can keep track of all the tasks within your pomodoro sessions",
     },
     {
       target: ".joyRideInProgressTask",
@@ -30,13 +28,11 @@ export const Walkthrough = () => {
     },
     {
       target: ".joyRideTask",
-      content:
-        "This is a task that is not in progress. The pomodoro sessions will not be tracked for these tasks",
+      content: "This is a task that is not in progress. The pomodoro sessions will not be tracked for these tasks",
     },
     {
       target: ".configureWidgetsButton",
-      content:
-        "This is your widget configuration screen — add the widgets you want, remove the ones you don't.",
+      content: "This is your widget configuration screen — add the widgets you want, remove the ones you don't.",
     },
     {
       target: ".chooseBackgroundButton",
@@ -45,16 +41,14 @@ export const Walkthrough = () => {
     {
       target: ".seoToggle",
       content: "After reading more about Astrostation, you can hide this section for full immersion.",
-
     },
     {
       target: ".donateButton",
-      content:
-        "Astrostation is 100% free to use. If you are feeling generous, you can donate Ethereum.",
+      content: "Astrostation is 100% free to use. If you are feeling generous, you can donate Ethereum.",
     },
     {
       target: ".sideNav",
-      content: "Enjoy your time with Astrostation! 🚀"
+      content: "Enjoy your time with Astrostation! 🚀",
     },
   ];
 
@@ -73,7 +67,7 @@ export const Walkthrough = () => {
           width: 400,
         },
       }}
-      callback={(e) => {
+      callback={e => {
         if (e.action === "reset") toggleIsFirstTimeUser();
       }}
     />
