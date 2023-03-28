@@ -10,7 +10,7 @@ import {
   useAlarmOption,
   useGrid,
   useLockWidgetsStore,
-  useSeoVisibilityStore
+  useSeoVisibilityStore,
 } from "@Store";
 import { IoCloseSharp } from "react-icons/io5";
 import { BsMusicPlayerFill, BsBellFill } from "react-icons/bs";
@@ -44,8 +44,7 @@ export const TimerSettings = ({ onClose }) => {
   const [currentGrid, setCurrentGrid] = useState(grid);
   const { areWidgetsLocked, setAreWidgetsLocked } = useLockWidgetsStore();
   const { isSeoVisible, setSeoVisibility } = useSeoVisibilityStore();
-  const [currentWidgetLockState, setCurrentWidgetLockState] =
-    useState(areWidgetsLocked);
+  const [currentWidgetLockState, setCurrentWidgetLockState] = useState(areWidgetsLocked);
 
   function onDefaultChange() {
     if (currentGrid === null) {
@@ -138,10 +137,7 @@ export const TimerSettings = ({ onClose }) => {
   return (
     <div className="w-72 max-w-sm rounded-lg bg-white p-2 px-1 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 sm:w-96">
       <div className="flex justify-end">
-        <IoCloseSharp
-          className="cursor-pointer text-red-500 hover:bg-red-200"
-          onClick={onClose}
-        />
+        <IoCloseSharp className="cursor-pointer text-red-500 hover:bg-red-200" onClick={onClose} />
       </div>
       <div className="grid">
         <div className="text-center text-lg">Settings</div>
@@ -155,18 +151,9 @@ export const TimerSettings = ({ onClose }) => {
               decrement="session-decrement"
               increment="session-increment"
               onClick={(e: React.MouseEvent<HTMLButtonElement>) =>
-                handleLengthChange(
-                  e,
-                  "session-decrement",
-                  "session-increment",
-                  60,
-                  3600,
-                  pomoCount,
-                  setPomoCount,
-                  60
-                )
+                handleLengthChange(e, "session-decrement", "session-increment", 60, 3600, pomoCount, setPomoCount, 60)
               }
-              onChange={(e) => {
+              onChange={e => {
                 if (hasStarted) {
                   e.target.readOnly = true;
                   return;
@@ -192,7 +179,7 @@ export const TimerSettings = ({ onClose }) => {
                   60
                 )
               }
-              onChange={(e) => {
+              onChange={e => {
                 if (hasStarted) {
                   e.target.readOnly = true;
                   return;
@@ -218,7 +205,7 @@ export const TimerSettings = ({ onClose }) => {
                   60
                 )
               }
-              onChange={(e) => {
+              onChange={e => {
                 if (hasStarted) {
                   e.target.readOnly = true;
                   return;
@@ -236,7 +223,7 @@ export const TimerSettings = ({ onClose }) => {
           <div className="items-center px-2 pb-2">
             <Slider
               defaultValue={audioVolume}
-              onChange={(value) => {
+              onChange={value => {
                 onVolumeChange(value as number);
               }}
               step={0.1}
@@ -301,14 +288,12 @@ export const TimerSettings = ({ onClose }) => {
         </div>
         <hr className="border-t-3 border-[#5c5c5c]" />
         <div className="border-gray-100 p-4">
-          <div className="rounded p-2 text-center">
-            Grid Size (increasing Step Size)
-          </div>
+          <div className="rounded p-2 text-center">Grid Size (increasing Step Size)</div>
           <div className="items-center px-2 pb-2">
             <Slider
               //@ts-ignore
               defaultValue={onDefaultChange}
-              onChange={(value) => {
+              onChange={value => {
                 onGridChange(value as number);
               }}
               step={50}
@@ -350,7 +335,7 @@ export const TimerSettings = ({ onClose }) => {
           >
             Unhide Info
           </Button>
-          
+
           <Button
             className="font-normal text-gray-800 hover:text-white dark:text-white"
             variant="cold"

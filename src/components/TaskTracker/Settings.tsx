@@ -36,14 +36,14 @@ export const Settings = ({ setOpenSettings, Task }) => {
   }
 
   return (
-    <div className="mb-6 mt-2 space-y-2 w-full rounded-lg border border-gray-200 bg-white py-2 px-1 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 ">
+    <div className="mb-6 mt-2 w-full space-y-2 rounded-lg border border-gray-200 bg-white py-2 px-1 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 ">
       <div className="flex">
         <input
           className="cancelDrag m-1 h-10 w-full border border-gray-300 py-2 px-3 text-lg dark:border-gray-500 dark:bg-gray-700"
           type="text"
           placeholder={Task.description}
           value={text}
-          onChange={(e) => {
+          onChange={e => {
             setText(e.target.value);
           }}
         />
@@ -52,11 +52,11 @@ export const Settings = ({ setOpenSettings, Task }) => {
         <div>Change Pomodoro's</div>
         <div className="bg-gray-200 dark:bg-gray-700 dark:text-gray-200">
           <div className="flex space-x-5 p-2">
-            <button id="decrement" onClick={(e) => handlePomoChange(e)}>
+            <button id="decrement" onClick={e => handlePomoChange(e)}>
               &lt;
             </button>
             <div>{changePomo}</div>
-            <button id="increment" onClick={(e) => handlePomoChange(e)}>
+            <button id="increment" onClick={e => handlePomoChange(e)}>
               &gt;
             </button>
           </div>
@@ -73,7 +73,7 @@ export const Settings = ({ setOpenSettings, Task }) => {
         <Button
           className="mr-1 font-normal text-gray-800 hover:text-white dark:text-white"
           variant="primary"
-          onClick={(e) => onSubmit(e)}
+          onClick={e => onSubmit(e)}
         >
           Okay
         </Button>

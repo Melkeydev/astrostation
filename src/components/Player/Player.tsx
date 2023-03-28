@@ -93,15 +93,11 @@ export const Player = () => {
         <div className="space-y-2">
           <div className="flex items-center space-x-3">
             <IconContext.Provider value={{ size: "1.5rem" }}>
-              {playAudio ? (
-                <FaPlayCircle onClick={triggerAudio} />
-              ) : (
-                <FaPauseCircle onClick={triggerAudio} />
-              )}
+              {playAudio ? <FaPlayCircle onClick={triggerAudio} /> : <FaPauseCircle onClick={triggerAudio} />}
             </IconContext.Provider>
             <Slider
               defaultValue={audioVolume}
-              onChange={(value) => {
+              onChange={value => {
                 onVolumeChange(value as number);
               }}
               railStyle={{

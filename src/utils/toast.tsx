@@ -32,10 +32,7 @@ export const defaultToast = (toastText: string) => {
   });
 };
 
-export const toastThemeNotification = (
-  isDark: boolean,
-  toggleMode: () => void
-) => {
+export const toastThemeNotification = (isDark: boolean, toggleMode: () => void) => {
   const nextVal = !isDark;
   toggleMode();
   if (nextVal) {
@@ -57,11 +54,7 @@ export const toastThemeNotification = (
   }
 };
 
-export const successToast = (
-  toastText: string,
-  isDark: boolean,
-  icon?: string
-) => {
+export const successToast = (toastText: string, isDark: boolean, icon?: string) => {
   if (isDark) {
     toast.success(toastText, {
       icon: icon,

@@ -276,5 +276,5 @@ export interface ISeoContent {
 }
 
 export interface ISeoToggle {
-    onButtonClick: () => void;
+  onButtonClick: () => void;
 }

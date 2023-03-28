@@ -14,41 +14,41 @@ const onClickOff = callback => {
   const callbackRef = useRef(); // initialize mutable ref, which stores callback
   const innerRef = useRef(); // returned to client, who marks "border" element
 
-  // update cb on each render, so second useEffect has access to current value 
-  useEffect(() => { callbackRef.current = callback; });
+  // update cb on each render, so second useEffect has access to current value
+  useEffect(() => {
+    callbackRef.current = callback;
+  });
 
   useEffect(() => {
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
     function handleClick(e) {
-      if (innerRef.current && callbackRef.current &&
-        !innerRef.current.contains(e.target)
-      ) callbackRef.current(e);
+      if (innerRef.current && callbackRef.current && !innerRef.current.contains(e.target)) callbackRef.current(e);
     }
   }, []);
 
-  return innerRef; // convenience for client (doesn't need to init ref himself) 
-}
+  return innerRef; // convenience for client (doesn't need to init ref himself)
+};
 
 export const Task = ({ task, tasks }) => {
   const [openSettings, setOpenSettings] = useState(false);
-  const { removeTask, setCompleted, toggleInProgressState, alertTask, setPomodoroCounter, toggleMenu } =
-    useTask();
+  const { removeTask, setCompleted, toggleInProgressState, alertTask, setPomodoroCounter, toggleMenu } = useTask();
   const { breakStarted } = useBreakStarted();
   const { timerQueue } = useTimer();
-  const innerRef = onClickOff(() => { toggleMenu(task.id, false); });
+  const innerRef = onClickOff(() => {
+    toggleMenu(task.id, false);
+  });
 
-  const openContextMenu = (event) => {
+  const openContextMenu = event => {
     event.preventDefault();
     toggleMenu(task.id, !task.menuToggled);
 
     /* This is linear search, however it did not seem to 
        have any perf impact for 100-200 tasks at a time */
     tasks.forEach((task_: ITask) => {
-      if (task_.menuToggled)
-        toggleMenu(task_.id, false);
+      if (task_.menuToggled) toggleMenu(task_.id, false);
     });
-  }
+  };
 
   const handleDelete = () => {
     // FIXME: This should be a modal
@@ -59,19 +59,18 @@ export const Task = ({ task, tasks }) => {
   /* Observation: When double clicking a task the text is highlighted
      This may not be a huge UX blunder, but it does exist. TBD */
   const preventFalseInProgress = () => {
-    if (task.completed) { return; }
+    if (task.completed) {
+      return;
+    }
     toggleInProgressState(task.id);
-  }
+  };
 
   const markNotCompleteWhenTracking = () => {
-    
-    if (!task.inProgress)
-      toggleInProgressState(task.id);
+    if (!task.inProgress) toggleInProgressState(task.id);
 
     toggleMenu(task.id, false);
-    if (task.completed)
-      setCompleted(task.id, false);
-  }
+    if (task.completed) setCompleted(task.id, false);
+  };
 
   useEffect(() => {
     if (timerQueue === 0 && !task.alerted && task.inProgress) {
@@ -92,20 +91,14 @@ export const Task = ({ task, tasks }) => {
           className={clsx(
             "my-2 w-full cursor-pointer border-l-4 bg-stone-300 py-2 px-2 dark:bg-gray-700",
             task.inProgress &&
-            !task.completed &&
-            "joyRideInProgressTask border-cyan-700 bg-cyan-500 dark:bg-cyan-500 dark:text-stone-600",
+              !task.completed &&
+              "joyRideInProgressTask border-cyan-700 bg-cyan-500 dark:bg-cyan-500 dark:text-stone-600",
 
-            task.completed &&
-            "border-green-500 bg-green-300 line-through dark:bg-green-300 dark:text-stone-600",
+            task.completed && "border-green-500 bg-green-300 line-through dark:bg-green-300 dark:text-stone-600",
 
-            !task.completed &&
-            task.alerted &&
-            "border-red-500 bg-red-300 dark:bg-red-300 dark:text-stone-600",
+            !task.completed && task.alerted && "border-red-500 bg-red-300 dark:bg-red-300 dark:text-stone-600",
 
-            !task.completed &&
-            !task.alerted &&
-            !task.inProgress &&
-            "joyRideTask"
+            !task.completed && !task.alerted && !task.inProgress && "joyRideTask"
           )}
           onContextMenu={openContextMenu}
           onDoubleClick={() => preventFalseInProgress()}
@@ -123,10 +116,7 @@ export const Task = ({ task, tasks }) => {
                   />
                 ) : (
                   <RiArrowGoBackFill
-                    className={clsx(
-                      "ml-2 cursor-pointer",
-                      task.completed ? "text-green-500" : "text-slate-500"
-                    )}
+                    className={clsx("ml-2 cursor-pointer", task.completed ? "text-green-500" : "text-slate-500")}
                     onClick={() => setCompleted(task.id, !task.completed)}
                   />
                 )}
@@ -139,44 +129,41 @@ export const Task = ({ task, tasks }) => {
               <div className="flex justify-end">
                 {task.pomodoroCounter}/{task.pomodoro}
               </div>
-              <BsThreeDotsVertical
-                className="ml-2 cursor-pointer"
-                onClick={() => setOpenSettings(!openSettings)}
-              />
+              <BsThreeDotsVertical className="ml-2 cursor-pointer" onClick={() => setOpenSettings(!openSettings)} />
             </div>
           </div>
         </div>
-
       ) : (
         <Settings setOpenSettings={setOpenSettings} Task={task} />
       )}
-      <div
-        className="absolute">
+      <div className="absolute">
         {task.menuToggled && (
-          <div
-            ref={innerRef}
-            className="bg-neutral-800 rounded-md">
+          <div ref={innerRef} className="rounded-md bg-neutral-800">
             <ul className="w-full">
               <li
-                onClick={() => { markNotCompleteWhenTracking() }}
-                className="cursor-pointer px-5 py-2 hover:bg-neutral-600 rounded-md">
-                <div className="select-none ">
-                  Track Task
-                </div>
+                onClick={() => {
+                  markNotCompleteWhenTracking();
+                }}
+                className="cursor-pointer rounded-md px-5 py-2 hover:bg-neutral-600"
+              >
+                <div className="select-none ">Track Task</div>
               </li>
               <li
-                onClick={() => { setCompleted(task.id, !task.completed); toggleMenu(task.id, false) }}
-                className="cursor-pointer px-5 py-2 hover:bg-neutral-600 rounded-md">
-                <div className="select-none">
-                  Complete Task
-                </div>
+                onClick={() => {
+                  setCompleted(task.id, !task.completed);
+                  toggleMenu(task.id, false);
+                }}
+                className="cursor-pointer rounded-md px-5 py-2 hover:bg-neutral-600"
+              >
+                <div className="select-none">Complete Task</div>
               </li>
               <li
-                onClick={() => { handleDelete() }}
-                className="cursor-pointer px-5 py-2 hover:bg-neutral-600 rounded-md">
-                <div className="select-none">
-                  Delete Task
-                </div>
+                onClick={() => {
+                  handleDelete();
+                }}
+                className="cursor-pointer rounded-md px-5 py-2 hover:bg-neutral-600"
+              >
+                <div className="select-none">Delete Task</div>
               </li>
             </ul>
           </div>
@@ -185,4 +172,3 @@ export const Task = ({ task, tasks }) => {
     </>
   );
 };
-

@@ -9,9 +9,7 @@ export const Spotify = () => {
   const { isDark } = useDarkToggleStore();
 
   const [text, setText] = useState("");
-  const [playlist, setPlaylist] = useState(
-    "https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn"
-  );
+  const [playlist, setPlaylist] = useState("https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn");
 
   function changePlaylist() {
     if (!text.includes("https://open.spotify.com/playlist/")) {
@@ -37,7 +35,7 @@ export const Spotify = () => {
         <div className="handle flex cursor-move items-center justify-between p-1">
           <p className="py-2 font-bold">Spotify</p>
           <IoCloseSharp
-            className="cursor-pointer rounded bg-gray-800 dark:bg-gray-300 dark:text-gray-800 text-gray-100 hover:bg-gray-900"
+            className="cursor-pointer rounded bg-gray-800 text-gray-100 hover:bg-gray-900 dark:bg-gray-300 dark:text-gray-800"
             onClick={() => setIsSpotifyToggled(false)}
           />
         </div>
@@ -52,21 +50,18 @@ export const Spotify = () => {
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         ></iframe>
       </div>
-      <div className="flex items-center space-x-1 mt-2 p-1">
+      <div className="mt-2 flex items-center space-x-1 p-1">
         <input
-          className="cancelDrag w-full border placeholder-gray-600 dark:placeholder-gray-300 border-gray-300 p-1 dark:border-gray-500 dark:bg-gray-700/[.96] rounded-lg"
+          className="cancelDrag w-full rounded-lg border border-gray-300 p-1 placeholder-gray-600 dark:border-gray-500 dark:bg-gray-700/[.96] dark:placeholder-gray-300"
           type="text"
           value={text}
           placeholder="Paste Spotify URL here"
-          onChange={(e) => {
+          onChange={e => {
             setText(e.target.value);
           }}
           onKeyDown={handleKeyDown}
         />
-        <AiOutlineReload
-          className="w-5 cursor-pointer hover:text-slate-500"
-          onClick={changePlaylist}
-        />
+        <AiOutlineReload className="w-5 cursor-pointer hover:text-slate-500" onClick={changePlaylist} />
       </div>
     </div>
   );
