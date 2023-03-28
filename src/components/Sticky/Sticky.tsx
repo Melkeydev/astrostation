@@ -1,30 +1,30 @@
 import { IoCloseSharp, IoEllipsisHorizontalSharp } from "react-icons/io5";
-import { useState } from "react";
+import { MouseEventHandler, useState } from "react";
 import { useStickyNote } from "@Store";
+import { ColorOptions } from "@Root/src/interfaces";
 import TextareaAutosize from "react-textarea-autosize";
 
-export const Sticky = ({ id, text }) => {
-  const { removeNote, editNote } = useStickyNote();
+export const Sticky = ({ id, text, color }) => {
+  const { removeNote, editNote, editNoteColor } = useStickyNote();
   const [showColorSelector, setShowColorSelector] = useState(false);
-  const [color, setColor] = useState("#feff9c");
 
   // Toggles the state of the color selector open/closed
-  const toggleColorSelector = () => {
-    setShowColorSelector((prevState) => !prevState);
+  const handleToggleSelector: MouseEventHandler<SVGElement> = (event) => {
+    event.stopPropagation();
+    setShowColorSelector(!showColorSelector);
   };
 
   // Sets the selected color and closes the color selector
   const selectColor = (selectedColor) => {
-    setColor(selectedColor);
-    toggleColorSelector();
+    editNoteColor(id, selectedColor);
+    setShowColorSelector(!showColorSelector);
   };
 
   // Renders a row of color elements
   const displayColors = () => {
-    const colors = ["#feff9c", "#d1fae5", "#f6ccd7", "#e0bbff", "#a7cdfa"];
     return (
       <div className="mb-1 flex">
-        {colors.map((c) => (
+        {Object.values(ColorOptions).map((c) => (
           <div
             key={c}
             className="h-10 w-10 cursor-pointer"
@@ -45,7 +45,7 @@ export const Sticky = ({ id, text }) => {
       <div className="flex w-full justify-end p-2">
         <IoEllipsisHorizontalSharp
           className="mr-2 cursor-pointer"
-          onClick={toggleColorSelector}
+          onClick={handleToggleSelector}
         />
         <IoCloseSharp
           className="cursor-pointer text-red-500 hover:bg-red-200"
