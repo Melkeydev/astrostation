@@ -23,7 +23,7 @@ export const StationSelector = () => {
               type="radio"
               name="flexRadioDefault"
               id="jfKfPfyJRdk"
-              onClick={(e) => setSongId(e)}
+              onClick={e => setSongId(e)}
             />
             Default Lofi Station
           </label>
@@ -35,7 +35,7 @@ export const StationSelector = () => {
               type="radio"
               name="flexRadioDefault"
               id="e3L1PIY1pN8"
-              onClick={(e) => setSongId(e)}
+              onClick={e => setSongId(e)}
             />
             Lofi Coffee Station
           </label>
@@ -49,7 +49,7 @@ export const StationSelector = () => {
               type="radio"
               name="flexRadioDefault"
               id="hi1cYzaLEig"
-              onClick={(e) => setSongId(e)}
+              onClick={e => setSongId(e)}
             />
             Lofi Hip Hop Station
           </label>
@@ -61,7 +61,7 @@ export const StationSelector = () => {
               type="radio"
               name="flexRadioDefault"
               id="6uddGul0oAc"
-              onClick={(e) => setSongId(e)}
+              onClick={e => setSongId(e)}
             />
             Tokyo Lofi Station
           </label>

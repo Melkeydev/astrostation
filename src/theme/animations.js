@@ -22,9 +22,7 @@ module.exports = {
     },
   },
   animation: {
-    "intro-fade-scale":
-      "intro-fade-scale 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards",
-    "outro-fade-scale":
-      "outro-fade-scale 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards",
+    "intro-fade-scale": "intro-fade-scale 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards",
+    "outro-fade-scale": "outro-fade-scale 200ms cubic-bezier(0.16, 1, 0.3, 1) forwards",
   },
 };

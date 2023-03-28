@@ -11,19 +11,16 @@ const classes: { [key: string]: any } = {
     large: "px-8 py-3 text-lg",
   },
   variant: {
-    primary:
-      "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
-    secondary:
-      "bg-stone-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
-    danger:
-      "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded",
+    primary: "bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+    secondary: "bg-stone-300 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
+    danger: "bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded",
     cold: "bg-blue-grey-800 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded",
     bottomButton:
       "bg-violet-700 hover:bg-violet-800 text-white font-bold rounded shadow-sm  focus:outline-none dark:bg-violet-700 dark:text-violet-200",
     coldPrimary: "bg-blue-700 text-white font-bold py-2 px-4 rounded ",
   },
 };
-  
+
 export const Button = ({
   children,
   className,

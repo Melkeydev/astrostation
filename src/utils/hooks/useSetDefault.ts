@@ -1,11 +1,4 @@
-import {
-  usePosTask,
-  usePosMusic,
-  usePosSpotify,
-  usePosTimer,
-  usePosQuote,
-  usePosTwitch,
-} from "@Store";
+import { usePosTask, usePosMusic, usePosSpotify, usePosTimer, usePosQuote, usePosTwitch } from "@Store";
 
 function useSetDefault() {
   const { setTaskPosDefault } = usePosTask();
