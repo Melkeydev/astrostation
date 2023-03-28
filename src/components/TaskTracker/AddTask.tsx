@@ -42,7 +42,7 @@ export const AddTask = () => {
   }
 
   return (
-    <form className="mb-8" onSubmit={(e) => onSubmit(e)}>
+    <form className="mb-8 mt-2" onSubmit={(e) => onSubmit(e)}>
       <div className="my-5">
         <label className="block">Task</label>
         <input
