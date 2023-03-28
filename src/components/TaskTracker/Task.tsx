@@ -146,14 +146,14 @@ export const Task = ({ task, tasks }) => {
             className="bg-neutral-800 rounded-md">
             <ul className="w-full">
               <li
-                onClick={() => { toggleInProgressState(task.id) }}
+                onClick={() => { toggleInProgressState(task.id); toggleMenu(task.id, false) }}
                 className="cursor-pointer px-5 py-2 hover:bg-neutral-600 rounded-md">
                 <div className="select-none ">
                   Track Task
                 </div>
               </li>
               <li
-                onClick={() => { completeTask(task.id) }}
+                onClick={() => { completeTask(task.id); toggleMenu(task.id, false) }}
                 className="cursor-pointer px-5 py-2 hover:bg-neutral-600 rounded-md">
                 <div className="select-none">
                   Complete Task

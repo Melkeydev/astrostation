@@ -34,9 +34,8 @@ export const TaskInfoModal = ({ isVisible = false, onClose }) => {
           </div>
           <hr className="border-t-3 w-1/4 border-[#5c5c5c]" />
           <div className="items-center p-2 px-2">
-            Double click a task you want to track 
+            Right Click any task to Track, Complete, or Delete any task. 
             <br></br>
-            (The task will turn blue)
           </div>
         </div>
       </div>
