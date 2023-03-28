@@ -1,8 +1,9 @@
 import { useDarkToggleStore, useSpotifyMusic } from "@Store";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { AiOutlineReload } from "react-icons/ai";
 import { IoCloseSharp } from "react-icons/io5";
 import { WithTooltip } from "../../Tooltip";
+import { failureToast } from "@Root/src/utils/toast";
 
 export const Spotify = () => {
   const { setIsSpotifyToggled } = useSpotifyMusic();
@@ -15,7 +16,7 @@ export const Spotify = () => {
 
   function changePlaylist() {
     if (!text.includes("https://open.spotify.com/playlist/")) {
-      alert("Invalid spotify URL");
+      failureToast("Invalid spotify URL", false);
       return;
     }
     const splitOn = (slicable: string, ...indices: number[]) =>
@@ -30,6 +31,8 @@ export const Spotify = () => {
       changePlaylist();
     }
   }
+
+
 
   return (
     <div className="mb-2 w-72 max-w-sm justify-between rounded-lg bg-white/[.96] py-4 px-4 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96">

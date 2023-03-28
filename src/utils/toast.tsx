@@ -79,6 +79,30 @@ export const successToast = (
       },
     });
   }
+}
+
+export const failureToast = (
+  toastText: string,
+  isDark: boolean,
+  icon?: string
+) => {
+  if (isDark) {
+    toast.error(toastText, {
+      icon: icon,
+      style: {
+        borderRadius: "10px",
+        background: "#fff",
+        color: "#edb1ad",
+      },
+    });
+  } else {
+    toast.error(toastText, {
+      icon: icon,
+      style: {
+        borderRadius: "10px",
+      },
+    });
+  }
 };
 
 const darkModeToast = (toastText: string, icon: string) => {

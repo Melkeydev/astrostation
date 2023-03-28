@@ -1,6 +1,7 @@
 import { useCallback, useState } from "react";
 import { useTask, useBreakStarted } from "@Store";
 import { Button } from "@Components/Common/Button";
+import { failureToast } from "@Root/src/utils/toast";
 
 export const AddTask = () => {
   const limit = 100;
@@ -21,7 +22,7 @@ export const AddTask = () => {
     e.preventDefault();
 
     if (!text) {
-      alert("Please add a task");
+      failureToast("Please add a task", false);
       return;
     }
 
