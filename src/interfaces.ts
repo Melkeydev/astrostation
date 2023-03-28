@@ -172,6 +172,16 @@ export interface IPosSpotify {
   setSpotifyPosDefault: () => void;
 }
 
+export interface ISpotifyPlaylist {
+  name: string;
+  url: string;
+}
+
+export interface ISpotifyPlaylists {
+  spotifyPlaylists: ISpotifyPlaylist[];
+  setSpotifyPlaylists: (spotifyPlaylists: ISpotifyPlaylist[]) => void;
+}
+
 export interface IToggleTimer {
   isTimerToggled: boolean;
   setIsTimerToggled: (isTimerToggled: boolean) => void;

@@ -1,44 +1,10 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import {
-  IAudioVolume,
-  IAlarmOption,
-  ITimer,
-  IPosTimerSettings,
-  IHasStarted,
-  IBreakStarted,
-  IShortBreakTime,
-  ILongBreakTime,
-  IPomodoroTime,
-  IStickyNote,
-  IStickyNoteState,
-  IToggleStickyNote,
-  ColorOptions,
-  ITask,
-  ITaskState,
-  ISongTask,
-  ISongState,
-  IBackground,
-  IToggleTasks,
-  IPosTask,
-  IToggleMusic,
-  IPosMusic,
-  IToggleSpotify,
-  IPosSpotify,
-  IToggleTimer,
-  IPosTimer,
-  IDarkModeState,
-  IFullscreenState,
-  IToggleQuote,
-  IPosQuote,
-  IToggleWidgetReset,
-  IToggleTwitch,
-  IPosTwitch,
-  IFirstTimeUserState,
-  IGrid,
-  ILockWidgets,
-  ISideNavOrderStore,
-  ISeoContent,
+  ColorOptions, IAlarmOption, IAudioVolume, IBackground, IBreakStarted, IDarkModeState, IFirstTimeUserState, IFullscreenState, IGrid, IHasStarted, ILockWidgets, ILongBreakTime,
+  IPomodoroTime, IPosMusic, IPosQuote, IPosSpotify, IPosTask, IPosTimer, IPosTimerSettings, IPosTwitch, ISeoContent, IShortBreakTime, ISideNavOrderStore, ISongState, ISongTask, ISpotifyPlaylists, IStickyNote,
+  IStickyNoteState, ITask,
+  ITaskState, ITimer, IToggleMusic, IToggleQuote, IToggleSpotify, IToggleStickyNote, IToggleTasks, IToggleTimer, IToggleTwitch, IToggleWidgetReset
 } from "./interfaces";
 import { InfoSection } from "./pages/InfoSection";
 
@@ -556,6 +522,18 @@ export const usePosSpotify = create<IPosSpotify>(
     }),
     {
       name: "set_spotify_position",
+    }
+  )
+);
+
+export const useSpotifyPlaylist = create<ISpotifyPlaylists>(
+  persist(
+    (set, _) => ({
+      spotifyPlaylists: [{name: "lofi beats", url:"https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn"}],
+      setSpotifyPlaylists: (playlists) => set({ spotifyPlaylists: playlists }),
+    }),
+    {
+      name: "spotify_playlists",
     }
   )
 );
