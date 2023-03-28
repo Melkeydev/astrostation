@@ -1,5 +1,5 @@
 /* Component for customization buttons in top right of the screen */
-export const CustomizationButton = (props) => {
+export const CustomizationButton = props => {
   return (
     <div>
       <button

@@ -4,8 +4,7 @@ import { AiOutlineReload } from "react-icons/ai";
 import { useToggleTwitch } from "@Store";
 
 export const TwitchStream = () => {
-  const { isTwitchToggled, isTwitchShown, setIsTwitchToggled } =
-    useToggleTwitch();
+  const { isTwitchToggled, isTwitchShown, setIsTwitchToggled } = useToggleTwitch();
   const [inputText, setInputText] = useState("");
   const [twitchStreamer, setTwitchStreamer] = useState("melkeydev");
   const [parentHostName, setParentHostName] = useState("astrostation.me");
@@ -18,13 +17,13 @@ export const TwitchStream = () => {
     }
   }, []);
 
-  const handleKeyDown = (e) => {
+  const handleKeyDown = e => {
     if (e.key === "Enter") {
       handleStreamerChange(e.target.value);
     }
   };
 
-  const handleStreamerChange = (streamName) => {
+  const handleStreamerChange = streamName => {
     if (streamName.length > 0) {
       setTwitchStreamer(streamName);
     }
@@ -45,12 +44,7 @@ export const TwitchStream = () => {
         {isTwitchShown && isTwitchToggled && (
           <iframe
             className="left-0 h-full w-full"
-            src={
-              "https://player.twitch.tv/?channel=" +
-              twitchStreamer +
-              "&parent=" +
-              parentHostName
-            }
+            src={"https://player.twitch.tv/?channel=" + twitchStreamer + "&parent=" + parentHostName}
             allowFullScreen
           ></iframe>
         )}
@@ -61,7 +55,7 @@ export const TwitchStream = () => {
           type="text"
           value={inputText}
           placeholder="Search stream..."
-          onChange={(e) => {
+          onChange={e => {
             setInputText(e.target.value);
           }}
           onKeyDown={handleKeyDown}

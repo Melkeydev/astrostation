@@ -10,8 +10,7 @@ import { FaEthereum } from "react-icons/fa";
 const startPayment = async ({ setError, setTxs, ether, addr }) => {
   try {
     //@ts-ignore
-    if (!window.ethereum)
-      throw new Error("No crypto wallet found. Please install it.");
+    if (!window.ethereum) throw new Error("No crypto wallet found. Please install it.");
 
     //@ts-ignore
     await window.ethereum.send("eth_requestAccounts");
@@ -52,8 +51,7 @@ export const CryptoModal = ({ isVisible = false, onClose }) => {
   const connectMetaMaskConnected = async () => {
     try {
       //@ts-ignore
-      if (!window.ethereum)
-        throw new Error("No crypto wallet found. Please install it.");
+      if (!window.ethereum) throw new Error("No crypto wallet found. Please install it.");
 
       //@ts-ignore
       await window.ethereum.send("eth_requestAccounts");
@@ -67,7 +65,7 @@ export const CryptoModal = ({ isVisible = false, onClose }) => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = async e => {
     e.preventDefault();
     const address = "0x39CFE0572DE24a92df064C8Fdf4C23DE6a2d6628";
     const data = new FormData(e.target);
@@ -89,7 +87,7 @@ export const CryptoModal = ({ isVisible = false, onClose }) => {
   };
 
   useEffect(() => {
-    isMetaMaskConnected().then((connected) => {
+    isMetaMaskConnected().then(connected => {
       if (connected) {
         setMetaMaskConnected(true);
       } else {
@@ -105,16 +103,10 @@ export const CryptoModal = ({ isVisible = false, onClose }) => {
 
   return !isVisible ? null : (
     <div className="modal " onClick={onClose}>
-      <div
-        className="modal-dialog dark:bg-gray-800 dark:text-gray-300"
-        onClick={(e) => e.stopPropagation()}
-      >
+      <div className="modal-dialog dark:bg-gray-800 dark:text-gray-300" onClick={e => e.stopPropagation()}>
         <div className="flex justify-end">
           <div className="modal-header dark:bg-gray-800 dark:text-gray-300">
-            <IoCloseSharp
-              className="cursor-pointer text-red-500 hover:bg-red-200"
-              onClick={onClose}
-            />
+            <IoCloseSharp className="cursor-pointer text-red-500 hover:bg-red-200" onClick={onClose} />
           </div>
         </div>
         <div className="">
@@ -143,7 +135,7 @@ export const CryptoModal = ({ isVisible = false, onClose }) => {
                 <footer className="p-4">
                   {!metaMaskConnected ? (
                     <Button
-                      variant="crypto"
+                      variant="bottomButton"
                       type="button"
                       className="w-full focus:outline-none focus:ring"
                       onClick={() => connectMetaMaskConnected()}
@@ -151,11 +143,7 @@ export const CryptoModal = ({ isVisible = false, onClose }) => {
                       Connect MetaMask wallet
                     </Button>
                   ) : (
-                    <Button
-                      variant="crypto"
-                      type="submit"
-                      className="w-full focus:outline-none focus:ring"
-                    >
+                    <Button variant="bottomButton" type="submit" className="w-full focus:outline-none focus:ring">
                       Donate Now
                     </Button>
                   )}

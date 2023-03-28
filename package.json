@@ -1,7 +1,7 @@
 {
   "name": "client",
   "private": true,
-  "version": "1.1.0",
+  "version": "1.2.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -30,6 +30,7 @@
     "react-tsparticles": "^2.1.0",
     "react-youtube": "^7.13.1",
     "sass": "^1.49.8",
+    "scroll-snap": "^4.0.3",
     "tsparticles": "^2.1.0",
     "tsparticles-engine": "^2.1.0",
     "uuid": "^8.3.2",

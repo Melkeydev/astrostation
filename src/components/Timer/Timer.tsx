@@ -52,7 +52,7 @@ export const Timer = () => {
         setTimer(breakLength);
         setBreakStarted(true);
         toast(
-          (t) => (
+          t => (
             <div className="flex items-center justify-between">
               <div>Break Mode</div>
               <IoCloseSharp
@@ -79,7 +79,7 @@ export const Timer = () => {
         setTimerQueue(pomodoroLength);
         toast.dismiss();
         toast(
-          (t) => (
+          t => (
             <div className="flex items-center justify-between">
               <div>Work Mode</div>
               <IoCloseSharp
@@ -120,9 +120,9 @@ export const Timer = () => {
     if (hasStarted) {
       const icon = sessionType === "Session" ? "⏱" : "☕️";
       // @ts-ignore
-      document.title = `Astrostation ${icon}${formatDisplayTime(
-        parseInt(timerMinutes)
-      )}:${formatDisplayTime(parseInt(timerSeconds))}`;
+      document.title = `Astrostation ${icon}${formatDisplayTime(parseInt(timerMinutes))}:${formatDisplayTime(
+        parseInt(timerSeconds)
+      )}`;
     } else {
       document.title = "Astrostation";
     }
@@ -139,7 +139,7 @@ export const Timer = () => {
       // stopped mode
       // create accurate date timer with date
       const newIntervalId = setInterval(() => {
-        setTimer((prevTime) => {
+        setTimer(prevTime => {
           let newTime = prevTime - 1;
           let time = secondsToTime(newTime);
           // @ts-ignore
@@ -182,7 +182,7 @@ export const Timer = () => {
     <div
       className={clsx(
         breakStarted && "bg-slate-200/[.96] shadow-lg",
-        "dwidth mb-2 max-w-sm rounded-lg border border-gray-200 bg-white/[.96] py-2 px-1 text-gray-800 shadow-lg dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-96`"
+        "dwidth sm:w-96` mb-2 max-w-sm rounded-lg border border-gray-200 bg-white/[.96] py-2 px-1 text-gray-800 shadow-lg dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300"
       )}
     >
       <div className="text-center">

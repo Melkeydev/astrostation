@@ -2,18 +2,9 @@ import { NavItem } from "./NavItems";
 import { IoMusicalNotesOutline } from "react-icons/io5";
 import { IoMenu } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
-import {
-  MdOutlineTimer,
-  MdWbSunny,
-  MdDarkMode,
-  MdOutlineNoteAdd,
-} from "react-icons/md";
+import { MdOutlineTimer, MdWbSunny, MdDarkMode, MdOutlineNoteAdd } from "react-icons/md";
 import { VscDebugRestartFrame } from "react-icons/vsc";
-import {
-  BsArrowsFullscreen,
-  BsFillChatLeftQuoteFill,
-  BsTwitch,
-} from "react-icons/bs";
+import { BsArrowsFullscreen, BsFillChatLeftQuoteFill, BsTwitch } from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa";
 import {
   useToggleMusic,
@@ -67,10 +58,7 @@ export const SideNav = () => {
   useEffect(() => {
     document.addEventListener("fullscreenchange", fullscreenChanged);
     document.addEventListener("keyup", function (e) {
-      if (
-        e.key === "F11" ||
-        (e.key === "Escape" && document.fullscreenElement)
-      ) {
+      if (e.key === "F11" || (e.key === "Escape" && document.fullscreenElement)) {
         toggleFullScreen();
       }
     });
@@ -86,14 +74,10 @@ export const SideNav = () => {
   }
 
   function toggleNavBar() {
-    setActive((oldDate) => !oldDate);
+    setActive(oldDate => !oldDate);
   }
 
-  let theme = isDark ? (
-    <MdWbSunny className="h-6 w-6" />
-  ) : (
-    <MdDarkMode className="h-6 w-6" />
-  );
+  let theme = isDark ? <MdWbSunny className="h-6 w-6" /> : <MdDarkMode className="h-6 w-6" />;
 
   const sideNavItems = [
     {
@@ -199,11 +183,7 @@ export const SideNav = () => {
   ];
 
   // a little function to help us with reordering the result
-  const reorder = (
-    list: number[],
-    startIndex: number,
-    endIndex: number
-  ): number[] => {
+  const reorder = (list: number[], startIndex: number, endIndex: number): number[] => {
     const result = Array.from(list);
     const [removed] = result.splice(startIndex, 1);
     result.splice(endIndex, 0, removed);
@@ -216,14 +196,12 @@ export const SideNav = () => {
       return;
     }
 
-    setSideNavOrder(
-      reorder(sideNavOrder, result.source.index, result.destination.index)
-    );
+    setSideNavOrder(reorder(sideNavOrder, result.source.index, result.destination.index));
   }
 
   return (
     <div className="sideNav absolute flex p-2">
-      <aside className="flex flex-col rounded-md overflow-hidden">
+      <aside className="flex flex-col overflow-hidden rounded-md">
         <ul>
           <div className="sm:hidden">
             <NavItem onClick={toggleNavBar} shown={true}>
@@ -248,11 +226,7 @@ export const SideNav = () => {
                           disableInteractiveElementBlocking="true"
                         >
                           {(provided, snapshot) => (
-                            <div
-                              ref={provided.innerRef}
-                              {...provided.draggableProps}
-                              {...provided.dragHandleProps}
-                            >
+                            <div ref={provided.innerRef} {...provided.draggableProps} {...provided.dragHandleProps}>
                               <DraggableNavItem active={active} item={item} />
                             </div>
                           )}

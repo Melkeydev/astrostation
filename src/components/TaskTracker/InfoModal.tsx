@@ -20,23 +20,15 @@ export const TaskInfoModal = ({ isVisible = false, onClose }) => {
     <div className="modal" onClick={onClose}>
       <div
         className="max-w-xs rounded-lg bg-white p-2 px-1 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300"
-        onClick={(e) => e.stopPropagation()}
+        onClick={e => e.stopPropagation()}
       >
         <div className="flex justify-end">
-          <IoCloseSharp
-            className="cursor-pointer text-red-500 hover:bg-red-200"
-            onClick={onClose}
-          />
+          <IoCloseSharp className="cursor-pointer text-red-500 hover:bg-red-200" onClick={onClose} />
         </div>
         <div className="border-gray-100 pb-2">
-          <div className="rounded pb-2 text-center font-bold">
-            Your tasks tracker
-          </div>
+          <div className="rounded pb-2 text-center font-bold">Your Task Tracker</div>
           <hr className="border-t-3 w-1/4 border-[#5c5c5c]" />
-          <div className="items-center p-2 px-2">
-            Double click a task you want to track with the pomodoro counters
-            (will turn blue)
-          </div>
+          <div className="items-center p-2 px-2">Right Click any task to Track, Complete, or Delete any task.</div>
         </div>
       </div>
     </div>
