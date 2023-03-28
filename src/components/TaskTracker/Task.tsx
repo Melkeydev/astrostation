@@ -50,16 +50,6 @@ export const Task = ({ task, tasks }) => {
     });
   }
 
-  const closeOnBoundsExit = (_) => {
-    /* when the mouse leaves the bounds of the task 
-     * only when the task context-menu is open we can close the contextmenu
-     * when the mouse leaves the bounds of the tasks div 
-     */
-    if (task.menuToggled) {
-      toggleMenu(task.id, !task.menuToggled);
-    }
-  }
-
   // FIXME: partially copied code from Settings.tsx
   const handleDelete = () => {
     alert("Are you sure you want to delete this task?");
@@ -155,7 +145,7 @@ export const Task = ({ task, tasks }) => {
         {task.menuToggled && (
           <div
             ref={innerRef}
-            className="bg-neutral-800 rounded-md" onMouseLeave={closeOnBoundsExit}>
+            className="bg-neutral-800 rounded-md">
             <ul className="w-full">
               <li
                 onClick={() => { toggleInProgressState(task.id) }}
