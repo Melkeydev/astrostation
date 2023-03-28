@@ -22,7 +22,7 @@ const onClickOff = callback => {
     return () => document.removeEventListener("click", handleClick);
     function handleClick(e) {
       if (innerRef.current && callbackRef.current &&
-        !innerRef.current.contains(e.target) 
+        !innerRef.current.contains(e.target)
       ) callbackRef.current(e);
     }
   }, []);
@@ -61,6 +61,13 @@ export const Task = ({ task, tasks }) => {
   const preventFalseInProgress = () => {
     if (task.completed) { return; }
     toggleInProgressState(task.id);
+  }
+
+  const markNotCompleteWhenTracking = () => {
+    toggleInProgressState(task.id);
+    toggleMenu(task.id, false);
+    if (task.completed)
+      completeTask(task.id, false);
   }
 
   useEffect(() => {
@@ -109,7 +116,7 @@ export const Task = ({ task, tasks }) => {
                       "ml-2 cursor-pointer dark:text-stone-600",
                       task.completed ? "text-green-500" : "text-slate-500"
                     )}
-                    onClick={() => completeTask(task.id)}
+                    onClick={() => completeTask(task.id, !task.completed)}
                   />
                 ) : (
                   <RiArrowGoBackFill
@@ -117,7 +124,7 @@ export const Task = ({ task, tasks }) => {
                       "ml-2 cursor-pointer",
                       task.completed ? "text-green-500" : "text-slate-500"
                     )}
-                    onClick={() => completeTask(task.id)}
+                    onClick={() => completeTask(task.id, !task.completed)}
                   />
                 )}
               </div>
@@ -148,14 +155,14 @@ export const Task = ({ task, tasks }) => {
             className="bg-neutral-800 rounded-md">
             <ul className="w-full">
               <li
-                onClick={() => { toggleInProgressState(task.id); toggleMenu(task.id, false) }}
+                onClick={() => { markNotCompleteWhenTracking() }}
                 className="cursor-pointer px-5 py-2 hover:bg-neutral-600 rounded-md">
                 <div className="select-none ">
                   Track Task
                 </div>
               </li>
               <li
-                onClick={() => { completeTask(task.id); toggleMenu(task.id, false) }}
+                onClick={() => { completeTask(task.id, !task.completed); toggleMenu(task.id, false) }}
                 className="cursor-pointer px-5 py-2 hover:bg-neutral-600 rounded-md">
                 <div className="select-none">
                   Complete Task
