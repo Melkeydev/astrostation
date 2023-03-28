@@ -13,6 +13,7 @@ import {
   IStickyNote,
   IStickyNoteState,
   IToggleStickyNote,
+  ColorOptions,
   ITask,
   ITaskState,
   ISongTask,
@@ -230,6 +231,7 @@ export const useStickyNote = create<IStickyNoteState>(
             {
               id: Date.now() + state.stickyNotes.length,
               text: text,
+              color: ColorOptions.Yellow,
               stickyNotesPosX: 165,
               stickyNotesPosY: 0,
             } as IStickyNote,
@@ -243,6 +245,19 @@ export const useStickyNote = create<IStickyNoteState>(
               ? ({
                   ...note,
                   text: newText,
+                } as IStickyNote)
+              : note
+          ),
+        }));
+      },
+      editNoteColor: (id, newColor) => {
+        console.log("editNoteColor: ", newColor);
+        set((state) => ({
+          stickyNotes: state.stickyNotes.map((note) =>
+            note.id === id
+              ? ({
+                  ...note,
+                  color: newColor,
                 } as IStickyNote)
               : note
           ),
