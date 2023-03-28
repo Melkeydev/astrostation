@@ -309,7 +309,6 @@ export const useTask = create<ITaskState>(
       addTask: (description: string, count: number, isBreak: boolean) => {
         set((state) => ({
           tasks: [
-            ...state.tasks,
             {
               id: Date.now() + state.tasks.length,
               description,
@@ -318,7 +317,9 @@ export const useTask = create<ITaskState>(
               pomodoro: count,
               pomodoroCounter: isBreak ? -1 : 0,
               alerted: false,
+              menuToggled: false,
             } as ITask,
+            ...state.tasks,
           ],
         }));
       },
@@ -349,11 +350,11 @@ export const useTask = create<ITaskState>(
           ),
         }));
       },
-      completeTask: (id) => {
+      setCompleted: (id, flag) => {
         set((state) => ({
           tasks: state.tasks.map((task) =>
             task.id === id
-              ? ({ ...task, completed: !task.completed } as ITask)
+              ? ({ ...task, completed: flag } as ITask)
               : task
           ),
         }));
@@ -392,6 +393,18 @@ export const useTask = create<ITaskState>(
               ? ({
                   ...task,
                   alerted: flag,
+                } as ITask)
+              : task
+          ),
+        }));
+      },
+      toggleMenu: (id, flag) => {
+        set((state) => ({
+          tasks: state.tasks.map((task) =>
+            task.id === id
+              ? ({
+                  ...task,
+                  menuToggled: flag,
                 } as ITask)
               : task
           ),
