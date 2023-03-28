@@ -21,6 +21,10 @@ export const Spotify = () => {
       alert("Invalid spotify URL");
       return;
     }
+    if (spotifyPlaylists.length >= 5) {
+      alert("You can only have 5 playlists");
+      return;
+    }
     const splitOn = (slicable: string, ...indices: number[]) =>
       [0, ...indices].map((n, i, m) => slicable.slice(n, m[i + 1]));
     const stitchUrl = splitOn(playlist, 24)[0] + "/embed" + splitOn(playlist, 24)[1];
