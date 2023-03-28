@@ -96,7 +96,7 @@ export interface ITaskState {
   removeTask: (id: number) => void;
   removeAllTasks: () => void;
   toggleInProgressState: (id: number) => void;
-  completeTask: (id: number) => void;
+  completeTask: (id: number, flag: boolean) => void;
   setPomodoroCounter: (id: number) => void;
   alertTask: (id: number, flag: boolean) => void;
   setPomodoro: (id: number, newVal: number) => void;
