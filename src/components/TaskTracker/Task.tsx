@@ -64,7 +64,10 @@ export const Task = ({ task, tasks }) => {
   }
 
   const markNotCompleteWhenTracking = () => {
-    toggleInProgressState(task.id);
+    
+    if (!task.inProgress)
+      toggleInProgressState(task.id);
+
     toggleMenu(task.id, false);
     if (task.completed)
       setCompleted(task.id, false);
