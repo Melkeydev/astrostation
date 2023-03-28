@@ -25,7 +25,7 @@ const onClickOff = callback => {
         !innerRef.current.contains(e.target) 
       ) callbackRef.current(e);
     }
-  }, []); 
+  }, []);
 
   return innerRef; // convenience for client (doesn't need to init ref himself) 
 }
@@ -50,16 +50,14 @@ export const Task = ({ task, tasks }) => {
     });
   }
 
-  // FIXME: partially copied code from Settings.tsx
   const handleDelete = () => {
+    // FIXME: This should be a modal
     alert("Are you sure you want to delete this task?");
     removeTask(task.id);
   };
 
-  function preventFalseInProgress() {
-    if (task.completed) {
-      return;
-    }
+  const preventFalseInProgress = () => {
+    if (task.completed) { return; }
     toggleInProgressState(task.id);
   }
 
