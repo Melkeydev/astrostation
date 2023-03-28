@@ -69,8 +69,7 @@ export interface IStickyNote {
 export interface IStickyNoteState {
   stickyNotes: IStickyNote[];
   addStickyNote: (text: string) => void;
-  editNote: (id: number, newText: string) => void;
-  editNoteColor: (id: number, newColor: string) => void;
+  editNote: (id: number, newProp: string, newValue: string) => void;
   removeNote: (id: number) => void;
   setStickyNotesPos: (id: number, X: number, Y: number) => void;
 }
