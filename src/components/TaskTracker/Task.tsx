@@ -56,6 +56,8 @@ export const Task = ({ task, tasks }) => {
     removeTask(task.id);
   };
 
+  /* Observation: When double clicking a task the text is highlighted
+     This may not be a huge UX blunder, but it does exist. TBD */
   const preventFalseInProgress = () => {
     if (task.completed) { return; }
     toggleInProgressState(task.id);
