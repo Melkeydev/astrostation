@@ -159,8 +159,7 @@ export const DvdContent = () => {
 
         if (el.nodeName === "path") {
           var path = new Path2D(el.getAttribute("d"));
-          ctx.fillStyle =
-            el.getAttribute("fill") === "#fff" ? background : logo_color;
+          ctx.fillStyle = el.getAttribute("fill") === "#fff" ? background : logo_color;
           ctx.fill(path);
         } else if (el.nodeName === "ellipse") {
           ctx.beginPath();
@@ -174,8 +173,7 @@ export const DvdContent = () => {
             Math.PI * 2
           );
           ctx.closePath();
-          ctx.fillStyle =
-            el.getAttribute("fill") === "#fff" ? background : logo_color;
+          ctx.fillStyle = el.getAttribute("fill") === "#fff" ? background : logo_color;
           ctx.fill();
         }
       }
@@ -244,10 +242,7 @@ export const DvdContent = () => {
       let deltaLKlsl = deltaL / 1.0;
       let deltaCkcsc = deltaC / sc;
       let deltaHkhsh = deltaH / sh;
-      let i =
-        deltaLKlsl * deltaLKlsl +
-        deltaCkcsc * deltaCkcsc +
-        deltaHkhsh * deltaHkhsh;
+      let i = deltaLKlsl * deltaLKlsl + deltaCkcsc * deltaCkcsc + deltaHkhsh * deltaHkhsh;
       return i < 0 ? 0 : Math.sqrt(i);
     }
 
@@ -272,33 +267,17 @@ export const DvdContent = () => {
 
     function hexToRgb(hex) {
       var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-      return result
-        ? [
-            parseInt(result[1], 16),
-            parseInt(result[2], 16),
-            parseInt(result[3], 16),
-          ]
-        : null;
+      return result ? [parseInt(result[1], 16), parseInt(result[2], 16), parseInt(result[3], 16)] : null;
     }
   }, [document.documentElement, isFullscreen]);
 
   return (
     <>
       <canvas id="canvas"></canvas>
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        id="image"
-        viewBox="0 0 67.417 29.523"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" id="image" viewBox="0 0 67.417 29.523">
         <path d="M59.646 0H43.07l-8.926 10.291L30.501 0H5.911L5 3.825h9.017c2.915 0 6.302 1.34 5.647 4.371-.729 3.37-4.19 5.01-10.474 5.01L11.011 5.1H4.727L2.04 16.758h8.516c5.601 0 13.115-1.64 15.165-7.969.551-1.702.496-3.225.11-4.508l.026-.001 5.738 16.395L46.35 3.825h9.381c2.915 0 5.618 1.33 5.01 4.371-.547 2.732-3.552 5.01-9.837 5.01L52.725 5.1H46.44l-2.687 11.658h6.968c5.601 0 14.299-1.64 16.348-7.969C68.764 3.555 63.927 0 59.646 0z"></path>
         <ellipse cx="31.686" cy="25.319" rx="31.686" ry="4.204"></ellipse>
-        <ellipse
-          cx="48.558"
-          cy="25.114"
-          rx="3.671"
-          ry="2.608"
-          fill="#fff"
-        ></ellipse>
+        <ellipse cx="48.558" cy="25.114" rx="3.671" ry="2.608" fill="#fff"></ellipse>
         <ellipse cx="48.558" cy="25.114" rx="2.397" ry="1.516"></ellipse>
         <path
           fill="#fff"

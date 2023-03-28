@@ -36,11 +36,7 @@ export const UnsplashFooter = () => {
 
   return (
     <div className="fixed bottom-0 right-0 flex space-x-4">
-      <a
-        href={dailyUnsplash.links?.html}
-        target="_blank"
-        className="flex items-center text-sm text-white"
-      >
+      <a href={dailyUnsplash.links?.html} target="_blank" className="flex items-center text-sm text-white">
         Image Source
       </a>
       <button

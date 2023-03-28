@@ -9,11 +9,7 @@ type TooltipProps = {
   position?: Placement;
 };
 
-export const WithTooltip = ({
-  text,
-  children,
-  position = "top",
-}: TooltipProps) => {
+export const WithTooltip = ({ text, children, position = "top" }: TooltipProps) => {
   const [isOpen, setIsOpen] = useState<boolean | undefined>(undefined);
   const { x, y, reference, floating, strategy } = useFloating({
     placement: position,

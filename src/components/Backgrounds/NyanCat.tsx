@@ -8,8 +8,7 @@ const options = {
     color: {
       value: "#043564",
     },
-    image:
-      "url('http://vincentgarreau.com/particles.js/assets/img/kbLd9vb_new.gif')",
+    image: "url('http://vincentgarreau.com/particles.js/assets/img/kbLd9vb_new.gif')",
     position: "0 50%",
     repeat: "no-repeat",
     size: "60%",

@@ -52,7 +52,7 @@ export const useGrid = create<IGrid>(
   persist(
     (set, _) => ({
       grid: null,
-      setGrid: (gridVal) => set({ grid: gridVal }),
+      setGrid: gridVal => set({ grid: gridVal }),
       setGridDefault: () => set(() => ({ grid: null })),
     }),
     { name: "set_grid" }
@@ -69,7 +69,7 @@ export const useAudioVolume = create<IAudioVolume>(
   persist(
     (set, _) => ({
       audioVolume: 0.7,
-      setAudioVolume: (volume) => set({ audioVolume: volume }),
+      setAudioVolume: volume => set({ audioVolume: volume }),
     }),
     { name: "set_audio_volume" }
   )
@@ -79,7 +79,7 @@ export const usePlayerAudioVolume = create<IAudioVolume>(
   persist(
     (set, _) => ({
       audioVolume: 75,
-      setAudioVolume: (volume) => set({ audioVolume: volume }),
+      setAudioVolume: volume => set({ audioVolume: volume }),
     }),
     { name: "set_player_audio_volume" }
   )
@@ -96,7 +96,7 @@ export const useAlarmOption = create<IAlarmOption>(
     (set, _) => ({
       alarm:
         "https://raw.githubusercontent.com/freeCodeCamp/cdn/master/build/testable-projects-fcc/audio/BeepSound.wav",
-      setAlarm: (alarmPath) => set({ alarm: alarmPath }),
+      setAlarm: alarmPath => set({ alarm: alarmPath }),
     }),
     { name: "set_alarm" }
   )
@@ -108,9 +108,9 @@ export const useAlarmOption = create<IAlarmOption>(
  * Handler for Timer
  */
 
-export const useTimer = create<ITimer>((set) => ({
+export const useTimer = create<ITimer>(set => ({
   timerQueue: 60,
-  setTimerQueue: (newTime) => set({ timerQueue: newTime }),
+  setTimerQueue: newTime => set({ timerQueue: newTime }),
 }));
 
 /**
@@ -124,10 +124,8 @@ export const usePosTimerSettings = create<IPosTimerSettings>(
     (set, _) => ({
       timerSettingsPosX: 750,
       timerSettingsPosY: -200,
-      setTimerSettingsPos: (X, Y) =>
-        set({ timerSettingsPosX: X, timerSettingsPosY: Y }),
-      setTimerSettingsPosDefault: () =>
-        set(() => ({ timerSettingsPosX: 400, timerSettingsPosY: 0 })),
+      setTimerSettingsPos: (X, Y) => set({ timerSettingsPosX: X, timerSettingsPosY: Y }),
+      setTimerSettingsPosDefault: () => set(() => ({ timerSettingsPosX: 400, timerSettingsPosY: 0 })),
     }),
     {
       name: "set_timer_settings_position",
@@ -141,9 +139,9 @@ export const usePosTimerSettings = create<IPosTimerSettings>(
  * Handler has started in timer sessions
  */
 
-export const useHasStarted = create<IHasStarted>((set) => ({
+export const useHasStarted = create<IHasStarted>(set => ({
   hasStarted: false,
-  setHasStarted: (hasStarted) => set({ hasStarted }),
+  setHasStarted: hasStarted => set({ hasStarted }),
 }));
 
 /**
@@ -152,9 +150,9 @@ export const useHasStarted = create<IHasStarted>((set) => ({
  * Handler break started in timer sessions
  */
 
-export const useBreakStarted = create<IBreakStarted>((set) => ({
+export const useBreakStarted = create<IBreakStarted>(set => ({
   breakStarted: false,
-  setBreakStarted: (breakStarted) => set({ breakStarted }),
+  setBreakStarted: breakStarted => set({ breakStarted }),
 }));
 
 /**
@@ -168,7 +166,7 @@ export const useShortBreakTimer = create<IShortBreakTime>(
     (set, _) => ({
       shortBreakLength: 300,
       defaultShortBreakLength: () => set(() => ({ shortBreakLength: 300 })),
-      setShortBreak: (value) => set({ shortBreakLength: value }),
+      setShortBreak: value => set({ shortBreakLength: value }),
     }),
     { name: "short_break_timer_length" }
   )
@@ -179,7 +177,7 @@ export const useLongBreakTimer = create<ILongBreakTime>(
     (set, _) => ({
       longBreakLength: 900,
       defaultLongBreakLength: () => set(() => ({ longBreakLength: 900 })),
-      setLongBreak: (value) => set({ longBreakLength: value }),
+      setLongBreak: value => set({ longBreakLength: value }),
     }),
     { name: "long_break_timer_length" }
   )
@@ -196,7 +194,7 @@ export const usePomodoroTimer = create<IPomodoroTime>(
     (set, _) => ({
       pomodoroLength: 1500,
       defaultPomodoroLength: () => set(() => ({ pomodoroLength: 1500 })),
-      setPomodoroLength: (value) => set({ pomodoroLength: value }),
+      setPomodoroLength: value => set({ pomodoroLength: value }),
     }),
     { name: "pomodoro_timer_length" }
   )
@@ -212,7 +210,7 @@ export const useToggleStickyNote = create<IToggleStickyNote>(
   persist(
     (set, _) => ({
       isStickyNoteShown: false,
-      setIsStickyNoteShown: (isStickyNoteShown) => set({ isStickyNoteShown }),
+      setIsStickyNoteShown: isStickyNoteShown => set({ isStickyNoteShown }),
     }),
     {
       name: "state_sticky_note",
@@ -225,7 +223,7 @@ export const useStickyNote = create<IStickyNoteState>(
     (set, _) => ({
       stickyNotes: [],
       addStickyNote: (text: string) => {
-        set((state) => ({
+        set(state => ({
           stickyNotes: [
             ...state.stickyNotes,
             {
@@ -243,8 +241,8 @@ export const useStickyNote = create<IStickyNoteState>(
        * of edit on Note
        */
       editNote: (id, newProp, newValue) => {
-        set((state) => ({
-          stickyNotes: state.stickyNotes.map((note) =>
+        set(state => ({
+          stickyNotes: state.stickyNotes.map(note =>
             note.id === id
               ? {
                   ...note,
@@ -254,14 +252,14 @@ export const useStickyNote = create<IStickyNoteState>(
           ),
         }));
       },
-      removeNote: (id) => {
-        set((state) => ({
-          stickyNotes: state.stickyNotes.filter((note) => note.id !== id),
+      removeNote: id => {
+        set(state => ({
+          stickyNotes: state.stickyNotes.filter(note => note.id !== id),
         }));
       },
       setStickyNotesPos: (id, X, Y) => {
-        set((state) => ({
-          stickyNotes: state.stickyNotes.map((note) =>
+        set(state => ({
+          stickyNotes: state.stickyNotes.map(note =>
             note.id === id
               ? ({
                   ...note,
@@ -307,7 +305,7 @@ export const useTask = create<ITaskState>(
         } as ITask,
       ],
       addTask: (description: string, count: number, isBreak: boolean) => {
-        set((state) => ({
+        set(state => ({
           tasks: [
             {
               id: Date.now() + state.tasks.length,
@@ -324,8 +322,8 @@ export const useTask = create<ITaskState>(
         }));
       },
       renameTask: (id, newName) => {
-        set((state) => ({
-          tasks: state.tasks.map((task) =>
+        set(state => ({
+          tasks: state.tasks.map(task =>
             task.id === id
               ? ({
                   ...task,
@@ -335,48 +333,39 @@ export const useTask = create<ITaskState>(
           ),
         }));
       },
-      removeTask: (id) => {
-        set((state) => ({
-          tasks: state.tasks.filter((task) => task.id !== id),
+      removeTask: id => {
+        set(state => ({
+          tasks: state.tasks.filter(task => task.id !== id),
         }));
       },
       removeAllTasks: () => set({ tasks: [] }),
-      toggleInProgressState: (id) => {
-        set((state) => ({
-          tasks: state.tasks.map((task) =>
-            task.id === id
-              ? ({ ...task, inProgress: !task.inProgress } as ITask)
-              : task
+      toggleInProgressState: id => {
+        set(state => ({
+          tasks: state.tasks.map(task =>
+            task.id === id ? ({ ...task, inProgress: !task.inProgress } as ITask) : task
           ),
         }));
       },
       setCompleted: (id, flag) => {
-        set((state) => ({
-          tasks: state.tasks.map((task) =>
-            task.id === id
-              ? ({ ...task, completed: flag } as ITask)
-              : task
-          ),
+        set(state => ({
+          tasks: state.tasks.map(task => (task.id === id ? ({ ...task, completed: flag } as ITask) : task)),
         }));
       },
-      setPomodoroCounter: (id) => {
-        set((state) => ({
-          tasks: state.tasks.map((task) =>
+      setPomodoroCounter: id => {
+        set(state => ({
+          tasks: state.tasks.map(task =>
             task.id === id
               ? ({
                   ...task,
-                  pomodoroCounter:
-                    task.pomodoroCounter < task.pomodoro
-                      ? task.pomodoroCounter + 1
-                      : task.pomodoro,
+                  pomodoroCounter: task.pomodoroCounter < task.pomodoro ? task.pomodoroCounter + 1 : task.pomodoro,
                 } as ITask)
               : task
           ),
         }));
       },
       setPomodoro: (id, newVal) => {
-        set((state) => ({
-          tasks: state.tasks.map((task) =>
+        set(state => ({
+          tasks: state.tasks.map(task =>
             task.id === id
               ? ({
                   ...task,
@@ -387,8 +376,8 @@ export const useTask = create<ITaskState>(
         }));
       },
       alertTask: (id, flag) => {
-        set((state) => ({
-          tasks: state.tasks.map((task) =>
+        set(state => ({
+          tasks: state.tasks.map(task =>
             task.id === id
               ? ({
                   ...task,
@@ -399,8 +388,8 @@ export const useTask = create<ITaskState>(
         }));
       },
       toggleMenu: (id, flag) => {
-        set((state) => ({
-          tasks: state.tasks.map((task) =>
+        set(state => ({
+          tasks: state.tasks.map(task =>
             task.id === id
               ? ({
                   ...task,
@@ -444,12 +433,11 @@ const songs = [
   },
 ];
 
-export const useSong = create<ISongState>((set) => ({
+export const useSong = create<ISongState>(set => ({
   song: songs[0],
-  setSong: (songId) =>
-    set({ song: songs.find((s) => s.id === songId) as ISongTask }),
+  setSong: songId => set({ song: songs.find(s => s.id === songId) as ISongTask }),
   toggledSong: "",
-  setToggledSong: (toggledSong) => set({ toggledSong }),
+  setToggledSong: toggledSong => set({ toggledSong }),
 }));
 
 /**
@@ -462,7 +450,7 @@ export const useSetBackground = create<IBackground>(
   persist(
     (set, _) => ({
       isBackground: 0,
-      setIsBackground: (isBackground) => set({ isBackground }),
+      setIsBackground: isBackground => set({ isBackground }),
     }),
     {
       name: "app_background",
@@ -480,9 +468,9 @@ export const useToggleTasks = create<IToggleTasks>(
   persist(
     (set, _) => ({
       isTasksToggled: true,
-      setIsTasksToggled: (isTasksToggled) => set({ isTasksToggled }),
+      setIsTasksToggled: isTasksToggled => set({ isTasksToggled }),
       isTasksShown: true,
-      setIsTasksShown: (isTasksShown) => set({ isTasksShown }),
+      setIsTasksShown: isTasksShown => set({ isTasksShown }),
     }),
     {
       name: "state_tasks_section",
@@ -514,9 +502,9 @@ export const useToggleMusic = create<IToggleMusic>(
   persist(
     (set, _) => ({
       isMusicToggled: true,
-      setIsMusicToggled: (isMusicToggled) => set({ isMusicToggled }),
+      setIsMusicToggled: isMusicToggled => set({ isMusicToggled }),
       isMusicShown: true,
-      setIsMusicShown: (isMusicShown) => set({ isMusicShown }),
+      setIsMusicShown: isMusicShown => set({ isMusicShown }),
     }),
     {
       name: "state_music_section",
@@ -548,9 +536,9 @@ export const useSpotifyMusic = create<IToggleSpotify>(
   persist(
     (set, _) => ({
       isSpotifyToggled: true,
-      setIsSpotifyToggled: (isSpotifyToggled) => set({ isSpotifyToggled }),
+      setIsSpotifyToggled: isSpotifyToggled => set({ isSpotifyToggled }),
       isSpotifyShown: true,
-      setIsSpotifyShown: (isSpotifyShown) => set({ isSpotifyShown }),
+      setIsSpotifyShown: isSpotifyShown => set({ isSpotifyShown }),
     }),
     {
       name: "state_spotify_section",
@@ -564,8 +552,7 @@ export const usePosSpotify = create<IPosSpotify>(
       spotifyPosX: 400,
       spotifyPosY: 158,
       setSpotifyPos: (X, Y) => set({ spotifyPosX: X, spotifyPosY: Y }),
-      setSpotifyPosDefault: () =>
-        set(() => ({ spotifyPosX: 400, spotifyPosY: 158 })),
+      setSpotifyPosDefault: () => set(() => ({ spotifyPosX: 400, spotifyPosY: 158 })),
     }),
     {
       name: "set_spotify_position",
@@ -583,9 +570,9 @@ export const useToggleTimer = create<IToggleTimer>(
   persist(
     (set, _) => ({
       isTimerToggled: true,
-      setIsTimerToggled: (isTimerToggled) => set({ isTimerToggled }),
+      setIsTimerToggled: isTimerToggled => set({ isTimerToggled }),
       isTimerShown: true,
-      setIsTimerShown: (isTimerShown) => set({ isTimerShown }),
+      setIsTimerShown: isTimerShown => set({ isTimerShown }),
     }),
     { name: "state_timer_section" }
   )
@@ -615,9 +602,9 @@ export const useDarkToggleStore = create<IDarkModeState>(
   persist(
     (set, _) => ({
       isDark: true,
-      toggleDarkMode: () => set((oldState) => ({ isDark: !oldState.isDark })),
+      toggleDarkMode: () => set(oldState => ({ isDark: !oldState.isDark })),
       isDarkModeShown: false,
-      setIsDarkModeShown: (isDarkModeShown) => set({ isDarkModeShown }),
+      setIsDarkModeShown: isDarkModeShown => set({ isDarkModeShown }),
     }),
     { name: "state_darkmode" }
   )
@@ -633,10 +620,9 @@ export const useFullScreenToggleStore = create<IFullscreenState>(
   persist(
     (set, _) => ({
       isFullscreen: false,
-      toggleFullscreenMode: () =>
-        set((oldState) => ({ isFullscreen: !oldState.isFullscreen })),
+      toggleFullscreenMode: () => set(oldState => ({ isFullscreen: !oldState.isFullscreen })),
       isFullscreenShown: false,
-      setIsFullscreenShown: (isFullscreenShown) => set({ isFullscreenShown }),
+      setIsFullscreenShown: isFullscreenShown => set({ isFullscreenShown }),
     }),
     { name: "state_fullscreen" }
   )
@@ -652,9 +638,9 @@ export const useToggleQuote = create<IToggleQuote>(
   persist(
     (set, _) => ({
       isQuoteToggled: false,
-      setIsQuoteToggled: (isQuoteToggled) => set({ isQuoteToggled }),
+      setIsQuoteToggled: isQuoteToggled => set({ isQuoteToggled }),
       isQuoteShown: false,
-      setIsQuoteShown: (isQuoteShown) => set({ isQuoteShown }),
+      setIsQuoteShown: isQuoteShown => set({ isQuoteShown }),
     }),
     {
       name: "state_quote_section",
@@ -686,8 +672,7 @@ export const useToggleWidgetReset = create<IToggleWidgetReset>(
   persist(
     (set, _) => ({
       isWidgetResetShown: false,
-      setIsWidgetResetShown: (isWidgetResetShown) =>
-        set({ isWidgetResetShown }),
+      setIsWidgetResetShown: isWidgetResetShown => set({ isWidgetResetShown }),
     }),
     {
       name: "state_widget_reset",
@@ -705,9 +690,9 @@ export const useToggleTwitch = create<IToggleTwitch>(
   persist(
     (set, _) => ({
       isTwitchToggled: false,
-      setIsTwitchToggled: (isTwitchToggled) => set({ isTwitchToggled }),
+      setIsTwitchToggled: isTwitchToggled => set({ isTwitchToggled }),
       isTwitchShown: false,
-      setIsTwitchShown: (isTwitchShown) => set({ isTwitchShown }),
+      setIsTwitchShown: isTwitchShown => set({ isTwitchShown }),
     }),
     {
       name: "state_twitch",
@@ -721,8 +706,7 @@ export const usePosTwitch = create<IPosTwitch>(
       twitchPosX: 804,
       twitchPosY: 436,
       setTwitchPos: (X, Y) => set({ twitchPosX: X, twitchPosY: Y }),
-      setTwitchPosDefault: () =>
-        set(() => ({ twitchPosX: 1208, twitchPosY: 0 })),
+      setTwitchPosDefault: () => set(() => ({ twitchPosX: 1208, twitchPosY: 0 })),
     }),
     {
       name: "set_twitch_position",
@@ -740,8 +724,7 @@ export const useFirstTimeUserStore = create<IFirstTimeUserState>(
   persist(
     (set, _) => ({
       isFirstTimeUser: true,
-      toggleIsFirstTimeUser: () =>
-        set((oldState) => ({ isFirstTimeUser: !oldState.isFirstTimeUser })),
+      toggleIsFirstTimeUser: () => set(oldState => ({ isFirstTimeUser: !oldState.isFirstTimeUser })),
     }),
     { name: "first_time_user" }
   )
@@ -751,8 +734,7 @@ export const useUnsplashStore = create<any>(
   persist(
     (set, _) => ({
       dailyUnsplash: {},
-      setDailyUnsplash: (unsplashObject) =>
-        set({ dailyUnsplash: unsplashObject }),
+      setDailyUnsplash: unsplashObject => set({ dailyUnsplash: unsplashObject }),
     }),
     { name: "unsplash_store" }
   )
@@ -767,7 +749,7 @@ export const useLockWidgetsStore = create<ILockWidgets>(
   persist(
     (set, _) => ({
       areWidgetsLocked: false,
-      setAreWidgetsLocked: (areWidgetsLocked) => set({ areWidgetsLocked }),
+      setAreWidgetsLocked: areWidgetsLocked => set({ areWidgetsLocked }),
     }),
     { name: "state_widgets_lock" }
   )
@@ -783,7 +765,7 @@ export const useSideNavOrderStore = create<ISideNavOrderStore>(
   persist(
     (set, _) => ({
       sideNavOrder: [...Array(20).keys()],
-      setSideNavOrder: (sideNavOrder) => set({ sideNavOrder }),
+      setSideNavOrder: sideNavOrder => set({ sideNavOrder }),
     }),
     { name: "side_nav_order" }
   )
@@ -792,13 +774,13 @@ export const useSideNavOrderStore = create<ISideNavOrderStore>(
 /**
  * Toggle SEO Content
  * ---
- * Handles storing SEO content visibility 
+ * Handles storing SEO content visibility
  */
 export const useSeoVisibilityStore = create<ISeoContent>(
   persist(
     (set, _) => ({
       isSeoVisible: true,
-      setSeoVisibility: (isSeoVisible) => set({ isSeoVisible}),
+      setSeoVisibility: isSeoVisible => set({ isSeoVisible }),
     }),
     { name: "state_seo_visibility" }
   )
