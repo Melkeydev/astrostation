@@ -10,6 +10,7 @@ import {
   useAlarmOption,
   useGrid,
   useLockWidgetsStore,
+  useSeoVisibilityStore
 } from "@Store";
 import { IoCloseSharp } from "react-icons/io5";
 import { BsMusicPlayerFill, BsBellFill } from "react-icons/bs";
@@ -42,6 +43,7 @@ export const TimerSettings = ({ onClose }) => {
   const { grid, setGrid } = useGrid();
   const [currentGrid, setCurrentGrid] = useState(grid);
   const { areWidgetsLocked, setAreWidgetsLocked } = useLockWidgetsStore();
+  const { isSeoVisible, setSeoVisibility } = useSeoVisibilityStore();
   const [currentWidgetLockState, setCurrentWidgetLockState] =
     useState(areWidgetsLocked);
 
@@ -125,6 +127,12 @@ export const TimerSettings = ({ onClose }) => {
     audioRef.volume = currentVolume;
     audioRef.play();
     setCurrentAlarm(alarmPath);
+  }
+
+  function unHideInfo() {
+    setSeoVisibility(true);
+    onClose();
+    successToast("Info now visible", isDark);
   }
 
   return (
@@ -334,6 +342,15 @@ export const TimerSettings = ({ onClose }) => {
           >
             Default
           </Button>
+
+          <Button
+            className="font-normal text-gray-800 hover:text-white dark:text-white"
+            variant="cold"
+            onClick={unHideInfo}
+          >
+            Unhide Info
+          </Button>
+          
           <Button
             className="font-normal text-gray-800 hover:text-white dark:text-white"
             variant="cold"

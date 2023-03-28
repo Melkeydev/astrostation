@@ -61,6 +61,7 @@ export interface IPomodoroTime {
 export interface IStickyNote {
   id: number;
   text: string;
+  color: string;
   stickyNotesPosX: number;
   stickyNotesPosY: number;
 }
@@ -68,7 +69,7 @@ export interface IStickyNote {
 export interface IStickyNoteState {
   stickyNotes: IStickyNote[];
   addStickyNote: (text: string) => void;
-  editNote: (id: number, newText: string) => void;
+  editNote: (id: number, newProp: string, newValue: string) => void;
   removeNote: (id: number) => void;
   setStickyNotesPos: (id: number, X: number, Y: number) => void;
 }
@@ -76,6 +77,14 @@ export interface IStickyNoteState {
 export interface IToggleStickyNote {
   isStickyNoteShown: boolean;
   setIsStickyNoteShown: (isStickyNoteShown: boolean) => void;
+}
+
+export enum ColorOptions {
+  Yellow = "#feff9c",
+  Green = "#d1fae5",
+  Pink = "#f6ccd7",
+  Purple = "#e0bbff",
+  Blue = "#a7cdfa",
 }
 
 export interface ITask {
@@ -259,4 +268,13 @@ export interface ISideNavItems {
 export interface ISideNavOrderStore {
   sideNavOrder: number[];
   setSideNavOrder: (sideNavOrder: number[]) => void;
+}
+
+export interface ISeoContent {
+  isSeoVisible: boolean;
+  setSeoVisibility: (isSeoVisible: boolean) => void;
+}
+
+export interface ISeoToggle {
+    onButtonClick: () => void;
 }

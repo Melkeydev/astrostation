@@ -13,6 +13,7 @@ import {
   IStickyNote,
   IStickyNoteState,
   IToggleStickyNote,
+  ColorOptions,
   ITask,
   ITaskState,
   ISongTask,
@@ -37,7 +38,9 @@ import {
   IGrid,
   ILockWidgets,
   ISideNavOrderStore,
+  ISeoContent,
 } from "./interfaces";
+import { InfoSection } from "./pages/InfoSection";
 
 /**
  * Grid Store
@@ -228,20 +231,25 @@ export const useStickyNote = create<IStickyNoteState>(
             {
               id: Date.now() + state.stickyNotes.length,
               text: text,
+              color: ColorOptions.Yellow,
               stickyNotesPosX: 165,
               stickyNotesPosY: 0,
             } as IStickyNote,
           ],
         }));
       },
-      editNote: (id, newText) => {
+      /**
+       * TODO: make new dynamic type for any types
+       * of edit on Note
+       */
+      editNote: (id, newProp, newValue) => {
         set((state) => ({
           stickyNotes: state.stickyNotes.map((note) =>
             note.id === id
-              ? ({
+              ? {
                   ...note,
-                  text: newText,
-                } as IStickyNote)
+                  [newProp]: newValue,
+                }
               : note
           ),
         }));
@@ -778,5 +786,20 @@ export const useSideNavOrderStore = create<ISideNavOrderStore>(
       setSideNavOrder: (sideNavOrder) => set({ sideNavOrder }),
     }),
     { name: "side_nav_order" }
+  )
+);
+
+/**
+ * Toggle SEO Content
+ * ---
+ * Handles storing SEO content visibility 
+ */
+export const useSeoVisibilityStore = create<ISeoContent>(
+  persist(
+    (set, _) => ({
+      isSeoVisible: true,
+      setSeoVisibility: (isSeoVisible) => set({ isSeoVisible}),
+    }),
+    { name: "state_seo_visibility" }
   )
 );
