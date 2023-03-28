@@ -1,10 +1,46 @@
 import create from "zustand";
 import { persist } from "zustand/middleware";
 import {
-  ColorOptions, IAlarmOption, IAudioVolume, IBackground, IBreakStarted, IDarkModeState, IFirstTimeUserState, IFullscreenState, IGrid, IHasStarted, ILockWidgets, ILongBreakTime,
-  IPomodoroTime, IPosMusic, IPosQuote, IPosSpotify, IPosTask, IPosTimer, IPosTimerSettings, IPosTwitch, ISeoContent, IShortBreakTime, ISideNavOrderStore, ISongState, ISongTask, ISpotifyPlaylists, IStickyNote,
-  IStickyNoteState, ITask,
-  ITaskState, ITimer, IToggleMusic, IToggleQuote, IToggleSpotify, IToggleSpotifyPlaylists as IShowSpotifyPlaylists, IToggleStickyNote, IToggleTasks, IToggleTimer, IToggleTwitch, IToggleWidgetReset
+  ColorOptions,
+  IAlarmOption,
+  IAudioVolume,
+  IBackground,
+  IBreakStarted,
+  IDarkModeState,
+  IFirstTimeUserState,
+  IFullscreenState,
+  IGrid,
+  IHasStarted,
+  ILockWidgets,
+  ILongBreakTime,
+  IPomodoroTime,
+  IPosMusic,
+  IPosQuote,
+  IPosSpotify,
+  IPosTask,
+  IPosTimer,
+  IPosTimerSettings,
+  IPosTwitch,
+  ISeoContent,
+  IShortBreakTime,
+  ISideNavOrderStore,
+  ISongState,
+  ISongTask,
+  ISpotifyPlaylists,
+  IStickyNote,
+  IStickyNoteState,
+  ITask,
+  ITaskState,
+  ITimer,
+  IToggleMusic,
+  IToggleQuote,
+  IToggleSpotify,
+  IToggleSpotifyPlaylists as IShowSpotifyPlaylists,
+  IToggleStickyNote,
+  IToggleTasks,
+  IToggleTimer,
+  IToggleTwitch,
+  IToggleWidgetReset,
 } from "./interfaces";
 import { InfoSection } from "./pages/InfoSection";
 
@@ -529,8 +565,8 @@ export const usePosSpotify = create<IPosSpotify>(
 export const useSpotifyPlaylist = create<ISpotifyPlaylists>(
   persist(
     (set, _) => ({
-      spotifyPlaylists: [{name: "lofi beats", url:"https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn"}],
-      setSpotifyPlaylists: (playlists) => set({ spotifyPlaylists: playlists }),
+      spotifyPlaylists: [{ name: "lofi beats", url: "https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn" }],
+      setSpotifyPlaylists: playlists => set({ spotifyPlaylists: playlists }),
     }),
     {
       name: "spotify_playlists",
@@ -542,7 +578,7 @@ export const useShowSpotifyPlaylists = create<IShowSpotifyPlaylists>(
   persist(
     (set, _) => ({
       showSpotifyPlaylists: false,
-      setShowSpotifyPlaylists: (show) => set({ showSpotifyPlaylists: show }),
+      setShowSpotifyPlaylists: show => set({ showSpotifyPlaylists: show }),
     }),
     {
       name: "show_spotify_playlists",
