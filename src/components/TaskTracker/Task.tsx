@@ -66,8 +66,6 @@ export const Task = ({ task, tasks }) => {
   };
 
   const markNotCompleteWhenTracking = () => {
-    if (!task.inProgress) toggleInProgressState(task.id);
-
     toggleMenu(task.id, false);
     if (task.completed) setCompleted(task.id, false);
   };
@@ -146,7 +144,11 @@ export const Task = ({ task, tasks }) => {
                 }}
                 className="cursor-pointer rounded-md px-5 py-2 hover:bg-neutral-600"
               >
-                <div className="select-none ">Track Task</div>
+                { task.inProgress ? (
+                  <div className="select-none ">Untrack Task</div>
+                ) : (
+                  <div className="select-none ">Track Task</div>
+                )}
               </li>
               <li
                 onClick={() => {
