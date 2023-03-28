@@ -342,7 +342,7 @@ export const useTask = create<ITaskState>(
           ),
         }));
       },
-      completeTask: (id, flag) => {
+      setCompleted: (id, flag) => {
         set((state) => ({
           tasks: state.tasks.map((task) =>
             task.id === id
