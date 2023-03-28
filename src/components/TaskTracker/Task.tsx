@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useRef, useEffect, useState } from "react";
 import { FaCheck } from "react-icons/fa";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -10,19 +10,40 @@ import { ITask } from "@Root/src/interfaces";
 // TODO: Remove alerted
 // TODO: Add a blurb/instructions to let users know how to toggle
 
+const onClickOff = callback => {
+  const callbackRef = useRef(); // initialize mutable ref, which stores callback
+  const innerRef = useRef(); // returned to client, who marks "border" element
+
+  // update cb on each render, so second useEffect has access to current value 
+  useEffect(() => { callbackRef.current = callback; });
+
+  useEffect(() => {
+    document.addEventListener("click", handleClick);
+    return () => document.removeEventListener("click", handleClick);
+    function handleClick(e) {
+      if (innerRef.current && callbackRef.current &&
+        !innerRef.current.contains(e.target) 
+      ) callbackRef.current(e);
+    }
+  }, []); 
+
+  return innerRef; // convenience for client (doesn't need to init ref himself) 
+}
+
 export const Task = ({ task, tasks }) => {
   const [openSettings, setOpenSettings] = useState(false);
   const { removeTask, completeTask, toggleInProgressState, alertTask, setPomodoroCounter, toggleMenu } =
     useTask();
   const { breakStarted } = useBreakStarted();
   const { timerQueue } = useTimer();
+  const innerRef = onClickOff(() => { toggleMenu(task.id, false); });
 
   const openContextMenu = (event) => {
     event.preventDefault();
     toggleMenu(task.id, !task.menuToggled);
 
     /* This is linear search, however it did not seem to 
-       have any perf impact for 100-200 tasks at a time */ 
+       have any perf impact for 100-200 tasks at a time */
     tasks.forEach((task_: ITask) => {
       if (task_.menuToggled)
         toggleMenu(task_.id, false);
@@ -133,6 +154,7 @@ export const Task = ({ task, tasks }) => {
         className="absolute">
         {task.menuToggled && (
           <div
+            ref={innerRef}
             className="bg-neutral-800 rounded-md" onMouseLeave={closeOnBoundsExit}>
             <ul className="w-full">
               <li
