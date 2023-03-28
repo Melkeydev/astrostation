@@ -16,10 +16,10 @@ export const Tasks = ({ tasks }) => {
   return (
     <>
       {tasks.map((task: ITask, index: number) => (
-        <Task key={index} task={task} />
+        <Task key={index} task={task} tasks={tasks} />
       ))}
       {tasks && (
-        <div className="flex justify-end">
+        <div className="mt-4 flex justify-end">
           <Button variant="danger" onClick={() => confirmClearTasks()}>
             Clear All
           </Button>

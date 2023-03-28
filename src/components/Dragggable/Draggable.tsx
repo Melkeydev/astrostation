@@ -85,33 +85,14 @@ export const DWrapper = ({
         handle={handle}
       >
         {isSticky ? (
-          <div
-            style={{ zIndex: z, position: "absolute" }}
-            onClick={() => setZ(++int)}
-          >
-            <div
-              ref={ref}
-              className={clsx(
-                "inline-block",
-                toggleHook ? "visible" : "pointer-events-none hidden"
-              )}
-            >
+          <div style={{ zIndex: z, position: "absolute" }} onClick={() => setZ(++int)}>
+            <div ref={ref} className={clsx("inline-block", toggleHook ? "visible" : "pointer-events-none hidden")}>
               {children}
             </div>
           </div>
         ) : (
-          <div
-            style={{ zIndex: z, position: "absolute" }}
-            className="dcard box dwidth"
-            onClick={() => setZ(++int)}
-          >
-            <div
-              ref={ref}
-              className={clsx(
-                "inline-block",
-                toggleHook ? "visible" : "pointer-events-none hidden"
-              )}
-            >
+          <div style={{ zIndex: z, position: "absolute" }} className="dcard box dwidth" onClick={() => setZ(++int)}>
+            <div ref={ref} className={clsx("inline-block", toggleHook ? "visible" : "pointer-events-none hidden")}>
               {children}
             </div>
           </div>
