@@ -339,10 +339,10 @@ export const useTask = create<ITaskState>(
         }));
       },
       removeAllTasks: () => set({ tasks: [] }),
-      toggleInProgressState: id => {
+      toggleInProgressState: (id, flag) => {
         set(state => ({
           tasks: state.tasks.map(task =>
-            task.id === id ? ({ ...task, inProgress: !task.inProgress } as ITask) : task
+            task.id === id ? ({ ...task, inProgress: flag } as ITask) : task
           ),
         }));
       },
