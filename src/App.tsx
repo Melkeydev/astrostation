@@ -62,7 +62,8 @@ function App() {
       <div
         id="entire-app"
         className={clsx(
-          `scrollbar-hide fixed inset-0 ${isSeoVisible ? `overflow-auto` : `overflow-hidden`}`,
+          "scrollbar-hide fixed inset-0 overflow-auto",
+          !isSeoVisible && "md:overflow-hidden",
           breakStarted && "bg-blue-500 bg-opacity-40"
         )}
       >
