@@ -27,9 +27,7 @@ export const BackgroundDropdownItem = ({
       {title === "Custom Color" ? (
         <TestColorPicker />
       ) : (
-        <div className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200">
-          {title}
-        </div>
+        <div className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200">{title}</div>
       )}
     </div>
   );
@@ -37,19 +35,22 @@ export const BackgroundDropdownItem = ({
 
 const colors = ["#000000", "#383838", "#654724", "#312465", "#1F6353", "#652424"];
 const TestColorPicker = () => {
-  const { setBackgroundColor } = useSetBackground();
+  const { backgroundColor, setBackgroundColor } = useSetBackground();
 
   return (
     <div>
-      <div className="block py-2 pl-4 text-sm text-gray-700 dark:text-gray-200">
-        Color
-      </div>
+      <div className="block py-2 pl-4 text-sm text-gray-700 dark:text-gray-200">Color</div>
       <div className="ml-4 flex pb-2">
-        {colors.map((col) => (
+        {colors.map(col => (
           <div
             className="mr-2 pl-4"
             onClick={() => setBackgroundColor(col)}
-            style={{ background: col, width: 16, height: 16 }}
+            style={{
+              background: col,
+              width: 16,
+              height: 16,
+              border: backgroundColor === col ? "1px solid #fff" : "none",
+            }}
           />
         ))}
       </div>
