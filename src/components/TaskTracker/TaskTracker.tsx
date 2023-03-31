@@ -5,6 +5,7 @@ import { AddTask } from "./AddTask";
 import { IoCloseSharp, IoInformationCircleOutline } from "react-icons/io5";
 import { useTask, useToggleTasks } from "@Store";
 import { TaskInfoModal } from "@App/components/TaskTracker/InfoModal";
+import { DeleteModal } from "./DeleteModal";
 
 export const TaskTracker = () => {
   const [showAddTask, setShowAddTask] = useState(false);
@@ -30,6 +31,7 @@ export const TaskTracker = () => {
         {showAddTask && <AddTask />}
         {tasks.length > 0 ? <Tasks tasks={tasks} /> : "No Tasks to Show"}
       </div>
+      <DeleteModal />
     </div>
   );
 };
