@@ -35,6 +35,12 @@ export const Settings = ({ setOpenSettings, Task }) => {
     }
   }
 
+  function handleKeyPress(e: React.KeyboardEvent<HTMLInputElement>) {
+    if (e.key === "Enter") {
+      onSubmit(e);
+    }
+  }
+
   return (
     <div className="mb-6 mt-2 w-full space-y-2 rounded-lg border border-gray-200 bg-white py-2 px-1 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300 ">
       <div className="flex">
@@ -45,6 +51,9 @@ export const Settings = ({ setOpenSettings, Task }) => {
           value={text}
           onChange={e => {
             setText(e.target.value);
+          }}
+          onKeyPress={e => {
+            handleKeyPress(e);
           }}
         />
       </div>
