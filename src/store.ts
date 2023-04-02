@@ -38,6 +38,8 @@ import {
   IGrid,
   ILockWidgets,
   ISideNavOrderStore,
+  IToggleKanban,
+  IPosKanban,
   ISeoContent,
   IBackgroundColor,
 } from "./interfaces";
@@ -460,6 +462,41 @@ export const useSetBackground = create<IBackground>(
     }),
     {
       name: "app_background",
+    }
+  )
+);
+
+/**
+ * Kanban Section Store
+ * ---
+ * Handle the visibility of the Kanban section
+ */
+
+export const useToggleKanban = create<IToggleKanban>(
+  persist(
+    (set, _) => ({
+      isKanbanToggled: false,
+      setIsKanbanToggled: (isKanbanToggled) => set({ isKanbanToggled }),
+      isKanbanShown: false,
+      setIsKanbanShown: (isKanbanShown) => set({ isKanbanShown }),
+    }),
+    {
+      name: "state_kanban_section",
+    }
+  )
+);
+
+export const usePosKanban = create<IPosKanban>(
+  persist(
+    (set, _) => ({
+      kanbanPosX: 200,
+      kanbanPosY: 0,
+      setKanbanPos: (X, Y) => set({ kanbanPosX: X, kanbanPosY: Y }),
+      setKanbanPosDefault: () =>
+        set(() => ({ kanbanPosX: 200, kanbanPosY: 0 })),
+    }),
+    {
+      name: "set_kanban_position",
     }
   )
 );

@@ -139,6 +139,20 @@ export interface IToggleTasks {
   setIsTasksShown: (isTasksShown: boolean) => void;
 }
 
+export interface IToggleKanban {
+  isKanbanToggled: boolean;
+  setIsKanbanToggled: (isKanbanToggled: boolean) => void;
+  isKanbanShown: boolean;
+  setIsKanbanShown: (isKanbanShown: boolean) => void;
+}
+
+export interface IPosKanban {
+  kanbanPosX: number;
+  kanbanPosY: number;
+  setKanbanPos: (X: number, Y: number) => void;
+  setKanbanPosDefault: () => void;
+}
+
 export interface IPosTask {
   taskPosX: number;
   taskPosY: number;
