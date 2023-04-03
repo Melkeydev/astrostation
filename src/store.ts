@@ -41,9 +41,11 @@ import {
   IToggleKanban,
   IPosKanban,
   ISeoContent,
+  IKanbanBoardState,
   IBackgroundColor,
 } from "./interfaces";
 import { InfoSection } from "./pages/InfoSection";
+import { uuid } from "uuidv4";
 
 /**
  * Grid Store
@@ -248,9 +250,9 @@ export const useStickyNote = create<IStickyNoteState>(
           stickyNotes: state.stickyNotes.map(note =>
             note.id === id
               ? {
-                  ...note,
-                  [newProp]: newValue,
-                }
+                ...note,
+                [newProp]: newValue,
+              }
               : note
           ),
         }));
@@ -398,9 +400,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                  ...task,
-                  menuToggled: flag,
-                } as ITask)
+                ...task,
+                menuToggled: flag,
+              } as ITask)
               : task
           ),
         }));
@@ -447,6 +449,48 @@ export const useSong = create<ISongState>(set => ({
 }));
 
 /**
+ * Task Store
+ * ---
+ * Handle the tasks created in the tasks section
+ */
+
+export const useKanban = create<IKanbanBoardState>(
+  persist(
+    (set, _) => ({
+      board: {
+        columns: [
+          {
+            id: "abac",
+            title: "To Do",
+            tasks: [{ id: "632727", name: "Need to do this important task" }],
+          },
+          {
+            id: "aawdawd",
+            title: "In Progress",
+            tasks: [{ id: "ääffw33", name: "Doing this thing" }],
+          },
+          {
+            id: "235",
+            title: "Done",
+            tasks: [{ id: "nnADAWD", name: "We done yeh" }],
+          },
+        ],
+      },
+      setColumns: (column: any) => {
+        set(state => ({
+          board: {
+            columns: column
+          }
+        }));
+      },
+    }),
+    {
+      name: "state_kanban_board",
+    }
+  )
+);
+
+/**
  * Background Store
  * ---
  * Handles the background image state of app
@@ -467,9 +511,9 @@ export const useSetBackground = create<IBackground>(
 );
 
 /**
- * Kanban Section Store
+ * Kanban board Store
  * ---
- * Handle the visibility of the Kanban section
+ * Handle the visibility of the Kanban board
  */
 
 export const useToggleKanban = create<IToggleKanban>(

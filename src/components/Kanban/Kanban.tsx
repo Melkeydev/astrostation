@@ -1,41 +1,72 @@
 import "@Components/Kanban/kanban.css";
-import { useToggleKanban } from "@Root/src/store";
+import { useKanban, useToggleKanban } from "@Root/src/store";
 import { IconContext } from "react-icons";
 import { IoCloseSharp } from "react-icons/io5";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useState } from "react";
 
+const KanbanColumn = ({ column, deleteTask }) => {
+  const test = () => {
+    console.log("pog");
+  }
+
+  return (
+    <Droppable key={column.id} droppableId={column.id}>
+      {(provided) => {
+        return (
+          <div
+            ref={provided.innerRef}
+            {...provided.droppableProps}
+            className="w-full"
+          >
+            <div className="flex h-64 w-full flex-col gap-2 overflow-auto rounded-md border border-gray-700 p-2">
+              <h2 className="font-bold">{column.title}</h2>
+              {column.tasks.map((task, index) => {
+                return (
+                  <Draggable
+                    key={task.id}
+                    draggableId={task.id}
+                    index={index}
+                  >
+                    {(provided) => (
+                      <div
+                        ref={provided.innerRef}
+                        {...provided.draggableProps}
+                        {...provided.dragHandleProps}
+                        style={{
+                          ...provided.draggableProps.style,
+                          userSelect: "none",
+                        }}
+                        className="rounded-md bg-gray-600 py-2 pl-2 pr-1 flex flex-row justify-between items-center"
+                      >
+                        <span className="align-middle">{task.name}</span>
+                        <div className="grow-0">
+                          <IoCloseSharp onClick={() => deleteTask(index)} className="cursor-pointer text-gray-400 hover:bg-gray-500 rounded-md w-6 h-6 px-1 grow-0" />
+                        </div>
+                      </div>
+                    )}
+                  </Draggable>
+                );
+              })}
+              {provided.placeholder}
+            </div>
+          </div>
+        );
+      }}
+    </Droppable>
+  )
+}
+
 export const Kanban = ({}) => {
   const { isKanbanToggled, setIsKanbanToggled } = useToggleKanban();
 
-  const [columns, setColumns] = useState([
-    {
-      id: "n23fnj3mfa073ad",
-      title: "To Do",
-      tasks: [
-        { id: "9nan529dab2495", name: "Example Task" },
-        { id: "nd35gna205ndz2", name: "Nice Task" },
-      ],
-    },
-    {
-      id: "za9w4550snadi23",
-      title: "In Progress",
-      tasks: [
-        { id: "jfiojijaw523a5", name: "Very nice Task" },
-        { id: "onbz237gwue25h", name: "Interesting Task" },
-      ],
-    },
-    {
-      id: "kl323dn3ai23ndaw",
-      title: "Done",
-      tasks: [
-        { id: "99dua235madiok", name: "Finished Task 1" },
-        { id: "jdo235hadu298a", name: "Finished Task 2" },
-      ],
-    },
-  ]);
+  const { board, setColumns } = useKanban();
 
-  const addTask = (_, column) => {};
+  const addTask = (_, column) => { };
+
+  const deleteTask = (taskIndex: number, columnId: string) => {
+    console.log(taskIndex, columnId);
+  }
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
@@ -51,8 +82,8 @@ export const Kanban = ({}) => {
       return;
     }
 
-    const sourceColumn = columns.find((col) => col.id === source.droppableId);
-    const destColumn = columns.find(
+    const sourceColumn = board.columns.find((col) => col.id === source.droppableId);
+    const destColumn = board.columns.find(
       (col) => col.id === destination.droppableId
     );
 
@@ -63,7 +94,7 @@ export const Kanban = ({}) => {
     sourceColumn.tasks.splice(source.index, 1);
     destColumn.tasks.splice(destination.index, 0, draggedTask);
 
-    setColumns([...columns]);
+    setColumns([...board.columns]);
   };
 
   return (
@@ -82,48 +113,11 @@ export const Kanban = ({}) => {
         </div>
         <div className="cancelDrag flex h-full w-full flex-row items-center gap-2">
           <DragDropContext onDragEnd={onDragEnd}>
-            {columns.map((column) => (
-              <Droppable key={column.id} droppableId={column.id}>
-                {(provided) => {
-                  return (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      className="w-full"
-                    >
-                      <div className="flex h-64 w-full flex-col gap-2 overflow-auto rounded-md border border-gray-700 p-2">
-                        <h2 className="font-bold">{column.title}</h2>
-                        {column.tasks.map((task, index) => {
-                          return (
-                            <Draggable
-                              key={task.id}
-                              draggableId={task.id}
-                              index={index}
-                            >
-                              {(provided) => (
-                                <div
-                                  ref={provided.innerRef}
-                                  {...provided.draggableProps}
-                                  {...provided.dragHandleProps}
-                                  style={{
-                                    ...provided.draggableProps.style,
-                                    userSelect: "none",
-                                  }}
-                                  className="rounded-md bg-gray-600 p-2"
-                                >
-                                  {task.name}
-                                </div>
-                              )}
-                            </Draggable>
-                          );
-                        })}
-                        {provided.placeholder}
-                      </div>
-                    </div>
-                  );
-                }}
-              </Droppable>
-            ))}
+            <div className="w-full flex flex-row gap-2">
+              {board.columns.map((column) => (
+                <KanbanColumn column={column} deleteTask={(passedIndex) => deleteTask(passedIndex, column.id)} />
+              ))}
+            </div>
           </DragDropContext>
         </div>
       </div>

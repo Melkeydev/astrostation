@@ -112,6 +112,22 @@ export interface ITaskState {
   toggleMenu: (id: number, flag: boolean) => void;
 }
 
+export interface IKanbanBoard {
+  columns: Array<{
+    id: string;
+    title: string;
+    tasks: Array<{
+      id: string;
+      name: string;
+    }>;
+  }>;
+}
+
+export interface IKanbanBoardState {
+  board: IKanbanBoard;
+  setColumns: (column: any) => void;
+}
+
 export interface ISongTask {
   id: string;
   artist: string;
