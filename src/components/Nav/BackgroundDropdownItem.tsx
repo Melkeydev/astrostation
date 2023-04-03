@@ -25,7 +25,7 @@ export const BackgroundDropdownItem = ({
       onClick={() => setBackgroundId(background)}
     >
       {title === "Custom Color" ? (
-        <TestColorPicker />
+        <CustomColorPicker />
       ) : (
         <div className="block px-4 py-2 text-sm text-gray-700 dark:text-gray-200">{title}</div>
       )}
@@ -34,8 +34,9 @@ export const BackgroundDropdownItem = ({
 };
 
 const colors = ["#000000", "#383838", "#654724", "#312465", "#1F6353", "#652424"];
-const TestColorPicker = () => {
-  const { backgroundColor, setBackgroundColor } = useSetBackground();
+const CustomColorPicker = () => {
+  const { backgroundId, backgroundColor, setBackgroundColor } = useSetBackground();
+  const isUsingCustomBackground = backgroundId === Background.CUSTOM_COLOR;
 
   return (
     <div>
@@ -49,7 +50,7 @@ const TestColorPicker = () => {
               background: col,
               width: 16,
               height: 16,
-              border: backgroundColor === col ? "1px solid #fff" : "none",
+              border: isUsingCustomBackground && backgroundColor === col ? "1px solid #fff" : "none",
             }}
           />
         ))}
