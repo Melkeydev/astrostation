@@ -29,7 +29,7 @@ const KanbanColumn = ({ column, addTask, deleteTask }) => {
       {provided => {
         return (
           <div ref={provided.innerRef} {...provided.droppableProps} className="w-full">
-            <div className="flex h-64 w-full flex-col justify-between gap-2 overflow-auto rounded-md border border-gray-700 p-2">
+            <div className="flex h-64 w-full flex-col justify-between gap-2 overflow-auto rounded-md border dark:border-gray-700 border-gray-200 p-2">
               <div className="flex flex-col gap-2">
                 <h2 className="font-bold">{column.title}</h2>
                 {column.tasks.map((task, index) => {
@@ -44,13 +44,13 @@ const KanbanColumn = ({ column, addTask, deleteTask }) => {
                             ...provided.draggableProps.style,
                             userSelect: "none",
                           }}
-                          className="flex flex-row items-center justify-between rounded-md bg-gray-600 py-2 pl-2 pr-1"
+                          className="flex flex-row items-center justify-between rounded-md dark:bg-gray-600 bg-gray-300 py-2 pl-2 pr-1"
                         >
                           <span className="align-middle">{task.name}</span>
                           <div className="grow-0">
                             <IoCloseSharp
                               onClick={() => deleteTask(index)}
-                              className="h-6 w-6 grow-0 cursor-pointer rounded-md px-1 text-gray-400 hover:bg-gray-500"
+                              className="h-6 w-6 grow-0 cursor-pointer rounded-md px-1 text-gray-400 dark:hover:bg-gray-500 hover:bg-gray-200"
                             />
                           </div>
                         </div>
@@ -62,7 +62,7 @@ const KanbanColumn = ({ column, addTask, deleteTask }) => {
               </div>
               {!taskAddMode ? (
                 <button
-                  className="flex flex-row items-center gap-1 rounded-md px-1 text-left hover:bg-gray-600"
+                  className="flex flex-row items-center gap-1 rounded-md px-1 text-left dark:hover:bg-gray-600 hover:bg-gray-200"
                   onClick={() => setTaskAddMode(true)}
                 >
                   <BsPlus className="h-6 w-6" />
