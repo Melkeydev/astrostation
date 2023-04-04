@@ -46,6 +46,7 @@ import {
 } from "./interfaces";
 import { InfoSection } from "./pages/InfoSection";
 import { uuid } from "uuidv4";
+import { v4 } from "uuid";
 
 /**
  * Grid Store
@@ -460,19 +461,19 @@ export const useKanban = create<IKanbanBoardState>(
       board: {
         columns: [
           {
-            id: "abac",
+            id: v4(),
             title: "To Do",
-            tasks: [{ id: "632727", name: "Need to do this important task" }],
+            tasks: [{ id: v4(), name: "Some important task" }],
           },
           {
-            id: "aawdawd",
+            id: v4(),
             title: "In Progress",
-            tasks: [{ id: "ääffw33", name: "Doing this thing" }],
+            tasks: [{ id: v4(), name: "A thing in progress" }],
           },
           {
-            id: "235",
+            id: v4(),
             title: "Done",
-            tasks: [{ id: "nnADAWD", name: "We done yeh" }],
+            tasks: [{ id: v4(), name: "It's done!" }],
           },
         ],
       },
