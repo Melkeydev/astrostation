@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState } from "react";
+import { useRef, useEffect, useState, RefCallback } from "react";
 import { FaCheck } from "react-icons/fa";
 import { RiArrowGoBackFill } from "react-icons/ri";
 import { BsThreeDotsVertical } from "react-icons/bs";
@@ -11,8 +11,8 @@ import { ITask } from "@Root/src/interfaces";
 // TODO: Add a blurb/instructions to let users know how to toggle
 
 const onClickOff = callback => {
-  const callbackRef = useRef(); // initialize mutable ref, which stores callback
-  const innerRef = useRef(); // returned to client, who marks "border" element
+  const callbackRef = useRef<RefCallback<null>>(); // initialize mutable ref, which stores callback
+  const innerRef = useRef<HTMLDivElement>(); // returned to client, who marks "border" element
 
   // update cb on each render, so second useEffect has access to current value
   useEffect(() => {
@@ -23,7 +23,9 @@ const onClickOff = callback => {
     document.addEventListener("click", handleClick);
     return () => document.removeEventListener("click", handleClick);
     function handleClick(e) {
-      if (innerRef.current && callbackRef.current && !innerRef.current.contains(e.target)) callbackRef.current(e);
+      if (innerRef.current && callbackRef.current && !innerRef.current.contains(e.target)) {
+        callbackRef.current(e);
+      }
     }
   }, []);
 
@@ -62,12 +64,11 @@ export const Task = ({ task, tasks }) => {
     if (task.completed) {
       return;
     }
-    toggleInProgressState(task.id);
+    toggleInProgressState(task.id, !task.inProgress);
   };
 
   const markNotCompleteWhenTracking = () => {
-    if (!task.inProgress) toggleInProgressState(task.id);
-
+    toggleInProgressState(task.id, !task.inProgress);
     toggleMenu(task.id, false);
     if (task.completed) setCompleted(task.id, false);
   };
@@ -146,7 +147,11 @@ export const Task = ({ task, tasks }) => {
                 }}
                 className="cursor-pointer rounded-md px-5 py-2 hover:bg-neutral-600"
               >
-                <div className="select-none ">Track Task</div>
+                {task.inProgress ? (
+                  <div className="select-none ">Untrack Task</div>
+                ) : (
+                  <div className="select-none ">Track Task</div>
+                )}
               </li>
               <li
                 onClick={() => {
