@@ -125,7 +125,7 @@ export interface IKanbanBoard {
 
 export interface IKanbanBoardState {
   board: IKanbanBoard;
-  setColumns: (column: any) => void;
+  setColumns: (columns: any) => void;
 }
 
 export interface ISongTask {

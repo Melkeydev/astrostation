@@ -476,13 +476,13 @@ export const useKanban = create<IKanbanBoardState>(
           },
         ],
       },
-      setColumns: (column: any) => {
+      setColumns: (columns: any) => {
         set(state => ({
           board: {
-            columns: column
+            columns: columns
           }
         }));
-      },
+      }
     }),
     {
       name: "state_kanban_board",

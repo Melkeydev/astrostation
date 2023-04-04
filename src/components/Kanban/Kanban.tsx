@@ -4,11 +4,10 @@ import { IconContext } from "react-icons";
 import { IoCloseSharp } from "react-icons/io5";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { useState } from "react";
+import { BsPlus } from "react-icons/bs";
 
-const KanbanColumn = ({ column, deleteTask }) => {
-  const test = () => {
-    console.log("pog");
-  }
+const KanbanColumn = ({ column, addTask, deleteTask }) => {
+  const [taskAddMode, setTaskAddMode] = useState(false);
 
   return (
     <Droppable key={column.id} droppableId={column.id}>
@@ -19,36 +18,42 @@ const KanbanColumn = ({ column, deleteTask }) => {
             {...provided.droppableProps}
             className="w-full"
           >
-            <div className="flex h-64 w-full flex-col gap-2 overflow-auto rounded-md border border-gray-700 p-2">
-              <h2 className="font-bold">{column.title}</h2>
-              {column.tasks.map((task, index) => {
-                return (
-                  <Draggable
-                    key={task.id}
-                    draggableId={task.id}
-                    index={index}
-                  >
-                    {(provided) => (
-                      <div
-                        ref={provided.innerRef}
-                        {...provided.draggableProps}
-                        {...provided.dragHandleProps}
-                        style={{
-                          ...provided.draggableProps.style,
-                          userSelect: "none",
-                        }}
-                        className="rounded-md bg-gray-600 py-2 pl-2 pr-1 flex flex-row justify-between items-center"
-                      >
-                        <span className="align-middle">{task.name}</span>
-                        <div className="grow-0">
-                          <IoCloseSharp onClick={() => deleteTask(index)} className="cursor-pointer text-gray-400 hover:bg-gray-500 rounded-md w-6 h-6 px-1 grow-0" />
+            <div className="flex h-64 w-full flex-col gap-2 overflow-auto rounded-md border border-gray-700 p-2 justify-between">
+              <div className="flex flex-col gap-2">
+                <h2 className="font-bold">{column.title}</h2>
+                {column.tasks.map((task, index) => {
+                  return (
+                    <Draggable
+                      key={task.id}
+                      draggableId={task.id}
+                      index={index}
+                    >
+                      {(provided) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                          style={{
+                            ...provided.draggableProps.style,
+                            userSelect: "none",
+                          }}
+                          className="rounded-md bg-gray-600 py-2 pl-2 pr-1 flex flex-row justify-between items-center"
+                        >
+                          <span className="align-middle">{task.name}</span>
+                          <div className="grow-0">
+                            <IoCloseSharp onClick={() => deleteTask(index)} className="cursor-pointer text-gray-400 hover:bg-gray-500 rounded-md w-6 h-6 px-1 grow-0" />
+                          </div>
                         </div>
-                      </div>
-                    )}
-                  </Draggable>
-                );
-              })}
-              {provided.placeholder}
+                      )}
+                    </Draggable>
+                  );
+                })}
+                {provided.placeholder}
+              </div>
+              <button className="text-left hover:bg-gray-600 rounded-md px-1 flex flex-row gap-1 items-center" onClick={() => addTask(column.id)}>
+                <BsPlus className="h-6 w-6" />
+                <span className="align-middle">Add Task</span>
+              </button>
             </div>
           </div>
         );
@@ -62,10 +67,20 @@ export const Kanban = ({}) => {
 
   const { board, setColumns } = useKanban();
 
-  const addTask = (_, column) => { };
+  const addTask = (columnId: string) => {
+    console.log(columnId);
+  };
 
-  const deleteTask = (taskIndex: number, columnId: string) => {
-    console.log(taskIndex, columnId);
+  const delTask = (taskIndex: number, columnId: string) => {
+    const column = board.columns.filter((obj) => {
+      return obj.id === columnId;
+    })[0];
+    const columnIndex = board.columns.indexOf(column);
+
+    let columns = board.columns;
+    columns[columnIndex].tasks.splice(taskIndex, 1);
+
+    setColumns(columns);
   }
 
   const onDragEnd = (result) => {
@@ -115,7 +130,7 @@ export const Kanban = ({}) => {
           <DragDropContext onDragEnd={onDragEnd}>
             <div className="w-full flex flex-row gap-2">
               {board.columns.map((column) => (
-                <KanbanColumn column={column} deleteTask={(passedIndex) => deleteTask(passedIndex, column.id)} />
+                <KanbanColumn key={column.id} column={column} addTask={(columnId) => addTask(columnId)} deleteTask={(passedIndex) => delTask(passedIndex, column.id)} />
               ))}
             </div>
           </DragDropContext>
