@@ -36,11 +36,11 @@ import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
 import clsx from "clsx";
-import BottomButtons from "../components/Nav/BottomButtons";
 import React from "react";
+import { Background } from "@App/App";
+import BottomButtons from "@Components/Nav/BottomButtons";
 
-export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any }>((props, ref) => {
-  const { backgrounds } = props;
+export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
   const { isTimerToggled, isTimerShown } = useToggleTimer();
   const { isTasksToggled, isTasksShown } = useToggleTasks();
@@ -60,13 +60,13 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen] = useState(false);
-  const { isBackground } = useSetBackground();
+  const { backgroundId } = useSetBackground();
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
   const { grid } = useGrid();
 
   return (
     <div ref={ref} className="pb-8 md:h-screen md:pb-0">
-      {isBackground == backgrounds.UNSPLASH && <UnsplashFooter />}
+      {backgroundId == Background.UNSPLASH && <UnsplashFooter />}
       <div className={"bodyPart ml-auto flex w-5/6 flex-wrap justify-end gap-2 py-2 px-2"}>
         <div className="settingsButton">
           <CustomizationButton
@@ -93,13 +93,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
           <CustomizationButton
             title="Choose Background"
             icon={<IoMdArrowDropdownCircle className="-mr-1 ml-2" />}
-            modal={
-              <BackgroundNav
-                backgrounds={backgrounds}
-                isVisible={isBackgroundModalOpen}
-                onClose={() => setIsBackgroundModalOpen(false)}
-              />
-            }
+            modal={<BackgroundNav isVisible={isBackgroundModalOpen} onClose={() => setIsBackgroundModalOpen(false)} />}
             changeModal={setIsBackgroundModalOpen}
           />
         </div>
