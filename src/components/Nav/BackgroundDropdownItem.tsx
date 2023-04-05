@@ -44,6 +44,7 @@ const CustomColorPicker = () => {
       <div className="ml-4 flex pb-2">
         {colors.map(col => (
           <div
+            key={col}
             className="mr-2 pl-4"
             onClick={() => setBackgroundColor(col)}
             style={{
