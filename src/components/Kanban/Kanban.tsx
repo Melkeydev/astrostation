@@ -6,6 +6,7 @@ import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import { FormEvent, useState } from "react";
 import { BsPlus } from "react-icons/bs";
 import { v4 } from "uuid";
+import useMediaQuery from "@Utils/hooks/useMediaQuery";
 
 const KanbanColumn = ({ column, addTask, deleteTask }) => {
   const [taskAddMode, setTaskAddMode] = useState(false);
@@ -102,8 +103,8 @@ const KanbanColumn = ({ column, addTask, deleteTask }) => {
 
 export const Kanban = ({}) => {
   const { isKanbanToggled, setIsKanbanToggled } = useToggleKanban();
-
   const { board, setColumns } = useKanban();
+  const isDesktop = useMediaQuery("(min-width: 641px)");
 
   const addTask = (columnId: string, taskName: string) => {
     const column = board.columns.filter(obj => {
@@ -152,7 +153,7 @@ export const Kanban = ({}) => {
   };
 
   return (
-    <div className="mb-2 w-72 rounded-lg border border-gray-200 bg-white/[.96] py-4 px-3 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-[40rem]">
+    <div className="my-2 w-72 rounded-lg border border-gray-200 bg-white/[.96] py-4 px-3 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-[40rem]">
       <div className="flex w-full flex-col">
         <div className="mb-2 flex flex-row items-center justify-between">
           <h1 className="font-bold text-gray-800 dark:text-white">Kanban board</h1>
@@ -165,7 +166,7 @@ export const Kanban = ({}) => {
         </div>
         <div className="cancelDrag flex h-full w-full flex-row items-center gap-2">
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className="flex w-full flex-row gap-2">
+            <div className={`flex w-full gap-2 ${isDesktop ? "flex-row" : "flex-col"}`}>
               {board.columns.map(column => (
                 <KanbanColumn
                   key={column.id}
