@@ -106,7 +106,7 @@ const KanbanColumn = ({ column, addTask, deleteTask }) => {
 };
 
 export const Kanban = ({}) => {
-  const { isKanbanToggled, setIsKanbanToggled } = useToggleKanban();
+  const { setIsKanbanToggled } = useToggleKanban();
   const { board, setColumns } = useKanban();
   const isDesktop = useMediaQuery("(min-width: 641px)");
 
@@ -122,15 +122,19 @@ export const Kanban = ({}) => {
     setColumns(columns);
   };
 
-  const delTask = (taskIndex: number, columnId: string) => {
+  const deleteTask = (taskIndex: number, columnId: string) => {
     const column = board.columns.filter(obj => {
       return obj.id === columnId;
     })[0];
     const columnIndex = board.columns.indexOf(column);
 
     let columns = board.columns;
-    columns[columnIndex].tasks.splice(taskIndex, 1);
 
+    if (!confirm(`Are you sure you want to delete the task "${columns[columnIndex].tasks[taskIndex].name}"?`)) {
+      return;
+    }
+
+    columns[columnIndex].tasks.splice(taskIndex, 1);
     setColumns(columns);
   };
 
@@ -176,7 +180,7 @@ export const Kanban = ({}) => {
                   key={column.id}
                   column={column}
                   addTask={(columnId, taskName) => addTask(columnId, taskName)}
-                  deleteTask={passedIndex => delTask(passedIndex, column.id)}
+                  deleteTask={passedIndex => deleteTask(passedIndex, column.id)}
                 />
               ))}
             </div>
