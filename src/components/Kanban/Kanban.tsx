@@ -30,69 +30,73 @@ const KanbanColumn = ({ column, addTask, deleteTask }) => {
       {provided => {
         return (
           <div ref={provided.innerRef} {...provided.droppableProps} className="w-full">
-            <div className="flex h-64 w-full flex-col justify-between gap-2 overflow-auto rounded-md border dark:border-gray-700 border-gray-200 p-2">
-              <div className="flex flex-col gap-2">
-                <h2 className="font-bold">{column.title}</h2>
-                {column.tasks.map((task, index) => {
-                  return (
-                    <Draggable key={task.id} draggableId={task.id} index={index}>
-                      {provided => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                          style={{
-                            ...provided.draggableProps.style,
-                            userSelect: "none",
-                          }}
-                          className="flex flex-row items-center justify-between rounded-md dark:bg-gray-600 bg-gray-300 py-2 pl-2 pr-1"
-                        >
-                          <span className="align-middle">{task.name}</span>
-                          <div className="grow-0">
-                            <IoCloseSharp
-                              onClick={() => deleteTask(index)}
-                              className="h-6 w-6 grow-0 cursor-pointer rounded-md px-1 text-gray-400 dark:hover:bg-gray-500 hover:bg-gray-200"
-                            />
+            <div className="flex h-64 w-full max-w-[200px] flex-col gap-2 overflow-auto rounded-md border border-gray-200 p-2 dark:border-gray-700 flex-grow-0">
+              <h2 className="font-bold">{column.title}</h2>
+              <div className="flex flex-col gap-2 overflow-y-auto justify-between h-full">
+                <div className="flex flex-col gap-2">
+                  {column.tasks.map((task, index) => {
+                    return (
+                      <Draggable key={task.id} draggableId={task.id} index={index}>
+                        {provided => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                            style={{
+                              ...provided.draggableProps.style,
+                              userSelect: "none",
+                            }}
+                            className="flex flex-grow-0 flex-row items-center justify-between rounded-md bg-gray-300 py-2 pl-2 pr-1 dark:bg-gray-600"
+                          >
+                            <span className="text-no-overflow align-middle">{task.name}</span>
+                            <div className="grow-0">
+                              <IoCloseSharp
+                                onClick={() => deleteTask(index)}
+                                className="h-6 w-6 grow-0 cursor-pointer rounded-md px-1 text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-500"
+                              />
+                            </div>
                           </div>
-                        </div>
-                      )}
-                    </Draggable>
-                  );
-                })}
-                {provided.placeholder}
-              </div>
-              {!taskAddMode ? (
-                <button
-                  className="flex flex-row items-center gap-1 rounded-md px-1 text-left dark:hover:bg-gray-600 hover:bg-gray-200"
-                  onClick={() => setTaskAddMode(true)}
-                >
-                  <BsPlus className="h-6 w-6" />
-                  <span className="align-middle">Add Task</span>
-                </button>
-              ) : (
-                <form onSubmit={e => onFormSubmit(e)}>
-                  <input
-                    autoFocus
-                    value={taskInputValue}
-                    onChange={event => {
-                      setTaskInputValue(event.target.value);
-                    }}
-                    placeholder="Enter a task name..."
-                    className="mb-2 w-full rounded-sm border border-gray-300 p-1 dark:border-gray-500 dark:bg-gray-700"
-                  />
-                  <div className="flex w-full flex-row gap-1">
-                    <button className="rounded-md bg-blue-600 px-2 py-0.5 text-white hover:bg-blue-700">
-                      Add Task
-                    </button>
+                        )}
+                      </Draggable>
+                    );
+                  })}
+                  {provided.placeholder}
+                </div>
+                <div className="w-full">
+                  {!taskAddMode ? (
                     <button
-                      className="rounded-md px-2 py-0.5 hover:bg-gray-300 dark:hover:bg-gray-600"
-                      onClick={() => setTaskInputValue("")}
+                      className="flex flex-row items-center gap-1 rounded-md px-1 text-left hover:bg-gray-200 dark:hover:bg-gray-600 w-full"
+                      onClick={() => setTaskAddMode(true)}
                     >
-                      Cancel
+                      <BsPlus className="h-6 w-6" />
+                      <span className="align-middle">Add Task</span>
                     </button>
-                  </div>
-                </form>
-              )}
+                  ) : (
+                    <form onSubmit={e => onFormSubmit(e)}>
+                      <input
+                        autoFocus
+                        value={taskInputValue}
+                        onChange={event => {
+                          setTaskInputValue(event.target.value);
+                        }}
+                        placeholder="Enter a task name..."
+                        className="mb-2 w-full rounded-sm border border-gray-300 p-1 dark:border-gray-500 dark:bg-gray-700"
+                      />
+                      <div className="flex w-full flex-row gap-1">
+                        <button className="rounded-md bg-blue-600 px-2 py-0.5 text-white hover:bg-blue-700">
+                          Add Task
+                        </button>
+                        <button
+                          className="rounded-md px-2 py-0.5 hover:bg-gray-300 dark:hover:bg-gray-600"
+                          onClick={() => setTaskInputValue("")}
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </form>
+                  )}
+                </div>
+              </div>
             </div>
           </div>
         );
