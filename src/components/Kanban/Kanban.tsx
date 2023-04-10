@@ -37,6 +37,16 @@ const KanbanCard = ({ provided, taskIndex, task, deleteTask, updateTaskName }) =
     updateTaskName(taskIndex, cardInputValue);
   }
 
+  const delTask = (taskIndex: number) => {
+    if (cardEditMode) {
+      setCardEditMode(false);
+      setCardInputValue(task.name);
+      return
+    };
+
+    deleteTask(taskIndex);
+  }
+
   return (
     <Draggable key={task.id} draggableId={task.id} index={taskIndex}>
       {provided => (
@@ -77,7 +87,7 @@ const KanbanCard = ({ provided, taskIndex, task, deleteTask, updateTaskName }) =
               />
             )}
             <IoCloseSharp
-              onClick={() => deleteTask(taskIndex)}
+              onClick={() => delTask(taskIndex)}
               className="h-6 w-6 grow-0 cursor-pointer rounded-md py-1 px-0 text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-500"
             />
           </div>
