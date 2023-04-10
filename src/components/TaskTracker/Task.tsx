@@ -6,6 +6,7 @@ import { Settings } from "./Settings";
 import { useTask, useTimer, useBreakStarted } from "@Store";
 import clsx from "clsx";
 import { ITask } from "@Root/src/interfaces";
+import { DeleteModal } from "./DeleteModal";
 
 // TODO: Remove alerted
 // TODO: Add a blurb/instructions to let users know how to toggle
@@ -32,6 +33,7 @@ const onClickOff = callback => {
 
 export const Task = ({ task, tasks }) => {
   const [openSettings, setOpenSettings] = useState(false);
+  const [showModal, setShowModal] = useState(false);
   const { removeTask, setCompleted, toggleInProgressState, alertTask, setPomodoroCounter, toggleMenu } = useTask();
   const { breakStarted } = useBreakStarted();
   const { timerQueue } = useTimer();
@@ -50,10 +52,18 @@ export const Task = ({ task, tasks }) => {
     });
   };
 
+  const handleOnCancel = () => {
+    setShowModal(false);
+  };
+
+  const handleOnConfirm = () => {
+    removeTask(task.id);
+    setShowModal(false);
+  };
+
   const handleDelete = () => {
     // FIXME: This should be a modal
-    alert("Are you sure you want to delete this task?");
-    removeTask(task.id);
+    setShowModal(true);
   };
 
   /* Observation: When double clicking a task the text is highlighted
@@ -169,6 +179,11 @@ export const Task = ({ task, tasks }) => {
           </div>
         )}
       </div>
+      {showModal && (
+        <div className=" absolute">
+          <DeleteModal show={showModal} onCancel={handleOnCancel} onConfirm={handleOnConfirm} />
+        </div>
+      )}
     </>
   );
 };

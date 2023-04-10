@@ -31,7 +31,7 @@ export const TaskTracker = () => {
         {showAddTask && <AddTask />}
         {tasks.length > 0 ? <Tasks tasks={tasks} /> : "No Tasks to Show"}
       </div>
-      <DeleteModal />
+      {/* <DeleteModal /> */}
     </div>
   );
 };
