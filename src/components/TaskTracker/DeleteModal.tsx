@@ -1,6 +1,4 @@
 export const DeleteModal = ({ show, onCancel, onConfirm }) => {
-  //Toggle modal visibility
-
   return (
     <div className="modal">
       <div className="max-w-xs rounded-lg bg-white p-2 px-1 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800 dark:text-gray-300">

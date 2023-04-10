@@ -62,7 +62,6 @@ export const Task = ({ task, tasks }) => {
   };
 
   const handleDelete = () => {
-    // FIXME: This should be a modal
     setShowModal(true);
   };
 
