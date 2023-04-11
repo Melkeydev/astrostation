@@ -25,7 +25,7 @@ export const Card = ({ title, toggleFunction, reloadFunction, children, width }:
         />
       </div>
 
-      <div className="cancelDrag handle flex flex-col w-full cursor-move p-2">
+      <div className="cancelDrag handle flex flex-col w-full p-2">
 
         {children}
       </div>
