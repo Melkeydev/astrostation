@@ -54,8 +54,6 @@ export const HackerNews = () => {
   const { setIsHackerNewsToggled } = useToggleHackerNews();
   const { feed, setFeed } = useHackerNewsFeed();
 
-  console.log('feed', feed)
-
   const selectedStoryType = storyTypes.find((storyType) => storyType.key === feed)
 
   const { isLoading, error, data, refetch } = useQuery({

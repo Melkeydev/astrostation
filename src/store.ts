@@ -249,10 +249,10 @@ export const useStickyNote = create<IStickyNoteState>(
         set(state => ({
           stickyNotes: state.stickyNotes.map(note =>
             note.id === id
-              ? ({
+              ? {
                 ...note,
-                text: newText,
-              } as IStickyNote)
+                [newProp]: newValue,
+              }
               : note
           ),
         }));
