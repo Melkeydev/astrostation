@@ -1,4 +1,3 @@
-import "./Draggable.scss";
 import { useState, useEffect, useRef } from "react";
 import Draggable from "react-draggable";
 import { useStickyNote, useLockWidgetsStore } from "@Store";
