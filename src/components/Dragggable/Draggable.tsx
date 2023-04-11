@@ -16,6 +16,7 @@ export const DWrapper = ({
   stickyID,
   gridValues,
   handle,
+  width = "24rem"
 }: {
   children: any;
   toggleHook: boolean;
@@ -26,6 +27,7 @@ export const DWrapper = ({
   stickyID?: number;
   gridValues?: number[];
   handle?: string;
+  width?: string;
 }) => {
   const { setStickyNotesPos } = useStickyNote();
   const { areWidgetsLocked } = useLockWidgetsStore();
@@ -82,20 +84,24 @@ export const DWrapper = ({
         handle={handle}
       >
         {isSticky ? (
-          <div 
-            style={{ zIndex: z, position: "absolute" }} 
+          <div
+            style={{ zIndex: z, position: "absolute" }}
             onMouseDown={() => getFocus()
-          }>
+            }>
             <div ref={ref} className={clsx("inline-block", toggleHook ? "visible" : "pointer-events-none hidden")}>
               {children}
             </div>
           </div>
         ) : (
-          <div 
-            style={{ zIndex: z, position: "absolute" }} 
-            className="dcard box dwidth" 
+          <div
+            style={{ zIndex: z, position: "absolute" }}
             onMouseDown={() => getFocus()
-          }>
+            }
+            className={clsx(
+              "dcard box w-72",
+              width === '24rem' ? 'w-96' : `sm:w-[${width}]`
+            )}
+          >
             <div ref={ref} className={clsx("inline-block", toggleHook ? "visible" : "pointer-events-none hidden")}>
               {children}
             </div>

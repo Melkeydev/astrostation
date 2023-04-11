@@ -211,6 +211,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
             setPosition={setHackerNewsPos}
             isSticky={false}
             gridValues={grid}
+            width="48rem"
           >
             <HackerNews />
           </DWrapper>
