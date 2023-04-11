@@ -656,7 +656,7 @@ export const usePosQuote = create<IPosQuote>(
       quotePosX: 804,
       quotePosY: 436,
       setQuotePos: (X, Y) => set({ quotePosX: X, quotePosY: Y }),
-      setQuotePosDefault: () => set(() => ({ quotePosX: 804, quotePosY: 464 })),
+      setQuotePosDefault: () => set(() => ({ quotePosX: 804, quotePosY: 544 })),
     }),
     {
       name: "set_quote_position",
