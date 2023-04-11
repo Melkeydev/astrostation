@@ -9,11 +9,13 @@ import {
   useStickyNote,
   useToggleQuote,
   useToggleTwitch,
+  useToggleYoutube,
   usePosMusic,
   usePosSpotify,
   usePosTimer,
   usePosQuote,
   usePosTwitch,
+  usePosYoutube,
   useGrid,
   useSetBackground,
 } from "@Store";
@@ -34,6 +36,7 @@ import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
+import { YoutubeVideo } from "@Components/Youtube/YoutubeVideo";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
 import clsx from "clsx";
 import BottomButtons from "../components/Nav/BottomButtons";
@@ -48,6 +51,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
   const { isStickyNoteShown } = useToggleStickyNote();
   const { isQuoteToggled, isQuoteShown } = useToggleQuote();
   const { isTwitchToggled, isTwitchShown } = useToggleTwitch();
+  const { isYoutubeToggled, isYoutubeShown } = useToggleYoutube();
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -57,6 +61,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
   const { twitchPosX, twitchPosY, setTwitchPos } = usePosTwitch();
+  const { youtubePosX, youtubePosY, setYoutubePos } = usePosYoutube();
   const isDesktop = useMediaQuery("(min-width: 641px)");
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen] = useState(false);
@@ -201,6 +206,16 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
             gridValues={grid}
           >
             <TwitchStream />
+          </DWrapper>
+          <DWrapper
+            toggleHook={isYoutubeToggled && isYoutubeShown}
+            defaultX={youtubePosX}
+            defaultY={youtubePosY}
+            setPosition={setYoutubePos}
+            isSticky={false}
+            gridValues={grid}
+          >
+            <YoutubeVideo />
           </DWrapper>
         </>
       )}
