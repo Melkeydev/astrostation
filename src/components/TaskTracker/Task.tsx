@@ -180,7 +180,7 @@ export const Task = ({ task, tasks }) => {
       </div>
       {showModal && (
         <div className=" absolute">
-          <DeleteModal show={showModal} onCancel={handleOnCancel} onConfirm={handleOnConfirm} />
+          <DeleteModal task={task} show={showModal} onCancel={handleOnCancel} onConfirm={handleOnConfirm} />
         </div>
       )}
     </>
