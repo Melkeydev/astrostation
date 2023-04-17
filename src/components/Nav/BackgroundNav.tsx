@@ -1,6 +1,6 @@
-import { useRef, useEffect } from "react";
-import { useSetBackground } from "@Store";
-import { BackgroundDropdownItem } from "./BackgroundDropdownItem";
+import {useRef, useEffect} from "react";
+import {useSetBackground} from "@Store";
+import {BackgroundDropdownItem} from "./BackgroundDropdownItem";
 
 export const BackgroundNav = ({
   backgrounds,
@@ -11,7 +11,7 @@ export const BackgroundNav = ({
   isVisible: boolean;
   onClose: any;
 }) => {
-  const { isBackground, setIsBackground } = useSetBackground();
+  const {isBackground, setIsBackground} = useSetBackground();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,7 +33,7 @@ export const BackgroundNav = ({
     <div className="flex justify-end" ref={menuRef}>
       <div className="w-70 text-left">
         <div
-          className=" absolute right-2 z-10 mt-2 ml-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:divide-gray-900"
+          className=" absolute right-2 z-[9999] mt-2 ml-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:divide-gray-900"
           role="menu"
           ref={menuRef}
         >
