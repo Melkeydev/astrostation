@@ -10,27 +10,47 @@ export const Spotify = () => {
   const { setSpotifyPlaylists, spotifyPlaylists } = useSpotifyPlaylist();
   const { setShowSpotifyPlaylists, showSpotifyPlaylists } = useShowSpotifyPlaylists();
   const { isDark } = useDarkToggleStore();
-  const [text, setText] = useState("");
+  const [url, setUrl] = useState("");
+  const [name, setName] = useState("");
   const [playlist, setPlaylist] = useState<ISpotifyPlaylist>({
     name: "lofi beats",
     url: "https://open.spotify.com/embed/playlist/37i9dQZF1DWWQRwui0ExPn",
   });
 
-  function addPlaylist(playlist: string) {
-    if (!playlist.includes("https://open.spotify.com/playlist/")) {
+  function addPlaylist(url: string, name: string) {
+    // Check if a URL has been entered
+    if (url.length <= 0) {
+      alert("Please enter a URL for the playlist");
+      return;
+    }
+    // Check if the URL is a Spotify URL
+    if (!url.includes("https://open.spotify.com/playlist/")) {
       alert("Invalid spotify URL");
       return;
     }
+    // Stitch the URL together
+    const splitOn = (slicable: string, ...indices: number[]) =>
+      [0, ...indices].map((n, i, m) => slicable.slice(n, m[i + 1]));
+    const stitchUrl = splitOn(url, 24)[0] + "/embed" + splitOn(url, 24)[1];
+    // Check if the playlist already exists
+    if (spotifyPlaylists.some(p => p.url === stitchUrl)) {
+      alert("Playlist already exists");
+      return;
+    }
+    // Check if the playlist limit has been reached
     if (spotifyPlaylists.length >= 5) {
       alert("You can only have 5 playlists");
       return;
     }
-    const splitOn = (slicable: string, ...indices: number[]) =>
-      [0, ...indices].map((n, i, m) => slicable.slice(n, m[i + 1]));
-    const stitchUrl = splitOn(playlist, 24)[0] + "/embed" + splitOn(playlist, 24)[1];
-    setSpotifyPlaylists([...spotifyPlaylists, { name: "Playlist", url: stitchUrl }]);
-    setPlaylist({ name: "Playlist", url: stitchUrl });
-    setText("");
+    // Check if a name has been entered
+    if (name.length <= 0) {
+      alert("Please enter a name for the playlist");
+      return;
+    }
+    setSpotifyPlaylists([...spotifyPlaylists, { name: name, url: stitchUrl }]);
+    setPlaylist({ name: name, url: stitchUrl });
+    setUrl("");
+    setName("");
   }
 
   function handleDelete(index: number) {
@@ -40,7 +60,7 @@ export const Spotify = () => {
 
   function handleKeyDown(e) {
     if (e.key === "Enter") {
-      addPlaylist(text);
+      addPlaylist(url, name);
     }
   }
 
@@ -65,22 +85,33 @@ export const Spotify = () => {
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         ></iframe>
       </div>
-      <div className="mt-2 flex items-center space-x-1 p-1">
+      <div className="mt-2 flex items-center space-x-1">
         <input
           className="cancelDrag w-full rounded-lg border border-gray-300 p-1 placeholder-gray-600 dark:border-gray-500 dark:bg-gray-700/[.96] dark:placeholder-gray-300"
           type="text"
-          value={text}
+          value={url}
           placeholder="Paste Spotify URL here"
           onChange={e => {
-            setText(e.target.value);
+            setUrl(e.target.value);
           }}
           onKeyDown={handleKeyDown}
         />
+
         <AiOutlineReload
           className="w-5 cursor-pointer hover:text-slate-500"
-          onClick={() => setPlaylist({ name: "", url: text })}
+          onClick={() => setPlaylist({ name: "", url: url })}
         />
       </div>
+      <input
+        className="cancelDrag w-full rounded-lg border border-gray-300 p-1 placeholder-gray-600 dark:border-gray-500 dark:bg-gray-700/[.96] dark:placeholder-gray-300"
+        type="text"
+        value={name}
+        placeholder="Playlist name"
+        onChange={e => {
+          setName(e.target.value);
+        }}
+        onKeyDown={handleKeyDown}
+      />
       <div className="flex flex-col gap-1">
         <IoChevronUp
           className={`${showSpotifyPlaylists ? "rotate-180" : ""}`}
