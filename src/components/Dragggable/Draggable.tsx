@@ -4,7 +4,7 @@ import Draggable from "react-draggable";
 import { useStickyNote, useLockWidgetsStore } from "@Store";
 import clsx from "clsx";
 
-let int = 0;
+let GLOBAL_Z = 50;
 
 export const DWrapper = ({
   children,
@@ -29,14 +29,10 @@ export const DWrapper = ({
 }) => {
   const { setStickyNotesPos } = useStickyNote();
   const { areWidgetsLocked } = useLockWidgetsStore();
-  const [z, setZ] = useState(0);
+  const [z, setZIndex] = useState(0);
   const ref = useRef();
 
-  function trackPosition() {
-    setZ(++int);
-  }
-
-  function changePosition(data: any) {
+  const changePosition = (data: any) => {
     if (isSticky) {
       setStickyNotesPos(stickyID, data.x, data.y);
     } else {
@@ -44,10 +40,12 @@ export const DWrapper = ({
     }
   }
 
-  const triggerMouseEvent = (element, eventType) => {
-    const mouseEvent = document.createEvent("MouseEvents");
+  const getFocus = () => {
+    setZIndex(++GLOBAL_Z);
+  };
 
-    mouseEvent.initEvent(eventType, true, true);
+  const triggerMouseEvent = (element, eventType) => {
+    const mouseEvent = new MouseEvent(eventType, { bubbles: true, cancelable: true });
     element.dispatchEvent(mouseEvent);
   };
 
@@ -66,18 +64,17 @@ export const DWrapper = ({
 
   useEffect(() => {
     if (toggleHook) {
-      setZ(++int);
+      setZIndex(++GLOBAL_Z);
     }
   }, [toggleHook]);
 
   return (
     <>
-      {/*@ts-ignore*/}
       <Draggable
         bounds="parent"
         cancel=".cancelDrag"
         position={{ x: defaultX, y: defaultY }}
-        onDrag={() => trackPosition()}
+        onMouseDown={() => getFocus()}
         onStop={(_, data) => changePosition(data)}
         //@ts-ignore
         grid={gridValues}
@@ -85,13 +82,20 @@ export const DWrapper = ({
         handle={handle}
       >
         {isSticky ? (
-          <div style={{ zIndex: z, position: "absolute" }} onClick={() => setZ(++int)}>
+          <div 
+            style={{ zIndex: z, position: "absolute" }} 
+            onMouseDown={() => getFocus()
+          }>
             <div ref={ref} className={clsx("inline-block", toggleHook ? "visible" : "pointer-events-none hidden")}>
               {children}
             </div>
           </div>
         ) : (
-          <div style={{ zIndex: z, position: "absolute" }} className="dcard box dwidth" onClick={() => setZ(++int)}>
+          <div 
+            style={{ zIndex: z, position: "absolute" }} 
+            className="dcard box dwidth" 
+            onMouseDown={() => getFocus()
+          }>
             <div ref={ref} className={clsx("inline-block", toggleHook ? "visible" : "pointer-events-none hidden")}>
               {children}
             </div>
