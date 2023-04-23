@@ -74,6 +74,26 @@ export const successToast = (toastText: string, isDark: boolean, icon?: string) 
   }
 };
 
+export const failureToast = (toastText: string, isDark: boolean, icon?: string) => {
+  if (isDark) {
+    toast.error(toastText, {
+      icon: icon,
+      style: {
+        borderRadius: "10px",
+        background: "#333",
+        color: "#fff",
+      },
+    });
+  } else {
+    toast.error(toastText, {
+      icon: icon,
+      style: {
+        borderRadius: "10px",
+      },
+    });
+  }
+};
+
 const darkModeToast = (toastText: string, icon: string) => {
   toast(toastText, {
     icon: icon,

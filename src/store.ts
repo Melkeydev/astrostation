@@ -39,6 +39,7 @@ import {
   ILockWidgets,
   ISideNavOrderStore,
   ISeoContent,
+  IBackgroundColor,
 } from "./interfaces";
 import { InfoSection } from "./pages/InfoSection";
 
@@ -262,10 +263,10 @@ export const useStickyNote = create<IStickyNoteState>(
           stickyNotes: state.stickyNotes.map(note =>
             note.id === id
               ? ({
-                  ...note,
-                  stickyNotesPosX: X,
-                  stickyNotesPosY: Y,
-                } as IStickyNote)
+                ...note,
+                stickyNotesPosX: X,
+                stickyNotesPosY: Y,
+              } as IStickyNote)
               : note
           ),
         }));
@@ -326,9 +327,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                  ...task,
-                  description: newName,
-                } as ITask)
+                ...task,
+                description: newName,
+              } as ITask)
               : task
           ),
         }));
@@ -339,10 +340,10 @@ export const useTask = create<ITaskState>(
         }));
       },
       removeAllTasks: () => set({ tasks: [] }),
-      toggleInProgressState: id => {
+      toggleInProgressState: (id, flag) => {
         set(state => ({
           tasks: state.tasks.map(task =>
-            task.id === id ? ({ ...task, inProgress: !task.inProgress } as ITask) : task
+            task.id === id ? ({ ...task, inProgress: flag } as ITask) : task
           ),
         }));
       },
@@ -356,9 +357,12 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                  ...task,
-                  pomodoroCounter: task.pomodoroCounter < task.pomodoro ? task.pomodoroCounter + 1 : task.pomodoro,
-                } as ITask)
+                ...task,
+                pomodoroCounter:
+                  task.pomodoroCounter < task.pomodoro
+                    ? task.pomodoroCounter + 1
+                    : task.pomodoro,
+              } as ITask)
               : task
           ),
         }));
@@ -368,9 +372,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                  ...task,
-                  pomodoro: newVal,
-                } as ITask)
+                ...task,
+                pomodoro: newVal,
+              } as ITask)
               : task
           ),
         }));
@@ -380,9 +384,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                  ...task,
-                  alerted: flag,
-                } as ITask)
+                ...task,
+                alerted: flag,
+              } as ITask)
               : task
           ),
         }));
@@ -449,8 +453,10 @@ export const useSong = create<ISongState>(set => ({
 export const useSetBackground = create<IBackground>(
   persist(
     (set, _) => ({
-      isBackground: 0,
-      setIsBackground: isBackground => set({ isBackground }),
+      backgroundId: 0,
+      backgroundColor: "",
+      setBackgroundColor: (color) => set({ backgroundColor: color }),
+      setBackgroundId: (backgroundId) => set({ backgroundId }),
     }),
     {
       name: "app_background",
@@ -780,7 +786,7 @@ export const useSeoVisibilityStore = create<ISeoContent>(
   persist(
     (set, _) => ({
       isSeoVisible: true,
-      setSeoVisibility: isSeoVisible => set({ isSeoVisible }),
+      setSeoVisibility: (isSeoVisible) => set({ isSeoVisible }),
     }),
     { name: "state_seo_visibility" }
   )

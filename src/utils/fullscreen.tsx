@@ -1,4 +1,5 @@
 import { useFullScreenToggleStore } from "@Store";
+import { failureToast } from "@Root/src/utils/toast";
 
 export function fullscreenChanged() {
   const { toggleFullscreenMode } = useFullScreenToggleStore();
@@ -55,7 +56,7 @@ export function toggleFullScreen() {
     } else {
       openFullscreen();
     }
-  } catch (err) {
-    alert("Cannot go into fullscreen mode: browser too old");
+  } catch {
+    failureToast("Cannot go into fullscreen mode: browser too old", false);
   }
 }
