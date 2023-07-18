@@ -248,7 +248,7 @@ export const Kanban = ({}) => {
         </div>
         <div className="cancelDrag flex h-full w-full flex-row items-center gap-2 overflow-hidden">
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className={`flex w-full gap-2 ${isDesktop ? "flex-row" : "flex-col"}`}>
+            <div className={`flex w-full h-full gap-2 ${isDesktop ? "flex-row" : "flex-col"}`}>
               {board.columns.map((column, columnIndex) => (
                 <KanbanColumn
                   key={column.id}
