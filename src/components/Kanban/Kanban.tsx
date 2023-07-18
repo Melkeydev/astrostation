@@ -124,56 +124,61 @@ const KanbanColumn = ({ column, addTask, deleteTask, updateTaskName }) => {
       {provided => {
         return (
           <div ref={provided.innerRef} {...provided.droppableProps} className="w-1/3">
-            <div className="flex h-full w-full mb-4 flex-grow-0 flex-col gap-2 overflow-auto">
+            <div className="mb-4 flex h-full w-full flex-grow-0 flex-col gap-2 overflow-auto">
               <h2 className="font-bold">{column.title}</h2>
               <div className="flex h-full flex-col justify-between gap-2 overflow-y-auto">
-                <div className="flex flex-col gap-2 pr-1 min-h-[160px]">
-                  {column.tasks.map((task, index) => (
-                    <KanbanCard
-                      task={task}
-                      taskIndex={index}
-                      provided={provided}
-                      deleteTask={taskIndex => deleteTask(taskIndex)}
-                      updateTaskName={(taskIndex, name) => updateTaskName(taskIndex, name)}
-                    />
-                  ))}
-                  {provided.placeholder}
-                </div>
-                <div className="w-full">
-                  {!taskAddMode ? (
-                    <button
-                      className="flex w-full flex-row items-center gap-1 rounded-md px-1 text-left hover:bg-gray-200 dark:hover:bg-gray-600"
-                      onClick={() => setTaskAddMode(true)}
-                    >
-                      <BsPlus className="h-6 w-6" />
-                      <span className="align-middle">Add Task</span>
-                    </button>
-                  ) : (
-                    <form onSubmit={e => onFormSubmit(e)}>
-                      <div className="px-1">
-                        <input
-                          autoFocus
-                          value={taskInputValue}
-                          onChange={event => {
-                            setTaskInputValue(event.target.value);
-                          }}
-                          placeholder="Enter a task name..."
-                          className="mb-2 w-full overflow-hidden rounded-sm border border-gray-300 p-1 dark:border-gray-500 dark:bg-gray-700"
-                        />
-                        <div className="flex w-full flex-row gap-1">
-                          <button ref={addTaskButtonRef} className="rounded-md bg-blue-600 px-2 py-0.5 text-white hover:bg-blue-700">
-                            Add Task
-                          </button>
-                          <button
-                            className="rounded-md px-2 py-0.5 hover:bg-gray-300 dark:hover:bg-gray-600"
-                            onClick={() => setTaskInputValue("")}
-                          >
-                            Cancel
-                          </button>
+                <div className="flex justify-between min-h-[160px] h-full flex-col gap-2 pr-1">
+                  <div className="flex flex-col gap-2">
+                    {column.tasks.map((task, index) => (
+                      <KanbanCard
+                        task={task}
+                        taskIndex={index}
+                        provided={provided}
+                        deleteTask={taskIndex => deleteTask(taskIndex)}
+                        updateTaskName={(taskIndex, name) => updateTaskName(taskIndex, name)}
+                      />
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                  <div className="w-full">
+                    {!taskAddMode ? (
+                      <button
+                        className="flex w-full flex-row items-center gap-1 rounded-md px-1 text-left hover:bg-gray-200 dark:hover:bg-gray-600"
+                        onClick={() => setTaskAddMode(true)}
+                      >
+                        <BsPlus className="h-6 w-6" />
+                        <span className="align-middle">Add Task</span>
+                      </button>
+                    ) : (
+                      <form onSubmit={e => onFormSubmit(e)}>
+                        <div className="px-1">
+                          <input
+                            autoFocus
+                            value={taskInputValue}
+                            onChange={event => {
+                              setTaskInputValue(event.target.value);
+                            }}
+                            placeholder="Enter a task name..."
+                            className="mb-2 w-full overflow-hidden rounded-sm border border-gray-300 p-1 dark:border-gray-500 dark:bg-gray-700"
+                          />
+                          <div className="flex w-full flex-row gap-1">
+                            <button
+                              ref={addTaskButtonRef}
+                              className="rounded-md bg-blue-600 px-2 py-0.5 text-white hover:bg-blue-700"
+                            >
+                              Add Task
+                            </button>
+                            <button
+                              className="rounded-md px-2 py-0.5 hover:bg-gray-300 dark:hover:bg-gray-600"
+                              onClick={() => setTaskInputValue("")}
+                            >
+                              Cancel
+                            </button>
+                          </div>
                         </div>
-                      </div>
-                    </form>
-                  )}
+                      </form>
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
