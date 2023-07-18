@@ -2,11 +2,10 @@ import "@Components/Kanban/kanban.css";
 import { useKanban, useToggleKanban } from "@Root/src/store";
 import { IconContext } from "react-icons";
 import { IoCloseSharp } from "react-icons/io5";
-import { BsPlus, BsCheck } from "react-icons/bs";
+import { BsPlus } from "react-icons/bs";
 import { RxPencil2, RxCheck } from "react-icons/rx";
-import { BiCheck } from "react-icons/bi"
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { FormEvent, useState } from "react";
+import { FormEvent, useCallback, useRef, useState } from "react";
 
 import { v4 } from "uuid";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
@@ -101,6 +100,12 @@ const KanbanColumn = ({ column, addTask, deleteTask, updateTaskName }) => {
   const [taskAddMode, setTaskAddMode] = useState(false);
   const [taskInputValue, setTaskInputValue] = useState("");
 
+  const addTaskButtonRef = useCallback((element) => {
+    element?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
+  }, []);
+
+
+
   const onFormSubmit = (e: FormEvent) => {
     e.preventDefault();
 
@@ -155,7 +160,7 @@ const KanbanColumn = ({ column, addTask, deleteTask, updateTaskName }) => {
                         className="mb-2 w-full rounded-sm border border-gray-300 p-1 dark:border-gray-500 dark:bg-gray-700"
                       />
                       <div className="flex w-full flex-row gap-1">
-                        <button className="rounded-md bg-blue-600 px-2 py-0.5 text-white hover:bg-blue-700">
+                        <button ref={addTaskButtonRef} className="rounded-md bg-blue-600 px-2 py-0.5 text-white hover:bg-blue-700">
                           Add Task
                         </button>
                         <button
