@@ -123,8 +123,8 @@ const KanbanColumn = ({ column, addTask, deleteTask, updateTaskName }) => {
     <Droppable key={column.id} droppableId={column.id}>
       {provided => {
         return (
-          <div ref={provided.innerRef} {...provided.droppableProps} className="w-full">
-            <div className="flex h-64 w-full max-w-[200px] flex-grow-0 flex-col gap-2 overflow-auto rounded-md border border-gray-200 p-2 dark:border-gray-700">
+          <div ref={provided.innerRef} {...provided.droppableProps} className="w-1/3">
+            <div className="flex h-full w-full mb-4 flex-grow-0 flex-col gap-2 overflow-auto rounded-md border border-gray-200 p-2 dark:border-gray-700">
               <h2 className="font-bold">{column.title}</h2>
               <div className="flex h-full flex-col justify-between gap-2 overflow-y-auto">
                 <div className="flex flex-col gap-2">
@@ -233,8 +233,8 @@ export const Kanban = ({}) => {
   };
 
   return (
-    <div className="my-2 w-72 rounded-lg border border-gray-200 bg-white/[.96] py-4 px-3 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-[40rem]">
-      <div className="flex w-full flex-col">
+    <div className="w-full resize justify-between overflow-auto my-2 rounded-lg border border-gray-200 bg-white/[.96] py-4 px-3 text-gray-800 shadow-md dark:border-gray-700 dark:bg-gray-800/[.96] dark:text-gray-300 sm:w-[40rem]">
+      <div className="flex w-full h-full flex-col">
         <div className="mb-2 flex flex-row items-center justify-between">
           <h1 className="font-bold text-gray-800 dark:text-white">Kanban board</h1>
           <IconContext.Provider value={{ size: "1.1rem" }}>
@@ -244,14 +244,14 @@ export const Kanban = ({}) => {
             />
           </IconContext.Provider>
         </div>
-        <div className="cancelDrag flex h-full w-full flex-row items-center gap-2">
+        <div className="cancelDrag flex h-full w-full flex-row items-center gap-2 overflow-hidden">
           <DragDropContext onDragEnd={onDragEnd}>
             <div className={`flex w-full gap-2 ${isDesktop ? "flex-row" : "flex-col"}`}>
               {board.columns.map((column, columnIndex) => (
                 <KanbanColumn
                   key={column.id}
                   column={column}
-                  addTask={(taskName) => addTask(columnIndex, taskName)}
+                  addTask={taskName => addTask(columnIndex, taskName)}
                   deleteTask={passedIndex => deleteTask(columnIndex, passedIndex)}
                   updateTaskName={(taskIndex, name) => updateTaskName(columnIndex, taskIndex, name)}
                 />
