@@ -41,8 +41,7 @@ import {
   IToggleKanban,
   IPosKanban,
   ISeoContent,
-  IKanbanBoardState,
-  IBackgroundColor,
+  IKanbanBoardState
 } from "./interfaces";
 import { InfoSection } from "./pages/InfoSection";
 import { uuid } from "uuidv4";
