@@ -127,7 +127,7 @@ const KanbanColumn = ({ column, addTask, deleteTask, updateTaskName }) => {
             <div className="flex h-full w-full mb-4 flex-grow-0 flex-col gap-2 overflow-auto">
               <h2 className="font-bold">{column.title}</h2>
               <div className="flex h-full flex-col justify-between gap-2 overflow-y-auto">
-                <div className="flex flex-col gap-2 pr-1 min-h-[240px]">
+                <div className="flex flex-col gap-2 pr-1 min-h-[160px]">
                   {column.tasks.map((task, index) => (
                     <KanbanCard
                       task={task}
