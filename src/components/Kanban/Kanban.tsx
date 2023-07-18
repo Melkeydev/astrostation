@@ -61,7 +61,7 @@ const KanbanCard = ({ provided, taskIndex, task, deleteTask, updateTaskName }) =
           className="flex flex-grow-0 flex-row items-center justify-between rounded-md bg-gray-300 py-2 pl-2 pr-0.5 dark:bg-gray-600"
         >
           {!cardEditMode ? (
-            <span className="text-no-overflow align-middle">{task.name}</span>
+            <span className="break-words whitespace-normal overflow-hidden align-middle">{task.name}</span>
           ) : (
             <form onSubmit={e => onFormSubmit(e)}>
               <input
@@ -110,7 +110,7 @@ const KanbanColumn = ({ column, addTask, deleteTask, updateTaskName }) => {
       return;
     }
 
-    addTask(column.id, taskInputValue);
+    addTask(taskInputValue);
     setTaskInputValue("");
   }
 
