@@ -46,7 +46,7 @@ const KanbanCard = ({ provided, taskIndex, task, deleteTask, updateTaskName }) =
   }
 
   return (
-    <Draggable key={task.id} draggableId={task.id} index={taskIndex}>
+    <Draggable key={task.id} draggableId={task.id} index={taskIndex} isDragDisabled={cardEditMode}>
       {provided => (
         <div
           ref={provided.innerRef}
