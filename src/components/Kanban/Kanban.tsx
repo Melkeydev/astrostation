@@ -5,7 +5,7 @@ import { IoCloseSharp } from "react-icons/io5";
 import { BsPlus } from "react-icons/bs";
 import { RxPencil2, RxCheck } from "react-icons/rx";
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
-import { FormEvent, useCallback, useRef, useState } from "react";
+import { FormEvent, useCallback, useState } from "react";
 
 import { v4 } from "uuid";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
@@ -21,7 +21,6 @@ const KanbanCard = ({ provided, taskIndex, task, deleteTask, updateTaskName }) =
 
   const onFormSubmit = (event: FormEvent) => {
     event.preventDefault();
-
     setTaskName();
   }
 
@@ -103,8 +102,6 @@ const KanbanColumn = ({ column, addTask, deleteTask, updateTaskName }) => {
   const addTaskButtonRef = useCallback((element) => {
     element?.scrollIntoView({ behavior: "smooth", block: "nearest", inline: "start" });
   }, []);
-
-
 
   const onFormSubmit = (e: FormEvent) => {
     e.preventDefault();
