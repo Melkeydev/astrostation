@@ -217,11 +217,7 @@ export const Kanban = ({}) => {
   const onDragEnd = result => {
     const { destination, source, draggableId } = result;
 
-    if (!destination) {
-      return;
-    }
-
-    if (destination.droppableId === source.droppableId && destination.index === source.index) {
+    if (!destination || (destination.droppableId === source.droppableId && destination.index === source.index)) {
       return;
     }
 
