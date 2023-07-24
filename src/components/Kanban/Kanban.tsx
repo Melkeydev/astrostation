@@ -189,7 +189,7 @@ const KanbanColumn = ({ column, addTask, deleteTask, updateTaskName }) => {
 export const Kanban = ({}) => {
   const { setIsKanbanToggled } = useToggleKanban();
   const { board, setColumns } = useKanban();
-  const isDesktop = useMediaQuery("(min-width: 641px)");
+  const isDesktop = useMediaQuery("(min-width: 768px)");
 
   const addTask = (columnIndex: number, taskName: string) => {
     let columns = board.columns;
