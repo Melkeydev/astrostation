@@ -120,7 +120,7 @@ const KanbanColumn = ({ column, addTask, deleteTask, updateTaskName }) => {
     <Droppable key={column.id} droppableId={column.id}>
       {provided => {
         return (
-          <div ref={provided.innerRef} {...provided.droppableProps} className="w-1/3">
+          <div ref={provided.innerRef} {...provided.droppableProps} className="w-full md:w-1/3">
             <div className="mb-4 flex h-full w-full flex-grow-0 flex-col gap-2 overflow-auto">
               <h2 className="font-bold">{column.title}</h2>
               <div className="flex h-full flex-col justify-between gap-2 overflow-y-auto">
@@ -246,7 +246,7 @@ export const Kanban = ({}) => {
         </div>
         <div className="cancelDrag flex h-full w-full flex-row items-center gap-2 overflow-hidden">
           <DragDropContext onDragEnd={onDragEnd}>
-            <div className={`flex w-full h-full gap-2 ${isDesktop ? "flex-row" : "flex-col"}`}>
+            <div className={`flex w-full h-full gap-2 min-w-[250px] ${isDesktop ? "flex-row" : "flex-col"}`}>
               {board.columns.map((column, columnIndex) => (
                 <KanbanColumn
                   key={column.id}
