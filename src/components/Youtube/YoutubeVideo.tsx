@@ -4,7 +4,7 @@ import { AiOutlineReload } from "react-icons/ai";
 import { useToggleYoutube } from "@Store";
 
 export const YoutubeVideo = () => {
-  const defaultVideoId = "?listType=user_uploads&list=GxAce";
+  const defaultVideoId = "TYCBicKyVhs";
   const playlistText = "?listType=playlist";
   const { isYoutubeToggled, isYoutubeShown, setIsYoutubeToggled } = useToggleYoutube();
   const [inputText, setInputText] = useState("");
