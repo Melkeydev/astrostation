@@ -235,6 +235,20 @@ export interface IPosTwitch {
   setTwitchPosDefault: () => void;
 }
 
+export interface IToggleYoutube {
+  isYoutubeToggled: boolean;
+  setIsYoutubeToggled: (isYoutubeToggled: boolean) => void;
+  isYoutubeShown: boolean;
+  setIsYoutubeShown: (isYoutubeShown: boolean) => void;
+}
+
+export interface IPosYoutube {
+  youtubePosX: number;
+  youtubePosY: number;
+  setYoutubePos: (X: number, Y: number) => void;
+  setYoutubePosDefault: () => void;
+}
+
 export interface IFirstTimeUserState {
   isFirstTimeUser: boolean;
   toggleIsFirstTimeUser: () => void;
