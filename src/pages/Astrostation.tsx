@@ -9,11 +9,13 @@ import {
   useStickyNote,
   useToggleQuote,
   useToggleTwitch,
+  useToggleKanban,
   usePosMusic,
   usePosSpotify,
   usePosTimer,
   usePosQuote,
   usePosTwitch,
+  usePosKanban,
   useGrid,
   useSetBackground,
 } from "@Store";
@@ -34,6 +36,7 @@ import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
+import { Kanban } from "@Components/Kanban/Kanban";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
 import clsx from "clsx";
 import React from "react";
@@ -48,6 +51,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const { isStickyNoteShown } = useToggleStickyNote();
   const { isQuoteToggled, isQuoteShown } = useToggleQuote();
   const { isTwitchToggled, isTwitchShown } = useToggleTwitch();
+  const { isKanbanToggled, isKanbanShown } = useToggleKanban();
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -57,6 +61,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
   const { twitchPosX, twitchPosY, setTwitchPos } = usePosTwitch();
+  const { kanbanPosX, kanbanPosY, setKanbanPos } = usePosKanban();
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen] = useState(false);
@@ -101,7 +106,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
       <CryptoDonationButton />
       <BottomButtons />
       {!isDesktop ? (
-        <div className="ml-8 flex flex-col items-center pt-10 pb-40">
+        <div className="ml-8 flex flex-col items-center">
           <div className={clsx(isMusicToggled ? "block" : "hidden")}>
             <Player />
           </div>
@@ -116,6 +121,9 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
           </div>
           <div className={clsx(isQuoteToggled ? "block" : "hidden")}>
             <Quotes />
+          </div>
+          <div className={clsx(isKanbanToggled ? "block" : "hidden")}>
+            <Kanban />
           </div>
         </div>
       ) : (
@@ -195,6 +203,16 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
             gridValues={grid}
           >
             <TwitchStream />
+          </DWrapper>
+          <DWrapper
+            toggleHook={isKanbanToggled && isKanbanShown}
+            defaultX={kanbanPosX}
+            defaultY={kanbanPosY}
+            setPosition={setKanbanPos}
+            isSticky={false}
+            gridValues={grid}
+          >
+            <Kanban />
           </DWrapper>
         </>
       )}

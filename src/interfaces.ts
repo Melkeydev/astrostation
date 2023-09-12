@@ -112,6 +112,22 @@ export interface ITaskState {
   toggleMenu: (id: number, flag: boolean) => void;
 }
 
+export interface IKanbanBoard {
+  columns: Array<{
+    id: string;
+    title: string;
+    tasks: Array<{
+      id: string;
+      name: string;
+    }>;
+  }>;
+}
+
+export interface IKanbanBoardState {
+  board: IKanbanBoard;
+  setColumns: (columns: any) => void;
+}
+
 export interface ISongTask {
   id: string;
   artist: string;
@@ -137,6 +153,20 @@ export interface IToggleTasks {
   setIsTasksToggled: (isTasksToggled: boolean) => void;
   isTasksShown: boolean;
   setIsTasksShown: (isTasksShown: boolean) => void;
+}
+
+export interface IToggleKanban {
+  isKanbanToggled: boolean;
+  setIsKanbanToggled: (isKanbanToggled: boolean) => void;
+  isKanbanShown: boolean;
+  setIsKanbanShown: (isKanbanShown: boolean) => void;
+}
+
+export interface IPosKanban {
+  kanbanPosX: number;
+  kanbanPosY: number;
+  setKanbanPos: (X: number, Y: number) => void;
+  setKanbanPosDefault: () => void;
 }
 
 export interface IPosTask {
