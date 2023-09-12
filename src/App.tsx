@@ -11,7 +11,10 @@ import useSetDefault from "@App/utils/hooks/useSetDefault";
 import clsx from "clsx";
 import { useRef } from "react";
 
-enum backgrounds {
+/**
+ * This is a background image that is supported
+ */
+export enum Background {
   CITY,
   FADE,
   GRADIENT,
@@ -21,6 +24,7 @@ enum backgrounds {
   TRAIN,
   DVD,
   UNSPLASH,
+  CUSTOM_COLOR,
 }
 
 function App() {
@@ -58,18 +62,21 @@ function App() {
   return (
     <>
       {isFirstTimeUser && <Walkthrough />}
-      <Backgrounds backgrounds={backgrounds} />
+      <Backgrounds />
       <div
-        id="entire-app"
         className={clsx(
-          `scrollbar-hide fixed inset-0 ${isSeoVisible ? `overflow-auto` : `overflow-hidden`}`,
+          "scrollbar-hide fixed inset-0 overflow-auto",
+          !isSeoVisible && "md:overflow-hidden",
           breakStarted && "bg-blue-500 bg-opacity-40"
         )}
       >
         <Toaster />
         <SideNav />
-        <Astrostation ref={astroStationRef} backgrounds={backgrounds} />
-        <InfoSection onButtonClick={handleButtonClick} isSeoVisible={isSeoVisible} />
+        <Astrostation ref={astroStationRef} />
+        <InfoSection
+          onButtonClick={handleButtonClick}
+          isSeoVisible={isSeoVisible}
+        />
       </div>
     </>
   );

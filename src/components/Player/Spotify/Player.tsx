@@ -1,6 +1,6 @@
 import { ISpotifyPlaylist } from "@Root/src/interfaces";
 import { useDarkToggleStore, useShowSpotifyPlaylists, useSpotifyMusic, useSpotifyPlaylist } from "@Store";
-import { useState } from "react";
+import { KeyboardEvent, useState } from "react";
 import { AiOutlineDelete, AiOutlineReload } from "react-icons/ai";
 import { IoChevronUp, IoCloseSharp } from "react-icons/io5";
 import { WithTooltip } from "../../Tooltip";
@@ -58,7 +58,7 @@ export const Spotify = () => {
     setSpotifyPlaylists(newPlaylists);
   }
 
-  function handleKeyDown(e) {
+  function handleKeyDown(e: KeyboardEvent<HTMLInputElement>) {
     if (e.key === "Enter") {
       addPlaylist(url, name);
     }
@@ -94,7 +94,7 @@ export const Spotify = () => {
           onChange={e => {
             setUrl(e.target.value);
           }}
-          onKeyDown={handleKeyDown}
+          onKeyDown={e => handleKeyDown(e)}
         />
 
         <AiOutlineReload
