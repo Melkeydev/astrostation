@@ -1,17 +1,16 @@
 import { useRef, useEffect } from "react";
 import { useSetBackground } from "@Store";
 import { BackgroundDropdownItem } from "./BackgroundDropdownItem";
+import { Background } from "@Root/src/App";
 
 export const BackgroundNav = ({
-  backgrounds,
   isVisible = false,
   onClose,
 }: {
-  backgrounds: any;
   isVisible: boolean;
   onClose: any;
 }) => {
-  const { isBackground, setIsBackground } = useSetBackground();
+  const { backgroundId, setBackgroundId } = useSetBackground();
   const menuRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -33,65 +32,72 @@ export const BackgroundNav = ({
     <div className="flex justify-end" ref={menuRef}>
       <div className="w-70 text-left">
         <div
-          className=" absolute right-2 z-10 mt-2 ml-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:divide-gray-900"
+          className=" absolute right-2 z-[9999] mt-2 ml-2 w-56 origin-top-right divide-y divide-gray-100 rounded-md bg-gray-700 shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none dark:divide-gray-900"
           role="menu"
           ref={menuRef}
         >
           <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.CITY}
-            setIsBackground={setIsBackground}
-            background={backgrounds.CITY}
+            isPicked={backgroundId == Background.CITY}
+            setBackgroundId={setBackgroundId}
+            background={Background.CITY}
             title="City"
             className="rounded-t-md"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.FADE}
-            setIsBackground={setIsBackground}
-            background={backgrounds.FADE}
+            isPicked={backgroundId == Background.FADE}
+            setBackgroundId={setBackgroundId}
+            background={Background.FADE}
             title="Fade"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.GRADIENT}
-            setIsBackground={setIsBackground}
-            background={backgrounds.GRADIENT}
+            isPicked={backgroundId == Background.GRADIENT}
+            setBackgroundId={setBackgroundId}
+            background={Background.GRADIENT}
             title="Gradient"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.JAPAN}
-            setIsBackground={setIsBackground}
-            background={backgrounds.JAPAN}
+            isPicked={backgroundId == Background.JAPAN}
+            setBackgroundId={setBackgroundId}
+            background={Background.JAPAN}
             title="Japan"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.COTTAGE}
-            setIsBackground={setIsBackground}
-            background={backgrounds.COTTAGE}
+            isPicked={backgroundId == Background.COTTAGE}
+            setBackgroundId={setBackgroundId}
+            background={Background.COTTAGE}
             title="Cottage"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.LOFIGIRL}
-            setIsBackground={setIsBackground}
-            background={backgrounds.LOFIGIRL}
+            isPicked={backgroundId == Background.LOFIGIRL}
+            setBackgroundId={setBackgroundId}
+            background={Background.LOFIGIRL}
             title="Lofi Girl"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.TRAIN}
-            setIsBackground={setIsBackground}
-            background={backgrounds.TRAIN}
+            isPicked={backgroundId == Background.TRAIN}
+            setBackgroundId={setBackgroundId}
+            background={Background.TRAIN}
             title="Train"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.DVD}
-            setIsBackground={setIsBackground}
-            background={backgrounds.DVD}
+            isPicked={backgroundId == Background.DVD}
+            setBackgroundId={setBackgroundId}
+            background={Background.DVD}
             title="DVD Player"
           />
           <BackgroundDropdownItem
-            isPicked={isBackground == backgrounds.UNSPLASH}
-            setIsBackground={setIsBackground}
-            background={backgrounds.UNSPLASH}
+            isPicked={backgroundId == Background.UNSPLASH}
+            setBackgroundId={setBackgroundId}
+            background={Background.UNSPLASH}
             title="Unsplash"
             className="rounded-b-md"
+          />
+          <BackgroundDropdownItem
+            isPicked={backgroundId == Background.CUSTOM_COLOR}
+            setBackgroundId={setBackgroundId}
+            background={Background.CUSTOM_COLOR}
+            title="Custom Color"
+            className="rounded-t-md"
           />
         </div>
       </div>

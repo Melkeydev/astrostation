@@ -38,9 +38,14 @@ import {
   IGrid,
   ILockWidgets,
   ISideNavOrderStore,
+  IToggleKanban,
+  IPosKanban,
   ISeoContent,
+  IKanbanBoardState
 } from "./interfaces";
 import { InfoSection } from "./pages/InfoSection";
+import { uuid } from "uuidv4";
+import { v4 } from "uuid";
 
 /**
  * Grid Store
@@ -245,9 +250,9 @@ export const useStickyNote = create<IStickyNoteState>(
           stickyNotes: state.stickyNotes.map(note =>
             note.id === id
               ? {
-                  ...note,
-                  [newProp]: newValue,
-                }
+                ...note,
+                [newProp]: newValue,
+              }
               : note
           ),
         }));
@@ -262,10 +267,10 @@ export const useStickyNote = create<IStickyNoteState>(
           stickyNotes: state.stickyNotes.map(note =>
             note.id === id
               ? ({
-                  ...note,
-                  stickyNotesPosX: X,
-                  stickyNotesPosY: Y,
-                } as IStickyNote)
+                ...note,
+                stickyNotesPosX: X,
+                stickyNotesPosY: Y,
+              } as IStickyNote)
               : note
           ),
         }));
@@ -326,9 +331,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                  ...task,
-                  description: newName,
-                } as ITask)
+                ...task,
+                description: newName,
+              } as ITask)
               : task
           ),
         }));
@@ -339,10 +344,10 @@ export const useTask = create<ITaskState>(
         }));
       },
       removeAllTasks: () => set({ tasks: [] }),
-      toggleInProgressState: id => {
+      toggleInProgressState: (id, flag) => {
         set(state => ({
           tasks: state.tasks.map(task =>
-            task.id === id ? ({ ...task, inProgress: !task.inProgress } as ITask) : task
+            task.id === id ? ({ ...task, inProgress: flag } as ITask) : task
           ),
         }));
       },
@@ -356,9 +361,12 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                  ...task,
-                  pomodoroCounter: task.pomodoroCounter < task.pomodoro ? task.pomodoroCounter + 1 : task.pomodoro,
-                } as ITask)
+                ...task,
+                pomodoroCounter:
+                  task.pomodoroCounter < task.pomodoro
+                    ? task.pomodoroCounter + 1
+                    : task.pomodoro,
+              } as ITask)
               : task
           ),
         }));
@@ -368,9 +376,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                  ...task,
-                  pomodoro: newVal,
-                } as ITask)
+                ...task,
+                pomodoro: newVal,
+              } as ITask)
               : task
           ),
         }));
@@ -380,9 +388,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                  ...task,
-                  alerted: flag,
-                } as ITask)
+                ...task,
+                alerted: flag,
+              } as ITask)
               : task
           ),
         }));
@@ -392,9 +400,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                  ...task,
-                  menuToggled: flag,
-                } as ITask)
+                ...task,
+                menuToggled: flag,
+              } as ITask)
               : task
           ),
         }));
@@ -441,6 +449,48 @@ export const useSong = create<ISongState>(set => ({
 }));
 
 /**
+ * Task Store
+ * ---
+ * Handle the tasks created in the tasks section
+ */
+
+export const useKanban = create<IKanbanBoardState>(
+  persist(
+    (set, _) => ({
+      board: {
+        columns: [
+          {
+            id: v4(),
+            title: "To Do",
+            tasks: [{ id: v4(), name: "Some important task" }],
+          },
+          {
+            id: v4(),
+            title: "In Progress",
+            tasks: [{ id: v4(), name: "A thing in progress" }],
+          },
+          {
+            id: v4(),
+            title: "Done",
+            tasks: [{ id: v4(), name: "It's done!" }],
+          },
+        ],
+      },
+      setColumns: (columns: any) => {
+        set(state => ({
+          board: {
+            columns: columns
+          }
+        }));
+      }
+    }),
+    {
+      name: "state_kanban_board",
+    }
+  )
+);
+
+/**
  * Background Store
  * ---
  * Handles the background image state of app
@@ -449,11 +499,48 @@ export const useSong = create<ISongState>(set => ({
 export const useSetBackground = create<IBackground>(
   persist(
     (set, _) => ({
-      isBackground: 0,
-      setIsBackground: isBackground => set({ isBackground }),
+      backgroundId: 0,
+      backgroundColor: "",
+      setBackgroundColor: (color) => set({ backgroundColor: color }),
+      setBackgroundId: (backgroundId) => set({ backgroundId }),
     }),
     {
       name: "app_background",
+    }
+  )
+);
+
+/**
+ * Kanban board Store
+ * ---
+ * Handle the visibility of the Kanban board
+ */
+
+export const useToggleKanban = create<IToggleKanban>(
+  persist(
+    (set, _) => ({
+      isKanbanToggled: false,
+      setIsKanbanToggled: (isKanbanToggled) => set({ isKanbanToggled }),
+      isKanbanShown: false,
+      setIsKanbanShown: (isKanbanShown) => set({ isKanbanShown }),
+    }),
+    {
+      name: "state_kanban_section",
+    }
+  )
+);
+
+export const usePosKanban = create<IPosKanban>(
+  persist(
+    (set, _) => ({
+      kanbanPosX: 200,
+      kanbanPosY: 0,
+      setKanbanPos: (X, Y) => set({ kanbanPosX: X, kanbanPosY: Y }),
+      setKanbanPosDefault: () =>
+        set(() => ({ kanbanPosX: 200, kanbanPosY: 0 })),
+    }),
+    {
+      name: "set_kanban_position",
     }
   )
 );
@@ -780,7 +867,7 @@ export const useSeoVisibilityStore = create<ISeoContent>(
   persist(
     (set, _) => ({
       isSeoVisible: true,
-      setSeoVisibility: isSeoVisible => set({ isSeoVisible }),
+      setSeoVisibility: (isSeoVisible) => set({ isSeoVisible }),
     }),
     { name: "state_seo_visibility" }
   )

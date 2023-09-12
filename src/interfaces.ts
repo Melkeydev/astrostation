@@ -104,12 +104,28 @@ export interface ITaskState {
   renameTask: (id: number, newName: string) => void;
   removeTask: (id: number) => void;
   removeAllTasks: () => void;
-  toggleInProgressState: (id: number) => void;
+  toggleInProgressState: (id: number, flag: boolean) => void;
   setCompleted: (id: number, flag: boolean) => void;
   setPomodoroCounter: (id: number) => void;
   alertTask: (id: number, flag: boolean) => void;
   setPomodoro: (id: number, newVal: number) => void;
   toggleMenu: (id: number, flag: boolean) => void;
+}
+
+export interface IKanbanBoard {
+  columns: Array<{
+    id: string;
+    title: string;
+    tasks: Array<{
+      id: string;
+      name: string;
+    }>;
+  }>;
+}
+
+export interface IKanbanBoardState {
+  board: IKanbanBoard;
+  setColumns: (columns: any) => void;
 }
 
 export interface ISongTask {
@@ -126,8 +142,10 @@ export interface ISongState {
 }
 
 export interface IBackground {
-  isBackground: number;
-  setIsBackground: (isBackground: number) => void;
+  backgroundColor: string;
+  backgroundId: number;
+  setBackgroundId: (backgroundId: number) => void;
+  setBackgroundColor: (color: string) => void;
 }
 
 export interface IToggleTasks {
@@ -135,6 +153,20 @@ export interface IToggleTasks {
   setIsTasksToggled: (isTasksToggled: boolean) => void;
   isTasksShown: boolean;
   setIsTasksShown: (isTasksShown: boolean) => void;
+}
+
+export interface IToggleKanban {
+  isKanbanToggled: boolean;
+  setIsKanbanToggled: (isKanbanToggled: boolean) => void;
+  isKanbanShown: boolean;
+  setIsKanbanShown: (isKanbanShown: boolean) => void;
+}
+
+export interface IPosKanban {
+  kanbanPosX: number;
+  kanbanPosY: number;
+  setKanbanPos: (X: number, Y: number) => void;
+  setKanbanPosDefault: () => void;
 }
 
 export interface IPosTask {
@@ -276,5 +308,5 @@ export interface ISeoContent {
 }
 
 export interface ISeoToggle {
-  onButtonClick: () => void;
+    onButtonClick: () => void;
 }

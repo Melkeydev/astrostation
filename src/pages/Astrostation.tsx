@@ -9,11 +9,13 @@ import {
   useStickyNote,
   useToggleQuote,
   useToggleTwitch,
+  useToggleKanban,
   usePosMusic,
   usePosSpotify,
   usePosTimer,
   usePosQuote,
   usePosTwitch,
+  usePosKanban,
   useGrid,
   useSetBackground,
 } from "@Store";
@@ -34,13 +36,14 @@ import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
+import { Kanban } from "@Components/Kanban/Kanban";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
 import clsx from "clsx";
-import BottomButtons from "../components/Nav/BottomButtons";
 import React from "react";
+import { Background } from "@App/App";
+import BottomButtons from "@Components/Nav/BottomButtons";
 
-export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any }>((props, ref) => {
-  const { backgrounds } = props;
+export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const { isMusicToggled, isMusicShown } = useToggleMusic();
   const { isTimerToggled, isTimerShown } = useToggleTimer();
   const { isTasksToggled, isTasksShown } = useToggleTasks();
@@ -48,6 +51,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
   const { isStickyNoteShown } = useToggleStickyNote();
   const { isQuoteToggled, isQuoteShown } = useToggleQuote();
   const { isTwitchToggled, isTwitchShown } = useToggleTwitch();
+  const { isKanbanToggled, isKanbanShown } = useToggleKanban();
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -57,16 +61,17 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
   const { twitchPosX, twitchPosY, setTwitchPos } = usePosTwitch();
-  const isDesktop = useMediaQuery("(min-width: 641px)");
+  const { kanbanPosX, kanbanPosY, setKanbanPos } = usePosKanban();
+  const isDesktop = useMediaQuery("(min-width: 768px)");
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen] = useState(false);
-  const { isBackground } = useSetBackground();
+  const { backgroundId } = useSetBackground();
   const [isBackgroundModalOpen, setIsBackgroundModalOpen] = useState(false);
   const { grid } = useGrid();
 
   return (
     <div ref={ref} className="pb-8 md:h-screen md:pb-0">
-      {isBackground == backgrounds.UNSPLASH && <UnsplashFooter />}
+      {backgroundId == Background.UNSPLASH && <UnsplashFooter />}
       <div className={"bodyPart ml-auto flex w-5/6 flex-wrap justify-end gap-2 py-2 px-2"}>
         <div className="settingsButton">
           <CustomizationButton
@@ -93,13 +98,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
           <CustomizationButton
             title="Choose Background"
             icon={<IoMdArrowDropdownCircle className="-mr-1 ml-2" />}
-            modal={
-              <BackgroundNav
-                backgrounds={backgrounds}
-                isVisible={isBackgroundModalOpen}
-                onClose={() => setIsBackgroundModalOpen(false)}
-              />
-            }
+            modal={<BackgroundNav isVisible={isBackgroundModalOpen} onClose={() => setIsBackgroundModalOpen(false)} />}
             changeModal={setIsBackgroundModalOpen}
           />
         </div>
@@ -107,7 +106,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
       <CryptoDonationButton />
       <BottomButtons />
       {!isDesktop ? (
-        <div className="ml-8 flex flex-col items-center pt-10 pb-40">
+        <div className="ml-8 flex flex-col items-center">
           <div className={clsx(isMusicToggled ? "block" : "hidden")}>
             <Player />
           </div>
@@ -122,6 +121,9 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
           </div>
           <div className={clsx(isQuoteToggled ? "block" : "hidden")}>
             <Quotes />
+          </div>
+          <div className={clsx(isKanbanToggled ? "block" : "hidden")}>
+            <Kanban />
           </div>
         </div>
       ) : (
@@ -201,6 +203,16 @@ export const Astrostation = React.forwardRef<HTMLDivElement, { backgrounds: any 
             gridValues={grid}
           >
             <TwitchStream />
+          </DWrapper>
+          <DWrapper
+            toggleHook={isKanbanToggled && isKanbanShown}
+            defaultX={kanbanPosX}
+            defaultY={kanbanPosY}
+            setPosition={setKanbanPos}
+            isSticky={false}
+            gridValues={grid}
+          >
+            <Kanban />
           </DWrapper>
         </>
       )}
