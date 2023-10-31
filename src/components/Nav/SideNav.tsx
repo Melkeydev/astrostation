@@ -2,7 +2,7 @@ import { NavItem } from "./NavItems";
 import { IoMusicalNotesOutline } from "react-icons/io5";
 import { IoMenu } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
-import { MdOutlineTimer, MdWbSunny, MdDarkMode, MdOutlineNoteAdd } from "react-icons/md";
+import { MdOutlineTimer, MdWbSunny, MdDarkMode, MdOutlineNoteAdd, MdOutlineViewKanban } from "react-icons/md";
 import { VscDebugRestartFrame } from "react-icons/vsc";
 import { BsArrowsFullscreen, BsFillChatLeftQuoteFill, BsTwitch, BsYoutube } from "react-icons/bs";
 import { FaSpotify } from "react-icons/fa";
@@ -20,6 +20,7 @@ import {
   useToggleTwitch,
   useToggleYoutube,
   useSideNavOrderStore,
+  useToggleKanban,
 } from "@Store";
 import { useState, useEffect } from "react";
 import useSetDefault from "@App/utils/hooks/useSetDefault";
@@ -34,6 +35,7 @@ export const SideNav = () => {
   const { isFullscreen } = useFullScreenToggleStore();
   const [active, setActive] = useState(false);
   const { isMusicToggled, setIsMusicToggled } = useToggleMusic();
+  const { isKanbanToggled, setIsKanbanToggled } = useToggleKanban();
   const { isTimerToggled, setIsTimerToggled } = useToggleTimer();
   const { isTasksToggled, setIsTasksToggled } = useToggleTasks();
   const { isSpotifyToggled, setIsSpotifyToggled } = useSpotifyMusic();
@@ -45,6 +47,7 @@ export const SideNav = () => {
   const { isStickyNoteShown } = useToggleStickyNote();
   const { isTasksShown } = useToggleTasks();
   const { isMusicShown } = useToggleMusic();
+  const { isKanbanShown } = useToggleKanban();
   const { isSpotifyShown } = useSpotifyMusic();
   const { isDarkModeShown } = useDarkToggleStore();
   const { isFullscreenShown } = useFullScreenToggleStore();
@@ -192,6 +195,16 @@ export const SideNav = () => {
       toggleString: "Fullscreen Toggled",
       toggleIcon: "",
       isShown: isFullscreenShown,
+    },
+    {
+      id: "12",
+      content: <MdOutlineViewKanban className="h-6 w-6" />,
+      tooltipTitle: "Kanban",
+      isToggled: isKanbanToggled,
+      setToggled: setIsKanbanToggled,
+      toggleString: "Kanban Toggled",
+      toggleIcon: "📃",
+      isShown: isKanbanShown,
     },
   ];
 

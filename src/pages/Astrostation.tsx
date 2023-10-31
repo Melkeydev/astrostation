@@ -10,12 +10,14 @@ import {
   useToggleQuote,
   useToggleTwitch,
   useToggleYoutube,
+  useToggleKanban,
   usePosMusic,
   usePosSpotify,
   usePosTimer,
   usePosQuote,
   usePosTwitch,
   usePosYoutube,
+  usePosKanban,
   useGrid,
   useSetBackground,
 } from "@Store";
@@ -37,6 +39,7 @@ import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
 import { YoutubeVideo } from "@Components/Youtube/YoutubeVideo";
+import { Kanban } from "@Components/Kanban/Kanban";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
 import clsx from "clsx";
 import React from "react";
@@ -52,6 +55,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const { isQuoteToggled, isQuoteShown } = useToggleQuote();
   const { isTwitchToggled, isTwitchShown } = useToggleTwitch();
   const { isYoutubeToggled, isYoutubeShown } = useToggleYoutube();
+  const { isKanbanToggled, isKanbanShown } = useToggleKanban();
 
   // Position hooks
   const { taskPosX, taskPosY, setTaskPos } = usePosTask();
@@ -62,6 +66,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
   const { twitchPosX, twitchPosY, setTwitchPos } = usePosTwitch();
   const { youtubePosX, youtubePosY, setYoutubePos } = usePosYoutube();
+  const { kanbanPosX, kanbanPosY, setKanbanPos } = usePosKanban();
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
   const [isConfigureWidgetModalOpen, setIsConfigureWidgetModalOpen] = useState(false);
@@ -106,7 +111,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
       <CryptoDonationButton />
       <BottomButtons />
       {!isDesktop ? (
-        <div className="ml-8 flex flex-col items-center pt-10 pb-40">
+        <div className="ml-8 flex flex-col items-center">
           <div className={clsx(isMusicToggled ? "block" : "hidden")}>
             <Player />
           </div>
@@ -121,6 +126,9 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
           </div>
           <div className={clsx(isQuoteToggled ? "block" : "hidden")}>
             <Quotes />
+          </div>
+          <div className={clsx(isKanbanToggled ? "block" : "hidden")}>
+            <Kanban />
           </div>
         </div>
       ) : (
@@ -210,6 +218,14 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
             gridValues={grid}
           >
             <YoutubeVideo />
+            toggleHook={isKanbanToggled && isKanbanShown}
+            defaultX={kanbanPosX}
+            defaultY={kanbanPosY}
+            setPosition={setKanbanPos}
+            isSticky={false}
+            gridValues={grid}
+          >
+            <Kanban />
           </DWrapper>
         </>
       )}

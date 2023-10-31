@@ -2,7 +2,12 @@ import { useEffect } from "react";
 import { FaSpotify } from "react-icons/fa";
 import { IoMusicalNotesOutline, IoCloseSharp } from "react-icons/io5";
 import { CgNotes } from "react-icons/cg";
-import { MdOutlineTimer, MdWbSunny, MdOutlineNoteAdd } from "react-icons/md";
+import {
+  MdOutlineTimer,
+  MdWbSunny,
+  MdOutlineNoteAdd,
+  MdOutlineViewKanban,
+} from "react-icons/md";
 import { VscDebugRestartFrame } from "react-icons/vsc";
 import { BsArrowsFullscreen, BsFillChatLeftQuoteFill, BsTwitch, BsYoutube } from "react-icons/bs";
 import clsx from "clsx";
@@ -19,6 +24,7 @@ import {
   useToggleWidgetReset,
   useToggleTwitch,
   useToggleYoutube,
+  useToggleKanban,
 } from "@Store";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { toggledToastNotification } from "@Utils/toast";
@@ -35,6 +41,7 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
   const { isWidgetResetShown, setIsWidgetResetShown } = useToggleWidgetReset();
   const { isTwitchShown, setIsTwitchShown } = useToggleTwitch();
   const { isYoutubeShown, setIsYoutubeShown } = useToggleYoutube();
+  const { isKanbanShown, setIsKanbanShown } = useToggleKanban();
 
   const isDesktop = useMediaQuery("(min-width: 641px)");
 
@@ -205,6 +212,22 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
             >
               Youtube
               <BsYoutube className="h-6 w-full" />
+                toggledToastNotification(
+                  isKanbanShown,
+                  setIsKanbanShown,
+                  "Kanban board Widget Added",
+                  750,
+                  "📃"
+                )
+              }
+              className={clsx(
+                "grid cursor-pointer content-center justify-center gap-2 rounded md:hover:bg-gray-200 md:hover:text-gray-800 md:dark:hover:bg-violet-500",
+                isKanbanShown &&
+                  "dark:bg-violet-500 md:bg-gray-200 md:text-gray-800"
+              )}
+            >
+              Kanban board
+              <MdOutlineViewKanban className="h-6 w-full" />
             </div>
           </div>
         </div>
