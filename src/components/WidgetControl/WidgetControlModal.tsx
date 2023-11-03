@@ -212,6 +212,9 @@ export const WidgetControlModal = ({ isVisible = false, onClose }) => {
             >
               Youtube
               <BsYoutube className="h-6 w-full" />
+            </div>
+            <div
+              onClick={() =>
                 toggledToastNotification(
                   isKanbanShown,
                   setIsKanbanShown,
