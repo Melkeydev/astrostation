@@ -178,16 +178,6 @@ export const SideNav = () => {
     },
     {
       id: "10",
-      content: <BsYoutube className="h-6 w-6" />,
-      tooltipTitle: "Youtube Video",
-      isToggled: isYoutubeToggled,
-      setToggled: setIsYoutubeToggled,
-      toggleString: "Youtube Toggled",
-      toggleIcon: "▶️",
-      isShown: isYoutubeShown,
-    },
-    {
-      id: "11",
       content: <BsArrowsFullscreen className="h-6 w-6" />,
       tooltipTitle: "Fullscreen",
       isToggled: isFullscreen,
@@ -197,7 +187,7 @@ export const SideNav = () => {
       isShown: isFullscreenShown,
     },
     {
-      id: "12",
+      id: "11",
       content: <MdOutlineViewKanban className="h-6 w-6" />,
       tooltipTitle: "Kanban",
       isToggled: isKanbanToggled,
@@ -205,6 +195,16 @@ export const SideNav = () => {
       toggleString: "Kanban Toggled",
       toggleIcon: "📃",
       isShown: isKanbanShown,
+    },
+    {
+      id: "12",
+      content: <BsYoutube className="h-6 w-6" />,
+      tooltipTitle: "Youtube Video",
+      isToggled: isYoutubeToggled,
+      setToggled: setIsYoutubeToggled,
+      toggleString: "Youtube Toggled",
+      toggleIcon: "▶️",
+      isShown: isYoutubeShown,
     },
   ];
 

@@ -9,7 +9,7 @@ export const YoutubeVideo = () => {
   const { isYoutubeToggled, isYoutubeShown, setIsYoutubeToggled } = useToggleYoutube();
   const [inputText, setInputText] = useState("");
   const [videoId, setVideoId] = useState(defaultVideoId);
-  const youtubeIdRegex = new RegExp(/(youtu.*be.*)\/(watch\?v=|embed\/|v|shorts|)(.*?((?=[&#?])|$))/);
+  const youtubeIdRegex = new RegExp(/(youtu.*be.*)\/(watch\?v=|\/shorts|)(.*?((?=[&#?])|$))/);
   const playlistRegex = new RegExp(/[&?]list=([^&]+)/i);
 
   const handleVideoChange = (youtubeUrl: string) => {

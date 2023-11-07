@@ -43,7 +43,7 @@ import {
   IToggleKanban,
   IPosKanban,
   ISeoContent,
-  IKanbanBoardState
+  IKanbanBoardState,
 } from "./interfaces";
 import { InfoSection } from "./pages/InfoSection";
 import { uuid } from "uuidv4";
@@ -269,10 +269,10 @@ export const useStickyNote = create<IStickyNoteState>(
           stickyNotes: state.stickyNotes.map(note =>
             note.id === id
               ? ({
-                ...note,
-                stickyNotesPosX: X,
-                stickyNotesPosY: Y,
-              } as IStickyNote)
+                  ...note,
+                  stickyNotesPosX: X,
+                  stickyNotesPosY: Y,
+                } as IStickyNote)
               : note
           ),
         }));
@@ -333,9 +333,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                ...task,
-                description: newName,
-              } as ITask)
+                  ...task,
+                  description: newName,
+                } as ITask)
               : task
           ),
         }));
@@ -348,9 +348,7 @@ export const useTask = create<ITaskState>(
       removeAllTasks: () => set({ tasks: [] }),
       toggleInProgressState: (id, flag) => {
         set(state => ({
-          tasks: state.tasks.map(task =>
-            task.id === id ? ({ ...task, inProgress: flag } as ITask) : task
-          ),
+          tasks: state.tasks.map(task => (task.id === id ? ({ ...task, inProgress: flag } as ITask) : task)),
         }));
       },
       setCompleted: (id, flag) => {
@@ -363,12 +361,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                ...task,
-                pomodoroCounter:
-                  task.pomodoroCounter < task.pomodoro
-                    ? task.pomodoroCounter + 1
-                    : task.pomodoro,
-              } as ITask)
+                  ...task,
+                  pomodoroCounter: task.pomodoroCounter < task.pomodoro ? task.pomodoroCounter + 1 : task.pomodoro,
+                } as ITask)
               : task
           ),
         }));
@@ -378,9 +373,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                ...task,
-                pomodoro: newVal,
-              } as ITask)
+                  ...task,
+                  pomodoro: newVal,
+                } as ITask)
               : task
           ),
         }));
@@ -390,9 +385,9 @@ export const useTask = create<ITaskState>(
           tasks: state.tasks.map(task =>
             task.id === id
               ? ({
-                ...task,
-                alerted: flag,
-              } as ITask)
+                  ...task,
+                  alerted: flag,
+                } as ITask)
               : task
           ),
         }));
@@ -481,10 +476,10 @@ export const useKanban = create<IKanbanBoardState>(
       setColumns: (columns: any) => {
         set(state => ({
           board: {
-            columns: columns
-          }
+            columns: columns,
+          },
         }));
-      }
+      },
     }),
     {
       name: "state_kanban_board",
@@ -503,8 +498,8 @@ export const useSetBackground = create<IBackground>(
     (set, _) => ({
       backgroundId: 0,
       backgroundColor: "",
-      setBackgroundColor: (color) => set({ backgroundColor: color }),
-      setBackgroundId: (backgroundId) => set({ backgroundId }),
+      setBackgroundColor: color => set({ backgroundColor: color }),
+      setBackgroundId: backgroundId => set({ backgroundId }),
     }),
     {
       name: "app_background",
@@ -522,9 +517,9 @@ export const useToggleKanban = create<IToggleKanban>(
   persist(
     (set, _) => ({
       isKanbanToggled: false,
-      setIsKanbanToggled: (isKanbanToggled) => set({ isKanbanToggled }),
+      setIsKanbanToggled: isKanbanToggled => set({ isKanbanToggled }),
       isKanbanShown: false,
-      setIsKanbanShown: (isKanbanShown) => set({ isKanbanShown }),
+      setIsKanbanShown: isKanbanShown => set({ isKanbanShown }),
     }),
     {
       name: "state_kanban_section",
@@ -538,8 +533,7 @@ export const usePosKanban = create<IPosKanban>(
       kanbanPosX: 200,
       kanbanPosY: 0,
       setKanbanPos: (X, Y) => set({ kanbanPosX: X, kanbanPosY: Y }),
-      setKanbanPosDefault: () =>
-        set(() => ({ kanbanPosX: 200, kanbanPosY: 0 })),
+      setKanbanPosDefault: () => set(() => ({ kanbanPosX: 200, kanbanPosY: 0 })),
     }),
     {
       name: "set_kanban_position",
@@ -741,9 +735,9 @@ export const usePosQuote = create<IPosQuote>(
   persist(
     (set, _) => ({
       quotePosX: 804,
-      quotePosY: 436,
+      quotePosY: 572,
       setQuotePos: (X, Y) => set({ quotePosX: X, quotePosY: Y }),
-      setQuotePosDefault: () => set(() => ({ quotePosX: 804, quotePosY: 464 })),
+      setQuotePosDefault: () => set(() => ({ quotePosX: 804, quotePosY: 572 })),
     }),
     {
       name: "set_quote_position",
@@ -903,7 +897,7 @@ export const useSeoVisibilityStore = create<ISeoContent>(
   persist(
     (set, _) => ({
       isSeoVisible: true,
-      setSeoVisibility: (isSeoVisible) => set({ isSeoVisible }),
+      setSeoVisibility: isSeoVisible => set({ isSeoVisible }),
     }),
     { name: "state_seo_visibility" }
   )
