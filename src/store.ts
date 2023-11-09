@@ -38,6 +38,8 @@ import {
   IGrid,
   ILockWidgets,
   ISideNavOrderStore,
+  IToggleYoutube,
+  IPosYoutube,
   IToggleKanban,
   IPosKanban,
   ISeoContent,
@@ -791,6 +793,40 @@ export const usePosTwitch = create<IPosTwitch>(
     }),
     {
       name: "set_twitch_position",
+    }
+  )
+);
+
+/**
+ * Youtube Section Store
+ * ---
+ * Handle the Youtube section
+ */
+
+export const useToggleYoutube = create<IToggleYoutube>(
+  persist(
+    (set, _) => ({
+      isYoutubeToggled: false,
+      setIsYoutubeToggled: isYoutubeToggled => set({ isYoutubeToggled }),
+      isYoutubeShown: false,
+      setIsYoutubeShown: isYoutubeShown => set({ isYoutubeShown }),
+    }),
+    {
+      name: "state_youtube",
+    }
+  )
+);
+
+export const usePosYoutube = create<IPosYoutube>(
+  persist(
+    (set, _) => ({
+      youtubePosX: 804,
+      youtubePosY: 436,
+      setYoutubePos: (X, Y) => set({ youtubePosX: X, youtubePosY: Y }),
+      setYoutubePosDefault: () => set(() => ({ youtubePosX: 1208, youtubePosY: 324 })),
+    }),
+    {
+      name: "set_youtube_position",
     }
   )
 );

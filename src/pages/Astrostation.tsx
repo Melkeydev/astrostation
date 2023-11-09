@@ -9,12 +9,14 @@ import {
   useStickyNote,
   useToggleQuote,
   useToggleTwitch,
+  useToggleYoutube,
   useToggleKanban,
   usePosMusic,
   usePosSpotify,
   usePosTimer,
   usePosQuote,
   usePosTwitch,
+  usePosYoutube,
   usePosKanban,
   useGrid,
   useSetBackground,
@@ -36,6 +38,7 @@ import { Sticky } from "@Components/Sticky/Sticky";
 import { Quotes } from "@App/components/Quotes/Quotes";
 import useMediaQuery from "@Utils/hooks/useMediaQuery";
 import { TwitchStream } from "@Components/Twitch/TwitchStream";
+import { YoutubeVideo } from "@Components/Youtube/YoutubeVideo";
 import { Kanban } from "@Components/Kanban/Kanban";
 import { UnsplashFooter } from "../components/Nav/UnsplashFooter";
 import clsx from "clsx";
@@ -51,6 +54,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const { isStickyNoteShown } = useToggleStickyNote();
   const { isQuoteToggled, isQuoteShown } = useToggleQuote();
   const { isTwitchToggled, isTwitchShown } = useToggleTwitch();
+  const { isYoutubeToggled, isYoutubeShown } = useToggleYoutube();
   const { isKanbanToggled, isKanbanShown } = useToggleKanban();
 
   // Position hooks
@@ -61,6 +65,7 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
   const { timerPosX, timerPosY, setTimerPos } = usePosTimer();
   const { stickyNotes, setStickyNotesPos } = useStickyNote();
   const { twitchPosX, twitchPosY, setTwitchPos } = usePosTwitch();
+  const { youtubePosX, youtubePosY, setYoutubePos } = usePosYoutube();
   const { kanbanPosX, kanbanPosY, setKanbanPos } = usePosKanban();
   const isDesktop = useMediaQuery("(min-width: 768px)");
   const [isSettingsModalOpen, setSettingsModalOpen] = useState(false);
@@ -203,6 +208,16 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
             gridValues={grid}
           >
             <TwitchStream />
+          </DWrapper>
+          <DWrapper
+            toggleHook={isYoutubeToggled && isYoutubeShown}
+            defaultX={youtubePosX}
+            defaultY={youtubePosY}
+            setPosition={setYoutubePos}
+            isSticky={false}
+            gridValues={grid}
+          >
+            <YoutubeVideo />
           </DWrapper>
           <DWrapper
             toggleHook={isKanbanToggled && isKanbanShown}

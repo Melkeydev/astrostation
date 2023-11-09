@@ -91,6 +91,7 @@ export const InfoSection = ({ onButtonClick, isSeoVisible }: { onButtonClick; is
               <li>Tune into our Lofi Wifi Station with 4 different channels!</li>
               <li>Listen to your go-to Spotify playlist with our Spotify widget</li>
               <li>Use the Twitch widget to support your favorite streamer while you study!</li>
+              <li>Watch some videos with our YouTube widget!</li>
               <li>Use our quote widget to display inspirational quotes</li>
               <li>Need to remember something? There’s a sticky note widget for that!</li>
             </ul>
