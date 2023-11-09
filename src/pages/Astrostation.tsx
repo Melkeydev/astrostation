@@ -218,6 +218,8 @@ export const Astrostation = React.forwardRef<HTMLDivElement>((_props, ref) => {
             gridValues={grid}
           >
             <YoutubeVideo />
+          </DWrapper>
+          <DWrapper
             toggleHook={isKanbanToggled && isKanbanShown}
             defaultX={kanbanPosX}
             defaultY={kanbanPosY}
