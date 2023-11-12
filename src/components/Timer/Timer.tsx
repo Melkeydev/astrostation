@@ -25,7 +25,7 @@ export const Timer = () => {
   const { breakStarted, setBreakStarted } = useBreakStarted();
   const [breakLength, setBreakLength] = useState(shortBreakLength);
   const [timer, setTimer] = useState(60);
-  const { setTimerQueue } = useTimer();
+  const { timerQueue, setTimerQueue } = useTimer();
   const [timerMinutes, setTimerMinutes] = useState("00");
   const [timerSeconds, setTimerSeconds] = useState("00");
   const [timerIntervalId, setTimerIntervalId] = useState(null);
@@ -127,6 +127,33 @@ export const Timer = () => {
       document.title = "Astrostation";
     }
   }, [hasStarted, timerMinutes, timerSeconds, sessionType]);
+
+  const localStorageKey = "timerState";
+
+  useEffect(() => {
+    // Load timer state from localStorage on component mount
+    const storedState = localStorage.getItem(localStorageKey);
+    if (storedState) {
+      const parsedState = JSON.parse(storedState);
+      setTimer(parsedState.timer);
+      setSessionType(parsedState.sessionType);
+      setBreakStarted(parsedState.breakStarted);
+      setTimerQueue(parsedState.timerQueue);
+      setHasStarted(parsedState.hasStarted);
+    }
+  }, []);
+
+  useEffect(() => {
+    // Save timer state to localStorage whenever it changes
+    const timerState = {
+      timer,
+      sessionType,
+      breakStarted,
+      timerQueue,
+      hasStarted,
+    };
+    localStorage.setItem(localStorageKey, JSON.stringify(timerState));
+  }, [timer, sessionType, breakStarted, timerQueue, hasStarted]);
 
   function toggleCountDown() {
     if (hasStarted) {
