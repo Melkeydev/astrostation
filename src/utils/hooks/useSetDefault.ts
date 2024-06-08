@@ -1,9 +1,19 @@
-import { usePosTask, usePosMusic, usePosSpotify, usePosTimer, usePosQuote, usePosTwitch, usePosYoutube } from "@Store";
+import {
+  usePosTask,
+  usePosMusic,
+  usePosSpotify,
+  usePosTimer,
+  usePosQuote,
+  usePosTwitch,
+  usePosYoutube,
+  useBrainfmPos,
+} from "@Store";
 
 function useSetDefault() {
   const { setTaskPosDefault } = usePosTask();
   const { setMusicPosDefault } = usePosMusic();
   const { setSpotifyPosDefault } = usePosSpotify();
+  const { setBrainfmPosDefault } = useBrainfmPos();
   const { setTimerPosDefault } = usePosTimer();
   const { setQuotePosDefault } = usePosQuote();
   const { setTwitchPosDefault } = usePosTwitch();
@@ -14,6 +24,7 @@ function useSetDefault() {
     setTaskPosDefault();
     setMusicPosDefault();
     setSpotifyPosDefault();
+    setBrainfmPosDefault();
     setTimerPosDefault();
     setQuotePosDefault();
     setTwitchPosDefault();

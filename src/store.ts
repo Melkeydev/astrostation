@@ -44,6 +44,8 @@ import {
   IPosKanban,
   ISeoContent,
   IKanbanBoardState,
+  IToggleBrainfm,
+  IPosBrainfm,
 } from "./interfaces";
 import { InfoSection } from "./pages/InfoSection";
 import { uuid } from "uuidv4";
@@ -639,6 +641,40 @@ export const usePosSpotify = create<IPosSpotify>(
     }),
     {
       name: "set_spotify_position",
+    }
+  )
+);
+
+/**
+ * Brain.fm Section Store
+ * ---
+ * Handle the Brain.fm section
+ */
+
+export const useBrainfmMusic = create<IToggleBrainfm>(
+  persist(
+    (set, _) => ({
+      isBrainfmToggled: true,
+      setIsBrainfmToggled: isBrainfmToggled => set({ isBrainfmToggled }),
+      isBrainfmShown: true,
+      setIsBrainfmShown: isBrainfmShown => set({ isBrainfmShown }),
+    }),
+    {
+      name: "state_brainfm_section",
+    }
+  )
+);
+
+export const useBrainfmPos = create<IPosBrainfm>(
+  persist(
+    (set, _) => ({
+      brainfmPosX: 400,
+      brainfmPosY: 158,
+      setBrainfmPos: (X, Y) => set({ brainfmPosX: X, brainfmPosY: Y }),
+      setBrainfmPosDefault: () => set(() => ({ brainfmPosX: 400, brainfmPosY: 158 })),
+    }),
+    {
+      name: "set_brainfm_position",
     }
   )
 );

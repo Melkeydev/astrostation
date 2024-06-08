@@ -204,6 +204,20 @@ export interface IPosSpotify {
   setSpotifyPosDefault: () => void;
 }
 
+export interface IToggleBrainfm {
+  isBrainfmToggled: boolean;
+  setIsBrainfmToggled: (isBrainfmToggled: boolean) => void;
+  isBrainfmShown: boolean;
+  setIsBrainfmShown: (isBrainfmShown: boolean) => void;
+}
+
+export interface IPosBrainfm {
+  brainfmPosX: number;
+  brainfmPosY: number;
+  setBrainfmPos: (X: number, Y: number) => void;
+  setBrainfmPosDefault: () => void;
+}
+
 export interface IToggleTimer {
   isTimerToggled: boolean;
   setIsTimerToggled: (isTimerToggled: boolean) => void;
@@ -322,5 +336,5 @@ export interface ISeoContent {
 }
 
 export interface ISeoToggle {
-    onButtonClick: () => void;
+  onButtonClick: () => void;
 }
