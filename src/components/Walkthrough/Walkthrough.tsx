@@ -24,7 +24,7 @@ export const Walkthrough = () => {
     {
       target: ".joyRideInProgressTask",
       content:
-        "This is a task that is currently in progess. The pomodoro counter will keep track how many pomodoro sessions you set to complete it",
+        "This is a task that is currently in progress. The pomodoro counter will keep track how many pomodoro sessions you set to complete it",
     },
     {
       target: ".joyRideTask",
