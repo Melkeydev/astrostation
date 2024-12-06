@@ -6,7 +6,7 @@ import { useToggleTwitch } from "@Store";
 export const TwitchStream = () => {
   const { isTwitchToggled, isTwitchShown, setIsTwitchToggled } = useToggleTwitch();
   const [inputText, setInputText] = useState("");
-  const [twitchStreamer, setTwitchStreamer] = useState("melkeydev");
+  const [twitchStreamer, setTwitchStreamer] = useState("melkey");
   const [parentHostName, setParentHostName] = useState("astrostation.me");
 
   // doing this for convenience (we don't have a real staging env)
